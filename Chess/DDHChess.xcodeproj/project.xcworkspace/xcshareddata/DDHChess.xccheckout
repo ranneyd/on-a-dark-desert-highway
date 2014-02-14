@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>056967F3-ED18-4B70-AAF7-993312490DDF</string>
+	<string>09A8397C-54B7-4D22-A354-F77AC36F6EC4</string>
 	<key>IDESourceControlProjectName</key>
 	<string>DDHChess</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>https://github.com/ranneyd/on-a-dark-desert-highway.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Chess/DDHChess.xcodeproj/project.xcworkspace</string>
+	<string>DDHChess/DDHChess.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>D988F664-AE4E-4BB4-AB6E-F98CB72482A1</key>

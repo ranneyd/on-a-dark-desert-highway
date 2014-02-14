@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SHCReversiGame.xcscheme</key>
+		<key>DDHChess.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,12 +12,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>72A5A0381671D8F600AF63F4</key>
+		<key>D599E55318AE2BDE00B1670B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>72A5A05F1671D8F600AF63F4</key>
+		<key>D599E57B18AE2BDE00B1670B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
