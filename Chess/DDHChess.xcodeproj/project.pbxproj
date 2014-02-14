@@ -7,32 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72347606167601BE00185647 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72347605167601BE00185647 /* main.m */; };
-		7234760A167604FA00185647 /* SHCMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72347609167604FA00185647 /* SHCMulticastDelegate.m */; };
 		72A5A03E1671D8F600AF63F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A5A03D1671D8F600AF63F4 /* UIKit.framework */; };
 		72A5A0401671D8F600AF63F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A5A03F1671D8F600AF63F4 /* Foundation.framework */; };
 		72A5A0421671D8F600AF63F4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A5A0411671D8F600AF63F4 /* CoreGraphics.framework */; };
-		72A5A0481671D8F600AF63F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0461671D8F600AF63F4 /* InfoPlist.strings */; };
-		72A5A04E1671D8F600AF63F4 /* SHCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5A04D1671D8F600AF63F4 /* SHCAppDelegate.m */; };
-		72A5A0501671D8F600AF63F4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A04F1671D8F600AF63F4 /* Default.png */; };
-		72A5A0521671D8F600AF63F4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0511671D8F600AF63F4 /* Default@2x.png */; };
-		72A5A0541671D8F600AF63F4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0531671D8F600AF63F4 /* Default-568h@2x.png */; };
-		72A5A0571671D8F600AF63F4 /* SHCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5A0561671D8F600AF63F4 /* SHCViewController.m */; };
-		72A5A05A1671D8F600AF63F4 /* SHCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0581671D8F600AF63F4 /* SHCViewController.xib */; };
 		72A5A0621671D8F600AF63F4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A5A0611671D8F600AF63F4 /* SenTestingKit.framework */; };
 		72A5A0631671D8F600AF63F4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A5A03D1671D8F600AF63F4 /* UIKit.framework */; };
 		72A5A0641671D8F600AF63F4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A5A03F1671D8F600AF63F4 /* Foundation.framework */; };
-		72A5A06C1671D8F600AF63F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A06A1671D8F600AF63F4 /* InfoPlist.strings */; };
-		72A5A0881671DA3E00AF63F4 /* GameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A07E1671DA3E00AF63F4 /* GameOver.png */; };
-		72A5A0891671DA3E00AF63F4 /* GameOver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A07F1671DA3E00AF63F4 /* GameOver@2x.png */; };
-		72A5A08B1671DA3E00AF63F4 /* Reversi.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0811671DA3E00AF63F4 /* Reversi.png */; };
-		72A5A08D1671DA3E00AF63F4 /* Reversi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0831671DA3E00AF63F4 /* Reversi@2x.png */; };
-		72A5A08E1671DA3E00AF63F4 /* ReversiBlackPiece.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0841671DA3E00AF63F4 /* ReversiBlackPiece.png */; };
-		72A5A08F1671DA3E00AF63F4 /* ReversiBlackPiece@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0851671DA3E00AF63F4 /* ReversiBlackPiece@2x.png */; };
-		72A5A0901671DA3E00AF63F4 /* ReversiWhitePiece.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A5A0861671DA3E00AF63F4 /* ReversiWhitePiece.png */; };
-		D5510E3618B01BD3007F62F1 /* SHCBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D5510E3518B01BD3007F62F1 /* SHCBoard.m */; };
-		D5510E3E18B02405007F62F1 /* SHCReversiBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D5510E3D18B02405007F62F1 /* SHCReversiBoard.m */; };
-		D5510E4418B025A6007F62F1 /* SHCBoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = D5510E4318B025A6007F62F1 /* SHCBoardSquare.m */; };
+		D59C759118AE270E00B3E178 /* DDHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C758E18AE270E00B3E178 /* DDHBoard.m */; };
+		D59C759218AE270E00B3E178 /* DDHReversiBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C759018AE270E00B3E178 /* DDHReversiBoard.m */; };
+		D59C75CD18AE279200B3E178 /* DDHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C75CC18AE279200B3E178 /* DDHViewController.m */; };
+		D59C75D118AE27D200B3E178 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75CE18AE27D100B3E178 /* Default-568h@2x.png */; };
+		D59C75D218AE27D200B3E178 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75CF18AE27D200B3E178 /* Default.png */; };
+		D59C75D318AE27D200B3E178 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75D018AE27D200B3E178 /* Default@2x.png */; };
+		D59C75D518AE27E200B3E178 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C75D418AE27E200B3E178 /* main.m */; };
+		D59C75D818AE282F00B3E178 /* DDHChess-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D59C75D718AE282F00B3E178 /* DDHChess-Info.plist */; };
+		D59C75DB18AE283A00B3E178 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D59C75D918AE283A00B3E178 /* InfoPlist.strings */; };
+		D59C75DE18AE284700B3E178 /* DDHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C75DD18AE284700B3E178 /* DDHAppDelegate.m */; };
+		D59C75E118AE285300B3E178 /* DDHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D59C75DF18AE285300B3E178 /* DDHViewController.xib */; };
+		D59C75E918AE286100B3E178 /* GameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E218AE286100B3E178 /* GameOver.png */; };
+		D59C75EA18AE286100B3E178 /* GameOver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E318AE286100B3E178 /* GameOver@2x.png */; };
+		D59C75EB18AE286100B3E178 /* Reversi.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E418AE286100B3E178 /* Reversi.png */; };
+		D59C75EC18AE286100B3E178 /* Reversi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E518AE286100B3E178 /* Reversi@2x.png */; };
+		D59C75ED18AE286100B3E178 /* ReversiBlackPiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E618AE286100B3E178 /* ReversiBlackPiece.png */; };
+		D59C75EE18AE286100B3E178 /* ReversiBlackPiece@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E718AE286100B3E178 /* ReversiBlackPiece@2x.png */; };
+		D59C75EF18AE286100B3E178 /* ReversiWhitePiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D59C75E818AE286100B3E178 /* ReversiWhitePiece.png */; };
+		D59C75F218AE286F00B3E178 /* DDHMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C75F118AE286F00B3E178 /* DDHMulticastDelegate.m */; };
+		D59C75F518AE287D00B3E178 /* DDHBoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = D59C75F418AE287D00B3E178 /* DDHBoardSquare.m */; };
+		D59C75F718AE299800B3E178 /* DDHChessTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D59C75F618AE299800B3E178 /* DDHChessTests-Info.plist */; };
+		D59C75FA18AE29A100B3E178 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D59C75F818AE29A100B3E178 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,42 +48,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		72347605167601BE00185647 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		72347608167604FA00185647 /* SHCMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHCMulticastDelegate.h; sourceTree = "<group>"; };
-		72347609167604FA00185647 /* SHCMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHCMulticastDelegate.m; sourceTree = "<group>"; };
-		72A5A0391671D8F600AF63F4 /* SHCReversiGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHCReversiGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72A5A0391671D8F600AF63F4 /* DDHChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDHChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A5A03D1671D8F600AF63F4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72A5A03F1671D8F600AF63F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		72A5A0411671D8F600AF63F4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		72A5A0451671D8F600AF63F4 /* SHCReversiGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SHCReversiGame-Info.plist"; sourceTree = "<group>"; };
-		72A5A0471671D8F600AF63F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		72A5A04B1671D8F600AF63F4 /* SHCReversiGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SHCReversiGame-Prefix.pch"; sourceTree = "<group>"; };
-		72A5A04C1671D8F600AF63F4 /* SHCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCAppDelegate.h; sourceTree = "<group>"; };
-		72A5A04D1671D8F600AF63F4 /* SHCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHCAppDelegate.m; sourceTree = "<group>"; };
-		72A5A04F1671D8F600AF63F4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		72A5A0511671D8F600AF63F4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		72A5A0531671D8F600AF63F4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		72A5A0551671D8F600AF63F4 /* SHCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHCViewController.h; sourceTree = "<group>"; };
-		72A5A0561671D8F600AF63F4 /* SHCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHCViewController.m; sourceTree = "<group>"; };
-		72A5A0591671D8F600AF63F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SHCViewController.xib; sourceTree = "<group>"; };
-		72A5A0601671D8F600AF63F4 /* SHCReversiGameTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SHCReversiGameTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72A5A0601671D8F600AF63F4 /* DDHChessTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DDHChessTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A5A0611671D8F600AF63F4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		72A5A0691671D8F600AF63F4 /* SHCReversiGameTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SHCReversiGameTests-Info.plist"; sourceTree = "<group>"; };
-		72A5A06B1671D8F600AF63F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		72A5A07E1671DA3E00AF63F4 /* GameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GameOver.png; path = Assets/GameOver.png; sourceTree = "<group>"; };
-		72A5A07F1671DA3E00AF63F4 /* GameOver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GameOver@2x.png"; path = "Assets/GameOver@2x.png"; sourceTree = "<group>"; };
-		72A5A0811671DA3E00AF63F4 /* Reversi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Reversi.png; path = Assets/Reversi.png; sourceTree = "<group>"; };
-		72A5A0831671DA3E00AF63F4 /* Reversi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reversi@2x.png"; path = "Assets/Reversi@2x.png"; sourceTree = "<group>"; };
-		72A5A0841671DA3E00AF63F4 /* ReversiBlackPiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiBlackPiece.png; path = Assets/ReversiBlackPiece.png; sourceTree = "<group>"; };
-		72A5A0851671DA3E00AF63F4 /* ReversiBlackPiece@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ReversiBlackPiece@2x.png"; path = "Assets/ReversiBlackPiece@2x.png"; sourceTree = "<group>"; };
-		72A5A0861671DA3E00AF63F4 /* ReversiWhitePiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiWhitePiece.png; path = Assets/ReversiWhitePiece.png; sourceTree = "<group>"; };
-		D5510E3418B01BD3007F62F1 /* SHCBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHCBoard.h; path = Model/SHCBoard.h; sourceTree = "<group>"; };
-		D5510E3518B01BD3007F62F1 /* SHCBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHCBoard.m; path = Model/SHCBoard.m; sourceTree = "<group>"; };
-		D5510E3718B01C02007F62F1 /* BoardCellState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardCellState.h; sourceTree = "<group>"; };
-		D5510E3C18B02405007F62F1 /* SHCReversiBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHCReversiBoard.h; path = Model/SHCReversiBoard.h; sourceTree = "<group>"; };
-		D5510E3D18B02405007F62F1 /* SHCReversiBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHCReversiBoard.m; path = Model/SHCReversiBoard.m; sourceTree = "<group>"; };
-		D5510E4218B025A6007F62F1 /* SHCBoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHCBoardSquare.h; path = View/SHCBoardSquare.h; sourceTree = "<group>"; };
-		D5510E4318B025A6007F62F1 /* SHCBoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHCBoardSquare.m; path = View/SHCBoardSquare.m; sourceTree = "<group>"; };
+		D59C758D18AE270E00B3E178 /* DDHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoard.h; path = DDHChess/Model/DDHBoard.h; sourceTree = SOURCE_ROOT; };
+		D59C758E18AE270E00B3E178 /* DDHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoard.m; path = DDHChess/Model/DDHBoard.m; sourceTree = SOURCE_ROOT; };
+		D59C758F18AE270E00B3E178 /* DDHReversiBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHReversiBoard.h; path = DDHChess/Model/DDHReversiBoard.h; sourceTree = SOURCE_ROOT; };
+		D59C759018AE270E00B3E178 /* DDHReversiBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHReversiBoard.m; path = DDHChess/Model/DDHReversiBoard.m; sourceTree = SOURCE_ROOT; };
+		D59C75CA18AE276100B3E178 /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardCellState.h; path = DDHChess/Model/BoardCellState.h; sourceTree = SOURCE_ROOT; };
+		D59C75CB18AE279200B3E178 /* DDHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHViewController.h; path = DDHChess/DDHViewController.h; sourceTree = SOURCE_ROOT; };
+		D59C75CC18AE279200B3E178 /* DDHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHViewController.m; path = DDHChess/DDHViewController.m; sourceTree = SOURCE_ROOT; };
+		D59C75CE18AE27D100B3E178 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "DDHChess/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
+		D59C75CF18AE27D200B3E178 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = DDHChess/Default.png; sourceTree = SOURCE_ROOT; };
+		D59C75D018AE27D200B3E178 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "DDHChess/Default@2x.png"; sourceTree = SOURCE_ROOT; };
+		D59C75D418AE27E200B3E178 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DDHChess/main.m; sourceTree = SOURCE_ROOT; };
+		D59C75D618AE281A00B3E178 /* DDHChess-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DDHChess-Prefix.pch"; path = "DDHChess/DDHChess-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		D59C75D718AE282F00B3E178 /* DDHChess-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DDHChess-Info.plist"; path = "DDHChess/DDHChess-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D59C75DA18AE283A00B3E178 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DDHChess/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		D59C75DC18AE284700B3E178 /* DDHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHAppDelegate.h; path = DDHChess/DDHAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		D59C75DD18AE284700B3E178 /* DDHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHAppDelegate.m; path = DDHChess/DDHAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		D59C75E018AE285300B3E178 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = DDHChess/en.lproj/DDHViewController.xib; sourceTree = SOURCE_ROOT; };
+		D59C75E218AE286100B3E178 /* GameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GameOver.png; path = DDHChess/Assets/GameOver.png; sourceTree = SOURCE_ROOT; };
+		D59C75E318AE286100B3E178 /* GameOver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GameOver@2x.png"; path = "DDHChess/Assets/GameOver@2x.png"; sourceTree = SOURCE_ROOT; };
+		D59C75E418AE286100B3E178 /* Reversi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Reversi.png; path = DDHChess/Assets/Reversi.png; sourceTree = SOURCE_ROOT; };
+		D59C75E518AE286100B3E178 /* Reversi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reversi@2x.png"; path = "DDHChess/Assets/Reversi@2x.png"; sourceTree = SOURCE_ROOT; };
+		D59C75E618AE286100B3E178 /* ReversiBlackPiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiBlackPiece.png; path = DDHChess/Assets/ReversiBlackPiece.png; sourceTree = SOURCE_ROOT; };
+		D59C75E718AE286100B3E178 /* ReversiBlackPiece@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ReversiBlackPiece@2x.png"; path = "DDHChess/Assets/ReversiBlackPiece@2x.png"; sourceTree = SOURCE_ROOT; };
+		D59C75E818AE286100B3E178 /* ReversiWhitePiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiWhitePiece.png; path = DDHChess/Assets/ReversiWhitePiece.png; sourceTree = SOURCE_ROOT; };
+		D59C75F018AE286F00B3E178 /* DDHMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHMulticastDelegate.h; path = DDHChess/Util/DDHMulticastDelegate.h; sourceTree = SOURCE_ROOT; };
+		D59C75F118AE286F00B3E178 /* DDHMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHMulticastDelegate.m; path = DDHChess/Util/DDHMulticastDelegate.m; sourceTree = SOURCE_ROOT; };
+		D59C75F318AE287D00B3E178 /* DDHBoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoardSquare.h; path = DDHChess/View/DDHBoardSquare.h; sourceTree = SOURCE_ROOT; };
+		D59C75F418AE287D00B3E178 /* DDHBoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoardSquare.m; path = DDHChess/View/DDHBoardSquare.m; sourceTree = SOURCE_ROOT; };
+		D59C75F618AE299800B3E178 /* DDHChessTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DDHChessTests-Info.plist"; path = "DDHChessTests/DDHChessTests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D59C75F918AE29A100B3E178 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = DDHChessTests/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,8 +113,8 @@
 		72347607167604FA00185647 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				72347608167604FA00185647 /* SHCMulticastDelegate.h */,
-				72347609167604FA00185647 /* SHCMulticastDelegate.m */,
+				D59C75F018AE286F00B3E178 /* DDHMulticastDelegate.h */,
+				D59C75F118AE286F00B3E178 /* DDHMulticastDelegate.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -120,8 +122,8 @@
 		72A5A02E1671D8F600AF63F4 = {
 			isa = PBXGroup;
 			children = (
-				72A5A0431671D8F600AF63F4 /* SHCReversiGame */,
-				72A5A0671671D8F600AF63F4 /* SHCReversiGameTests */,
+				72A5A0431671D8F600AF63F4 /* DDHReversiGame */,
+				72A5A0671671D8F600AF63F4 /* DDHReversiGameTests */,
 				72A5A03C1671D8F600AF63F4 /* Frameworks */,
 				72A5A03A1671D8F600AF63F4 /* Products */,
 			);
@@ -130,8 +132,8 @@
 		72A5A03A1671D8F600AF63F4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				72A5A0391671D8F600AF63F4 /* SHCReversiGame.app */,
-				72A5A0601671D8F600AF63F4 /* SHCReversiGameTests.octest */,
+				72A5A0391671D8F600AF63F4 /* DDHChess.app */,
+				72A5A0601671D8F600AF63F4 /* DDHChessTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,50 +149,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		72A5A0431671D8F600AF63F4 /* SHCReversiGame */ = {
+		72A5A0431671D8F600AF63F4 /* DDHReversiGame */ = {
 			isa = PBXGroup;
 			children = (
+				D59C75DF18AE285300B3E178 /* DDHViewController.xib */,
+				D59C75DC18AE284700B3E178 /* DDHAppDelegate.h */,
+				D59C75DD18AE284700B3E178 /* DDHAppDelegate.m */,
+				D59C75CB18AE279200B3E178 /* DDHViewController.h */,
+				D59C75CC18AE279200B3E178 /* DDHViewController.m */,
 				72347607167604FA00185647 /* Util */,
 				72A5A07C1671D9E100AF63F4 /* Assets */,
 				72A5A07B1671D9D700AF63F4 /* View */,
 				72A5A07A1671D9D200AF63F4 /* Model */,
-				72A5A04C1671D8F600AF63F4 /* SHCAppDelegate.h */,
-				72A5A04D1671D8F600AF63F4 /* SHCAppDelegate.m */,
-				72A5A0551671D8F600AF63F4 /* SHCViewController.h */,
-				72A5A0561671D8F600AF63F4 /* SHCViewController.m */,
-				72A5A0581671D8F600AF63F4 /* SHCViewController.xib */,
 				72A5A0441671D8F600AF63F4 /* Supporting Files */,
 			);
+			name = DDHReversiGame;
 			path = SHCReversiGame;
 			sourceTree = "<group>";
 		};
 		72A5A0441671D8F600AF63F4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				72347605167601BE00185647 /* main.m */,
-				72A5A0451671D8F600AF63F4 /* SHCReversiGame-Info.plist */,
-				72A5A0461671D8F600AF63F4 /* InfoPlist.strings */,
-				72A5A04B1671D8F600AF63F4 /* SHCReversiGame-Prefix.pch */,
-				72A5A04F1671D8F600AF63F4 /* Default.png */,
-				72A5A0511671D8F600AF63F4 /* Default@2x.png */,
-				72A5A0531671D8F600AF63F4 /* Default-568h@2x.png */,
+				D59C75D918AE283A00B3E178 /* InfoPlist.strings */,
+				D59C75D718AE282F00B3E178 /* DDHChess-Info.plist */,
+				D59C75D618AE281A00B3E178 /* DDHChess-Prefix.pch */,
+				D59C75D418AE27E200B3E178 /* main.m */,
+				D59C75CE18AE27D100B3E178 /* Default-568h@2x.png */,
+				D59C75CF18AE27D200B3E178 /* Default.png */,
+				D59C75D018AE27D200B3E178 /* Default@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		72A5A0671671D8F600AF63F4 /* SHCReversiGameTests */ = {
+		72A5A0671671D8F600AF63F4 /* DDHReversiGameTests */ = {
 			isa = PBXGroup;
 			children = (
 				72A5A0681671D8F600AF63F4 /* Supporting Files */,
 			);
+			name = DDHReversiGameTests;
 			path = SHCReversiGameTests;
 			sourceTree = "<group>";
 		};
 		72A5A0681671D8F600AF63F4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				72A5A0691671D8F600AF63F4 /* SHCReversiGameTests-Info.plist */,
-				72A5A06A1671D8F600AF63F4 /* InfoPlist.strings */,
+				D59C75F818AE29A100B3E178 /* InfoPlist.strings */,
+				D59C75F618AE299800B3E178 /* DDHChessTests-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -198,11 +202,11 @@
 		72A5A07A1671D9D200AF63F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D5510E3418B01BD3007F62F1 /* SHCBoard.h */,
-				D5510E3518B01BD3007F62F1 /* SHCBoard.m */,
-				D5510E3718B01C02007F62F1 /* BoardCellState.h */,
-				D5510E3C18B02405007F62F1 /* SHCReversiBoard.h */,
-				D5510E3D18B02405007F62F1 /* SHCReversiBoard.m */,
+				D59C75CA18AE276100B3E178 /* BoardCellState.h */,
+				D59C758D18AE270E00B3E178 /* DDHBoard.h */,
+				D59C758E18AE270E00B3E178 /* DDHBoard.m */,
+				D59C758F18AE270E00B3E178 /* DDHReversiBoard.h */,
+				D59C759018AE270E00B3E178 /* DDHReversiBoard.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -210,8 +214,8 @@
 		72A5A07B1671D9D700AF63F4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D5510E4218B025A6007F62F1 /* SHCBoardSquare.h */,
-				D5510E4318B025A6007F62F1 /* SHCBoardSquare.m */,
+				D59C75F318AE287D00B3E178 /* DDHBoardSquare.h */,
+				D59C75F418AE287D00B3E178 /* DDHBoardSquare.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -219,13 +223,13 @@
 		72A5A07C1671D9E100AF63F4 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				72A5A07E1671DA3E00AF63F4 /* GameOver.png */,
-				72A5A07F1671DA3E00AF63F4 /* GameOver@2x.png */,
-				72A5A0811671DA3E00AF63F4 /* Reversi.png */,
-				72A5A0831671DA3E00AF63F4 /* Reversi@2x.png */,
-				72A5A0841671DA3E00AF63F4 /* ReversiBlackPiece.png */,
-				72A5A0851671DA3E00AF63F4 /* ReversiBlackPiece@2x.png */,
-				72A5A0861671DA3E00AF63F4 /* ReversiWhitePiece.png */,
+				D59C75E218AE286100B3E178 /* GameOver.png */,
+				D59C75E318AE286100B3E178 /* GameOver@2x.png */,
+				D59C75E418AE286100B3E178 /* Reversi.png */,
+				D59C75E518AE286100B3E178 /* Reversi@2x.png */,
+				D59C75E618AE286100B3E178 /* ReversiBlackPiece.png */,
+				D59C75E718AE286100B3E178 /* ReversiBlackPiece@2x.png */,
+				D59C75E818AE286100B3E178 /* ReversiWhitePiece.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -233,9 +237,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		72A5A0381671D8F600AF63F4 /* SHCReversiGame */ = {
+		72A5A0381671D8F600AF63F4 /* DDHChess */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 72A5A0721671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "SHCReversiGame" */;
+			buildConfigurationList = 72A5A0721671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "DDHChess" */;
 			buildPhases = (
 				72A5A0351671D8F600AF63F4 /* Sources */,
 				72A5A0361671D8F600AF63F4 /* Frameworks */,
@@ -245,14 +249,14 @@
 			);
 			dependencies = (
 			);
-			name = SHCReversiGame;
+			name = DDHChess;
 			productName = SHCReversiGame;
-			productReference = 72A5A0391671D8F600AF63F4 /* SHCReversiGame.app */;
+			productReference = 72A5A0391671D8F600AF63F4 /* DDHChess.app */;
 			productType = "com.apple.product-type.application";
 		};
-		72A5A05F1671D8F600AF63F4 /* SHCReversiGameTests */ = {
+		72A5A05F1671D8F600AF63F4 /* DDHChessTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 72A5A0751671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "SHCReversiGameTests" */;
+			buildConfigurationList = 72A5A0751671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "DDHChessTests" */;
 			buildPhases = (
 				72A5A05B1671D8F600AF63F4 /* Sources */,
 				72A5A05C1671D8F600AF63F4 /* Frameworks */,
@@ -264,9 +268,9 @@
 			dependencies = (
 				72A5A0661671D8F600AF63F4 /* PBXTargetDependency */,
 			);
-			name = SHCReversiGameTests;
+			name = DDHChessTests;
 			productName = SHCReversiGameTests;
-			productReference = 72A5A0601671D8F600AF63F4 /* SHCReversiGameTests.octest */;
+			productReference = 72A5A0601671D8F600AF63F4 /* DDHChessTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -279,7 +283,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Colin Eberhardt";
 			};
-			buildConfigurationList = 72A5A0331671D8F600AF63F4 /* Build configuration list for PBXProject "SHCReversiGame" */;
+			buildConfigurationList = 72A5A0331671D8F600AF63F4 /* Build configuration list for PBXProject "DDHChess" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -291,8 +295,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				72A5A0381671D8F600AF63F4 /* SHCReversiGame */,
-				72A5A05F1671D8F600AF63F4 /* SHCReversiGameTests */,
+				72A5A0381671D8F600AF63F4 /* DDHChess */,
+				72A5A05F1671D8F600AF63F4 /* DDHChessTests */,
 			);
 		};
 /* End PBXProject section */
@@ -302,18 +306,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A5A0481671D8F600AF63F4 /* InfoPlist.strings in Resources */,
-				72A5A0501671D8F600AF63F4 /* Default.png in Resources */,
-				72A5A0521671D8F600AF63F4 /* Default@2x.png in Resources */,
-				72A5A0541671D8F600AF63F4 /* Default-568h@2x.png in Resources */,
-				72A5A05A1671D8F600AF63F4 /* SHCViewController.xib in Resources */,
-				72A5A0881671DA3E00AF63F4 /* GameOver.png in Resources */,
-				72A5A0891671DA3E00AF63F4 /* GameOver@2x.png in Resources */,
-				72A5A08B1671DA3E00AF63F4 /* Reversi.png in Resources */,
-				72A5A08D1671DA3E00AF63F4 /* Reversi@2x.png in Resources */,
-				72A5A08E1671DA3E00AF63F4 /* ReversiBlackPiece.png in Resources */,
-				72A5A08F1671DA3E00AF63F4 /* ReversiBlackPiece@2x.png in Resources */,
-				72A5A0901671DA3E00AF63F4 /* ReversiWhitePiece.png in Resources */,
+				D59C75DB18AE283A00B3E178 /* InfoPlist.strings in Resources */,
+				D59C75ED18AE286100B3E178 /* ReversiBlackPiece.png in Resources */,
+				D59C75D118AE27D200B3E178 /* Default-568h@2x.png in Resources */,
+				D59C75EA18AE286100B3E178 /* GameOver@2x.png in Resources */,
+				D59C75FA18AE29A100B3E178 /* InfoPlist.strings in Resources */,
+				D59C75EE18AE286100B3E178 /* ReversiBlackPiece@2x.png in Resources */,
+				D59C75EB18AE286100B3E178 /* Reversi.png in Resources */,
+				D59C75D218AE27D200B3E178 /* Default.png in Resources */,
+				D59C75EC18AE286100B3E178 /* Reversi@2x.png in Resources */,
+				D59C75E118AE285300B3E178 /* DDHViewController.xib in Resources */,
+				D59C75E918AE286100B3E178 /* GameOver.png in Resources */,
+				D59C75F718AE299800B3E178 /* DDHChessTests-Info.plist in Resources */,
+				D59C75EF18AE286100B3E178 /* ReversiWhitePiece.png in Resources */,
+				D59C75D818AE282F00B3E178 /* DDHChess-Info.plist in Resources */,
+				D59C75D318AE27D200B3E178 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +328,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72A5A06C1671D8F600AF63F4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,13 +354,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5510E3618B01BD3007F62F1 /* SHCBoard.m in Sources */,
-				72A5A04E1671D8F600AF63F4 /* SHCAppDelegate.m in Sources */,
-				72A5A0571671D8F600AF63F4 /* SHCViewController.m in Sources */,
-				72347606167601BE00185647 /* main.m in Sources */,
-				D5510E3E18B02405007F62F1 /* SHCReversiBoard.m in Sources */,
-				D5510E4418B025A6007F62F1 /* SHCBoardSquare.m in Sources */,
-				7234760A167604FA00185647 /* SHCMulticastDelegate.m in Sources */,
+				D59C759218AE270E00B3E178 /* DDHReversiBoard.m in Sources */,
+				D59C759118AE270E00B3E178 /* DDHBoard.m in Sources */,
+				D59C75DE18AE284700B3E178 /* DDHAppDelegate.m in Sources */,
+				D59C75D518AE27E200B3E178 /* main.m in Sources */,
+				D59C75F518AE287D00B3E178 /* DDHBoardSquare.m in Sources */,
+				D59C75CD18AE279200B3E178 /* DDHViewController.m in Sources */,
+				D59C75F218AE286F00B3E178 /* DDHMulticastDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,32 +376,32 @@
 /* Begin PBXTargetDependency section */
 		72A5A0661671D8F600AF63F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 72A5A0381671D8F600AF63F4 /* SHCReversiGame */;
+			target = 72A5A0381671D8F600AF63F4 /* DDHChess */;
 			targetProxy = 72A5A0651671D8F600AF63F4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		72A5A0461671D8F600AF63F4 /* InfoPlist.strings */ = {
+		D59C75D918AE283A00B3E178 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				72A5A0471671D8F600AF63F4 /* en */,
+				D59C75DA18AE283A00B3E178 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		72A5A0581671D8F600AF63F4 /* SHCViewController.xib */ = {
+		D59C75DF18AE285300B3E178 /* DDHViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				72A5A0591671D8F600AF63F4 /* en */,
+				D59C75E018AE285300B3E178 /* en */,
 			);
-			name = SHCViewController.xib;
+			name = DDHViewController.xib;
 			sourceTree = "<group>";
 		};
-		72A5A06A1671D8F600AF63F4 /* InfoPlist.strings */ = {
+		D59C75F818AE29A100B3E178 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				72A5A06B1671D8F600AF63F4 /* en */,
+				D59C75F918AE29A100B3E178 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -458,9 +464,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SHCReversiGame/SHCReversiGame-Prefix.pch";
-				INFOPLIST_FILE = "SHCReversiGame/SHCReversiGame-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SHCReversiGame/DDHChess-Prefix.pch";
+				INFOPLIST_FILE = "SHCReversiGame/DDHChess-Info.plist";
+				PRODUCT_NAME = DDHChess;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -469,9 +475,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SHCReversiGame/SHCReversiGame-Prefix.pch";
-				INFOPLIST_FILE = "SHCReversiGame/SHCReversiGame-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SHCReversiGame/DDHChess-Prefix.pch";
+				INFOPLIST_FILE = "SHCReversiGame/DDHChess-Info.plist";
+				PRODUCT_NAME = DDHChess;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -486,8 +492,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SHCReversiGame/SHCReversiGame-Prefix.pch";
-				INFOPLIST_FILE = "SHCReversiGameTests/SHCReversiGameTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "SHCReversiGameTests/DDHChessTests-Info.plist";
+				PRODUCT_NAME = DDHChessTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -503,8 +509,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SHCReversiGame/SHCReversiGame-Prefix.pch";
-				INFOPLIST_FILE = "SHCReversiGameTests/SHCReversiGameTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "SHCReversiGameTests/DDHChessTests-Info.plist";
+				PRODUCT_NAME = DDHChessTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -513,7 +519,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		72A5A0331671D8F600AF63F4 /* Build configuration list for PBXProject "SHCReversiGame" */ = {
+		72A5A0331671D8F600AF63F4 /* Build configuration list for PBXProject "DDHChess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				72A5A0701671D8F600AF63F4 /* Debug */,
@@ -522,7 +528,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		72A5A0721671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "SHCReversiGame" */ = {
+		72A5A0721671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "DDHChess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				72A5A0731671D8F600AF63F4 /* Debug */,
@@ -531,7 +537,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		72A5A0751671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "SHCReversiGameTests" */ = {
+		72A5A0751671D8F600AF63F4 /* Build configuration list for PBXNativeTarget "DDHChessTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				72A5A0761671D8F600AF63F4 /* Debug */,
