@@ -24,6 +24,8 @@
 		D5567F84189DCD8F0048B4A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5567F5F189DCD8F0048B4A2 /* UIKit.framework */; };
 		D5567F8C189DCD8F0048B4A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5567F8A189DCD8F0048B4A2 /* InfoPlist.strings */; };
 		D5567F8E189DCD8F0048B4A2 /* ChessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5567F8D189DCD8F0048B4A2 /* ChessTests.m */; };
+		D592993118ADFE1A00D8A878 /* DDHPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D592993018ADFE1A00D8A878 /* DDHPiece.m */; };
+		D592993418ADFE3600D8A878 /* DDHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D592993318ADFE3600D8A878 /* DDHBoard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		D5567F89189DCD8F0048B4A2 /* ChessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ChessTests-Info.plist"; sourceTree = "<group>"; };
 		D5567F8B189DCD8F0048B4A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5567F8D189DCD8F0048B4A2 /* ChessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChessTests.m; sourceTree = "<group>"; };
+		D592992F18ADFE1A00D8A878 /* DDHPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPiece.h; path = ../DDHPiece.h; sourceTree = "<group>"; };
+		D592993018ADFE1A00D8A878 /* DDHPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPiece.m; path = ../DDHPiece.m; sourceTree = "<group>"; };
+		D592993218ADFE3600D8A878 /* DDHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoard.h; path = ../DDHBoard.h; sourceTree = "<group>"; };
+		D592993318ADFE3600D8A878 /* DDHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoard.m; path = ../DDHBoard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,10 @@
 		D5567F63189DCD8F0048B4A2 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				D592992F18ADFE1A00D8A878 /* DDHPiece.h */,
+				D592993018ADFE1A00D8A878 /* DDHPiece.m */,
+				D592993218ADFE3600D8A878 /* DDHBoard.h */,
+				D592993318ADFE3600D8A878 /* DDHBoard.m */,
 				D5567F6C189DCD8F0048B4A2 /* DDHAppDelegate.h */,
 				D5567F6D189DCD8F0048B4A2 /* DDHAppDelegate.m */,
 				D5567F6F189DCD8F0048B4A2 /* Main.storyboard */,
@@ -266,7 +276,9 @@
 				D5567F6A189DCD8F0048B4A2 /* main.m in Sources */,
 				D5567F6E189DCD8F0048B4A2 /* DDHAppDelegate.m in Sources */,
 				D5567F74189DCD8F0048B4A2 /* DDHViewController.m in Sources */,
+				D592993418ADFE3600D8A878 /* DDHBoard.m in Sources */,
 				D5567F77189DCD8F0048B4A2 /* DDHMyScene.m in Sources */,
+				D592993118ADFE1A00D8A878 /* DDHPiece.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +491,7 @@
 				D5567F93189DCD8F0048B4A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D5567F94189DCD8F0048B4A2 /* Build configuration list for PBXNativeTarget "ChessTests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +500,7 @@
 				D5567F96189DCD8F0048B4A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
