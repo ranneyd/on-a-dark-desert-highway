@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72A5A0381671D8F600AF63F4"
+               BlueprintIdentifier = "D599E55318AE2BDE00B1670B"
                BuildableName = "DDHChess.app"
                BlueprintName = "DDHChess"
                ReferencedContainer = "container:DDHChess.xcodeproj">
@@ -32,8 +32,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "72A5A05F1671D8F600AF63F4"
-               BuildableName = "DDHChessTests.octest"
+               BlueprintIdentifier = "D599E57B18AE2BDE00B1670B"
+               BuildableName = "DDHChessTests.xctest"
                BlueprintName = "DDHChessTests"
                ReferencedContainer = "container:DDHChess.xcodeproj">
             </BuildableReference>
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "72A5A0381671D8F600AF63F4"
+            BlueprintIdentifier = "D599E55318AE2BDE00B1670B"
             BuildableName = "DDHChess.app"
             BlueprintName = "DDHChess"
             ReferencedContainer = "container:DDHChess.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "72A5A0381671D8F600AF63F4"
+            BlueprintIdentifier = "D599E55318AE2BDE00B1670B"
             BuildableName = "DDHChess.app"
             BlueprintName = "DDHChess"
             ReferencedContainer = "container:DDHChess.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "72A5A0381671D8F600AF63F4"
+            BlueprintIdentifier = "D599E55318AE2BDE00B1670B"
             BuildableName = "DDHChess.app"
             BlueprintName = "DDHChess"
             ReferencedContainer = "container:DDHChess.xcodeproj">
