@@ -10,4 +10,7 @@
 
 @interface DDHLoc : NSObject
 
+@property int x;
+@property int y;
+
 @end

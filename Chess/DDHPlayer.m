@@ -10,4 +10,7 @@
 
 @implementation DDHPlayer
 
+const int WHITE = 0;
+const int BLACK = 1;
+
 @end

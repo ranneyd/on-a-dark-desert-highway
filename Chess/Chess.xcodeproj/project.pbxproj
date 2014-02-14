@@ -17,7 +17,6 @@
 		D5567F71189DCD8F0048B4A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5567F6F189DCD8F0048B4A2 /* Main.storyboard */; };
 		D5567F74189DCD8F0048B4A2 /* DDHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5567F73189DCD8F0048B4A2 /* DDHViewController.m */; };
 		D5567F77189DCD8F0048B4A2 /* DDHMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D5567F76189DCD8F0048B4A2 /* DDHMyScene.m */; };
-		D5567F79189DCD8F0048B4A2 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = D5567F78189DCD8F0048B4A2 /* Spaceship.png */; };
 		D5567F7B189DCD8F0048B4A2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5567F7A189DCD8F0048B4A2 /* Images.xcassets */; };
 		D5567F82189DCD8F0048B4A2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5567F81189DCD8F0048B4A2 /* XCTest.framework */; };
 		D5567F83189DCD8F0048B4A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5567F5B189DCD8F0048B4A2 /* Foundation.framework */; };
@@ -27,6 +26,7 @@
 		D592993118ADFE1A00D8A878 /* DDHPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D592993018ADFE1A00D8A878 /* DDHPiece.m */; };
 		D592993418ADFE3600D8A878 /* DDHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D592993318ADFE3600D8A878 /* DDHBoard.m */; };
 		D5E08F2818AEBD4F00261BCF /* DDHPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E08F2718AEBD4F00261BCF /* DDHPlayer.m */; };
+		D5E08F2B18AEC00000261BCF /* DDHLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = D5E08F2A18AEC00000261BCF /* DDHLoc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,6 @@
 		D5567F73189DCD8F0048B4A2 /* DDHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHViewController.m; sourceTree = "<group>"; };
 		D5567F75189DCD8F0048B4A2 /* DDHMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHMyScene.h; sourceTree = "<group>"; };
 		D5567F76189DCD8F0048B4A2 /* DDHMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHMyScene.m; sourceTree = "<group>"; };
-		D5567F78189DCD8F0048B4A2 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		D5567F7A189DCD8F0048B4A2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D5567F80189DCD8F0048B4A2 /* ChessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5567F81189DCD8F0048B4A2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -69,6 +68,8 @@
 		D592993318ADFE3600D8A878 /* DDHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoard.m; path = ../DDHBoard.m; sourceTree = "<group>"; };
 		D5E08F2618AEBD4F00261BCF /* DDHPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPlayer.h; path = ../DDHPlayer.h; sourceTree = "<group>"; };
 		D5E08F2718AEBD4F00261BCF /* DDHPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPlayer.m; path = ../DDHPlayer.m; sourceTree = "<group>"; };
+		D5E08F2918AEC00000261BCF /* DDHLoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHLoc.h; sourceTree = "<group>"; };
+		D5E08F2A18AEC00000261BCF /* DDHLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHLoc.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +131,8 @@
 		D5567F63189DCD8F0048B4A2 /* Chess */ = {
 			isa = PBXGroup;
 			children = (
+				D5E08F2918AEC00000261BCF /* DDHLoc.h */,
+				D5E08F2A18AEC00000261BCF /* DDHLoc.m */,
 				D5E08F2618AEBD4F00261BCF /* DDHPlayer.h */,
 				D5E08F2718AEBD4F00261BCF /* DDHPlayer.m */,
 				D592992F18ADFE1A00D8A878 /* DDHPiece.h */,
@@ -143,7 +146,6 @@
 				D5567F73189DCD8F0048B4A2 /* DDHViewController.m */,
 				D5567F75189DCD8F0048B4A2 /* DDHMyScene.h */,
 				D5567F76189DCD8F0048B4A2 /* DDHMyScene.m */,
-				D5567F78189DCD8F0048B4A2 /* Spaceship.png */,
 				D5567F7A189DCD8F0048B4A2 /* Images.xcassets */,
 				D5567F64189DCD8F0048B4A2 /* Supporting Files */,
 			);
@@ -258,7 +260,6 @@
 			files = (
 				D5567F68189DCD8F0048B4A2 /* InfoPlist.strings in Resources */,
 				D5567F7B189DCD8F0048B4A2 /* Images.xcassets in Resources */,
-				D5567F79189DCD8F0048B4A2 /* Spaceship.png in Resources */,
 				D5567F71189DCD8F0048B4A2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5567F6A189DCD8F0048B4A2 /* main.m in Sources */,
+				D5E08F2B18AEC00000261BCF /* DDHLoc.m in Sources */,
 				D5567F6E189DCD8F0048B4A2 /* DDHAppDelegate.m in Sources */,
 				D5567F74189DCD8F0048B4A2 /* DDHViewController.m in Sources */,
 				D5E08F2818AEBD4F00261BCF /* DDHPlayer.m in Sources */,

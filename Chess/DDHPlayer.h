@@ -10,4 +10,9 @@
 
 @interface DDHPlayer : NSObject
 
+@property int color;
+
+extern const int WHITE;
+extern const int BLACK;
+
 @end

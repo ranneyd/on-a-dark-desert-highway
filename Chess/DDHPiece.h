@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDHPlayer.h"
+#import "DDHLoc.h"
+#import "DDHBoard.h"
 
 @interface DDHPiece : NSObject
+
+@property DDHPlayer *player;
+@property DDHLoc *position;
+@property DDHBoard  *board;
+
+-(NSArray *) moves;
+-(void) moveTo:(DDHLoc *) position;
 
 @end
