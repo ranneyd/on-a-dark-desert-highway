@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+
+//This class could not be more simple. Couldn't find a Point object in Objective C
 @interface DDHLoc : NSObject
 
 @property int x;
 @property int y;
+
++(id) newPosAtX:(int) x andY: (int) y;
 
 @end

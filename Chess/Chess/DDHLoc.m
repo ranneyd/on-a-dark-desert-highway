@@ -10,4 +10,12 @@
 
 @implementation DDHLoc
 
++(id) newPosAtX:(int)x andY:(int)y
+{
+    id newPos = [[self alloc] init];
+    [newPos setX:x];
+    [newPos setY:y];
+    return newPos;
+}
+
 @end

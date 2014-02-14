@@ -13,4 +13,10 @@
 const int WHITE = 0;
 const int BLACK = 1;
 
++(id) newPlayer:(int)color{
+    id newPlayer = [[self alloc] init];
+    [newPlayer setColorValue:color];
+    return newPlayer;
+}
+
 @end

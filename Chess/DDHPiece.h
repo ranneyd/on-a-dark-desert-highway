@@ -13,11 +13,13 @@
 
 @interface DDHPiece : NSObject
 
-@property DDHPlayer *player;
-@property DDHLoc *position;
-@property DDHBoard  *board;
+@property DDHPlayer *player;            //Represents the player that controls this piece
+@property DDHLoc *position;             //Represents the location on the board of this piece
+@property DDHBoard  *board;             //Pointer to the board this piece lives on
 
--(NSArray *) moves;
--(void) moveTo:(DDHLoc *) position;
+-(NSArray *) moves;                     //Returns an array containing DDHLoc objects that represent all possible moves
+-(void) moveTo:(DDHLoc *) position;     //Moves the piece to the given DDHLoc
+
++(id) newPieceWithPlayer:(DDHPlayer *) player andPosition: (DDHLoc *) position andBoard: (DDHBoard *) board;
 
 @end

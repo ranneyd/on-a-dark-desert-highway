@@ -10,9 +10,11 @@
 
 @interface DDHPlayer : NSObject
 
-@property int color;
+@property int colorValue;       //Determines what color the player is. Color was a reserved word
 
-extern const int WHITE;
+extern const int WHITE;         //Constants to make referring to colors easier
 extern const int BLACK;
+
++(id) newPlayer: (int) color;
 
 @end
