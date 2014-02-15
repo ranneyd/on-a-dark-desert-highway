@@ -13,9 +13,9 @@
 @interface DDHBoard : NSObject
 
 @property NSMutableArray *pieces;   //contains DDHPiece objects
-@property NSArray *board;            //Represents board. Consists of pointers to pieces and nil. Will be two dimensional.
-@property int width;
-@property int height;
+@property DDHPiece* board;          //Represents board. Consists of pointers to pieces and nil. Will be two dimensional.
+@property int boardWidth;           //every word is taken! Can't do a setWidth if this is just width :(
+@property int boardHeight;          //See above
 
 +(id) newBoardOfWidth:(int) width andHeight: (int) height;
 

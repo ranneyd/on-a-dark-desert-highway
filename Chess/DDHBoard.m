@@ -10,4 +10,13 @@
 
 @implementation DDHBoard
 
++(id)newBoardOfWidth:(int)width andHeight:(int)height
+{
+    id newBoard = [[self alloc] init];
+    [newBoard setBoardWidth:width];
+    [newBoard setBoardHeight:height];
+    return newBoard;
+}
+
+
 @end
