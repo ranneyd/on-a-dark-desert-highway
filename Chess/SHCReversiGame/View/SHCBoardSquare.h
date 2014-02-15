@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SHCReversiBoard.h"
 
 @interface SHCBoardSquare : UIView
 
+-(id) initWithFrame:(CGRect) frame column:(NSInteger) column row:(NSInteger)row board:(SHCReversiBoard *)board;
+
 @end
+
