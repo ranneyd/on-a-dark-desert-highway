@@ -13,7 +13,7 @@
 @interface DDHBoard : NSObject
 
 @property NSMutableArray *pieces;   //contains DDHPiece objects
-@property NSArray *board;            //Represents board. Consists of pointers to pieces and null pieces. Will be two dimensional.
+@property NSArray *board;            //Represents board. Consists of pointers to pieces and nil. Will be two dimensional.
 @property int width;
 @property int height;
 
@@ -22,6 +22,6 @@
 -(void) addPiece:(DDHPiece *) piece;            //Adds piece to the board via pieces array
 -(BOOL) removePiece:(DDHPiece *) piece;         //Compares the pointer to elements in the pieces array and removes piece when it finds it.
                                                 //Returns YES if it finds the piece, NO otherwise
--(DDHPiece*) getPieceAtLoc:(DDHLoc *) position; //Returns pointer to piece at location. Returns pointer to null piece if nothing there.
+-(DDHPiece*) getPieceAtLoc:(DDHLoc *) position; //Returns pointer to piece at location. Returns nil if nothing there.
 
 @end
