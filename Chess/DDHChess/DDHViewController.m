@@ -7,13 +7,17 @@
 //
 
 #import "DDHViewController.h"
+#import "DDHReversiBoard.h"
+#import "DDHReversiBoardView.h"
 
 @interface DDHViewController ()
 
 @end
 
 @implementation DDHViewController
-
+{
+    DDHReversiBoard* _board;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -22,6 +26,8 @@
     self.backgroundImage.image = [UIImage imageNamed: @"Reversi.png"];
     self.gameOverImage.image = [UIImage imageNamed: @"GameOver.png"];
     self.gameOverImage.hidden = YES;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
