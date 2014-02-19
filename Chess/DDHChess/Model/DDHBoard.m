@@ -38,7 +38,14 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     _board[column][row] = state;
+}
 
+
+-(void)informDelegateOfStateChanged:(BoardCellState) state forColumn:(NSInteger)column andRow:(NSInteger) row
+{
+    if([_delegate respondsToSelector:@selector(cellStateChanged:forColumn:addRow:)]){
+        [_delegate cellStateChanged:state forColumn:column addRow:row];
+    }
 }
 
 // CHANGE FOR DYNAMICALLY SIZED BOARD
