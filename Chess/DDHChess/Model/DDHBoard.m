@@ -22,6 +22,8 @@
     return self;
 }
 
+
+
 - (BoardCellState) cellStateAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self checkBoundsForColumn:column andRow:row];
