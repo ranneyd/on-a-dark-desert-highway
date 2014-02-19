@@ -38,6 +38,7 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     _board[column][row] = state;
+    [self informDelegateOfStateChanged:state forColumn:column andRow:row];
 }
 
 
@@ -60,6 +61,7 @@
 {
     // Hack way to do it. Change this
     memset(_board, 0, sizeof(NSUInteger) * 8 * 8);
+    [self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
 }
 
 @end

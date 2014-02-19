@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DDHReversiBoard.h"
+#import "DDHBoardDelegate.h"
 
-@interface DDHBoardSquare : UIView
+@interface DDHBoardSquare : UIView <DDHBoardDelegate>
 
 -(id) initWithFrame:(CGRect) frame column:(NSInteger) column row:(NSInteger)row board:(DDHReversiBoard *)board;
 

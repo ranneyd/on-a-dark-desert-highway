@@ -18,8 +18,18 @@
 // Black player's score
 @property (readonly) NSInteger blackScore;
 
+// indicates the player who makes the next move
+@property (readonly) BoardCellState nextMove;
 
 // Sets board to opening positions for Reversi
 - (void) setToInitialState;
+
+
+// Returns whether the player who's turn it is can make the given move
+-(BOOL) isValidMoveToColumn:(NSInteger)column andRow:(NSInteger) row;
+
+// Makes the given move for the player who is currently taking their turn
+- (void) makeMoveToColumn: (NSInteger) column andRow:(NSInteger) row;
+
 
 @end
