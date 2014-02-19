@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDHReversiBoard.h"
 
 @interface DDHReversiBoardView : UIView
+
+- (id) initWithFrame:(CGRect)frame andBoard:(DDHReversiBoard *)board;
 
 @end
