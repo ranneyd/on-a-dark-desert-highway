@@ -2,7 +2,7 @@
 //  DDHBoard.h
 //  DDHChess
 //
-//  Created by Ray Wenderlich and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
+//  Created by Colin Eberhardt and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
 //  Copyright (c) 2014 Colin Eberhardt. All rights reserved.
 //
 

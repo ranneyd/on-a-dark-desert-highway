@@ -2,7 +2,7 @@
 //  DDHReversiBoard.m
 //  DDHChess
 //
-//  Created by Ray Wenderlich and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
+//  Created by Colin Eberhardt and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
 //  Copyright (c) 2014 Colin Eberhardt. All rights reserved.
 //
 
@@ -96,9 +96,7 @@ BoardNavigationFunction BoardNavigationFunctionLeftDown = ^(NSInteger* c, NSInte
 
 -(BOOL) isValidMoveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    if([super cellStateAtColumn:column andRow:row] != BoardCellStateEmpty)
-        return NO;
-    return YES;
+    return [self isValidMoveToColumn:column andRow:row forState:self.nextMove];
 }
 
 -(BOOL) isValidMoveToColumn:(NSInteger)column andRow:(NSInteger)row forState:(BoardCellState)state
@@ -130,6 +128,14 @@ BoardNavigationFunction BoardNavigationFunctionLeftDown = ^(NSInteger* c, NSInte
     //place the playing piece at the given location
     
     [self setCellState:self.nextMove forColumn:column andRow:row];
+    
+    for(int i = 0; i < 8; i++)
+    {
+        [self flipOpponentsCountersForColumn:column
+                                      andRow:row
+                      withNavigationFunction:_boardNavigationFunctions[i]
+                                     toState:self.nextMove];
+    }
     
     _nextMove = [self invertState:_nextMove];
 }
@@ -188,6 +194,31 @@ BoardNavigationFunction BoardNavigationFunctionLeftDown = ^(NSInteger* c, NSInte
     }
     
     return NO;
+}
+
+-(void) flipOpponentsCountersForColumn:(int) column andRow:(int)row withNavigationFunction: (BoardNavigationFunction) navigationFunction toState:(BoardCellState) state
+{
+    // are any pieces surrounded in this direction?
+    
+    if (![self moveSurroundsCountersForColumn:column
+                                       andRow:row
+                       withNavigationFunction:navigationFunction
+                                      toState:state])
+        return;
+    BoardCellState opponentsState = [self invertState:state];
+    BoardCellState currentCellState;
+    
+    // flip counters until the edge of the board is reached, ora piece of the current state is reached
+    
+    do
+    {
+        // advance to the next cell
+        
+        navigationFunction(&column, &row);
+        currentCellState = [super cellStateAtColumn:column andRow:row];
+        [self setCellState:state forColumn:column andRow:row];
+    }
+    while(column >=0 && column <= 7 && row >=0 && row <= 7 && currentCellState == opponentsState);
 }
 
 @end
