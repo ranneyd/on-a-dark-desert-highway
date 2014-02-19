@@ -27,6 +27,7 @@
 		D51E83C018AE2D9D001C352E /* DDHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83BD18AE2D9D001C352E /* DDHBoard.m */; };
 		D51E83C118AE2D9D001C352E /* DDHReversiBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83BF18AE2D9D001C352E /* DDHReversiBoard.m */; };
 		D51E83C518AE2DCF001C352E /* DDHMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83C418AE2DCF001C352E /* DDHMulticastDelegate.m */; };
+		D523F5EB18B4602300E52CAA /* DDHReversiBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */; };
 		D599E55818AE2BDE00B1670B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D599E55718AE2BDE00B1670B /* Foundation.framework */; };
 		D599E55A18AE2BDE00B1670B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D599E55918AE2BDE00B1670B /* CoreGraphics.framework */; };
 		D599E55C18AE2BDE00B1670B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D599E55B18AE2BDE00B1670B /* UIKit.framework */; };
@@ -77,6 +78,8 @@
 		D51E83BF18AE2D9D001C352E /* DDHReversiBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHReversiBoard.m; path = Model/DDHReversiBoard.m; sourceTree = "<group>"; };
 		D51E83C318AE2DCF001C352E /* DDHMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHMulticastDelegate.h; path = Util/DDHMulticastDelegate.h; sourceTree = "<group>"; };
 		D51E83C418AE2DCF001C352E /* DDHMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHMulticastDelegate.m; path = Util/DDHMulticastDelegate.m; sourceTree = "<group>"; };
+		D523F5E918B4602300E52CAA /* DDHReversiBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHReversiBoardView.h; path = View/DDHReversiBoardView.h; sourceTree = "<group>"; };
+		D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHReversiBoardView.m; path = View/DDHReversiBoardView.m; sourceTree = "<group>"; };
 		D599E55418AE2BDE00B1670B /* DDHChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDHChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D599E55718AE2BDE00B1670B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D599E55918AE2BDE00B1670B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,8 @@
 			children = (
 				D51E83B718AE2D8B001C352E /* DDHBoardSquare.h */,
 				D51E83B818AE2D8B001C352E /* DDHBoardSquare.m */,
+				D523F5E918B4602300E52CAA /* DDHReversiBoardView.h */,
+				D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				D51E83C118AE2D9D001C352E /* DDHReversiBoard.m in Sources */,
 				D51E83B918AE2D8B001C352E /* DDHBoardSquare.m in Sources */,
 				D51E838818AE2C8C001C352E /* DDHAppDelegate.m in Sources */,
+				D523F5EB18B4602300E52CAA /* DDHReversiBoardView.m in Sources */,
 				D51E83A218AE2D35001C352E /* main.m in Sources */,
 				D51E838B18AE2C95001C352E /* DDHViewController.m in Sources */,
 				D51E83C018AE2D9D001C352E /* DDHBoard.m in Sources */,
