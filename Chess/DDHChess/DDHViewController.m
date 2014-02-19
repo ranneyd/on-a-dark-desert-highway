@@ -27,6 +27,15 @@
     self.gameOverImage.image = [UIImage imageNamed: @"GameOver.png"];
     self.gameOverImage.hidden = YES;
     
+    //make board
+    _board = [[DDHReversiBoard alloc] init];
+    [_board setToInitialState];
+    
+    //make view
+    
+    DDHReversiBoardView* reversiBoard = [[DDHReversiBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
+    
+    [self.view addSubview:reversiBoard];
     
 }
 

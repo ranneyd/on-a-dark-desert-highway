@@ -7,17 +7,21 @@
 //
 
 #import "DDHBoard.h"
+#import "DDHBoardDelegate.h"
 
 @implementation DDHBoard
 {
     // CHANGE FOR DYNAMICALLY SIZED BOARD
     NSUInteger _board[8][8];
+    id<DDHBoardDelegate> _delegate;
 }
 
 - (id) init
 {
     if (self = [super init]){
         [self clearBoard];
+        _boardDelegate = [[DDHMulticastDelegate alloc] init];
+        _delegate = (id)_boardDelegate;
     }
     return self;
 }
@@ -34,6 +38,7 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     _board[column][row] = state;
+
 }
 
 // CHANGE FOR DYNAMICALLY SIZED BOARD

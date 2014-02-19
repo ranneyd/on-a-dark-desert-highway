@@ -24,6 +24,7 @@
             for(int col = 0; col < 8; col++)
             {
                 DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight) column:col row:row board:board];
+                [self addSubview:square];
             }
         }
         

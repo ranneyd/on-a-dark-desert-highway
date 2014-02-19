@@ -80,6 +80,7 @@
 		D51E83C418AE2DCF001C352E /* DDHMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHMulticastDelegate.m; path = Util/DDHMulticastDelegate.m; sourceTree = "<group>"; };
 		D523F5E918B4602300E52CAA /* DDHReversiBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHReversiBoardView.h; path = View/DDHReversiBoardView.h; sourceTree = "<group>"; };
 		D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHReversiBoardView.m; path = View/DDHReversiBoardView.m; sourceTree = "<group>"; };
+		D523F5EC18B4743500E52CAA /* DDHBoardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DDHBoardDelegate.h; path = Model/DDHBoardDelegate.h; sourceTree = "<group>"; };
 		D599E55418AE2BDE00B1670B /* DDHChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDHChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D599E55718AE2BDE00B1670B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D599E55918AE2BDE00B1670B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -150,6 +151,7 @@
 				D51E83BD18AE2D9D001C352E /* DDHBoard.m */,
 				D51E83BE18AE2D9D001C352E /* DDHReversiBoard.h */,
 				D51E83BF18AE2D9D001C352E /* DDHReversiBoard.m */,
+				D523F5EC18B4743500E52CAA /* DDHBoardDelegate.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";

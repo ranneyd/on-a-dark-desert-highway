@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "BoardCellState.h"
+#import "DDHMulticastDelegate.h"
+
 
 /* The Board */
 @interface DDHBoard : NSObject
+
+// multicasts changes in cell state. Each delegate is informed of changes in state of individual cells
+@property (readonly) DDHMulticastDelegate* boardDelegate;
 
 
 // Get the state of the board at a point
