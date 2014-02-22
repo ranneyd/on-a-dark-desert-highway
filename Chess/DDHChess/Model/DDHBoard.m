@@ -8,11 +8,14 @@
 
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
+#import "ChessPlayer.h"
+#import "DDHPiece.h"
 
 @implementation DDHBoard
 {
     // CHANGE FOR DYNAMICALLY SIZED BOARD
-    NSUInteger _board[8][8];
+    BoardCellState _board[8][8];
+    DDHPiece* _pieces[8][8];
     id<DDHBoardDelegate> _delegate;
 }
 
