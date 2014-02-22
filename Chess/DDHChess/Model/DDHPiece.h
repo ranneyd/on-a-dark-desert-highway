@@ -8,13 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "DDHBoard.h"
+#import "ChessPlayer.h"
+
 
 @interface DDHPiece : NSObject
 
 // This is the board the piece belongs to
 @property (readonly) DDHBoard* board;
 // This represents which player each piece belongs to
-@property (readonly) int player;
+@property (readonly) ChessPlayer player;
+// this represents the piece's location
+@property Location pos;
+
 
 
 @end

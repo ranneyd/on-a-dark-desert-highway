@@ -10,6 +10,10 @@
 #import "BoardCellState.h"
 #import "DDHMulticastDelegate.h"
 
+typedef struct {
+    NSInteger* x;
+    NSInteger* y;
+} Location;
 
 /* The Board */
 @interface DDHBoard : NSObject
