@@ -3,7 +3,7 @@
 //  DDHChess
 //
 //  Created by Colin Eberhardt and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
-//  Copyright (c) 2014 Colin Eberhardt. All rights reserved.
+//  Copyright (c) 2014 Dark Desert Highway Softworks. All rights reserved.
 //
 
 #ifndef DDHReversiGame_BoardCellState_h
