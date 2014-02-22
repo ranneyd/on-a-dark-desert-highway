@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Dark Desert Highway Software. All rights reserved.
 //
 
-#ifndef DDHReversiGame_BoardCellState_h
-#define DDHReversiGame_BoardCellState_h
+#ifndef DDHChess_BoardCellState_h
+#define DDHChess_BoardCellState_h
 
 typedef NS_ENUM(NSUInteger, BoardCellState){
     BoardCellStateEmpty = 0,

@@ -84,6 +84,7 @@
 		D523F5EC18B4743500E52CAA /* DDHBoardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DDHBoardDelegate.h; path = Model/DDHBoardDelegate.h; sourceTree = "<group>"; };
 		D58AA7FC18B82C4E00849AD8 /* DDHPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPiece.h; path = Model/DDHPiece.h; sourceTree = "<group>"; };
 		D58AA7FD18B82C4E00849AD8 /* DDHPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPiece.m; path = Model/DDHPiece.m; sourceTree = "<group>"; };
+		D58AA7FF18B82E2600849AD8 /* ChessPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChessPlayer.h; sourceTree = "<group>"; };
 		D599E55418AE2BDE00B1670B /* DDHChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDHChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D599E55718AE2BDE00B1670B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D599E55918AE2BDE00B1670B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -157,6 +158,7 @@
 				D523F5EC18B4743500E52CAA /* DDHBoardDelegate.h */,
 				D58AA7FC18B82C4E00849AD8 /* DDHPiece.h */,
 				D58AA7FD18B82C4E00849AD8 /* DDHPiece.m */,
+				D58AA7FF18B82E2600849AD8 /* ChessPlayer.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";

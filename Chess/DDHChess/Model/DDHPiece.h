@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDHBoard.h"
 
 @interface DDHPiece : NSObject
+
+// This is the board the piece belongs to
+@property (readonly) DDHBoard* board;
+// This represents which player each piece belongs to
+@property (readonly) int player;
+
 
 @end
