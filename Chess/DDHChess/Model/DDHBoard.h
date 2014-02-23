@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BoardCellState.h"
 #import "DDHMulticastDelegate.h"
+#import "DDHPiece.h"
 
 typedef struct {
     NSInteger* x;
@@ -23,10 +23,10 @@ typedef struct {
 
 
 // Get the state of the board at a point
--(BoardCellState) cellStateAtColumn: (NSInteger) column andRow:(NSInteger)row;
+-(DDHPiece*) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
 
 // Sets cell at location
--(void) setCellState:(BoardCellState) state forColumn:(NSInteger) column andRow:(NSInteger) row;
+-(void) putPiece:(DDHPiece*) piece inColumn:(NSInteger) column andRow:(NSInteger) row;
 
 
 // Sets every cell in board to empty

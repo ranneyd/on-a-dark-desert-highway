@@ -10,12 +10,12 @@
 #import "DDHBoardDelegate.h"
 #import "ChessPlayer.h"
 #import "DDHPiece.h"
+#import "DDHNullPiece.h"
 
 @implementation DDHBoard
 {
     // CHANGE FOR DYNAMICALLY SIZED BOARD
-    BoardCellState _board[8][8];
-    DDHPiece* _pieces[8][8];
+    NSMutableArray* _board;
     id<DDHBoardDelegate> _delegate;
 }
 
@@ -31,17 +31,17 @@
 
 
 
-- (BoardCellState) cellStateAtColumn:(NSInteger)column andRow:(NSInteger)row
+- (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self checkBoundsForColumn:column andRow:row];
-    return _board[column][row];
+    return [[_board objectAtIndex:row] objectAtIndex:column];
 }
 
--(void) setCellState:(BoardCellState)state forColumn:(NSInteger)column andRow:(NSInteger)row
+-(void) putPiece:(DDHPiece *)piece inColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self checkBoundsForColumn:column andRow:row];
-    _board[column][row] = state;
-    [self informDelegateOfStateChanged:state forColumn:column andRow:row];
+    [[_board objectAtIndex:row] replaceObjectAtIndex:column withObject:piece];
+    //[self informDelegateOfStateChanged:state forColumn:column andRow:row];
 }
 
 
@@ -60,11 +60,20 @@
 }
 
 // CHANGE FOR DYNAMICALLY SIZED BOARD
+
+//SKETCHY AND PROBABLY HAS MEMORY LEAKS
 -(void) clearBoard
 {
-    // Hack way to do it. Change this
-    memset(_board, 0, sizeof(NSUInteger) * 8 * 8);
-    [self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
+    // Hack way to do it. Change this. Almost certainly doesn't work without leaks
+    _board = [[NSMutableArray alloc] initWithCapacity:8];
+    for (int i = 0; i < 8; i++){
+        NSMutableArray* newRow = [[NSMutableArray alloc] initWithCapacity:8];
+        [_board addObject:newRow];
+        for(int j = 0; j < 8; j++){
+            [newRow addObject:[[DDHNullPiece alloc] init]];
+        }
+    }
+    //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
 }
 
 @end
