@@ -10,7 +10,6 @@
 #import "DDHBoardDelegate.h"
 #import "ChessPlayer.h"
 #import "DDHPiece.h"
-#import "DDHNullPiece.h"
 
 @implementation DDHBoard
 {
@@ -95,8 +94,8 @@
         // Find the piece index of the soon-to-be-dead piece
         NSInteger pieceInWay = _pieceBoard[column][row];
         // We don't want to remove the object because we don't want to screw up all the numbering, so we'll
-        // replace it with a null piece
-        [_pieceList replaceObjectAtIndex:pieceInWay withObject:[[DDHNullPiece alloc] init]];
+        // replace it with nil
+        [_pieceList replaceObjectAtIndex:pieceInWay withObject:nil];
     }
     // Change the old position in the board array to empty
     _pieceBoard[oldX][oldY] = -1;
