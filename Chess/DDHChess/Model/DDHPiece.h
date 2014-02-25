@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DDHBoard.h"
 #import "ChessPlayer.h"
+#import "DDHBoard.h"
 
 
 @interface DDHPiece : NSObject
@@ -21,11 +21,16 @@
 @property NSInteger x;
 @property NSInteger y;
 
++(id) initWithBoard: (id) board atColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
 // Sets the highlighted array of the board to the places that are moveable by this piece
 -(void) highlightMoves;
 
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;
 
+-(NSUInteger) getX;
+
+-(NSUInteger) getY;
 
 @end
