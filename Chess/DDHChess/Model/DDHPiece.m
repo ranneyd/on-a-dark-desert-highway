@@ -10,14 +10,14 @@
 
 @implementation DDHPiece
 {
-    DDHBoard* _board;
     ChessPlayer _owner;
 }
 
--(id) initWithBoard:(id)board andPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
+-(id) initWithBoard:(id)board andPlayer:(ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super init];
-    _board = board;
+    [self setBoard:board];
+    [self setIndex:index];
     [self moveToColumn:column andRow:row];
     _owner = player;
     return self;

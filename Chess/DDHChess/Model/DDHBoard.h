@@ -20,6 +20,7 @@
 // Returns pointer to piece at location
 -(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
 
+
 // Puts the piece on the piece stack and in the piece array
 // ASSUMES: piece object already has correct coordinates as its x and y and belongs to the board.
 -(void) putPiece:(id) piece inColumn:(NSInteger) column andRow:(NSInteger) row;
@@ -37,6 +38,8 @@
 -(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row withIndex: (int) index;
 
 -(void) clearHighlighting;
+
+-(BOOL) onBoardAtColumn: (NSInteger) column andRow: (NSInteger) row;
 
 // Sets every cell in board to empty
 -(void) clearBoard;

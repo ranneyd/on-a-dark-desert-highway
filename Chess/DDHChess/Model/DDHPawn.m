@@ -10,4 +10,10 @@
 
 @implementation DDHPawn
 
+
+-(void) highlightMoves
+{
+    
+}
+
 @end

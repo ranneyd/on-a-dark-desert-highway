@@ -14,10 +14,12 @@
 @interface DDHPiece : NSObject
 
 // this represents the piece's location
+@property DDHBoard* board;
 @property NSInteger x;
 @property NSInteger y;
+@property int index;
 
--(id) initWithBoard: (id) board andPlayer: (ChessPlayer) player atColumn:(NSUInteger) column andRow:(NSUInteger) row;
+-(id) initWithBoard: (id) board andPlayer: (ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
 -(void) highlightMoves;

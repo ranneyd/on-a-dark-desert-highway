@@ -124,6 +124,11 @@
         [NSException raise:NSRangeException format:@"row or column out of bounds"];
 }
 
+-(BOOL) onBoardAtColumn:(NSInteger)column andRow:(NSInteger)row
+{
+    return column < 0 || column > 7 || row < 0 || row > 7;
+}
+
 // CHANGE FOR DYNAMICALLY SIZED BOARD
 // SKETCHY AND PROBABLY HAS MEMORY LEAKS
 -(void) clearBoard
