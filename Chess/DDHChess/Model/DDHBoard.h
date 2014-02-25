@@ -10,11 +10,6 @@
 #import "DDHMulticastDelegate.h"
 #import "DDHPiece.h"
 
-typedef struct {
-    NSInteger* x;
-    NSInteger* y;
-} Location;
-
 /* The Board */
 @interface DDHBoard : NSObject
 
@@ -22,12 +17,25 @@ typedef struct {
 @property (readonly) DDHMulticastDelegate* boardDelegate;
 
 
-// Get the state of the board at a point
--(DDHPiece*) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
+// Returns pointer to piece at location
+-(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
 
 // Sets cell at location
--(void) putPiece:(DDHPiece*) piece inColumn:(NSInteger) column andRow:(NSInteger) row;
+-(void) putPiece:(id) piece inColumn:(NSInteger) column andRow:(NSInteger) row;
 
+// Returns true if square has no piece in it. Shocking, I know
+-(BOOL) isEmptySquareAtColumn:(NSInteger) column andRow:(NSInteger) row;
+
+// Returns a pointer to the piece at the given index in the internal piece array.
+-(id) pieceAtIndex: (int) index;
+
+-(BOOL) highlightedAtColumn: (NSInteger) column andRow:(NSInteger) row;
+
+-(void) moveToColumn:(NSInteger) column andRow:(NSInteger) row;
+
+-(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row withIndex: (int) index;
+
+-(void) clearHighlighting;
 
 // Sets every cell in board to empty
 -(void) clearBoard;

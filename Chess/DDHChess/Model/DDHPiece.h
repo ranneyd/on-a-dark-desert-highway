@@ -18,8 +18,14 @@
 // This represents which player each piece belongs to
 @property (readonly) ChessPlayer player;
 // this represents the piece's location
-@property Location pos;
+@property NSInteger x;
+@property NSInteger y;
 
+// Sets the highlighted array of the board to the places that are moveable by this piece
+-(void) highlightMoves;
+
+// Changes the x and y properties of this piece
+-(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;
 
 
 @end
