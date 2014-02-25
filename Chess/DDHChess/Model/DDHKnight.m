@@ -12,8 +12,6 @@
 
 -(void) highlightMoves
 {
-    NSUInteger x = [self x];
-    NSUInteger y = [self y];
     DDHBoard* board = [self board];
     
     /*
@@ -35,6 +33,8 @@
     }
     
     /*
+    NSUInteger x = [self x];
+    NSUInteger y = [self y];
     // up 1 left 2
     int dx = x - 2;
     int dy = y - 1;
