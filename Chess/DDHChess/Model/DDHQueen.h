@@ -10,4 +10,6 @@
 
 @interface DDHQueen : DDHPiece
 
+-(void) highlightMoves;
+
 @end

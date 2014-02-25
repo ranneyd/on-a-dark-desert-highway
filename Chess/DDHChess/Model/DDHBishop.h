@@ -10,4 +10,6 @@
 
 @interface DDHBishop : DDHPiece
 
+-(void) highlightMoves;
+
 @end

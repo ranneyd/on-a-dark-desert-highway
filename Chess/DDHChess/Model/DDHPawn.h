@@ -10,4 +10,6 @@
 
 @interface DDHPawn : DDHPiece
 
+-(void) highlightMoves;
+
 @end

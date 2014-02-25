@@ -10,4 +10,6 @@
 
 @interface DDHRook : DDHPiece
 
+-(void) highlightMoves;
+
 @end

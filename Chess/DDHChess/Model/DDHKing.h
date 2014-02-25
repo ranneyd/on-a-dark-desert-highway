@@ -10,4 +10,6 @@
 
 @interface DDHKing : DDHPiece
 
+-(void) highlightMoves;
+
 @end
