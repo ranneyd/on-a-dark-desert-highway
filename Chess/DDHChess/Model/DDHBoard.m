@@ -84,8 +84,8 @@
     // Get the piece from the _pieceList
     DDHPiece* piece = [_pieceList objectAtIndex:pieceIndex];
     // Get old position of the piece
-    NSUInteger oldX = [piece getX];
-    NSUInteger oldY = [piece getY];
+    NSUInteger oldX = [piece x];
+    NSUInteger oldY = [piece y];
     
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
