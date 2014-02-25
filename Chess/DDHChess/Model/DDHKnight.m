@@ -18,7 +18,7 @@
     
     /*
      * Technically worse performance than the if statments, but more elegant?
-     */
+
     
     // Iterate over all possible x shifts
     for(int dx = -2; dx <= 2; dx++)
@@ -33,50 +33,48 @@
                 [board highlightAtColumn:x + dx andRow:y + dy withIndex:[self index]];
         }
     }
+     */
     
-    /*
-    
-    // up 1 left 2
+    // left 2 up 1
     int dx = x - 2;
     int dy = y - 1;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // up 2 left 1
+    // left 1 up 2
     dx = x - 1;
     dy = y - 2;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // up 2 right 1
+    // right 1 up 2
     dx = x + 1;
     dy = y - 2;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // up 1 right 2
+    // right 2 up 1
     dx = x + 2;
     dy = y - 1;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // down 1 right 2
+    // right 2 down 1
     dx = x + 2;
     dy = y + 1;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // down 2 right 1
+    // right 1 down 2
     dx = x + 1;
     dy = y + 2;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // down 2 left 1
+    // left 1 down 2
     dx = x - 1;
     dy = y + 2;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // down 1 left 2
+    // left 2 down 1 
     dx = x - 2;
     dy = y + 1;
     if([board onBoardAtColumn:dx andRow:dy])
         [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    */
 }
 
 @end
