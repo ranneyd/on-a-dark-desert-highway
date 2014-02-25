@@ -44,4 +44,6 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
+-(BOOL) kingCouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
+
 @end

@@ -111,9 +111,8 @@
 
 -(void)informDelegateOfStateChanged:(BoardCellState) state forColumn:(NSInteger)column andRow:(NSInteger) row
 {
-    if([_delegate respondsToSelector:@selector(cellStateChanged:forColumn:addRow:)]){
+    if([_delegate respondsToSelector:@selector(cellStateChanged:forColumn:addRow:)])
         [_delegate cellStateChanged:state forColumn:column addRow:row];
-    }
 }
 
 // CHANGE FOR DYNAMICALLY SIZED BOARD
@@ -147,6 +146,52 @@
 -(void) clearHighlighting
 {
     memset(_highlightBoard, 0, sizeof(NSUInteger) * 8 * 8);
+}
+
+
+// Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
+// with their moves and if, after all the pieces are through, the given spot is highlighted, the king can't move there
+// ie can't move into check.
+-(BOOL) kingBelongingToPlayer: (ChessPlayer) player CouldMoveToColumn:(NSInteger)column andRow:(NSInteger)row
+{
+    // I sincerely wish pointers in objective C weren't so stupid
+    
+    // We're going to store the current state of the highlighted board here.
+    NSUInteger oldHighlighting[8][8];
+    
+    // Iterate over the highlighted board and save it into the temporary save location
+    for(int i = 0; i < 8; i++)
+        for(int j = 0; j < 8; j++)
+            oldHighlighting[i][j] = _highlightBoard[i][j];
+    
+    // Clear the highlighting
+    [self clearHighlighting];
+    // If we find that our spot is hit, we set this to NO
+    BOOL result = YES;
+    
+    // Iterate over all pieces
+    for(DDHPiece* piece in _pieceList){
+        // _pieceList has nils in it to preserve indices after piece deletion. We have to avoid those and
+        // we don't want to consider moves from our own pieces.
+        if(piece != nil && [piece getPlayer] != player){
+            // Highlight possible moves
+            [piece highlightMoves];
+            // If the square we're looking at is highlighted, we'll return NO later and break the loop now
+            
+            // Putting here and not outside the loop for performance. Don't want to go through every piece if
+            // The first piece can hit that spot.
+            if ([self highlightedAtColumn:column andRow:row]){
+                result = NO;
+                break;
+            }
+        }
+    }
+   
+    // Set the highlight board back to its original state.
+    for(int i = 0; i < 8; i++)
+        for(int j = 0; j < 8; j++)
+            _highlightBoard[i][j] = oldHighlighting[i][j];
+    return result;
 }
 
 @end
