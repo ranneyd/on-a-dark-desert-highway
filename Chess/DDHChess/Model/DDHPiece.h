@@ -27,4 +27,6 @@
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;
 
+-(ChessPlayer) getPlayer;
+
 @end

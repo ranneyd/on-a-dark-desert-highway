@@ -13,6 +13,8 @@
 -(void) highlightMoves
 {
     DDHBoard* board = [self board];
+    NSUInteger x = [self x];
+    NSUInteger y = [self y];
     
     /*
      * Technically worse performance than the if statments, but more elegant?
@@ -27,14 +29,13 @@
             // The y shift and the x shift cannot be the same, ie you can't move a knight two up and two left.
             // Knights cannot move in straight lines so neither dy nor dx can be 0.
             // Move must be on the board
-            if(abs(dx) != abs(dy) && dx != 0 && dy != 00 && [board onBoardAtColumn:dx andRow:dy])
-                [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
+            if(abs(dx) != abs(dy) && dx != 0 && dy != 00 && [board onBoardAtColumn:x + dx andRow:y +dy])
+                [board highlightAtColumn:x + dx andRow:y + dy withIndex:[self index]];
         }
     }
     
     /*
-    NSUInteger x = [self x];
-    NSUInteger y = [self y];
+    
     // up 1 left 2
     int dx = x - 2;
     int dy = y - 1;

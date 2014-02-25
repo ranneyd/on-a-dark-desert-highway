@@ -32,5 +32,9 @@
     [self setX:column];
     [self setY:row];
 }
+-(ChessPlayer)getPlayer
+{
+    return _owner;
+}
 
 @end
