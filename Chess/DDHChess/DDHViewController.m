@@ -7,8 +7,8 @@
 //
 
 #import "DDHViewController.h"
-#import "DDHReversiBoard.h"
-#import "DDHReversiBoardView.h"
+#import "DDHBoard.h"
+#import "DDHChessBoardView.h"
 
 @interface DDHViewController ()
 
@@ -16,7 +16,7 @@
 
 @implementation DDHViewController
 {
-    DDHReversiBoard* _board;
+    DDHBoard* _board;
 }
 - (void)viewDidLoad
 {
@@ -28,14 +28,14 @@
     self.gameOverImage.hidden = YES;
     
     //make board
-    _board = [[DDHReversiBoard alloc] init];
+    _board = [[DDHBoard alloc] init];
     [_board setToInitialState];
     
     //make view
     
-    DDHReversiBoardView* reversiBoard = [[DDHReversiBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
+    DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
     
-    [self.view addSubview:reversiBoard];
+    [self.view addSubview:chessBoard];
     
 }
 

@@ -55,7 +55,8 @@
 - (void)update
 {
     // show / hide the images based on the cell state
-    DDHPiece* state = [_board pieceAtColumn:_column andRow:_row];
+    DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
+    NSLog(@"%", [piece description]);
     /*
      
      WILL!!! HALP!

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BoardCellState.h"
+#import "ChessPlayer.h"
 
 @protocol DDHBoardDelegate <NSObject>
 
--(void)cellStateChanged: (BoardCellState)state forColumn:(int)column addRow:(int) row;
+-(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row;
 
 @end

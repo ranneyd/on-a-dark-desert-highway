@@ -123,10 +123,10 @@
     // INVERT PLAYER STATE
 }
 
--(void)informDelegateOfStateChanged:(BoardCellState) state forColumn:(NSInteger)column andRow:(NSInteger) row
+-(void)informDelegateOfPieceChanged:(DDHPiece*) piece forColumn:(NSInteger)column andRow:(NSInteger) row
 {
-    if([_delegate respondsToSelector:@selector(cellStateChanged:forColumn:addRow:)])
-        [_delegate cellStateChanged:state forColumn:column addRow:row];
+    if([_delegate respondsToSelector:@selector(cellPieceChanged:forColumn:addRow:)])
+        [_delegate cellPieceChanged:piece forColumn:column addRow:row];
 }
 
 // CHANGE FOR DYNAMICALLY SIZED BOARD

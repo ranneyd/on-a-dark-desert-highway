@@ -8,8 +8,8 @@
 
 
 //Include guards from the tutorial. Assume they are important
-#ifndef DDHChess_ChessPlayer.h
-#define DDHChess_ChessPlayer.h
+#ifndef DDHChess_ChessPlayer
+#define DDHChess_ChessPlayer
 
 
 // Make our lives easier by defining chess players as ints

@@ -50,7 +50,7 @@
     for(int i = 0; i < 8; i++){
         dx = x + points[i]->x;
         dy = y + points[i]->y;
-        if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
+        if([board onBoardAtColumn:dx andRow:dy] && [board kingBelongingTo:[self getPlayer] CouldMoveToColumn:dx andRow:dy])
             [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
     }
 }

@@ -17,7 +17,6 @@ struct Tuple{
 
 @interface DDHPiece : NSObject
 
-// this represents the piece's location
 @property DDHBoard* board;
 @property NSInteger x;
 @property NSInteger y;
