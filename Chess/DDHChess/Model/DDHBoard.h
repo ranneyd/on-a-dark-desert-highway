@@ -9,17 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "DDHMulticastDelegate.h"
 #import "DDHPiece.h"
+#import "ChessPlayer.h"
 
 /* The Board */
 @interface DDHBoard : NSObject
 
 // multicasts changes in cell state. Each delegate is informed of changes in state of individual cells
 @property (readonly) DDHMulticastDelegate* boardDelegate;
-
+// indicates the player who makes the next move
+@property (readonly) ChessPlayer nextMove;
 
 // Returns pointer to piece at location
 -(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
+// Returns the opposite of the player
+-(ChessPlayer) invertState: (ChessPlayer)state;
 
+-(void) setToInitialState;
 
 // Puts the piece on the piece stack and in the piece array
 // ASSUMES: piece object already has correct coordinates as its x and y and belongs to the board.
@@ -44,6 +49,6 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
--(BOOL) kingCouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
+-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
 
 @end

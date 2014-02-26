@@ -8,8 +8,6 @@
 
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
-#import "ChessPlayer.h"
-#import "DDHPiece.h"
 
 @implementation DDHBoard
 {
@@ -36,7 +34,23 @@
     return self;
 }
 
+-(void) setToInitialState
+{
+    // clear le board
+    
+    [self clearBoard];
+    
+    // Put in the board setup
+    
+    _nextMove = ChessPlayerBlack;
+}
 
+-(ChessPlayer)invertState:(ChessPlayer)state
+{
+    if (state == ChessPlayerBlack)
+        return ChessPlayerWhite;
+    return ChessPlayerBlack;
+}
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
@@ -152,7 +166,7 @@
 // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
 // with their moves and if, after all the pieces are through, the given spot is highlighted, the king can't move there
 // ie can't move into check.
--(BOOL) kingBelongingToPlayer: (ChessPlayer) player CouldMoveToColumn:(NSInteger)column andRow:(NSInteger)row
+-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn:(NSInteger)column andRow:(NSInteger) row
 {
     // I sincerely wish pointers in objective C weren't so stupid
     
