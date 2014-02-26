@@ -12,12 +12,12 @@
 {
     int _row;
     int _column;
-    DDHReversiBoard* _board;
+    DDHBoard* _board;
     UIImageView* _blackView;
     UIImageView* _whiteView;
 }
 
-- (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHReversiBoard *)board
+- (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHBoard *)board
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -55,12 +55,17 @@
 - (void)update
 {
     // show / hide the images based on the cell state
-    BoardCellState state = [_board cellStateAtColumn:_column andRow:_row];
+    DDHPiece* state = [_board pieceAtColumn:_column andRow:_row];
+    /*
+     
+     WILL!!! HALP!
+     
     _whiteView.alpha = state == BoardCellStateWhitePiece ? 1.0 : 0.0;
     _blackView.alpha = state == BoardCellStateBlackPiece ? 1.0 : 0.0;
+     */
 }
 
--(void) cellStateChanged:(BoardCellState)state forColumn:(int)column addRow:(int)row
+-(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row
 {
     if ((column == _column && row == _row) || (column == -1 && row == -1))
     {
@@ -70,10 +75,11 @@
 
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
-        if ([_board isValidMoveToColumn:_column andRow:_row])
-        {
-            [_board makeMoveToColumn:_column andRow:_row];
-        }
+    /*
+     
+     All the stuff that Will did goes here? Maybe?
+     
+     */
 }
 
 @end

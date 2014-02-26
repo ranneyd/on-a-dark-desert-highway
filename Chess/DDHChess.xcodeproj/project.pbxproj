@@ -26,7 +26,6 @@
 		D51E83B918AE2D8B001C352E /* DDHBoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83B818AE2D8B001C352E /* DDHBoardSquare.m */; };
 		D51E83C018AE2D9D001C352E /* DDHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83BD18AE2D9D001C352E /* DDHBoard.m */; };
 		D51E83C518AE2DCF001C352E /* DDHMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83C418AE2DCF001C352E /* DDHMulticastDelegate.m */; };
-		D523F5EB18B4602300E52CAA /* DDHReversiBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */; };
 		D58AA7FE18B82C4E00849AD8 /* DDHPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA7FD18B82C4E00849AD8 /* DDHPiece.m */; };
 		D58AA80218B88B8B00849AD8 /* DDHPawn.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA80118B88B8B00849AD8 /* DDHPawn.m */; };
 		D58AA80818B88BC100849AD8 /* DDHRook.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA80718B88BC100849AD8 /* DDHRook.m */; };
@@ -34,6 +33,7 @@
 		D58AA80E18B88BDA00849AD8 /* DDHBishop.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA80D18B88BDA00849AD8 /* DDHBishop.m */; };
 		D58AA81118B88BE400849AD8 /* DDHQueen.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA81018B88BE400849AD8 /* DDHQueen.m */; };
 		D58AA81418B88BED00849AD8 /* DDHKing.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA81318B88BED00849AD8 /* DDHKing.m */; };
+		D58AA81A18BDB77800849AD8 /* DDHChessBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D58AA81918BDB77800849AD8 /* DDHChessBoardView.m */; };
 		D599E55818AE2BDE00B1670B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D599E55718AE2BDE00B1670B /* Foundation.framework */; };
 		D599E55A18AE2BDE00B1670B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D599E55918AE2BDE00B1670B /* CoreGraphics.framework */; };
 		D599E55C18AE2BDE00B1670B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D599E55B18AE2BDE00B1670B /* UIKit.framework */; };
@@ -77,13 +77,10 @@
 		D51E83AC18AE2D6B001C352E /* ReversiWhitePiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiWhitePiece.png; path = Assets/ReversiWhitePiece.png; sourceTree = "<group>"; };
 		D51E83B718AE2D8B001C352E /* DDHBoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoardSquare.h; path = View/DDHBoardSquare.h; sourceTree = "<group>"; };
 		D51E83B818AE2D8B001C352E /* DDHBoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoardSquare.m; path = View/DDHBoardSquare.m; sourceTree = "<group>"; };
-		D51E83BB18AE2D9D001C352E /* BoardCellState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardCellState.h; path = Model/BoardCellState.h; sourceTree = "<group>"; };
 		D51E83BC18AE2D9D001C352E /* DDHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoard.h; path = Model/DDHBoard.h; sourceTree = "<group>"; };
 		D51E83BD18AE2D9D001C352E /* DDHBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoard.m; path = Model/DDHBoard.m; sourceTree = "<group>"; };
 		D51E83C318AE2DCF001C352E /* DDHMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHMulticastDelegate.h; path = Util/DDHMulticastDelegate.h; sourceTree = "<group>"; };
 		D51E83C418AE2DCF001C352E /* DDHMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHMulticastDelegate.m; path = Util/DDHMulticastDelegate.m; sourceTree = "<group>"; };
-		D523F5E918B4602300E52CAA /* DDHReversiBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHReversiBoardView.h; path = View/DDHReversiBoardView.h; sourceTree = "<group>"; };
-		D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHReversiBoardView.m; path = View/DDHReversiBoardView.m; sourceTree = "<group>"; };
 		D523F5EC18B4743500E52CAA /* DDHBoardDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DDHBoardDelegate.h; path = Model/DDHBoardDelegate.h; sourceTree = "<group>"; };
 		D58AA7FC18B82C4E00849AD8 /* DDHPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPiece.h; path = Model/DDHPiece.h; sourceTree = "<group>"; };
 		D58AA7FD18B82C4E00849AD8 /* DDHPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPiece.m; path = Model/DDHPiece.m; sourceTree = "<group>"; };
@@ -100,6 +97,8 @@
 		D58AA81018B88BE400849AD8 /* DDHQueen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHQueen.m; path = Model/DDHQueen.m; sourceTree = "<group>"; };
 		D58AA81218B88BED00849AD8 /* DDHKing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHKing.h; path = Model/DDHKing.h; sourceTree = "<group>"; };
 		D58AA81318B88BED00849AD8 /* DDHKing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHKing.m; path = Model/DDHKing.m; sourceTree = "<group>"; };
+		D58AA81818BDB77800849AD8 /* DDHChessBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHChessBoardView.h; path = View/DDHChessBoardView.h; sourceTree = "<group>"; };
+		D58AA81918BDB77800849AD8 /* DDHChessBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHChessBoardView.m; path = View/DDHChessBoardView.m; sourceTree = "<group>"; };
 		D599E55418AE2BDE00B1670B /* DDHChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDHChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D599E55718AE2BDE00B1670B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D599E55918AE2BDE00B1670B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,10 +153,10 @@
 		D51E83B418AE2D70001C352E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D58AA81818BDB77800849AD8 /* DDHChessBoardView.h */,
+				D58AA81918BDB77800849AD8 /* DDHChessBoardView.m */,
 				D51E83B718AE2D8B001C352E /* DDHBoardSquare.h */,
 				D51E83B818AE2D8B001C352E /* DDHBoardSquare.m */,
-				D523F5E918B4602300E52CAA /* DDHReversiBoardView.h */,
-				D523F5EA18B4602300E52CAA /* DDHReversiBoardView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -165,7 +164,6 @@
 		D51E83BA18AE2D90001C352E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D51E83BB18AE2D9D001C352E /* BoardCellState.h */,
 				D51E83BC18AE2D9D001C352E /* DDHBoard.h */,
 				D51E83BD18AE2D9D001C352E /* DDHBoard.m */,
 				D523F5EC18B4743500E52CAA /* DDHBoardDelegate.h */,
@@ -389,8 +387,8 @@
 				D58AA80818B88BC100849AD8 /* DDHRook.m in Sources */,
 				D51E83B918AE2D8B001C352E /* DDHBoardSquare.m in Sources */,
 				D51E838818AE2C8C001C352E /* DDHAppDelegate.m in Sources */,
-				D523F5EB18B4602300E52CAA /* DDHReversiBoardView.m in Sources */,
 				D58AA7FE18B82C4E00849AD8 /* DDHPiece.m in Sources */,
+				D58AA81A18BDB77800849AD8 /* DDHChessBoardView.m in Sources */,
 				D58AA81118B88BE400849AD8 /* DDHQueen.m in Sources */,
 				D51E83A218AE2D35001C352E /* main.m in Sources */,
 				D58AA80B18B88BCE00849AD8 /* DDHKnight.m in Sources */,

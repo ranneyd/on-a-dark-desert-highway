@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDHReversiBoard.h"
+#import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
 
 @interface DDHBoardSquare : UIView <DDHBoardDelegate>
 
--(id) initWithFrame:(CGRect) frame column:(NSInteger) column row:(NSInteger)row board:(DDHReversiBoard *)board;
+-(id) initWithFrame:(CGRect) frame column:(NSInteger) column row:(NSInteger)row board:(DDHBoard *)board;
 
 @end
 

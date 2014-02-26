@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DDHReversiBoard.h"
+#import "DDHBoard.h"
 
 @interface DDHReversiBoardView : UIView
 
