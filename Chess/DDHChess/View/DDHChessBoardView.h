@@ -1,5 +1,5 @@
 //
-//  DDHReversiBoardView.h
+//  DDHChessboardView.h
 //  DDHChess
 //
 //  Created by Dustin Kane on 2/18/14.
@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DDHBoard.h"
 
-@interface DDHReversiBoardView : UIView
+@interface DDHChessBoardView : UIView
 
-- (id) initWithFrame:(CGRect)frame andBoard:(DDHReversiBoard *)board;
+- (id) initWithFrame:(CGRect)frame andBoard:(DDHBoard *)board;
 
 @end

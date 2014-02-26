@@ -1,17 +1,17 @@
 //
-//  DDHReversiBoardView.m
+//  DDHChesssBoardView.m
 //  DDHChess
 //
 //  Created by Dustin Kane on 2/18/14.
 //  Copyright (c) 2014 Dark Desert Highway Software. All rights reserved.
 //
 
-#import "DDHReversiBoardView.h"
+#import "DDHChessBoardView.h"
 #import "DDHBoardSquare.h"
 
-@implementation DDHReversiBoardView
+@implementation DDHChessBoardView
 
-- (id)initWithFrame:(CGRect)frame andBoard:(DDHReversiBoard*) board
+- (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board
 {
     if (self = [super initWithFrame:frame])
     {
