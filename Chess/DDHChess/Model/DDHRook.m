@@ -16,111 +16,50 @@
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
-    //up
-    int dy = -1;
-    // Loop as long as the spots are still on the board
-    while([board onBoardAtColumn:x andRow: y + dy])
-    {
-        
-        // If this spot has a piece in it...
-        if(![board isEmptySquareAtColumn:x andRow:y+dy])
-        {
-            // if it is our piece, do nothing and get out of the loop because you can't go further
-            if([[board pieceAtColumn:x andRow:y+dy] getPlayer] == [self getPlayer])
-                break;
-            // If it isn't our piece, highlight that spot but exit the loop because we can't go further
-            else{
-                [board highlightAtColumn:x andRow:y + dy withIndex:[self index]];
-                break;
+    // Store moves in here.
+    struct Tuple* points[4];
+    
+    // up
+    points[0]->x =  0;
+    points[0]->y = -1;
+    // down
+    points[1]->x =  0;
+    points[1]->y =  1;
+    // left
+    points[2]->x = -1;
+    points[2]->y =  0;
+    // right
+    points[3]->x =  1;
+    points[3]->y =  0;
+    
+    int dx;
+    int dy;
+    for(int i = 0; i < 4; i++){
+        dx = x;
+        dy = y;
+        // Loop as long as the spots are still on the board
+        while([board onBoardAtColumn:x + dx andRow: y + dy]){
+            // If this spot has a piece in it...
+            if(![board isEmptySquareAtColumn:x +dx andRow:y+dy]){
+                // if it is our piece, do nothing and get out of the loop because you can't go further
+                if([[board pieceAtColumn:x +dx andRow:y+dy] getPlayer] == [self getPlayer])
+                    break;
+                // If it isn't our piece, highlight that spot but exit the loop because we can't go further
+                else{
+                    [board highlightAtColumn:x + dx andRow:y + dy withIndex:[self index]];
+                    break;
+                }
             }
-        }
-        // If the place is empty...
-        else{
-            // highlight the current spot
-            [board highlightAtColumn:x andRow:y + dy withIndex:[self index]];
-        }
-        // Keep going
-        --dy;
-    }
-    //down
-    dy = 1;
-    // Loop as long as the spots are still on the board
-    while([board onBoardAtColumn:x andRow: y + dy])
-    {
-        
-        // If this spot has a piece in it...
-        if(![board isEmptySquareAtColumn:x andRow:y+dy])
-        {
-            // if it is our piece, do nothing and get out of the loop because you can't go further
-            if([[board pieceAtColumn:x andRow:y+dy] getPlayer] == [self getPlayer])
-                break;
-            // If it isn't our piece, highlight that spot but exit the loop because we can't go further
+            // If the place is empty...
             else{
-                [board highlightAtColumn:x andRow:y + dy withIndex:[self index]];
-                break;
+                // highlight the current spot
+                [board highlightAtColumn:x +dx andRow:y + dy withIndex:[self index]];
             }
+            // Keep going
+            dx += points[i]->x;
+            dy += points[i]->y;
         }
-        // If the place is empty...
-        else{
-            // highlight the current spot
-            [board highlightAtColumn:x andRow:y + dy withIndex:[self index]];
-        }
-        // Keep going
-        ++dy;
     }
-    //left
-    int dx = -1;
-    // Loop as long as the spots are still on the board
-    while([board onBoardAtColumn:x + dx andRow: y])
-    {
-        
-        // If this spot has a piece in it...
-        if(![board isEmptySquareAtColumn:x +dx andRow:y])
-        {
-            // if it is our piece, do nothing and get out of the loop because you can't go further
-            if([[board pieceAtColumn:x +dx andRow:y] getPlayer] == [self getPlayer])
-                break;
-            // If it isn't our piece, highlight that spot but exit the loop because we can't go further
-            else{
-                [board highlightAtColumn:x +dx andRow:y withIndex:[self index]];
-                break;
-            }
-        }
-        // If the place is empty...
-        else{
-            // highlight the current spot
-            [board highlightAtColumn:x + dx andRow:y withIndex:[self index]];
-        }
-        // Keep going
-        --dx;
-    }
-    //right
-    dx = 1;
-    // Loop as long as the spots are still on the board
-    while([board onBoardAtColumn:x + dx andRow: y])
-    {
-        
-        // If this spot has a piece in it...
-        if(![board isEmptySquareAtColumn:x +dx andRow:y])
-        {
-            // if it is our piece, do nothing and get out of the loop because you can't go further
-            if([[board pieceAtColumn:x +dx andRow:y] getPlayer] == [self getPlayer])
-                break;
-            // If it isn't our piece, highlight that spot but exit the loop because we can't go further
-            else{
-                [board highlightAtColumn:x +dx andRow:y withIndex:[self index]];
-                break;
-            }
-        }
-        // If the place is empty...
-        else{
-            // highlight the current spot
-            [board highlightAtColumn:x + dx andRow:y withIndex:[self index]];
-        }
-        // Keep going
-        ++dx;
-    }
-
 }
 
 @end

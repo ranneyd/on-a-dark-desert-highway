@@ -16,46 +16,43 @@
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
-    // left 1 up 1
-    int dx = x - 1;
-    int dy = y - 1;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // up 1
-    dx = x ;
-    dy = y - 1;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // right 1 up 1
-    dx = x + 1;
-    dy = y - 1;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // right 1
-    dx = x +1;
-    dy = y;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // right 1 down 1
-    dx = x + 1;
-    dy = y + 1;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // down 1
-    dx = x;
-    dy = y + 1;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // down 1 left 1
-    dx = x - 1;
-    dy = y + 1;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
-    // left 1
-    dx = x -1;
-    dy = y;
-    if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
-        [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
+    // Store moves in here.
+    struct Tuple* points[8];
+    
+    // up
+    points[0]->x = 0;
+    points[0]->y = -1;
+    // up right
+    points[1]->x =  1;
+    points[1]->y = -1;
+    // right
+    points[2]->x =  1;
+    points[2]->y =  0;
+    // down right
+    points[3]->x =  1;
+    points[3]->y =  1;
+    // down
+    points[4]->x =  0;
+    points[4]->y =  1;
+    // down left
+    points[5]->x = -1;
+    points[5]->y =  1;
+    // left
+    points[6]->x = -1;
+    points[6]->y =  0;
+    // up left
+    points[7]->x = -1;
+    points[7]->y = -1;
+    
+    // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
+    int dx = 0;
+    int dy = 0;
+    for(int i = 0; i < 8; i++){
+        dx = x + points[i]->x;
+        dy = y + points[i]->y;
+        if([board onBoardAtColumn:dx andRow:dy] && [board kingCouldMoveToColumn:dx andRow:dy])
+            [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
+    }
 }
 
 @end

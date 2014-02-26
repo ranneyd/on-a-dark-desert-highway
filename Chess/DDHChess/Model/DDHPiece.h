@@ -10,6 +10,10 @@
 #import "ChessPlayer.h"
 #import "DDHBoard.h"
 
+struct Tuple{
+    NSInteger x;
+    NSInteger y;
+};
 
 @interface DDHPiece : NSObject
 
