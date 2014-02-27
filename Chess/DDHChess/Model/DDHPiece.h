@@ -33,4 +33,7 @@ struct Tuple{
 
 -(BOOL) onBoard:(DDH2DArray*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 
+-(BOOL**) blankHighlightingForBoard:(DDH2DArray*) board;
+
+
 @end

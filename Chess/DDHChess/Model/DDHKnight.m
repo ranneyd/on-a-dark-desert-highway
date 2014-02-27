@@ -43,13 +43,8 @@
     points[7]->x = -2;
     points[7]->y =  1;
     
-    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
-    // Should be size of rows*columns
-    BOOL** highlighting = malloc([board rows]*[board columns]);
-    // Initialize everything to false
-    for (int i = 0; i < [board rows]; i++)
-        for (int j = 0; j < [board columns]; j++)
-            highlighting[i][j] = NO;
+
+    BOOL** highlighting = [super blankHighlightingForBoard:board];
     
     // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
     for(int i = 0; i < 8; i++){

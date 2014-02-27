@@ -10,9 +10,8 @@
 
 @implementation DDHKing
 
--(void)highlightMoves
+-(BOOL**) highlightMovesWithBoard:(DDH2DArray *) board;
 {
-    DDHBoard* board = [self board];
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
@@ -44,15 +43,15 @@
     points[7]->x = -1;
     points[7]->y = -1;
     
-    // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
-    int dx = 0;
-    int dy = 0;
+    BOOL** highlighting = [super blankHighlightingForBoard:board];
+    
     for(int i = 0; i < 8; i++){
-        dx = x + points[i]->x;
-        dy = y + points[i]->y;
-        if([board onBoardAtColumn:dx andRow:dy] && [board kingBelongingTo:[self getPlayer] CouldMoveToColumn:dx andRow:dy])
-            [board highlightAtColumn:dx andRow:dy withIndex:[self index]];
+        int dx = x + points[i]->x ;
+        int dy = y + points[i]->y ;
+        if([self onBoard:board AtColumn:dx andRow:dy])
+            highlighting[dx][dy] = YES;
     }
+    return highlighting;
 }
 
 @end

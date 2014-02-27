@@ -12,7 +12,6 @@
 
 -(BOOL**) highlightMovesWithBoard:(DDH2DArray *)board
 {
-    DDHBoard* board = [self board];
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
@@ -32,34 +31,38 @@
     points[3]->x =  1;
     points[3]->y = -1;
     
-    int dx;
-    int dy;
+    BOOL** highlighting = [super blankHighlightingForBoard:board];
+    
+    // Iterate over move types. Either up and left, up and right, etc...
     for(int i = 0; i < 4; i++){
-        dx = x;
-        dy = y;
-        // Loop as long as the spots are still on the board
-        while([board onBoardAtColumn:x + dx andRow: y + dy]){
+        // accumulate new positions. Don't want to include piece's current position.
+        int dx = x + points[i]->x;
+        int dy = y + points[i]->y;
+        // While we're still on the board.
+        while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
-            if(![board isEmptySquareAtColumn:x +dx andRow:y+dy]){
+            if(!([board objectAtColumn:dx andRow:dy] == nil)){
                 // if it is our piece, do nothing and get out of the loop because you can't go further
-                if([[board pieceAtColumn:x +dx andRow:y+dy] getPlayer] == [self getPlayer])
+                if([[board objectAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
                     break;
                 // If it isn't our piece, highlight that spot but exit the loop because we can't go further
                 else{
-                    [board highlightAtColumn:x + dx andRow:y + dy withIndex:[self index]];
+                    highlighting[dx][dy] = YES;
                     break;
                 }
             }
             // If the place is empty...
             else{
                 // highlight the current spot
-                [board highlightAtColumn:x +dx andRow:y + dy withIndex:[self index]];
+                highlighting[dx][dy] = YES;
             }
             // Keep going
             dx += points[i]->x;
             dy += points[i]->y;
         }
+
     }
+    return highlighting;
 }
 
 @end

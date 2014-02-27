@@ -42,5 +42,16 @@
     return column < 0 || column >= [board columns] || row < 0 || row >= [board rows];
 }
 
+-(BOOL**) blankHighlightingForBoard:(DDH2DArray*) board
+{
+    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
+    // Should be size of rows*columns
+    BOOL** highlighting = malloc([board rows]*[board columns]);
+    // Initialize everything to false
+    for (int i = 0; i < [board rows]; i++)
+        for (int j = 0; j < [board columns]; j++)
+            highlighting[i][j] = NO;
+    return highlighting;
+}
 
 @end

@@ -18,12 +18,17 @@
     // 2D array representing which parts of the board are currently highlighted
     BOOL** _highlightBoard;
     id<DDHBoardDelegate> _delegate;
+    
+    NSUInteger _rows;
+    NSUInteger _columns;
 }
 
 - (id) init
 {
     if (self = [super init]){
-        _pieces = [[DDH2DArray alloc] initWithColumns:8 andRow:8];
+        _rows = 8;
+        _columns = 8;
+        _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns];
         [self clearBoard];
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
@@ -101,16 +106,11 @@
         [_delegate cellPieceChanged:piece forColumn:column addRow:row];
 }
 
-// CHANGE FOR DYNAMICALLY SIZED BOARD
+
 -(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row
 {
-    if (column < 0 || column > 7 || row < 0 || row > 7)
+    if (column < 0 || column >= _columns || row < 0 || row >= _rows)
         [NSException raise:NSRangeException format:@"row or column out of bounds"];
-}
-
--(BOOL) onBoardAtColumn:(NSInteger)column andRow:(NSInteger)row
-{
-    return column < 0 || column > 7 || row < 0 || row > 7;
 }
 
 // Someone figure out if this takes advantage of spacial locality
@@ -131,7 +131,9 @@
 
 -(void) clearHighlighting
 {
-    memset(_highlightBoard, 0, sizeof(BOOL) * 8 * 8);
+    for(int i = 0; i < _rows; i++)
+        for(int j = 0; i < _columns; j++)
+            _highlightBoard[i][j] = NO;
 }
 
 /*

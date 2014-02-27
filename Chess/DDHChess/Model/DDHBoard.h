@@ -41,8 +41,6 @@
 
 -(void) clearHighlighting;
 
--(BOOL) onBoardAtColumn: (NSInteger) column andRow: (NSInteger) row;
-
 // Sets every cell in board to empty
 -(void) clearBoard;
 
