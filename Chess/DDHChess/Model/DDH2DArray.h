@@ -18,4 +18,6 @@
 
 -(id)objectAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+-(void) replaceObjectAtColumn:(NSUInteger) column andRow:(NSUInteger) row withObject:(id) object;
+
 @end

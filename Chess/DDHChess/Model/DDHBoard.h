@@ -17,12 +17,12 @@
 // multicasts changes in cell state. Each delegate is informed of changes in state of individual cells
 @property (readonly) DDHMulticastDelegate* boardDelegate;
 // indicates the player who makes the next move
-@property (readonly) ChessPlayer nextMove;
+@property ChessPlayer nextMove;
 
 // Returns pointer to piece at location
 -(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
 // Returns the opposite of the player
--(ChessPlayer) invertState: (ChessPlayer)state;
+-(void) invertState;
 
 -(void) setToInitialState;
 
@@ -32,9 +32,6 @@
 
 // Returns true if square has no piece in it. Shocking, I know
 -(BOOL) isEmptySquareAtColumn:(NSInteger) column andRow:(NSInteger) row;
-
-// Returns a pointer to the piece at the given index in the internal piece array.
--(id) pieceAtIndex: (int) index;
 
 -(BOOL) highlightedAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
@@ -49,6 +46,6 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
--(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
+//-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
 
 @end

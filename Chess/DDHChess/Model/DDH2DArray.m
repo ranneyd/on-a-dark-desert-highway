@@ -22,4 +22,9 @@
     return [super objectAtIndex:[self rows]*row + column];
 }
 
+-(void)replaceObjectAtColumn:(NSUInteger)column andRow:(NSUInteger)row withObject:(id) object
+{
+    return [super replaceObjectAtIndex:[self rows]*row + column withObject:object];
+}
+
 @end

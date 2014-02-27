@@ -13,11 +13,8 @@
 {
     // CHANGE FOR DYNAMICALLY SIZED BOARD
     
-    // List of piece pointers. Used to access piece objects
-    NSMutableArray* _pieceList;
     // 2D array representing which pieces are in each board location.
-    // Number represents index in _pieceList. -1 means empty
-    NSUInteger _pieceBoard[8][8];
+    DDH2DArray* _pieces;
     // 2D array representing which parts of the board are currently highlighted
     // Number represents index in _pieceList. -1 means not highlighted
     NSUInteger _highlightBoard[8][8];
@@ -27,6 +24,7 @@
 - (id) init
 {
     if (self = [super init]){
+        _pieces = [[DDH2DArray alloc] initWithColumns:8 andRow:8];
         [self clearBoard];
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
@@ -45,43 +43,29 @@
     _nextMove = ChessPlayerBlack;
 }
 
--(ChessPlayer)invertState:(ChessPlayer)state
+-(void)invertState
 {
-    if (state == ChessPlayerBlack)
-        return ChessPlayerWhite;
-    return ChessPlayerBlack;
+    if ([self nextMove] == ChessPlayerBlack)
+        self.nextMove = ChessPlayerWhite;
+    self.nextMove = ChessPlayerBlack;
 }
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self checkBoundsForColumn:column andRow:row];
-    NSUInteger piece = _pieceBoard[column][row];
-    if (piece == -1)
-        return nil;
-    else
-        return [_pieceList objectAtIndex:piece];
+    return [_pieces objectAtColumn:column andRow:row];
 }
 
 -(void) putPiece:(DDHPiece *)piece inColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self checkBoundsForColumn:column andRow:row];
-    // Since this is the size, or biggest index + 1, it should be the index of the thing we're about to add
-    NSUInteger index = [_pieceList count];
-    // Add the piece object to the list of pieces
-    [_pieceList addObject:piece];
-    // Add the index of the piece to the piece board.
-    _pieceBoard[column][row] = index;
+    [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
     //[self informDelegateOfStateChanged:state forColumn:column andRow:row];
 }
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return _pieceBoard[column][row] == -1;
-}
-
--(id) pieceAtIndex:(int)index
-{
-    return [_pieceList objectAtIndex:index];
+    return [_pieces objectAtColumn:column andRow:row] == nil;
 }
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
@@ -91,11 +75,8 @@
 
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    // Get _pieceList index of the piece we are moving. Theoretically, if we are moving to spot, that spot was
-    // highlighted with the value of the piece index.
-    NSUInteger pieceIndex = _highlightBoard[column][row];
-    // Get the piece from the _pieceList
-    DDHPiece* piece = [_pieceList objectAtIndex:pieceIndex];
+    // Get the piece from _pieces
+    DDHPiece* piece = [_pieces objectAtColumn:column andRow:row];
     // Get old position of the piece
     NSUInteger oldX = [piece x];
     NSUInteger oldY = [piece y];
@@ -103,24 +84,16 @@
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
     
-    // Kill old piece if there was one
-    if (![self isEmptySquareAtColumn:column andRow:row]){
-        // Find the piece index of the soon-to-be-dead piece
-        NSInteger pieceInWay = _pieceBoard[column][row];
-        // We don't want to remove the object because we don't want to screw up all the numbering, so we'll
-        // replace it with nil
-        [_pieceList replaceObjectAtIndex:pieceInWay withObject:nil];
-    }
     // Change the old position in the board array to empty
-    _pieceBoard[oldX][oldY] = -1;
+    [_pieces replaceObjectAtColumn:oldX andRow:oldY withObject:nil];
     
     // Change the new position in the board to our piece index
-    _pieceBoard[column][row] = pieceIndex;
+    [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
     
     // Clear the highlighting
     [self clearHighlighting];
     
-    // INVERT PLAYER STATE
+    [self invertState];
 }
 
 -(void)informDelegateOfPieceChanged:(DDHPiece*) piece forColumn:(NSInteger)column andRow:(NSInteger) row
@@ -141,15 +114,15 @@
     return column < 0 || column > 7 || row < 0 || row > 7;
 }
 
-// CHANGE FOR DYNAMICALLY SIZED BOARD
-// SKETCHY AND PROBABLY HAS MEMORY LEAKS
+// Someone figure out if this takes advantage of spacial locality
 -(void) clearBoard
 {
-    // Hack way to do it. Oh well
-    // REPLACE FOR DYNAMIC BOARD SIZE
-    memset(_pieceBoard, 0, sizeof(NSUInteger) * 8 * 8);
     [self clearHighlighting];
-    _pieceList = [[NSMutableArray alloc] init];
+    for(int i = 0; i < [_pieces rows]; i++){
+        for(int j = 0; j < [_pieces columns]; j++){
+            [_pieces replaceObjectAtColumn:j andRow:i withObject:nil];
+        }
+    }
     //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
 }
 -(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row withIndex:(int)index
@@ -162,6 +135,7 @@
     memset(_highlightBoard, 0, sizeof(NSUInteger) * 8 * 8);
 }
 
+/*
 
 // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
 // with their moves and if, after all the pieces are through, the given spot is highlighted, the king can't move there
@@ -207,5 +181,7 @@
             _highlightBoard[i][j] = oldHighlighting[i][j];
     return result;
 }
+ 
+ */
 
 @end

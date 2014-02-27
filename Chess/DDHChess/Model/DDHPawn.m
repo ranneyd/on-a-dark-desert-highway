@@ -11,7 +11,7 @@
 @implementation DDHPawn
 
 
--(void) highlightMoves
+-(void) highlightMovesWithBoard:(DDH2DArray *)board
 {
     
 }

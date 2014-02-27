@@ -10,7 +10,7 @@
 
 @implementation DDHQueen
 
--(void) highlightMoves
+-(void) highlightMovesWithBoard:(DDH2DArray *)board
 {
     
     //Code from DDHRook and DDHBishop. Don't judge.

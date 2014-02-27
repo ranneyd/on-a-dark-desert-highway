@@ -13,17 +13,16 @@
     ChessPlayer _owner;
 }
 
--(id) initWithBoard:(id)board andPlayer:(ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger)column andRow:(NSUInteger)row
+-(id) initWithPlayer:(ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super init];
-    [self setBoard:board];
     [self setIndex:index];
     [self moveToColumn:column andRow:row];
     _owner = player;
     return self;
 }
 
--(void) highlightMoves
+-(void) highlightMovesWithBoard:(DDH2DArray *)board
 {
     // To be overridden 
 }

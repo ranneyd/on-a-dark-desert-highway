@@ -10,6 +10,6 @@
 
 @interface DDHQueen : DDHPiece
 
--(void) highlightMoves;
+-(void) highlightMovesWithBoard:(DDH2DArray *) board;
 
 @end

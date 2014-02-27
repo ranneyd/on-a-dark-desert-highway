@@ -10,7 +10,7 @@
 
 @implementation DDHRook
 
--(void) highlightMoves
+-(void) highlightMovesWithBoard:(DDH2DArray *)board
 {
     DDHBoard* board = [self board];
     NSUInteger x = [self x];
