@@ -18,6 +18,7 @@
     // 2D array representing which parts of the board are currently highlighted
     BOOL** _highlightBoard;
     id<DDHBoardDelegate> _delegate;
+    DDHTuple* _locOfHighlightOwner;
     
     NSUInteger _rows;
     NSUInteger _columns;
@@ -77,19 +78,17 @@
     return _highlightBoard[column][row] != -1;
 }
 
--(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
+-(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
 {
     // Get the piece from _pieces
-    DDHPiece* piece = [_pieces objectAtColumn:column andRow:row];
+    DDHPiece* piece = [_pieces objectAtColumn:oldColumn andRow:oldRow];
     // Get old position of the piece
-    NSUInteger oldX = [piece x];
-    NSUInteger oldY = [piece y];
     
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
     
     // Change the old position in the board array to empty
-    [_pieces replaceObjectAtColumn:oldX andRow:oldY withObject:nil];
+    [_pieces replaceObjectAtColumn:oldColumn andRow:oldRow withObject:nil];
     
     // Change the new position in the board to our piece index
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
@@ -124,9 +123,9 @@
     }
     //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
 }
--(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row withIndex:(int)index
+-(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
 {
-    _highlightBoard[column][row] = index;
+    _highlightBoard[column][row] = YES;
 }
 
 -(void) clearHighlighting
@@ -135,6 +134,25 @@
         for(int j = 0; i < _columns; j++)
             _highlightBoard[i][j] = NO;
 }
+
+
+-(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row
+{
+    DDHPiece* piece = [self pieceAtColumn:column andRow:row];
+    if (piece == nil)
+        return nil;
+    NSMutableArray* highlighting = [piece highlightMovesWithBoard:_pieces];
+    _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
+    for (DDHTuple *location in highlighting){
+        [self highlightAtColumn:[location x] andRow: [location y]];
+    }
+    return highlighting;
+}
+-(void) moveHighlightOwnerToColumn:(NSUInteger)columnn AndRow:(NSUInteger)row
+{
+    [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
+}
+
 
 /*
 

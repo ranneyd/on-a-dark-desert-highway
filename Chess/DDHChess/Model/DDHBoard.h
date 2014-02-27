@@ -10,6 +10,7 @@
 #import "DDHMulticastDelegate.h"
 #import "DDHPiece.h"
 #import "ChessPlayer.h"
+#import "DDHTuple.h"
 
 /* The Board */
 @interface DDHBoard : NSObject
@@ -35,11 +36,15 @@
 
 -(BOOL) highlightedAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
--(void) moveToColumn:(NSInteger) column andRow:(NSInteger) row;
+-(void) movePieceAtColumn:(NSInteger) oldColumn andRow:(NSUInteger) oldRow ToColumn:(NSInteger) column andRow:(NSInteger) row;
 
--(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row withIndex: (int) index;
+-(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
 -(void) clearHighlighting;
+
+-(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row;
+
+-(void) moveHighlightOwnerToColumn:(NSUInteger) columnn AndRow:(NSUInteger) row;
 
 // Sets every cell in board to empty
 -(void) clearBoard;
