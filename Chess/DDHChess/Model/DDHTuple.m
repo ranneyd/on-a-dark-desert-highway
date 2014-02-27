@@ -10,4 +10,12 @@
 
 @implementation DDHTuple
 
+-(id) initWithX: (NSInteger) x andY:(NSInteger) y
+{
+    DDHTuple* me = [[DDHTuple alloc] init];
+    [me setX:x];
+    [me setY: y];
+    return me;
+}
+
 @end

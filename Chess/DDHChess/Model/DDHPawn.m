@@ -11,7 +11,7 @@
 @implementation DDHPawn
 
 
--(DDHTuple*) highlightMovesWithBoard:(DDH2DArray *)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     return nil;
 }

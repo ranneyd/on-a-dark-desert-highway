@@ -10,7 +10,7 @@
 
 @implementation DDHQueen
 
--(DDHTuple*) highlightMovesWithBoard:(DDH2DArray *)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -43,7 +43,7 @@
     [points[7] setX:  1];
     [points[7] setY: -1];
     
-    BOOL** highlighting = [super blankHighlightingForBoard:board];
+    NSMutableArray *highlighting = [[NSMutableArray alloc]init];
     
     // Iterate over move types. Either up and left, up and right, etc...
     for(int i = 0; i < 4; i++){
@@ -59,14 +59,14 @@
                     break;
                 // If it isn't our piece, highlight that spot but exit the loop because we can't go further
                 else{
-                    highlighting[dx][dy] = YES;
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
                     break;
                 }
             }
             // If the place is empty...
             else{
                 // highlight the current spot
-                highlighting[dx][dy] = YES;
+                [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
             }
             // Keep going
             dx += [points[i] x];

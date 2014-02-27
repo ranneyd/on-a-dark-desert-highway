@@ -10,7 +10,7 @@
 
 @implementation DDHKnight
 
--(DDHTuple*) highlightMovesWithBoard:(DDH2DArray *)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -44,14 +44,14 @@
     [points[7] setY:  1];
     
 
-    BOOL** highlighting = [super blankHighlightingForBoard:board];
+    NSMutableArray *highlighting = [[NSMutableArray alloc]init];
     
     // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
     for(int i = 0; i < 8; i++){
         int dx = x + [points[i] x];
         int dy = y + [points[i] y];
         if([self onBoard:board AtColumn:dx andRow:dy])
-            highlighting[dx][dy] = YES;
+            [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
     }
     return highlighting;
 }
