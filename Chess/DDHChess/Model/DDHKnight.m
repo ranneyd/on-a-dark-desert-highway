@@ -10,9 +10,8 @@
 
 @implementation DDHKnight
 
--(void) highlightMovesWithBoard:(DDH2DArray *)board
+-(BOOL**) highlightMovesWithBoard:(DDH2DArray *)board
 {
-    DDHBoard* board = [self board];
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
@@ -44,10 +43,22 @@
     points[7]->x = -2;
     points[7]->y =  1;
     
+    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
+    // Should be size of rows*columns
+    BOOL** highlighting = malloc([board rows]*[board columns]);
+    // Initialize everything to false
+    for (int i = 0; i < [board rows]; i++)
+        for (int j = 0; j < [board columns]; j++)
+            highlighting[i][j] = NO;
+    
     // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
-    for(int i = 0; i < 8; i++)
-        if([board onBoardAtColumn:x + points[i]->x andRow:y + points[i]->y])
-            [board highlightAtColumn:x + points[i]->x andRow: y + points[i]->y withIndex:[self index]];
+    for(int i = 0; i < 8; i++){
+        int dx = x + points[i]->x ;
+        int dy = y + points[i]->y ;
+        if([self onBoard:board AtColumn:dx andRow:dy])
+            highlighting[dx][dy] = YES;
+    }
+    return highlighting;
 }
 
 @end

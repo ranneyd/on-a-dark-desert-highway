@@ -10,6 +10,6 @@
 
 @interface DDHBishop : DDHPiece
 
--(void) highlightMovesWithBoard:(DDH2DArray *) board;
+-(BOOL**) highlightMovesWithBoard:(DDH2DArray *) board;
 
 @end

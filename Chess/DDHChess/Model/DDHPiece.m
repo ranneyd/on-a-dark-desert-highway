@@ -22,9 +22,10 @@
     return self;
 }
 
--(void) highlightMovesWithBoard:(DDH2DArray *)board
+-(BOOL**) highlightMovesWithBoard:(DDH2DArray *)board
 {
-    // To be overridden 
+    // To be overridden
+    return nil;
 }
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
@@ -35,5 +36,11 @@
 {
     return _owner;
 }
+
+-(BOOL) onBoard:(DDH2DArray*)board AtColumn:(NSInteger)column andRow:(NSInteger)row
+{
+    return column < 0 || column >= [board columns] || row < 0 || row >= [board rows];
+}
+
 
 @end

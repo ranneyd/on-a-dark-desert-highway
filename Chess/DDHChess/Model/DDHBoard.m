@@ -16,8 +16,7 @@
     // 2D array representing which pieces are in each board location.
     DDH2DArray* _pieces;
     // 2D array representing which parts of the board are currently highlighted
-    // Number represents index in _pieceList. -1 means not highlighted
-    NSUInteger _highlightBoard[8][8];
+    BOOL** _highlightBoard;
     id<DDHBoardDelegate> _delegate;
 }
 
@@ -132,7 +131,7 @@
 
 -(void) clearHighlighting
 {
-    memset(_highlightBoard, 0, sizeof(NSUInteger) * 8 * 8);
+    memset(_highlightBoard, 0, sizeof(BOOL) * 8 * 8);
 }
 
 /*

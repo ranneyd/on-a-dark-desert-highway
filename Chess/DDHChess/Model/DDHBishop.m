@@ -10,7 +10,7 @@
 
 @implementation DDHBishop
 
--(void) highlightMovesWithBoard:(DDH2DArray *)board
+-(BOOL**) highlightMovesWithBoard:(DDH2DArray *)board
 {
     DDHBoard* board = [self board];
     NSUInteger x = [self x];
