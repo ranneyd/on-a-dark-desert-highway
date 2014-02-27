@@ -10,11 +10,6 @@
 #import "ChessPlayer.h"
 #import "DDH2DArray.h"
 
-struct Tuple{
-    NSInteger x;
-    NSInteger y;
-};
-
 @interface DDHPiece : NSObject
 
 @property NSInteger x;
@@ -24,7 +19,7 @@ struct Tuple{
 -(id) initWithPlayer: (ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
--(BOOL**) highlightMovesWithBoard:(DDH2DArray *) board;
+-(Tuple*) highlightMovesWithBoard:(DDH2DArray *) board;
 
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;

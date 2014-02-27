@@ -11,7 +11,7 @@
 @implementation DDHPawn
 
 
--(BOOL**) highlightMovesWithBoard:(DDH2DArray *)board
+-(Tuple*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     return nil;
 }
