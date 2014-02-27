@@ -10,34 +10,34 @@
 
 @implementation DDHRook
 
--(Tuple*) highlightMovesWithBoard:(DDH2DArray *)board
+-(DDHTuple*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
     // Store moves in here.
-    struct Tuple* points[4];
+    DDHTuple* points[4];
     
     // up
-    points[0]->x =  0;
-    points[0]->y = -1;
+    [points[0] setX:  0];
+    [points[0] setY: -1];
     // down
-    points[1]->x =  0;
-    points[1]->y =  1;
+    [points[1] setX:  0];
+    [points[1] setY:  1];
     // left
-    points[2]->x = -1;
-    points[2]->y =  0;
+    [points[2] setX: -1];
+    [points[2] setY:  0];
     // right
-    points[3]->x =  1;
-    points[3]->y =  0;
+    [points[3] setX:  1];
+    [points[3] setY:  0];
     
     BOOL** highlighting = [super blankHighlightingForBoard:board];
     
     // Iterate over move types. Either up and left, up and right, etc...
     for(int i = 0; i < 4; i++){
         // accumulate new positions. Don't want to include piece's current position.
-        int dx = x + points[i]->x;
-        int dy = y + points[i]->y;
+        int dx = x + [points[i] x];
+        int dy = y + [points[i] y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
@@ -57,8 +57,8 @@
                 highlighting[dx][dy] = YES;
             }
             // Keep going
-            dx += points[i]->x;
-            dy += points[i]->y;
+            dx += [points[i] x];
+            dy += [points[i] y];
         }
         
     }

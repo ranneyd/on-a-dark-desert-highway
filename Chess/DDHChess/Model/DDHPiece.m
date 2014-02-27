@@ -22,7 +22,7 @@
     return self;
 }
 
--(Tuple*) highlightMovesWithBoard:(DDH2DArray *)board
+-(DDHTuple*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     // To be overridden
     return nil;

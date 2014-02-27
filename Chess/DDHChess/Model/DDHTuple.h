@@ -10,4 +10,7 @@
 
 @interface DDHTuple : NSObject
 
+@property NSInteger x;
+@property NSInteger y;
+
 @end
