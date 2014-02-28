@@ -54,4 +54,11 @@
     return highlighting;
 }
 
+-(NSString*) description
+{
+    if (_owner == ChessPlayerBlack)
+        return @"Black";
+    return @"White";
+}
+
 @end

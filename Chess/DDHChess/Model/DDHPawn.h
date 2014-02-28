@@ -10,6 +10,4 @@
 
 @interface DDHPawn : DDHPiece
 
--(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *) board;
-
 @end

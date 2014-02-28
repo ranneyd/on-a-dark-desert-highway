@@ -31,5 +31,6 @@
 
 -(BOOL**) blankHighlightingForBoard:(DDH2DArray*) board;
 
+-(NSString*) description;
 
 @end
