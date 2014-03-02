@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDH2DArray : NSMutableArray
+@interface DDH2DArray : NSObject
 
 @property NSUInteger rows;
 

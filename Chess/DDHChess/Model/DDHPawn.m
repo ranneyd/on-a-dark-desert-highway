@@ -13,7 +13,7 @@
 
 -(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
 {
-    return nil;
+    return NULL;
 }
 
 @end
