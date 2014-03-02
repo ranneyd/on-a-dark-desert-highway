@@ -133,16 +133,14 @@
 // updates the UI state
 - (void)update
 {
-    // show / hide the images based on the cell state
-//    DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
-//    NSLog(@"%@", [piece description]);
-    
     // Update the image on the square
     // Makes assumption about behaviour of pieceAt function
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
     [self updateWhitePieceImageForPiece:piece];
     
     [self updateBlackPieceImageForPiece:piece];
+    
+    [self updateHighlighted];
     
 }
 
@@ -181,24 +179,72 @@
     _blackKingView.alpha = [pieceDescription isEqualToString:@"blackKing"];
 }
 
+// Update the highlighted status of a square. This entails
+
+- (void) updateHighlighted
+{
+    if ((_column+_row) % 2 == 0)
+    {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    else
+    {
+        self.backgroundColor = [UIColor cyanColor];
+    }
+    
+    self.backgroundColor = [_board highlightedAtColumn:_column andRow:_row] ? [UIColor yellowColor] : self.backgroundColor;
+    
+}
+
+// This function is called by the Board class through a delegate
+// to let the Board Square know it should display an updated
+// image.
 -(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row
 {
-//    if ((column == _column && row == _row) || (column == -1 && row == -1))
-//    {
-//        [self update];
-//    }
+    if ((column == _column && row == _row) || (column == -1 && row == -1))
+    {
+        [self update];
+    }
 }
 
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"HELLO WORLD!");
+    // First, move to the square if it is highlighted
+    if ([_board highlightedAtColumn:_column andRow:_row])
+    {
+        // Here, board takes care of figuring out which piece exactly will be moving.
+        //[_board makeMoveToColumn:_column andRow:_row];
+    }
     
+    // Next clear all highlighting so that we can ensure only
+    // the right squares are highlighted and previously
+    // highlighted squares are unhighlighted if necessary.
+    [_board clearHighlighting];
     
-    /*
-     
-     All the stuff that Will did goes here? Maybe?
-     
-     */
+    // Next highlight the proper squares based on whose turn it
+    // is and which piece is tapped.
+    
+    // First, check if the square tapped contains a piece.
+    if (![_board isEmptySquareAtColumn:_column andRow:_row])
+    {
+        // Next, get the piece in the square
+        // First, get the piece.
+        DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
+        
+        // Next, check if the piece is of the proper color
+        if ([_board nextMove] == [piece getPlayer])
+        {
+            // At this point, we know the user has tapped a
+            // square containing a piece that is of the same
+            // color as the player who is set to make the next
+            // move, so highlight the squares that piece can
+            // move to.
+            
+            // THIS FUNCTION DOESN'T EXIST YET, BUT IT SHOULD!
+            //[_board highlightMovesForPieceAtColumn:_column andRow:_row];
+        }
+    }
+    
 }
 
 @end
