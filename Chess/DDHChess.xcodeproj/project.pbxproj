@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93BA43BD18C3D99900008234 /* BlackBishop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B118C3D99900008234 /* BlackBishop.png */; };
+		93BA43BE18C3D99900008234 /* BlackKing.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B218C3D99900008234 /* BlackKing.png */; };
+		93BA43BF18C3D99900008234 /* BlackKnight.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B318C3D99900008234 /* BlackKnight.png */; };
+		93BA43C018C3D99900008234 /* BlackPawn.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B418C3D99900008234 /* BlackPawn.png */; };
+		93BA43C118C3D99900008234 /* BlackQueen.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B518C3D99900008234 /* BlackQueen.png */; };
+		93BA43C218C3D99900008234 /* BlackRook.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B618C3D99900008234 /* BlackRook.png */; };
+		93BA43C318C3D99900008234 /* WhiteBishop.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B718C3D99900008234 /* WhiteBishop.png */; };
+		93BA43C418C3D99900008234 /* WhiteKing.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B818C3D99900008234 /* WhiteKing.png */; };
+		93BA43C518C3D99900008234 /* WhiteKnight.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43B918C3D99900008234 /* WhiteKnight.png */; };
+		93BA43C618C3D99900008234 /* WhitePawn.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43BA18C3D99900008234 /* WhitePawn.png */; };
+		93BA43C718C3D99900008234 /* WhiteQueen.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43BB18C3D99900008234 /* WhiteQueen.png */; };
+		93BA43C818C3D99900008234 /* WhiteRook.png in Resources */ = {isa = PBXBuildFile; fileRef = 93BA43BC18C3D99900008234 /* WhiteRook.png */; };
 		D51E838818AE2C8C001C352E /* DDHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E838718AE2C8C001C352E /* DDHAppDelegate.m */; };
 		D51E838B18AE2C95001C352E /* DDHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E838A18AE2C95001C352E /* DDHViewController.m */; };
 		D51E839418AE2CAF001C352E /* DDHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D51E839218AE2CAF001C352E /* DDHViewController.xib */; };
@@ -16,13 +28,6 @@
 		D51E839D18AE2D21001C352E /* DDHChess-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D51E839B18AE2D21001C352E /* DDHChess-Info.plist */; };
 		D51E83A018AE2D28001C352E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D51E839E18AE2D28001C352E /* InfoPlist.strings */; };
 		D51E83A218AE2D35001C352E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83A118AE2D35001C352E /* main.m */; };
-		D51E83AD18AE2D6B001C352E /* GameOver.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83A618AE2D6B001C352E /* GameOver.png */; };
-		D51E83AE18AE2D6B001C352E /* GameOver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83A718AE2D6B001C352E /* GameOver@2x.png */; };
-		D51E83AF18AE2D6B001C352E /* Reversi.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83A818AE2D6B001C352E /* Reversi.png */; };
-		D51E83B018AE2D6B001C352E /* Reversi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83A918AE2D6B001C352E /* Reversi@2x.png */; };
-		D51E83B118AE2D6B001C352E /* ReversiBlackPiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83AA18AE2D6B001C352E /* ReversiBlackPiece.png */; };
-		D51E83B218AE2D6B001C352E /* ReversiBlackPiece@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83AB18AE2D6B001C352E /* ReversiBlackPiece@2x.png */; };
-		D51E83B318AE2D6B001C352E /* ReversiWhitePiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D51E83AC18AE2D6B001C352E /* ReversiWhitePiece.png */; };
 		D51E83B918AE2D8B001C352E /* DDHBoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83B818AE2D8B001C352E /* DDHBoardSquare.m */; };
 		D51E83C018AE2D9D001C352E /* DDHBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83BD18AE2D9D001C352E /* DDHBoard.m */; };
 		D51E83C518AE2DCF001C352E /* DDHMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D51E83C418AE2DCF001C352E /* DDHMulticastDelegate.m */; };
@@ -58,6 +63,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		93BA43B118C3D99900008234 /* BlackBishop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackBishop.png; sourceTree = "<group>"; };
+		93BA43B218C3D99900008234 /* BlackKing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackKing.png; sourceTree = "<group>"; };
+		93BA43B318C3D99900008234 /* BlackKnight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackKnight.png; sourceTree = "<group>"; };
+		93BA43B418C3D99900008234 /* BlackPawn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackPawn.png; sourceTree = "<group>"; };
+		93BA43B518C3D99900008234 /* BlackQueen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackQueen.png; sourceTree = "<group>"; };
+		93BA43B618C3D99900008234 /* BlackRook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlackRook.png; sourceTree = "<group>"; };
+		93BA43B718C3D99900008234 /* WhiteBishop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteBishop.png; sourceTree = "<group>"; };
+		93BA43B818C3D99900008234 /* WhiteKing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteKing.png; sourceTree = "<group>"; };
+		93BA43B918C3D99900008234 /* WhiteKnight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteKnight.png; sourceTree = "<group>"; };
+		93BA43BA18C3D99900008234 /* WhitePawn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhitePawn.png; sourceTree = "<group>"; };
+		93BA43BB18C3D99900008234 /* WhiteQueen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteQueen.png; sourceTree = "<group>"; };
+		93BA43BC18C3D99900008234 /* WhiteRook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WhiteRook.png; sourceTree = "<group>"; };
 		D51E838618AE2C8C001C352E /* DDHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHAppDelegate.h; sourceTree = "<group>"; };
 		D51E838718AE2C8C001C352E /* DDHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHAppDelegate.m; sourceTree = "<group>"; };
 		D51E838918AE2C95001C352E /* DDHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHViewController.h; sourceTree = "<group>"; };
@@ -70,13 +87,6 @@
 		D51E839C18AE2D21001C352E /* DDHChess-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDHChess-Prefix.pch"; sourceTree = "<group>"; };
 		D51E839F18AE2D28001C352E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D51E83A118AE2D35001C352E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D51E83A618AE2D6B001C352E /* GameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GameOver.png; path = Assets/GameOver.png; sourceTree = "<group>"; };
-		D51E83A718AE2D6B001C352E /* GameOver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GameOver@2x.png"; path = "Assets/GameOver@2x.png"; sourceTree = "<group>"; };
-		D51E83A818AE2D6B001C352E /* Reversi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Reversi.png; path = Assets/Reversi.png; sourceTree = "<group>"; };
-		D51E83A918AE2D6B001C352E /* Reversi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Reversi@2x.png"; path = "Assets/Reversi@2x.png"; sourceTree = "<group>"; };
-		D51E83AA18AE2D6B001C352E /* ReversiBlackPiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiBlackPiece.png; path = Assets/ReversiBlackPiece.png; sourceTree = "<group>"; };
-		D51E83AB18AE2D6B001C352E /* ReversiBlackPiece@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ReversiBlackPiece@2x.png"; path = "Assets/ReversiBlackPiece@2x.png"; sourceTree = "<group>"; };
-		D51E83AC18AE2D6B001C352E /* ReversiWhitePiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ReversiWhitePiece.png; path = Assets/ReversiWhitePiece.png; sourceTree = "<group>"; };
 		D51E83B718AE2D8B001C352E /* DDHBoardSquare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoardSquare.h; path = View/DDHBoardSquare.h; sourceTree = "<group>"; };
 		D51E83B818AE2D8B001C352E /* DDHBoardSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBoardSquare.m; path = View/DDHBoardSquare.m; sourceTree = "<group>"; };
 		D51E83BC18AE2D9D001C352E /* DDHBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBoard.h; path = Model/DDHBoard.h; sourceTree = "<group>"; };
@@ -145,13 +155,18 @@
 		D51E83A318AE2D54001C352E /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D51E83A618AE2D6B001C352E /* GameOver.png */,
-				D51E83A718AE2D6B001C352E /* GameOver@2x.png */,
-				D51E83A818AE2D6B001C352E /* Reversi.png */,
-				D51E83A918AE2D6B001C352E /* Reversi@2x.png */,
-				D51E83AA18AE2D6B001C352E /* ReversiBlackPiece.png */,
-				D51E83AB18AE2D6B001C352E /* ReversiBlackPiece@2x.png */,
-				D51E83AC18AE2D6B001C352E /* ReversiWhitePiece.png */,
+				93BA43B118C3D99900008234 /* BlackBishop.png */,
+				93BA43B218C3D99900008234 /* BlackKing.png */,
+				93BA43B318C3D99900008234 /* BlackKnight.png */,
+				93BA43B418C3D99900008234 /* BlackPawn.png */,
+				93BA43B518C3D99900008234 /* BlackQueen.png */,
+				93BA43B618C3D99900008234 /* BlackRook.png */,
+				93BA43B718C3D99900008234 /* WhiteBishop.png */,
+				93BA43B818C3D99900008234 /* WhiteKing.png */,
+				93BA43B918C3D99900008234 /* WhiteKnight.png */,
+				93BA43BA18C3D99900008234 /* WhitePawn.png */,
+				93BA43BB18C3D99900008234 /* WhiteQueen.png */,
+				93BA43BC18C3D99900008234 /* WhiteRook.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -362,18 +377,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93BA43C418C3D99900008234 /* WhiteKing.png in Resources */,
+				93BA43C218C3D99900008234 /* BlackRook.png in Resources */,
+				93BA43C718C3D99900008234 /* WhiteQueen.png in Resources */,
+				93BA43BD18C3D99900008234 /* BlackBishop.png in Resources */,
+				93BA43C018C3D99900008234 /* BlackPawn.png in Resources */,
 				D51E839A18AE2D19001C352E /* Default@2x.png in Resources */,
-				D51E83B118AE2D6B001C352E /* ReversiBlackPiece.png in Resources */,
+				93BA43BF18C3D99900008234 /* BlackKnight.png in Resources */,
 				D51E839418AE2CAF001C352E /* DDHViewController.xib in Resources */,
-				D51E83AE18AE2D6B001C352E /* GameOver@2x.png in Resources */,
-				D51E83B218AE2D6B001C352E /* ReversiBlackPiece@2x.png in Resources */,
-				D51E83AF18AE2D6B001C352E /* Reversi.png in Resources */,
+				93BA43C818C3D99900008234 /* WhiteRook.png in Resources */,
+				93BA43C618C3D99900008234 /* WhitePawn.png in Resources */,
+				93BA43C318C3D99900008234 /* WhiteBishop.png in Resources */,
 				D51E839918AE2D19001C352E /* Default.png in Resources */,
-				D51E83B018AE2D6B001C352E /* Reversi@2x.png in Resources */,
 				D51E839D18AE2D21001C352E /* DDHChess-Info.plist in Resources */,
-				D51E83AD18AE2D6B001C352E /* GameOver.png in Resources */,
-				D51E83B318AE2D6B001C352E /* ReversiWhitePiece.png in Resources */,
+				93BA43C118C3D99900008234 /* BlackQueen.png in Resources */,
+				93BA43C518C3D99900008234 /* WhiteKnight.png in Resources */,
 				D51E839818AE2D19001C352E /* Default-568h@2x.png in Resources */,
+				93BA43BE18C3D99900008234 /* BlackKing.png in Resources */,
 				D51E83A018AE2D28001C352E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

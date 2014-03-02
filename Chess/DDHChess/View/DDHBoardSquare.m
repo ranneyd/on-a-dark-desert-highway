@@ -13,7 +13,8 @@
     int _row;
     int _column;
     DDHBoard* _board;
-    UIImageView* _blackView;
+    
+    // 
     UIImageView* _whiteView;
 }
 
@@ -57,13 +58,9 @@
     // show / hide the images based on the cell state
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
     NSLog(@"%", [piece description]);
-    /*
-     
-     WILL!!! HALP!
-     
-    _whiteView.alpha = state == BoardCellStateWhitePiece ? 1.0 : 0.0;
-    _blackView.alpha = state == BoardCellStateBlackPiece ? 1.0 : 0.0;
-     */
+    
+    // Update the image on the square
+    
 }
 
 -(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row

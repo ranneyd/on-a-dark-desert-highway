@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Colin Eberhardt. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import "DDHViewController.h"
 #import "DDHBoard.h"
 #import "DDHChessBoardView.h"
