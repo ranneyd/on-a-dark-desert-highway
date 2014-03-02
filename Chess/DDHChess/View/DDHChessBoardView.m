@@ -24,6 +24,17 @@
             for(int col = 0; col < 8; col++)
             {
                 DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight) column:col row:row board:board];
+                
+                // Set the colors of the squares of the board.
+                if ((col+row) % 2 == 0)
+                {
+                    square.backgroundColor = [UIColor cyanColor];
+                }
+                else
+                {
+                    square.backgroundColor = [UIColor whiteColor];
+                }
+                
                 [self addSubview:square];
             }
         }
