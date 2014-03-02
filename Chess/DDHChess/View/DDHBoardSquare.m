@@ -207,12 +207,17 @@
     }
 }
 
+// YOYOYO DUSTIN YOU SHOULD READ THIS SO YOU CAN MAKE THE
+// METHODS I REQUEST IN IT
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
     // First, move to the square if it is highlighted
     if ([_board highlightedAtColumn:_column andRow:_row])
     {
         // Here, board takes care of figuring out which piece exactly will be moving.
+        
+        // DUSTIN: MAKE THIS METHOD SO IT DOES EXACTLY WHAT I
+        // WANT!!!! OKAY, THANKS, BYE
         //[_board makeMoveToColumn:_column andRow:_row];
     }
     
