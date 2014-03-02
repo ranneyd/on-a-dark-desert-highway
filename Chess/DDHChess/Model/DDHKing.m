@@ -54,4 +54,11 @@
     return highlighting;
 }
 
+-(NSString*) description
+{
+    if ([super getPlayer] == ChessPlayerBlack)
+        return @"BlackKing";
+    return @"WhiteKing";
+}
+
 @end
