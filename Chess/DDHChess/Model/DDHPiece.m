@@ -13,10 +13,9 @@
     ChessPlayer _owner;
 }
 
--(id) initWithPlayer:(ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger)column andRow:(NSUInteger)row
+-(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super init];
-    [self setIndex:index];
     [self moveToColumn:column andRow:row];
     _owner = player;
     return self;

@@ -8,6 +8,7 @@
 
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
+#import "DDHKnight.h"
 
 @implementation DDHBoard
 {
@@ -31,6 +32,7 @@
         _columns = 8;
         _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns];
         [self clearBoard];
+        [_pieces replaceObjectAtColumn:1 andRow:1 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
     }
@@ -65,7 +67,7 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    //[self informDelegateOfStateChanged:state forColumn:column andRow:row];
+    [self informDelegateOfStateChanged:state forColumn:column andRow:row];
 }
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
