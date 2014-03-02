@@ -120,12 +120,12 @@
     
     UIImage* blackQueenImage = [UIImage imageNamed: @"blackQueen.png"];
     _blackQueenView = [[UIImageView alloc] initWithImage: blackQueenImage];
-    _blackQueenView.alpha = 1.0;
+    _blackQueenView.alpha = 0.0;
     [self addSubview:_blackQueenView];
     
     UIImage* blackKingImage = [UIImage imageNamed: @"blackKing.png"];
     _blackKingView = [[UIImageView alloc] initWithImage: blackKingImage];
-    _blackKingView.alpha = 1.0;
+    _blackKingView.alpha = 0.0;
     [self addSubview:_blackKingView];
 }
 
@@ -138,7 +138,47 @@
 //    NSLog(@"%@", [piece description]);
     
     // Update the image on the square
+    // Makes assumption about behaviour of pieceAt function
+    DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
+    [self updateWhitePieceImageForPiece:piece];
     
+    [self updateBlackPieceImageForPiece:piece];
+    
+}
+
+// Method that handles which white piece to display based which
+// piece is in the given square.
+- (void) updateWhitePieceImageForPiece:(DDHPiece*) piece
+{
+    // Use handy description method to figure out which piece
+    // we should display
+    NSString* pieceDescription = [piece description];
+    
+    // Go through huge conditional statements to figure out
+    // which image to display. Not the sleekest...
+    _whitePawnView.alpha = [pieceDescription isEqualToString:@"WhitePawn"];
+    _whiteRookView.alpha = [pieceDescription isEqualToString:@"WhiteRook"];
+    _whiteKnightView.alpha = [pieceDescription isEqualToString:@"WhiteKnight"];
+    _whiteBishopView.alpha = [pieceDescription isEqualToString:@"WhiteBishop"];
+    _whiteQueenView.alpha = [pieceDescription isEqualToString:@"WhiteQueen"];
+    _whiteKingView.alpha = [pieceDescription isEqualToString:@"WhiteKing"];
+}
+
+// Same method for black pieces as updateWhitePieceImage...
+- (void) updateBlackPieceImageForPiece:(DDHPiece*) piece
+{
+    // Use handy description method to figure out which piece
+    // we should display
+    NSString* pieceDescription = [piece description];
+    
+    // Go through huge conditional statements to figure out
+    // which image to display. Not the sleekest...
+    _blackPawnView.alpha = [pieceDescription isEqualToString:@"blackPawn"];
+    _blackRookView.alpha = [pieceDescription isEqualToString:@"blackRook"];
+    _blackKnightView.alpha = [pieceDescription isEqualToString:@"blackKnight"];
+    _blackBishopView.alpha = [pieceDescription isEqualToString:@"blackBishop"];
+    _blackQueenView.alpha = [pieceDescription isEqualToString:@"blackQueen"];
+    _blackKingView.alpha = [pieceDescription isEqualToString:@"blackKing"];
 }
 
 -(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row
@@ -151,6 +191,9 @@
 
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
+    NSLog(@"HELLO WORLD!");
+    
+    
     /*
      
      All the stuff that Will did goes here? Maybe?
