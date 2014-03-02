@@ -24,13 +24,15 @@
     [super viewDidLoad];
     
     // set the various background images
-    self.backgroundImage.image = [UIImage imageNamed: @"Reversi.png"];
-    self.gameOverImage.image = [UIImage imageNamed: @"GameOver.png"];
-    self.gameOverImage.hidden = YES;
+//    self.backgroundImage.image = [UIImage imageNamed: @"Reversi.png"];
+//    self.gameOverImage.image = [UIImage imageNamed: @"GameOver.png"];
+//    self.gameOverImage.hidden = YES;
     
     //make board
-    _board = [[DDHBoard alloc] init];
-    [_board setToInitialState];
+//    _board = [[DDHBoard alloc] init];
+//    [_board setToInitialState];
+    
+    self.view.backgroundColor = [UIColor blackColor];
     
     //make view
     

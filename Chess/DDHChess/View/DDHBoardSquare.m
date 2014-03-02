@@ -120,12 +120,12 @@
     
     UIImage* blackQueenImage = [UIImage imageNamed: @"blackQueen.png"];
     _blackQueenView = [[UIImageView alloc] initWithImage: blackQueenImage];
-    _blackQueenView.alpha = 0.0;
+    _blackQueenView.alpha = 1.0;
     [self addSubview:_blackQueenView];
     
     UIImage* blackKingImage = [UIImage imageNamed: @"blackKing.png"];
     _blackKingView = [[UIImageView alloc] initWithImage: blackKingImage];
-    _blackKingView.alpha = 0.0;
+    _blackKingView.alpha = 1.0;
     [self addSubview:_blackKingView];
 }
 
@@ -134,8 +134,8 @@
 - (void)update
 {
     // show / hide the images based on the cell state
-    DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
-    NSLog(@"%", [piece description]);
+//    DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
+//    NSLog(@"%@", [piece description]);
     
     // Update the image on the square
     
@@ -143,10 +143,10 @@
 
 -(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row
 {
-    if ((column == _column && row == _row) || (column == -1 && row == -1))
-    {
-        [self update];
-    }
+//    if ((column == _column && row == _row) || (column == -1 && row == -1))
+//    {
+//        [self update];
+//    }
 }
 
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
