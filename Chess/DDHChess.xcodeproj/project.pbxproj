@@ -59,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		D51E838618AE2C8C001C352E /* DDHAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHAppDelegate.h; sourceTree = "<group>"; };
-		D51E838718AE2C8C001C352E /* DDHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHAppDelegate.m; sourceTree = "<group>"; };
+		D51E838718AE2C8C001C352E /* DDHAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDHAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D51E838918AE2C95001C352E /* DDHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHViewController.h; sourceTree = "<group>"; };
 		D51E838A18AE2C95001C352E /* DDHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHViewController.m; sourceTree = "<group>"; };
 		D51E839318AE2CAF001C352E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DDHViewController.xib; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		D51E839B18AE2D21001C352E /* DDHChess-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DDHChess-Info.plist"; sourceTree = "<group>"; };
 		D51E839C18AE2D21001C352E /* DDHChess-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDHChess-Prefix.pch"; sourceTree = "<group>"; };
 		D51E839F18AE2D28001C352E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D51E83A118AE2D35001C352E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D51E83A118AE2D35001C352E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D51E83A618AE2D6B001C352E /* GameOver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GameOver.png; path = Assets/GameOver.png; sourceTree = "<group>"; };
 		D51E83A718AE2D6B001C352E /* GameOver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GameOver@2x.png"; path = "Assets/GameOver@2x.png"; sourceTree = "<group>"; };
 		D51E83A818AE2D6B001C352E /* Reversi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Reversi.png; path = Assets/Reversi.png; sourceTree = "<group>"; };
@@ -89,18 +89,18 @@
 		D585CD3018BFEA4600F6120D /* DDHTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHTuple.h; path = Model/DDHTuple.h; sourceTree = "<group>"; };
 		D585CD3118BFEA4600F6120D /* DDHTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHTuple.m; path = Model/DDHTuple.m; sourceTree = "<group>"; };
 		D58AA7FC18B82C4E00849AD8 /* DDHPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPiece.h; path = Model/DDHPiece.h; sourceTree = "<group>"; };
-		D58AA7FD18B82C4E00849AD8 /* DDHPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPiece.m; path = Model/DDHPiece.m; sourceTree = "<group>"; };
+		D58AA7FD18B82C4E00849AD8 /* DDHPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DDHPiece.m; path = Model/DDHPiece.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D58AA7FF18B82E2600849AD8 /* ChessPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChessPlayer.h; sourceTree = "<group>"; };
 		D58AA80018B88B8B00849AD8 /* DDHPawn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPawn.h; path = Model/DDHPawn.h; sourceTree = "<group>"; };
-		D58AA80118B88B8B00849AD8 /* DDHPawn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPawn.m; path = Model/DDHPawn.m; sourceTree = "<group>"; };
+		D58AA80118B88B8B00849AD8 /* DDHPawn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DDHPawn.m; path = Model/DDHPawn.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D58AA80618B88BC100849AD8 /* DDHRook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHRook.h; path = Model/DDHRook.h; sourceTree = "<group>"; };
-		D58AA80718B88BC100849AD8 /* DDHRook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHRook.m; path = Model/DDHRook.m; sourceTree = "<group>"; };
+		D58AA80718B88BC100849AD8 /* DDHRook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DDHRook.m; path = Model/DDHRook.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D58AA80918B88BCE00849AD8 /* DDHKnight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHKnight.h; path = Model/DDHKnight.h; sourceTree = "<group>"; };
 		D58AA80A18B88BCE00849AD8 /* DDHKnight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHKnight.m; path = Model/DDHKnight.m; sourceTree = "<group>"; };
 		D58AA80C18B88BDA00849AD8 /* DDHBishop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHBishop.h; path = Model/DDHBishop.h; sourceTree = "<group>"; };
 		D58AA80D18B88BDA00849AD8 /* DDHBishop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHBishop.m; path = Model/DDHBishop.m; sourceTree = "<group>"; };
 		D58AA80F18B88BE400849AD8 /* DDHQueen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHQueen.h; path = Model/DDHQueen.h; sourceTree = "<group>"; };
-		D58AA81018B88BE400849AD8 /* DDHQueen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHQueen.m; path = Model/DDHQueen.m; sourceTree = "<group>"; };
+		D58AA81018B88BE400849AD8 /* DDHQueen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DDHQueen.m; path = Model/DDHQueen.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D58AA81218B88BED00849AD8 /* DDHKing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHKing.h; path = Model/DDHKing.h; sourceTree = "<group>"; };
 		D58AA81318B88BED00849AD8 /* DDHKing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHKing.m; path = Model/DDHKing.m; sourceTree = "<group>"; };
 		D58AA81818BDB77800849AD8 /* DDHChessBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHChessBoardView.h; path = View/DDHChessBoardView.h; sourceTree = "<group>"; };

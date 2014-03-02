@@ -53,7 +53,7 @@
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
-            if(!([board objectAtColumn:dx andRow:dy] == nil)){
+            if(!([board objectAtColumn:dx andRow:dy] == NULL)){
                 // if it is our piece, do nothing and get out of the loop because you can't go further
                 if([[board objectAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
                     break;

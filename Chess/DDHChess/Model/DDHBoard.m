@@ -16,7 +16,7 @@
     // 2D array representing which pieces are in each board location.
     DDH2DArray* _pieces;
     // 2D array representing which parts of the board are currently highlighted
-    BOOL** _highlightBoard;
+    BOOL _highlightBoard[8][8];
     id<DDHBoardDelegate> _delegate;
     DDHTuple* _locOfHighlightOwner;
     
@@ -70,7 +70,7 @@
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return [_pieces objectAtColumn:column andRow:row] == nil;
+    return [_pieces objectAtColumn:column andRow:row] == NULL;
 }
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
@@ -118,7 +118,7 @@
     [self clearHighlighting];
     for(int i = 0; i < [_pieces rows]; i++){
         for(int j = 0; j < [_pieces columns]; j++){
-            [_pieces replaceObjectAtColumn:j andRow:i withObject:nil];
+            [_pieces replaceObjectAtColumn:j andRow:i withObject:NULL];
         }
     }
     //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];

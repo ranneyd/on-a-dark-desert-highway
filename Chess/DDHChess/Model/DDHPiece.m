@@ -25,7 +25,7 @@
 -(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
 {
     // To be overridden
-    return nil;
+    return NULL;
 }
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
