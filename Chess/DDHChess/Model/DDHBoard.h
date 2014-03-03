@@ -20,12 +20,23 @@
 // indicates the player who makes the next move
 @property ChessPlayer nextMove;
 
+// Initialize a board
+-(id) init;
+
+// Places pieces in proper places for chess and sets which player moves first
+-(void) setToInitialState;
+
+// Sets every cell in board to empty
+-(void) clearBoard;
+
 // Returns pointer to piece at location
 -(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
-// Returns the opposite of the player
+
+// Changes whose turn it is
 -(void) invertState;
 
--(void) setToInitialState;
+
+
 
 // Puts the piece on the piece stack and in the piece array
 // ASSUMES: piece object already has correct coordinates as its x and y and belongs to the board.
@@ -46,8 +57,7 @@
 
 -(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
 
-// Sets every cell in board to empty
--(void) clearBoard;
+
 
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 

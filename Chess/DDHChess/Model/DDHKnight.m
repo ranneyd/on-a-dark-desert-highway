@@ -48,9 +48,12 @@
     
     // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
     for(int i = 0; i < 8; i++){
-        int dx = x + [points[i] x];
-        int dy = y + [points[i] y];
+        DDHTuple* nextMove = points[i];
+        int dx = x + [nextMove x];
+        int dy = y + [nextMove y];
+        NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
         if([self onBoard:board AtColumn:dx andRow:dy])
+            NSLog(@"Adding move for dx: %d and dy: %d", dx, dy);
             [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
     }
     return highlighting;

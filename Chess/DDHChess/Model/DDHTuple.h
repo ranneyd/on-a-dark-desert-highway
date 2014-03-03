@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+// Class used to store location data
 @interface DDHTuple : NSObject
 
 @property NSInteger x;

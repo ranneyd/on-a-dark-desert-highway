@@ -189,11 +189,11 @@
 {
     if ((_column+_row) % 2 == 0)
     {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor cyanColor];
     }
     else
     {
-        self.backgroundColor = [UIColor cyanColor];
+        self.backgroundColor = [UIColor whiteColor];
     }
     
     self.backgroundColor = [_board highlightedAtColumn:_column andRow:_row] ? [UIColor yellowColor] : self.backgroundColor;
@@ -219,6 +219,7 @@
     // First, move to the square if it is highlighted
     if ([_board highlightedAtColumn:_column andRow:_row])
     {
+        NSLog(@"Tapped Highlighted Square!");
         // Here, board takes care of figuring out which piece exactly will be moving.
         [_board makeMoveToColumn:_column andRow:_row];
     }
