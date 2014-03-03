@@ -227,7 +227,7 @@
     if ([pieceDescription isEqualToString:@"NullPiece"])
         return [[NSMutableArray alloc] init];
     
-    NSMutableArray* highlighting = [piece highlightMovesWithBoard:_pieces];
+    NSMutableArray* highlighting = [piece highlightMovesWithBoard:self];
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
     return highlighting;
 }

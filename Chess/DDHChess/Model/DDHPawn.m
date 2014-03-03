@@ -44,20 +44,32 @@
     
     NSInteger verticalMove = row + pow(-1, [self getPlayer]);
     
-    // Variables for attacking other pieces...will use eventually
-//    NSInteger leftMove = column - 1 > 0 ? column - 1 : column;
-//    NSInteger rightMove = column + 1 < [board columns] ? column + 1 : column;
- 
-
-    
     if ([self onBoard:board AtColumn:column andRow:verticalMove]) {
-        [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:verticalMove]];
+        if ([board isEmptySquareAtColumn:column andRow:verticalMove]) {
+            [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:verticalMove]];
+        }
     }
     
-    // Check if the pawn can attack an enemy?
-//    if (![_board objectAtColumn:rightMove andRow:verticalMove] == ) {
-//        <#statements#>
-//    }
+    // Variables for attacking other pieces.
+    NSInteger leftMove = column - 1 > 0 ? column - 1 : column;
+    NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : column;
+    
+    // Check if we can attack other pieces.
+    if ([self onBoard:board AtColumn:leftMove andRow:verticalMove]) {
+        if (![board isEmptySquareAtColumn:leftMove andRow:verticalMove]) {
+            if ([board pieceAtColumn:leftMove andRow:verticalMove notBelongingToPlayer:[self getPlayer]]) {
+                [highlighting addObject:[[DDHTuple alloc] initWithX:leftMove andY:verticalMove]];
+            }
+        }
+    }
+    
+    if ([self onBoard:board AtColumn:rightMove andRow:verticalMove]) {
+        if (![board isEmptySquareAtColumn:rightMove andRow:verticalMove]) {
+            if ([board pieceAtColumn:rightMove andRow:verticalMove notBelongingToPlayer:[self getPlayer]]) {
+                [highlighting addObject:[[DDHTuple alloc] initWithX:rightMove andY:verticalMove]];
+            }
+        }
+    }
  
     return highlighting;
 }
