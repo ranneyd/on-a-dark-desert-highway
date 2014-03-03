@@ -16,33 +16,33 @@
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
-    // Store moves in here.
-    DDHTuple* points[4];
+    // Store move types in here.
+    NSMutableArray* points = [[NSMutableArray alloc] initWithCapacity:4];
     
     // up
-    [points[0] setX:  0];
-    [points[0] setY: -1];
+    [points addObject:[[DDHTuple alloc] initWithX:0 andY:-1]];
+
     // down
-    [points[1] setX:  0];
-    [points[1] setY:  1];
+    [points addObject:[[DDHTuple alloc] initWithX:0 andY:1]];
+
     // left
-    [points[2] setX: -1];
-    [points[2] setY:  0];
+    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:0]];
+
     // right
-    [points[3] setX:  1];
-    [points[3] setY:  0];
+    [points addObject:[[DDHTuple alloc] initWithX:1 andY:0]];
     
     NSMutableArray *highlighting = [[NSMutableArray alloc]init];
     
     // Iterate over move types. Either up and left, up and right, etc...
     for(int i = 0; i < 4; i++){
         // accumulate new positions. Don't want to include piece's current position.
-        int dx = x + [points[i] x];
-        int dy = y + [points[i] y];
+        DDHTuple* nextMove = [points objectAtIndex:i];
+        int dx = x + [nextMove x];
+        int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
-            if(([board pieceAtColumn:dx andRow:dy notBelongingToPlayer:[self getPlayer]])){
+            if(![board isEmptySquareAtColumn:dx andRow:dy]){
                 // if it is our piece, do nothing and get out of the loop because you can't go further
                 if([[board pieceAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
                     break;
@@ -58,8 +58,8 @@
                 [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
             }
             // Keep going
-            dx += [points[i] x];
-            dy += [points[i] y];
+            dx += [nextMove x];
+            dy += [nextMove y];
         }
         
     }
