@@ -17,28 +17,29 @@
     NSUInteger y = [self y];
     
     // Store moves in here.
-    DDHTuple* points[4];
+    // Store move types in here.
+    NSMutableArray* points = [[NSMutableArray alloc] initWithCapacity:4];
     
-    // left 1 up 1
-    [points[0] setX: -1];
-    [points[0] setY: -1];
-    // left 1 down 1
-    [points[1] setX: -1];
-    [points[1] setY:  1];
-    // right 1 up 1
-    [points[2] setX:  1];
-    [points[2] setY:  1];
-    // right 1 down 1
-    [points[3] setX:  1];
-    [points[3] setY: -1];
+    // up 1 left 1
+    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:-1]];
+    
+    // down 1 left 1
+    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:1]];
+    
+    // up 1 right 1
+    [points addObject:[[DDHTuple alloc] initWithX:1 andY:-1]];
+    
+    // down 1 right 1
+    [points addObject:[[DDHTuple alloc] initWithX:1 andY:1]];
     
     NSMutableArray *highlighting = [[NSMutableArray alloc]init];
     
     // Iterate over move types. Either up and left, up and right, etc...
     for(int i = 0; i < 4; i++){
         // accumulate new positions. Don't want to include piece's current position.
-        int dx = x + [points[i] x];
-        int dy = y + [points[i] y];
+        DDHTuple* nextMove = [points objectAtIndex:i];
+        int dx = x + [nextMove x];
+        int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
@@ -58,8 +59,8 @@
                 [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
             }
             // Keep going
-            dx += [points[i] x];
-            dy += [points[i] y];
+            dx += [nextMove x];
+            dy += [nextMove y];
         }
 
     }
