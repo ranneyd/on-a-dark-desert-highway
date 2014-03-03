@@ -52,6 +52,8 @@
     [self setY:row];
 }
 */
+
+// F
 - (NSString*) description
 {
     if ([self getPlayer] == ChessPlayerBlack)
