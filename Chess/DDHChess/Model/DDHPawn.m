@@ -12,7 +12,7 @@
 {
     BOOL hasNotMoved;
 }
-
+/*
 -(id) initWithPlayer:(ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super initWithPlayer:player andIndex:index atColumn:column andRow:row];
@@ -51,7 +51,7 @@
     [self setX:column];
     [self setY:row];
 }
-
+*/
 - (NSString*) description
 {
     if ([self getPlayer] == ChessPlayerBlack)

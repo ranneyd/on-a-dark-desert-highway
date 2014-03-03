@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>09A8397C-54B7-4D22-A354-F77AC36F6EC4</string>
+	<string>AAAD7B05-2B99-450C-90C1-404D7E8ADD36</string>
 	<key>IDESourceControlProjectName</key>
 	<string>DDHChess</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D988F664-AE4E-4BB4-AB6E-F98CB72482A1</key>
+		<key>01C3C6EC-E33D-4DC1-AB2F-93B39390A8A6</key>
 		<string>https://github.com/ranneyd/on-a-dark-desert-highway.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DDHChess/DDHChess.xcodeproj/project.xcworkspace</string>
+	<string>Chess/DDHChess.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D988F664-AE4E-4BB4-AB6E-F98CB72482A1</key>
+		<key>01C3C6EC-E33D-4DC1-AB2F-93B39390A8A6</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,16 +25,16 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D988F664-AE4E-4BB4-AB6E-F98CB72482A1</string>
+	<string>01C3C6EC-E33D-4DC1-AB2F-93B39390A8A6</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D988F664-AE4E-4BB4-AB6E-F98CB72482A1</string>
+			<string>01C3C6EC-E33D-4DC1-AB2F-93B39390A8A6</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Chess</string>
+			<string>on-a-dark-desert-highway</string>
 		</dict>
 	</array>
 </dict>

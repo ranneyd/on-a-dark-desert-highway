@@ -67,7 +67,7 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    [self informDelegateOfStateChanged:state forColumn:column andRow:row];
+    //[self informDelegateOfStateChanged:state forColumn:column andRow:row];
 }
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
