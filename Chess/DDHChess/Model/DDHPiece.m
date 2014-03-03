@@ -39,7 +39,7 @@
 
 -(BOOL) onBoard:(DDH2DArray*)board AtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return column < 0 || column >= [board columns] || row < 0 || row >= [board rows];
+    return column >= 0 && column < [board columns] && row >= 0 && row < [board rows];
 }
 
 -(BOOL**) blankHighlightingForBoard:(DDH2DArray*) board

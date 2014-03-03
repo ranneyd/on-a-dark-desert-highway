@@ -28,6 +28,8 @@
 //    self.gameOverImage.image = [UIImage imageNamed: @"GameOver.png"];
 //    self.gameOverImage.hidden = YES;
     
+    
+    // THIS IS COMMENTED OUT UNTIL THE BOARD IS READY TO GO
     //make board
 //    _board = [[DDHBoard alloc] init];
 //    [_board setToInitialState];
@@ -35,7 +37,6 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     //make view
-    
     DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
     
     [self.view addSubview:chessBoard];
