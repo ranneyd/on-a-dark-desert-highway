@@ -17,7 +17,7 @@
 @property NSInteger y;
 @property int index;
 
--(id) initWithPlayer: (ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger) column andRow:(NSUInteger) row;
+-(id) initWithPlayer: (ChessPlayer) player atColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
 -(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *) board;

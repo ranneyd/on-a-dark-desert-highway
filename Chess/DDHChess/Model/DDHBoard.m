@@ -8,6 +8,7 @@
 
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
+#import "DDHKnight.h"
 
 @implementation DDHBoard
 {
@@ -16,7 +17,7 @@
     // 2D array representing which pieces are in each board location.
     DDH2DArray* _pieces;
     // 2D array representing which parts of the board are currently highlighted
-    BOOL** _highlightBoard;
+    BOOL _highlightBoard[8][8];
     id<DDHBoardDelegate> _delegate;
     DDHTuple* _locOfHighlightOwner;
     
@@ -31,6 +32,7 @@
         _columns = 8;
         _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns];
         [self clearBoard];
+        [_pieces replaceObjectAtColumn:1 andRow:1 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
     }
@@ -65,12 +67,12 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    //[self informDelegateOfStateChanged:state forColumn:column andRow:row];
+    [self informDelegateOfStateChanged:state forColumn:column andRow:row];
 }
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return [_pieces objectAtColumn:column andRow:row] == nil;
+    return [_pieces objectAtColumn:column andRow:row] == NULL;
 }
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
@@ -118,7 +120,7 @@
     [self clearHighlighting];
     for(int i = 0; i < [_pieces rows]; i++){
         for(int j = 0; j < [_pieces columns]; j++){
-            [_pieces replaceObjectAtColumn:j andRow:i withObject:nil];
+            [_pieces replaceObjectAtColumn:j andRow:i withObject:NULL];
         }
     }
     //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
