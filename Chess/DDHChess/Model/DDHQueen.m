@@ -16,41 +16,41 @@
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
-    // Store moves in here.
-    DDHTuple* points[8];
+    // Store move types in here.
+    NSMutableArray* points = [[NSMutableArray alloc] initWithCapacity:8];
     
     // up
-    [points[0] setX:  0];
-    [points[0] setY: -1];
+    [points addObject:[[DDHTuple alloc] initWithX:0 andY:-1]];
+    
     // down
-    [points[1] setX:  0];
-    [points[1] setY:  1];
+    [points addObject:[[DDHTuple alloc] initWithX:0 andY:1]];
+    
     // left
-    [points[2] setX: -1];
-    [points[2] setY:  0];
+    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:0]];
+    
     // right
-    [points[3] setX:  1];
-    [points[3] setY:  0];
-    // left 1 up 1
-    [points[4] setX: -1];
-    [points[4] setY: -1];
-    // left 1 down 1
-    [points[5] setX: -1];
-    [points[5] setY:  1];
-    // right 1 up 1
-    [points[6] setX:  1];
-    [points[6] setY:  1];
-    // right 1 down 1
-    [points[7] setX:  1];
-    [points[7] setY: -1];
+    [points addObject:[[DDHTuple alloc] initWithX:1 andY:0]];
+    
+    // up 1 left 1
+    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:-1]];
+    
+    // down 1 left 1
+    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:1]];
+    
+    // up 1 right 1
+    [points addObject:[[DDHTuple alloc] initWithX:1 andY:-1]];
+    
+    // down 1 right 1
+    [points addObject:[[DDHTuple alloc] initWithX:1 andY:1]];
     
     NSMutableArray *highlighting = [[NSMutableArray alloc]init];
     
     // Iterate over move types. Either up and left, up and right, etc...
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 8; i++){
         // accumulate new positions. Don't want to include piece's current position.
-        int dx = x + [points[i] x];
-        int dy = y + [points[i] y];
+        DDHTuple* nextMove = [points objectAtIndex:i];
+        int dx = x + [nextMove x];
+        int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
@@ -70,8 +70,8 @@
                 [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
             }
             // Keep going
-            dx += [points[i] x];
-            dy += [points[i] y];
+            dx += [nextMove x];
+            dy += [nextMove y];
         }
         
     }
