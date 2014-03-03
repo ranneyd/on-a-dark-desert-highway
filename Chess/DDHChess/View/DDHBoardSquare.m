@@ -7,11 +7,12 @@
 //
 
 #import "DDHBoardSquare.h"
+#import "DDHBoard.h"
 
 @implementation DDHBoardSquare
 {
-    int _row;
-    int _column;
+    NSUInteger _row;
+    NSUInteger _column;
     DDHBoard* _board;
     
     // Views for pieces
@@ -174,12 +175,12 @@
     
     // Go through huge conditional statements to figure out
     // which image to display. Not the sleekest...
-    _blackPawnView.alpha = [pieceDescription isEqualToString:@"blackPawn"];
-    _blackRookView.alpha = [pieceDescription isEqualToString:@"blackRook"];
-    _blackKnightView.alpha = [pieceDescription isEqualToString:@"blackKnight"];
-    _blackBishopView.alpha = [pieceDescription isEqualToString:@"blackBishop"];
-    _blackQueenView.alpha = [pieceDescription isEqualToString:@"blackQueen"];
-    _blackKingView.alpha = [pieceDescription isEqualToString:@"blackKing"];
+    _blackPawnView.alpha = [pieceDescription isEqualToString:@"BlackPawn"];
+    _blackRookView.alpha = [pieceDescription isEqualToString:@"BlackRook"];
+    _blackKnightView.alpha = [pieceDescription isEqualToString:@"BlackKnight"];
+    _blackBishopView.alpha = [pieceDescription isEqualToString:@"BlackBishop"];
+    _blackQueenView.alpha = [pieceDescription isEqualToString:@"BlackQueen"];
+    _blackKingView.alpha = [pieceDescription isEqualToString:@"BlackKing"];
 }
 
 // Update the highlighted status of a square. This entails
@@ -202,7 +203,7 @@
 // This function is called by the Board class through a delegate
 // to let the Board Square know it should display an updated
 // image.
--(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row
+-(void) pieceChangedAtColumn:(int)column addRow:(int)row
 {
     if ((column == _column && row == _row) || (column == -1 && row == -1))
     {
@@ -241,6 +242,7 @@
         // Next, check if the piece is of the proper color
         if ([_board nextMove] == [piece getPlayer])
         {
+            NSLog(@"YUPYUP");
             // At this point, we know the user has tapped a
             // square containing a piece that is of the same
             // color as the player who is set to make the next

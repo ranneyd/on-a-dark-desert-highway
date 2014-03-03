@@ -7,15 +7,16 @@
 //
 
 #import "DDHPawn.h"
+#import "DDHTuple.h"
 
 @implementation DDHPawn
 {
     BOOL hasNotMoved;
 }
-/*
--(id) initWithPlayer:(ChessPlayer) player andIndex:(int) index atColumn:(NSUInteger)column andRow:(NSUInteger)row
+
+-(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
-    self = [super initWithPlayer:player andIndex:index atColumn:column andRow:row];
+    self = [super initWithPlayer:player atColumn:column andRow:row];
     hasNotMoved = YES;
     return self;
 }
@@ -30,18 +31,25 @@
     NSInteger row = [self y];
     
     NSInteger verticalMove = row + pow(-1, [self getPlayer]);
-    NSInteger leftMove = column - 1 > 0 ? column - 1 : column;
-    NSInteger rightMove = column + 1 < [_board columns] ? column + 1 : column;
     
+    // Variables for attacking other pieces...will use eventually
+//    NSInteger leftMove = column - 1 > 0 ? column - 1 : column;
+//    NSInteger rightMove = column + 1 < [board columns] ? column + 1 : column;
+ 
+    NSMutableArray* highlighting = [[NSMutableArray alloc] init];
     
-    // Check if the pawn can attack an enemy?
-    if ([_board objectAtColumn:rightMove andRow:verticalMove] == ) {
-        <#statements#>
+    if ([self onBoard:board AtColumn:column andRow:verticalMove]) {
+        [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:verticalMove]];
     }
     
-    return nil;
+    // Check if the pawn can attack an enemy?
+//    if ([_board objectAtColumn:rightMove andRow:verticalMove] == ) {
+//        <#statements#>
+//    }
+ 
+    return highlighting;
 }
-
+/*
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
     if (hasNotMoved)

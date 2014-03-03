@@ -36,8 +36,6 @@
 
 -(BOOL) highlightedAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
--(void) movePieceAtColumn:(NSInteger) oldColumn andRow:(NSUInteger) oldRow ToColumn:(NSInteger) column andRow:(NSInteger) row;
-
 -(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
 -(void) clearHighlighting;
@@ -50,6 +48,8 @@
 
 // Sets every cell in board to empty
 -(void) clearBoard;
+
+-(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
 //-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
 

@@ -9,7 +9,12 @@
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
 #import "DDHNullPiece.h"
+#import "DDHPawn.h"
+#import "DDHRook.h"
 #import "DDHKnight.h"
+#import "DDHBishop.h"
+#import "DDHQueen.h"
+#import "DDHKing.h"
 
 @implementation DDHBoard
 {
@@ -29,9 +34,14 @@
 - (id) init
 {
     if (self = [super init]){
+        // Set the size of the board. TODO: Change for dynamically allocated array.
         _rows = 8;
         _columns = 8;
+        
+        // Initialize the array of pieces. Set all pieces on the board to null pieces initially (i.e. set the board
+        // to be completely empty).
         _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns andObject:[[DDHNullPiece alloc] init]];
+        
         [self clearBoard];
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
@@ -46,17 +56,52 @@
     [self clearBoard];
     
     // Put in the board setup
-    [_pieces replaceObjectAtColumn:1 andRow:1 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:0 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:1 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:2 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:3 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:4 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:5 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:6 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:7 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
     
+    [_pieces replaceObjectAtColumn:0 andRow:0 withObject:[[DDHRook alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:1 andRow:0 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:2 andRow:0 withObject:[[DDHBishop alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:3 andRow:0 withObject:[[DDHQueen alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:4 andRow:0 withObject:[[DDHKing alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:5 andRow:0 withObject:[[DDHBishop alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:6 andRow:0 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:7 andRow:0 withObject:[[DDHRook alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
     
-    _nextMove = ChessPlayerWhite;
+    // Black pieces
+    [_pieces replaceObjectAtColumn:0 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:1 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:2 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:3 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:4 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:5 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:6 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:7 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    
+    [_pieces replaceObjectAtColumn:0 andRow:7 withObject:[[DDHRook alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:1 andRow:7 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:2 andRow:7 withObject:[[DDHBishop alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:3 andRow:7 withObject:[[DDHQueen alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:4 andRow:7 withObject:[[DDHKing alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:5 andRow:7 withObject:[[DDHBishop alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:6 andRow:7 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    [_pieces replaceObjectAtColumn:7 andRow:7 withObject:[[DDHRook alloc]initWithPlayer:ChessPlayerBlack atColumn:1 andRow:1]];
+    
+    _nextMove = ChessPlayerBlack;
 }
 
 -(void)invertState
 {
     if ([self nextMove] == ChessPlayerBlack)
         self.nextMove = ChessPlayerWhite;
-    self.nextMove = ChessPlayerBlack;
+    else
+        self.nextMove = ChessPlayerBlack;
 }
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
@@ -69,17 +114,19 @@
 {
     [self checkBoundsForColumn:column andRow:row];
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    //[self informDelegateOfStateChanged:state forColumn:column andRow:row];
+    [self informDelegateOfPieceChangedAtColumn:column andRow:row];
 }
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return [_pieces objectAtColumn:column andRow:row] == NULL;
+    DDHPiece* piece = [_pieces objectAtColumn:column andRow:row];
+    NSString* pieceDescription = [piece description];
+    return [pieceDescription isEqualToString:@"NullPiece"];
 }
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return _highlightBoard[column][row] != -1;
+    return _highlightBoard[column][row] == YES;
 }
 
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
@@ -103,10 +150,10 @@
     [self invertState];
 }
 
--(void)informDelegateOfPieceChanged:(DDHPiece*) piece forColumn:(NSInteger)column andRow:(NSInteger) row
+-(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row
 {
-    if([_delegate respondsToSelector:@selector(cellPieceChanged:forColumn:addRow:)])
-        [_delegate cellPieceChanged:piece forColumn:column addRow:row];
+    if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
+        [_delegate pieceChangedAtColumn:column addRow:row];
 }
 
 
@@ -125,7 +172,7 @@
             [_pieces replaceObjectAtColumn:j andRow:i withObject:[[DDHNullPiece alloc] init]];
         }
     }
-    //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
+    [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 -(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
 {
@@ -154,20 +201,27 @@
     DDHPiece* piece = [self pieceAtColumn:column andRow:row];
     NSString* pieceDescription = [piece description];
     if ([pieceDescription isEqualToString:@"NullPiece"])
-        return nil;
+        return [[NSMutableArray alloc] init];
+    
     NSMutableArray* highlighting = [piece highlightMovesWithBoard:_pieces];
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
-    for (DDHTuple *location in highlighting){
-        [self highlightAtColumn:[location x] andRow: [location y]];
-    }
     return highlighting;
 }
+
 -(void) moveHighlightOwnerToColumn:(NSUInteger)columnn andRow:(NSUInteger)row
 {
     [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
 }
 
-
+-(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row
+{
+    NSMutableArray* highlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
+    
+    for (DDHTuple *location in highlighting){
+        [self highlightAtColumn:[location x] andRow: [location y]];
+        [self informDelegateOfPieceChangedAtColumn:[location x] andRow:[location y]];
+    }
+}
 /*
 
 // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board

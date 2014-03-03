@@ -11,6 +11,6 @@
 
 @protocol DDHBoardDelegate <NSObject>
 
--(void) cellPieceChanged:(DDHPiece*)piece forColumn:(int)column addRow:(int)row;
+-(void) pieceChangedAtColumn:(int)column addRow:(int)row;
 
 @end
