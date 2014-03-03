@@ -139,7 +139,7 @@
     NSLog(@"ABOUT TO DIE!");
     NSLog(@"Column is: %d and Row is: %d", _column, _row);
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
-    NSLog(@"Will not reach");
+    NSLog(@"Piece is: %@", [piece description]);
     [self updateWhitePieceImageForPiece:piece];
     
     [self updateBlackPieceImageForPiece:piece];

@@ -229,12 +229,29 @@
 
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
-    NSMutableArray* highlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
+    NSMutableArray* allHighlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
+    NSMutableArray* properHighlighting = [[NSMutableArray alloc] init];
+    for (DDHTuple *location in allHighlighting){
+        if ([self pieceAtColumn:[location x] andRow:[location y] notBelongingToPlayer:_nextMove]) {
+            [properHighlighting addObject:location];
+        }
+    }
     
-    for (DDHTuple *location in highlighting){
+    for (DDHTuple *location in properHighlighting){
         [self highlightAtColumn:[location x] andRow: [location y]];
         [self informDelegateOfPieceChangedAtColumn:[location x] andRow:[location y]];
     }
+}
+
+-(BOOL) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongingToPlayer:(ChessPlayer)player
+{
+    [self checkBoundsForColumn:column andRow:row];
+    
+    if (![self isEmptySquareAtColumn:column andRow:row]) {
+        DDHPiece* piece = [self pieceAtColumn:column andRow:row];
+        return [piece getPlayer] != _nextMove;
+    }
+    return YES;
 }
 /*
 

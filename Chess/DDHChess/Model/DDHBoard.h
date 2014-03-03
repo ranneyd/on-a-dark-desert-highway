@@ -61,6 +61,8 @@
 
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
+-(BOOL) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongingToPlayer:(ChessPlayer)player;
+
 //-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
 
 @end
