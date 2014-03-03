@@ -7,10 +7,11 @@
 //
 
 #import "DDHQueen.h"
+#import "DDHBoard.h"
 
 @implementation DDHQueen
 
--(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -53,9 +54,9 @@
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             // If this spot has a piece in it...
-            if(!([board objectAtColumn:dx andRow:dy] == NULL)){
+            if(![board isEmptySquareAtColumn:dx andRow:dy ]){
                 // if it is our piece, do nothing and get out of the loop because you can't go further
-                if([[board objectAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
+                if([[board pieceAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
                     break;
                 // If it isn't our piece, highlight that spot but exit the loop because we can't go further
                 else{

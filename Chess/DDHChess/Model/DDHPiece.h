@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "ChessPlayer.h"
-#import "DDH2DArray.h"
 #import "DDHTuple.h"
+
+@class DDHBoard;
 
 @interface DDHPiece : NSObject
 
@@ -20,16 +21,16 @@
 -(id) initWithPlayer: (ChessPlayer) player atColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
--(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *) board;
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board;
 
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;
 
 -(ChessPlayer) getPlayer;
 
--(BOOL) onBoard:(DDH2DArray*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
+-(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 
--(BOOL**) blankHighlightingForBoard:(DDH2DArray*) board;
+-(BOOL**) blankHighlightingForBoard:(DDHBoard*) board;
 
 -(NSString*) description;
 

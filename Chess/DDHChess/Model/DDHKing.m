@@ -7,10 +7,11 @@
 //
 
 #import "DDHKing.h"
+#import "DDHBoard.h"
 
 @implementation DDHKing
 
--(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *) board;
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board;
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];

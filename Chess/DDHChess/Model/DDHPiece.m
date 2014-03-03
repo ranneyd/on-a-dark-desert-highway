@@ -7,6 +7,7 @@
 //
 
 #import "DDHPiece.h"
+#import "DDHBoard.h"
 
 @implementation DDHPiece
 {
@@ -21,7 +22,7 @@
     return self;
 }
 
--(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
 {
     // To be overridden
     return NULL;
@@ -36,19 +37,19 @@
     return _owner;
 }
 
--(BOOL) onBoard:(DDH2DArray*)board AtColumn:(NSInteger)column andRow:(NSInteger)row
+-(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    return column >= 0 && column < [board columns] && row >= 0 && row < [board rows];
+    return column >= 0 && column < [board getColumns] && row >= 0 && row < [board getRows];
 }
 
--(BOOL**) blankHighlightingForBoard:(DDH2DArray*) board
+-(BOOL**) blankHighlightingForBoard:(DDHBoard*) board
 {
     // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
     // Should be size of rows*columns
-    BOOL** highlighting = malloc([board rows]*[board columns]);
+    BOOL** highlighting = malloc([board getRows]*[board getColumns]);
     // Initialize everything to false
-    for (int i = 0; i < [board rows]; i++)
-        for (int j = 0; j < [board columns]; j++)
+    for (int i = 0; i < [board getRows]; i++)
+        for (int j = 0; j < [board getColumns]; j++)
             highlighting[i][j] = NO;
     return highlighting;
 }

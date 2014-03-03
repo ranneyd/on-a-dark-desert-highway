@@ -7,6 +7,7 @@
 //
 
 #import "DDHBoard.h"
+#import "DDH2DArray.h"
 #import "DDHBoardDelegate.h"
 #import "DDHNullPiece.h"
 #import "DDHPawn.h"
@@ -121,6 +122,16 @@
         self.nextMove = ChessPlayerWhite;
     else
         self.nextMove = ChessPlayerBlack;
+}
+
+-(NSUInteger) getColumns
+{
+    return _columns;
+}
+
+-(NSUInteger) getRows
+{
+    return _rows;
 }
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row

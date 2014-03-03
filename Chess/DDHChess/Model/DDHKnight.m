@@ -10,7 +10,7 @@
 
 @implementation DDHKnight
 
--(NSMutableArray*) highlightMovesWithBoard:(DDH2DArray *)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -35,7 +35,6 @@
     // left 2 down 1
     [points addObject:[[DDHTuple alloc] initWithX:-2 andY:1]];
     
-    DDHTuple* move = [points objectAtIndex:0];
     //NSLog(@"HALP: %d and: %d", [move x], [move y]);
     
 

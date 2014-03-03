@@ -35,6 +35,10 @@
 // Changes whose turn it is
 -(void) invertState;
 
+-(NSUInteger) getColumns;
+
+-(NSUInteger) getRows;
+
 
 
 
