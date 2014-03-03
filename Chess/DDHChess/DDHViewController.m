@@ -31,8 +31,10 @@
     
     // THIS IS COMMENTED OUT UNTIL THE BOARD IS READY TO GO
     //make board
-//    _board = [[DDHBoard alloc] init];
-//    [_board setToInitialState];
+    _board = [[DDHBoard alloc] init];
+    [_board setToInitialState];
+    
+    NSLog(@"Built Board");
     
     self.view.backgroundColor = [UIColor blackColor];
     

@@ -14,7 +14,7 @@
 
 @property NSUInteger columns;
 
--(id)initWithColumns:(NSUInteger) columns andRow:(NSUInteger) rows;
+-(id)initWithColumns:(NSUInteger) columns andRow:(NSUInteger) rows andObject:(id)object;
 
 -(id)objectAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 

@@ -13,11 +13,15 @@
     NSMutableArray* _array;
 }
 
--(id)initWithColumns:(NSUInteger)columns andRow:(NSUInteger)rows
+-(id)initWithColumns:(NSUInteger)columns andRow:(NSUInteger)rows andObject:(id)object
 {
     self.columns = columns;
     self.rows = rows;
     _array = [[NSMutableArray alloc] initWithCapacity:columns*rows];
+    for (int i = 0; i < columns*rows; i++)
+    {
+        [_array addObject:object];
+    }
     return self;
 }
 
@@ -26,9 +30,11 @@
     return [_array objectAtIndex:[self rows]*row + column];
 }
 
+
+
 -(void)replaceObjectAtColumn:(NSUInteger)column andRow:(NSUInteger)row withObject:(id) object
 {
-    return [_array replaceObjectAtIndex:[self rows]*row + column withObject:object];
+    [_array replaceObjectAtIndex:[self rows]*row + column withObject:object];
 }
 
 @end

@@ -135,7 +135,10 @@
 {
     // Update the image on the square
     // Makes assumption about behaviour of pieceAt function
+    NSLog(@"ABOUT TO DIE!");
+    NSLog(@"Column is: %d and Row is: %d", _column, _row);
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
+    NSLog(@"Will not reach");
     [self updateWhitePieceImageForPiece:piece];
     
     [self updateBlackPieceImageForPiece:piece];
@@ -211,14 +214,12 @@
 // METHODS I REQUEST IN IT
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
+    NSLog(@"Tapped at column: %d and row: %d", _column, _row);
     // First, move to the square if it is highlighted
     if ([_board highlightedAtColumn:_column andRow:_row])
     {
         // Here, board takes care of figuring out which piece exactly will be moving.
-        
-        // DUSTIN: MAKE THIS METHOD SO IT DOES EXACTLY WHAT I
-        // WANT!!!! OKAY, THANKS, BYE
-        //[_board makeMoveToColumn:_column andRow:_row];
+        [_board makeMoveToColumn:_column andRow:_row];
     }
     
     // Next clear all highlighting so that we can ensure only
@@ -232,6 +233,7 @@
     // First, check if the square tapped contains a piece.
     if (![_board isEmptySquareAtColumn:_column andRow:_row])
     {
+        NSLog(@"YAY");
         // Next, get the piece in the square
         // First, get the piece.
         DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
@@ -246,7 +248,7 @@
             // move to.
             
             // THIS FUNCTION DOESN'T EXIST YET, BUT IT SHOULD!
-            //[_board highlightMovesForPieceAtColumn:_column andRow:_row];
+            [_board highlightMovesForPieceAtColumn:_column andRow:_row];
         }
     }
     

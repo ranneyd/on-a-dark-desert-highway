@@ -42,9 +42,11 @@
 
 -(void) clearHighlighting;
 
+-(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
 -(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row;
 
--(void) moveHighlightOwnerToColumn:(NSUInteger) columnn AndRow:(NSUInteger) row;
+-(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
 
 // Sets every cell in board to empty
 -(void) clearBoard;

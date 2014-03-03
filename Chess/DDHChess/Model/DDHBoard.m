@@ -8,6 +8,7 @@
 
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
+#import "DDHNullPiece.h"
 #import "DDHKnight.h"
 
 @implementation DDHBoard
@@ -30,9 +31,8 @@
     if (self = [super init]){
         _rows = 8;
         _columns = 8;
-        _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns];
+        _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns andObject:[[DDHNullPiece alloc] init]];
         [self clearBoard];
-        [_pieces replaceObjectAtColumn:1 andRow:1 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
     }
@@ -46,8 +46,10 @@
     [self clearBoard];
     
     // Put in the board setup
+    [_pieces replaceObjectAtColumn:1 andRow:1 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerWhite atColumn:1 andRow:1]];
     
-    _nextMove = ChessPlayerBlack;
+    
+    _nextMove = ChessPlayerWhite;
 }
 
 -(void)invertState
@@ -90,7 +92,7 @@
     [piece moveToColumn:column andRow:row];
     
     // Change the old position in the board array to empty
-    [_pieces replaceObjectAtColumn:oldColumn andRow:oldRow withObject:nil];
+    [_pieces replaceObjectAtColumn:oldColumn andRow:oldRow withObject:[[DDHNullPiece alloc] init]];
     
     // Change the new position in the board to our piece index
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
@@ -120,7 +122,7 @@
     [self clearHighlighting];
     for(int i = 0; i < [_pieces rows]; i++){
         for(int j = 0; j < [_pieces columns]; j++){
-            [_pieces replaceObjectAtColumn:j andRow:i withObject:NULL];
+            [_pieces replaceObjectAtColumn:j andRow:i withObject:[[DDHNullPiece alloc] init]];
         }
     }
     //[self informDelegateOfStateChanged:BoardCellStateEmpty forColumn:-1 andRow:-1];
@@ -133,15 +135,25 @@
 -(void) clearHighlighting
 {
     for(int i = 0; i < _rows; i++)
-        for(int j = 0; i < _columns; j++)
+    {
+        for(int j = 0; j < _columns; j++)
+        {
             _highlightBoard[i][j] = NO;
+        }
+    }
+}
+
+-(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row
+{
+    [self moveHighlightOwnerToColumn:column andRow:row];
 }
 
 
 -(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row
 {
     DDHPiece* piece = [self pieceAtColumn:column andRow:row];
-    if (piece == nil)
+    NSString* pieceDescription = [piece description];
+    if ([pieceDescription isEqualToString:@"NullPiece"])
         return nil;
     NSMutableArray* highlighting = [piece highlightMovesWithBoard:_pieces];
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
@@ -150,7 +162,7 @@
     }
     return highlighting;
 }
--(void) moveHighlightOwnerToColumn:(NSUInteger)columnn AndRow:(NSUInteger)row
+-(void) moveHighlightOwnerToColumn:(NSUInteger)columnn andRow:(NSUInteger)row
 {
     [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
 }
