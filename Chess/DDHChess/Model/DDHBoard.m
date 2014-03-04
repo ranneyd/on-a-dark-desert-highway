@@ -77,6 +77,11 @@
     
     // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
     BOOL _highlightBoard[8][8]; // Which parts of the board are currently highlighted
+    
+    
+    // Keep track of the kings
+    DDHKing* whiteKing;
+    DDHKing* blackKing;
 }
 
 // ********************
@@ -197,6 +202,10 @@
     
     // Nobody has highlighted anything yet, so make it out of bounds
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:_columns + 1 andY:_rows + 1];
+    
+    //
+    whiteKing = [_pieces objectAtColumn:4 andRow:0];
+    blackKing = [_pieces objectAtColumn:4 andRow:7];
     
     // Set who gets to move first
     _nextMove = ChessPlayerBlack;
@@ -356,6 +365,30 @@
 //            }
 //        }
 //    }
+    // Iterate over the board
+    for(int i = 0; i < _columns; i++){
+        for (int j = 0; j < _rows; j++) {
+            // Get a piece from the board
+            DDHPiece *piece = [_pieces objectAtColumn:i andRow:j];
+            // If the piece is not a null piece
+            if(![piece isKindOfClass:[DDHNullPiece class]]){
+                // If the piece is an enemy piece
+                if(player != [piece getPlayer]){
+                    // Get the enemy piece's moves
+                    NSMutableArray *moves = [piece highlightMovesWithBoard:self];
+                    // look at each move
+                    for (DDHTuple* move in moves){
+                        // A piece cannot take its own teammate, so we don't have to worry about a potential move taking the player's own king
+                        // If a piece has a move that can take a king, we know it's bad.
+                        if(([move x] == [whiteKing x] && [move y] == [whiteKing y]) ||
+                           ([move x] == [blackKing x] && [move y] == [blackKing y])){
+                            return YES;
+                        }
+                    }
+                }
+            }
+        }
+    }
     return NO;
 }
 /*

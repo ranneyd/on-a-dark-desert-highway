@@ -34,4 +34,6 @@
 
 -(NSString*) description;
 
+-(BOOL) movingIntoCheckinColumn:(NSInteger) column andRow:(NSInteger) row withBoard:(DDHBoard*)board;
+
 @end
