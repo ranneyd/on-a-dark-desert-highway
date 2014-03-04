@@ -49,6 +49,8 @@
         [self initBlackPieceViews];
         
         self.backgroundColor = [UIColor clearColor];
+        self.layer.borderColor = [UIColor blackColor].CGColor;
+        self.layer.borderWidth = 1.0f;
         
         [self update];
     }
@@ -187,16 +189,17 @@
 
 - (void) updateHighlighted
 {
-    if ((_column+_row) % 2 == 0)
+    if ((_column+_row) % 2 == 1)
     {
-        self.backgroundColor = [UIColor cyanColor];
+        self.backgroundColor = [UIColor blackColor];
     }
     else
     {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1];
     }
     
-    self.backgroundColor = [_board highlightedAtColumn:_column andRow:_row] ? [UIColor yellowColor] : self.backgroundColor;
+    self.backgroundColor = [_board highlightedAtColumn:_column andRow:_row] ? [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:1.0] : self.backgroundColor;
+    
     
 }
 
