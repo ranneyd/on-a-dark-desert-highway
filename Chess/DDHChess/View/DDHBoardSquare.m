@@ -198,7 +198,22 @@
         self.backgroundColor = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1];
     }
     
-    self.backgroundColor = [_board highlightedAtColumn:_column andRow:_row] ? [UIColor colorWithRed:1.0 green:1.0 blue:0 alpha:1.0] : self.backgroundColor;
+    self.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    if ([ _board highlightOwnerAtColumn:_column andRow:_row]) {
+        self.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1].CGColor;
+    }
+    
+//    if ([_board highlightedAtColumn:_column andRow:_row]) {
+//        if ((_column+_row) % 2 == 1)
+//        {
+//            self.backgroundColor = [UIColor colorWithRed:0.1 green:.1 blue:.1 alpha:1];
+//        }
+//        else
+//        {
+//            self.backgroundColor = [UIColor colorWithRed:0.3 green:0 blue:0 alpha:1];
+//        }
+//    }
     
     
 }

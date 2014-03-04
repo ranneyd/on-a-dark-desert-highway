@@ -94,6 +94,9 @@
     [_pieces replaceObjectAtColumn:6 andRow:7 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerBlack atColumn:6 andRow:7]];
     [_pieces replaceObjectAtColumn:7 andRow:7 withObject:[[DDHRook alloc]initWithPlayer:ChessPlayerBlack atColumn:7 andRow:7]];
     
+    // Nobody has highlighted anything yet. So the highlight owner should be updated accordingly
+    _locOfHighlightOwner = [[DDHTuple alloc] initWithX:_columns + 1 andY:_rows + 1];
+    
     _nextMove = ChessPlayerBlack;
 }
 
@@ -211,6 +214,12 @@
             _highlightBoard[i][j] = NO;
         }
     }
+    
+    // Set location of highlight owner to be nobody
+    [_locOfHighlightOwner setX:_columns+1];
+    [_locOfHighlightOwner setY:_rows + 1];
+    
+    // Update all squares
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
@@ -229,6 +238,7 @@
     
     NSMutableArray* highlighting = [piece highlightMovesWithBoard:self];
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
+    [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     return highlighting;
 }
 
@@ -263,6 +273,11 @@
         return [piece getPlayer] != _nextMove;
     }
     return YES;
+}
+
+-(BOOL) highlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row
+{
+    return [_locOfHighlightOwner x] == column && [_locOfHighlightOwner y] == row;
 }
 /*
 
