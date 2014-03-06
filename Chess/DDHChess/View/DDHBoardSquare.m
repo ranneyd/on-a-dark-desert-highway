@@ -235,6 +235,17 @@
     {
         // If the piece isn't highlighted, no need to display the border
         self.layer.borderColor = [UIColor clearColor].CGColor;
+        
+        // TODO: Will, is this the right way to do this? Highlighting keeps staying...  -Zakkai
+        // Set the colors of the squares of the board to unhighlighted color
+        if ((_column+_row) % 2 == 1)
+        {
+            self.backgroundColor = [UIColor blackColor];
+        }
+        else
+        {
+            self.backgroundColor = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1];
+        }
     }
     
     

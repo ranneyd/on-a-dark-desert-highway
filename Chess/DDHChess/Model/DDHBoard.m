@@ -28,8 +28,8 @@
     id<DDHBoardDelegate> _delegate;
     DDHTuple* _locOfHighlightOwner;
     
-    NSUInteger _rows;
-    NSUInteger _columns;
+    NSUInteger _rows; // Number of rows in the board
+    NSUInteger _columns; // Number of columns in the board
 }
 
 - (id) init
