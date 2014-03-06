@@ -38,6 +38,9 @@
     UIImageView* _blackBishopView;
     UIImageView* _blackQueenView;
     UIImageView* _blackKingView;
+    
+    // Question mark squares
+    UIImageView* _questionMarkView;
 }
 
 // Creation method for squares.
@@ -57,6 +60,8 @@
         [self initWhitePieceViews];
         
         [self initBlackPieceViews];
+        
+        [self initQuestionMarkView];
         
         // Set additional values for squares.
         self.layer.borderWidth = 1.0f;
@@ -162,6 +167,14 @@
     [self addSubview:_blackKingView];
 }
 
+-(void) initQuestionMarkView
+{
+    UIImage* questionMarkImage = [UIImage imageNamed: @"questionMark.png"];
+    _questionMarkView = [[UIImageView alloc] initWithImage: questionMarkImage];
+    _questionMarkView.alpha = 1.0;
+    [self addSubview:_questionMarkView];
+}
+
 
 // Method that updates the UI state.
 - (void)update
@@ -233,6 +246,7 @@
     }
     else
     {
+        self.backgroundColor = _color;
         // If the piece isn't highlighted, no need to display the border
         self.layer.borderColor = [UIColor clearColor].CGColor;
     }
