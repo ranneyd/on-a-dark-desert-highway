@@ -2,21 +2,27 @@
 //  DDHBoardSquare.m
 //  DDHChess
 //
-//  Created by Colin Eberhardt and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
+//  Created by Dustin Kane, Will Clausen, and Zakkai Davidson on 3/4/14. Adapted from code by Colin Eberhardt.
 //  Copyright (c) 2014 Dark Desert Highway Software. All rights reserved.
 //
 
 #import "DDHBoardSquare.h"
 #import "DDHBoard.h"
 
+// This class handles the UI for individual squares in our chessboard
 @implementation DDHBoardSquare
 {
+    // The location of the square on the board, i.e. row and column indices
     NSUInteger _row;
     NSUInteger _column;
+    
+    // The board on which this square lives
     DDHBoard* _board;
     
-    // Views for pieces
+    // The color of the square;
+    UIColor* _color;
     
+    // Views for pieces
     // White Pieces
     UIImageView* _whitePawnView;
     UIImageView* _whiteRookView;
@@ -34,36 +40,59 @@
     UIImageView* _blackKingView;
 }
 
+// Creation method for squares.
 - (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHBoard *)board
 {
     self = [super initWithFrame:frame];
     if (self) {
         
+        // Set data members properly given input.
         _row = row;
         _column = column;
         _board = board;
+        
+        [self setColor];
         
         // create the views for the playing piece graphics
         [self initWhitePieceViews];
         
         [self initBlackPieceViews];
         
-        self.backgroundColor = [UIColor clearColor];
-        self.layer.borderColor = [UIColor blackColor].CGColor;
+        // Set additional values for squares.
         self.layer.borderWidth = 1.0f;
+        self.layer.borderColor = [UIColor clearColor].CGColor;
         
         [self update];
     }
+    
+    // Add the square to the board.
     [_board.boardDelegate addDelegate:self];
     
-    // add a tap recognizer
-    
+    // Add a tap recognizer.
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
     [self addGestureRecognizer:tapRecognizer];
     
     return self;
 }
 
+// Method that stores the proper background color and displays it.
+-(void) setColor
+{
+    // Set the proper background color of the square based on the location on the board.
+    if ((_column+_row) % 2 == 1)
+    {
+        _color = [UIColor blackColor];
+    }
+    else
+    {
+        _color = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1];
+    }
+    
+    // Display the proper color of the square
+    self.backgroundColor = _color;
+}
+
+// Method that creates and adds the views for all of the possible white pieces to a given square.
 - (void) initWhitePieceViews
 {
     
@@ -98,6 +127,7 @@
     [self addSubview:_whiteKingView];
 }
 
+// Method that creates and adds the views for all of the possible black pieces to a given square.
 - (void) initBlackPieceViews
 {
     
@@ -133,19 +163,21 @@
 }
 
 
-// updates the UI state
+// Method that updates the UI state.
 - (void)update
 {
     // Update the image on the square
-    // Makes assumption about behaviour of pieceAt function
-    NSLog(@"ABOUT TO DIE!");
-    NSLog(@"Column is: %d and Row is: %d", _column, _row);
+    // TODO: Remove debug statements
+//    NSLog(@"ABOUT TO DIE!");
+//    NSLog(@"Column is: %d and Row is: %d", _column, _row);
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
-    NSLog(@"Piece is: %@", [piece description]);
+    // TODO: Remove debug statements
+    //NSLog(@"Piece is: %@", [piece description]);
     [self updateWhitePieceImageForPiece:piece];
     
     [self updateBlackPieceImageForPiece:piece];
     
+    // Update the highlighting of the square.
     [self updateHighlighted];
     
 }
@@ -158,8 +190,6 @@
     // we should display
     NSString* pieceDescription = [piece description];
     
-    // Go through huge conditional statements to figure out
-    // which image to display. Not the sleekest...
     _whitePawnView.alpha = [pieceDescription isEqualToString:@"WhitePawn"];
     _whiteRookView.alpha = [pieceDescription isEqualToString:@"WhiteRook"];
     _whiteKnightView.alpha = [pieceDescription isEqualToString:@"WhiteKnight"];
@@ -185,35 +215,27 @@
     _blackKingView.alpha = [pieceDescription isEqualToString:@"BlackKing"];
 }
 
-// Update the highlighted status of a square. This entails
-
+// Update the highlighted status of a square.
 - (void) updateHighlighted
 {
-    if ((_column+_row) % 2 == 1)
-    {
-        self.backgroundColor = [UIColor blackColor];
-    }
-    else
-    {
-        self.backgroundColor = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1];
-    }
+    //self.layer.borderColor = [UIColor blackColor].CGColor;
     
-    self.layer.borderColor = [UIColor blackColor].CGColor;
-    
+    // If the square has the piece the user selected, put a white border around the piece.
     if ([ _board highlightOwnerAtColumn:_column andRow:_row]) {
+        NSLog(@"Never getting here?");
         self.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1].CGColor;
     }
     
-//    if ([_board highlightedAtColumn:_column andRow:_row]) {
-//        if ((_column+_row) % 2 == 1)
-//        {
-//            self.backgroundColor = [UIColor colorWithRed:0.1 green:.1 blue:.1 alpha:1];
-//        }
-//        else
-//        {
-//            self.backgroundColor = [UIColor colorWithRed:0.3 green:0 blue:0 alpha:1];
-//        }
-//    }
+    // If the square is a place the selected piece could move, highlight it yellow with black borders.
+    if ([_board highlightedAtColumn:_column andRow:_row]) {
+        self.layer.borderColor = [UIColor blackColor].CGColor;
+        self.backgroundColor = [UIColor yellowColor];
+    }
+    else
+    {
+        // If the piece isn't highlighted, no need to display the border
+        self.layer.borderColor = [UIColor clearColor].CGColor;
+    }
     
     
 }
@@ -223,6 +245,8 @@
 // image.
 -(void) pieceChangedAtColumn:(int)column addRow:(int)row
 {
+    // Note that if the board sends the message with column and row values equal to -1,
+    // then the board wants every square to update its state.
     if ((column == _column && row == _row) || (column == -1 && row == -1))
     {
         [self update];
@@ -233,11 +257,15 @@
 // METHODS I REQUEST IN IT
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"Tapped at column: %d and row: %d", _column, _row);
+    // TODO: Remove debug statements.
+//    NSLog(@"Tapped at column: %d and row: %d", _column, _row);
+    
     // First, move to the square if it is highlighted
     if ([_board highlightedAtColumn:_column andRow:_row])
     {
-        NSLog(@"Tapped Highlighted Square!");
+        // TODO: Remove debug statements.
+//        NSLog(@"Tapped Highlighted Square!");
+        
         // Here, board takes care of figuring out which piece exactly will be moving.
         [_board makeMoveToColumn:_column andRow:_row];
     }
@@ -253,22 +281,22 @@
     // First, check if the square tapped contains a piece.
     if (![_board isEmptySquareAtColumn:_column andRow:_row])
     {
-        NSLog(@"YAY");
+        // TODO: Remove debug statements.
+//        NSLog(@"YAY");
         // Next, get the piece in the square
-        // First, get the piece.
         DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
         
         // Next, check if the piece is of the proper color
         if ([_board nextMove] == [piece getPlayer])
         {
-            NSLog(@"YUPYUP");
+            // TODO: Remove debug statements
+//            NSLog(@"YUPYUP");
+            
             // At this point, we know the user has tapped a
             // square containing a piece that is of the same
             // color as the player who is set to make the next
             // move, so highlight the squares that piece can
             // move to.
-            
-            // THIS FUNCTION DOESN'T EXIST YET, BUT IT SHOULD!
             [_board highlightMovesForPieceAtColumn:_column andRow:_row];
         }
     }
