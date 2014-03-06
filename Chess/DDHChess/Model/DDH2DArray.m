@@ -27,6 +27,11 @@
     return self;
 }
 
+-(int) count
+{
+    return [_array count];
+}
+
 // Get the object at a particular location in the 2D array
 -(id)objectAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {

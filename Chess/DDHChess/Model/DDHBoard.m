@@ -279,6 +279,43 @@
 {
     return [_locOfHighlightOwner x] == column && [_locOfHighlightOwner y] == row;
 }
+
+//-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
+//{
+//    NSInteger kingColumn = -1;
+//    NSInteger kingRow = -1;
+//    
+//    // First, we need to find the King of the player.
+//    // Let's iterate over all the pieces to find the King.
+//    for (int row = 0; row < _rows; row++) {
+//        for (int col = 0; col < _columns; col++) {
+//            DDHPiece* piece = [_pieces objectAtColumn:col andRow:row];
+//            
+//            if ([piece getPlayer] == player) {
+//                NSString* pieceDescription = [piece description];
+//                if ([pieceDescription rangeOfString:@"King"].location != NSNotFound) {
+//                    // We found the King!
+//                    // Get the location
+//                    NSInteger kingColumn = [piece x];
+//                    NSInteger kingRow = [piece y];
+//                }
+//            }
+//        }
+//    }
+//    
+//    // Iterate over all enemy pieces to determine if they are attacking the player's king.
+//    for (int row = 0; row < _rows; row++) {
+//        for (int col = 0; col < _columns; col++) {
+//            DDHPiece* piece = [_pieces objectAtColumn:col andRow:row];
+//            
+//            if ([piece getPlayer] != player) {
+//                if ([piece couldAttackAtColumn:kingColumn andRow:kingRow]) {
+//                    return YES;
+//                }
+//            }
+//        }
+//    }
+//}
 /*
 
 // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board

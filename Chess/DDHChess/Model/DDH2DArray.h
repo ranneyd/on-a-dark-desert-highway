@@ -17,6 +17,8 @@
 // Create 2D array with a certain number of columns and rows, initially filled with a set object.
 -(id)initWithColumns:(NSUInteger)columns andRow:(NSUInteger)rows andObject:(id)object;
 
+-(int) count;
+
 // Get the object at a particular location in the 2D array
 -(id)objectAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 

@@ -69,6 +69,8 @@
 
 -(BOOL) highlightOwnerAtColumn:(NSUInteger)columen andRow:(NSUInteger)row;
 
+-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
+
 //-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
 
 @end
