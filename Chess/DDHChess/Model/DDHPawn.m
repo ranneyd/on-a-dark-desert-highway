@@ -38,13 +38,6 @@
     NSInteger leftMove = column - 1 > 0 ? column - 1 : -1;
     NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : -1;
     
-    // Now, to determining moves. First things first, if the pawn is pinned, it can't move.
-    // TODO: Implement isPinned!
-//    if ([self isPinned])
-//    {
-//        return highlighting;
-//    }
-    
     // Next check for ability to move two squares forward.
     if (hasNotMoved) {
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
@@ -61,6 +54,7 @@
         
     }
     
+    // Check if the pawn can move forward.
     if ([self onBoard:board AtColumn:column andRow:verticalMove]) {
         
         // If the square in front of the pawn is empty, it can move there.
