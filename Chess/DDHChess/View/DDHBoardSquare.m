@@ -171,7 +171,7 @@
 {
     UIImage* questionMarkImage = [UIImage imageNamed: @"questionMark.png"];
     _questionMarkView = [[UIImageView alloc] initWithImage: questionMarkImage];
-    _questionMarkView.alpha = 1.0;
+    _questionMarkView.alpha = 0.0;
     [self addSubview:_questionMarkView];
 }
 
