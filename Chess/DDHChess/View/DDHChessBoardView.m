@@ -1,5 +1,5 @@
 //
-//  DDHChesssBoardView.m
+//  DDHChesssBoardView.m - Implementation of main game view
 //  DDHChess
 //
 //  Created by Dustin Kane on 2/18/14.
@@ -13,36 +13,30 @@
 
 - (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board
 {
+    // Initialize UIView and make sure it worked
     if (self = [super initWithFrame:frame])
     {
+        // Use size of frame to determine size of board squares
         float rowHeight = frame.size.height / 8.0 - 1;
         float columnWidth = frame.size.width / 8.0 - 1;
         
-        //create the 8x8 cells for this board
+        // Create the board using DDHBoardSquare objects
         for (int row = 0; row < 8; row++)
         {
             for(int col = 0; col < 8; col++)
             {
+                // Create a DDHBoardSquare at each position on the board
                 DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight) column:col row:row board:board];
                 
-                // Set the colors of the squares of the board.
-                if ((col+row) % 2 == 1)
-                {
-                    square.backgroundColor = [UIColor blackColor];
-                }
-                else
-                {
-                    square.backgroundColor = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1];
-                }
-                
+                // Make sure that we keep track of each square
                 [self addSubview:square];
             }
         }
         
+        // The DDHChessBoardView should be invisible. The square themselves have the correct colors
         self.backgroundColor = [UIColor clearColor];
     }
     return self;
 }
-
 
 @end
