@@ -63,7 +63,7 @@
 		D5B86E1B18C463B800042BD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1718C463B800042BD9 /* Default.png */; };
 		D5B86E1C18C463B800042BD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1818C463B800042BD9 /* Default@2x.png */; };
 		D5B86E1F18C463C400042BD9 /* DDHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1D18C463C400042BD9 /* DDHViewController.xib */; };
-		D5DE7A9F18C69E6D00506C67 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DE7A9E18C69E6D00506C67 /* clear.png */; };
+		D5DE7A9F18C69E6D00506C67 /* NullPiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DE7A9E18C69E6D00506C67 /* NullPiece.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,7 +154,7 @@
 		D5B86E1718C463B800042BD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D5B86E1818C463B800042BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D5B86E1E18C463C400042BD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DDHViewController.xib; sourceTree = "<group>"; };
-		D5DE7A9E18C69E6D00506C67 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear.png; path = Assets/clear.png; sourceTree = "<group>"; };
+		D5DE7A9E18C69E6D00506C67 /* NullPiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NullPiece.png; path = Assets/NullPiece.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +264,7 @@
 		D5B86DB418C4635600042BD9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D5DE7A9E18C69E6D00506C67 /* clear.png */,
+				D5DE7A9E18C69E6D00506C67 /* NullPiece.png */,
 				9357F65F18C8FE160034FF67 /* questionMark.png */,
 				9357F66018C8FE170034FF67 /* questionMark@2x.png */,
 				D5B86DB518C4636800042BD9 /* BlackBishop.png */,
@@ -424,7 +424,7 @@
 				D5B86DD718C4636800042BD9 /* BlackRook.png in Resources */,
 				D5B86DCD18C4636800042BD9 /* BlackBishop.png in Resources */,
 				D5B86DD018C4636800042BD9 /* BlackKing@2x.png in Resources */,
-				D5DE7A9F18C69E6D00506C67 /* clear.png in Resources */,
+				D5DE7A9F18C69E6D00506C67 /* NullPiece.png in Resources */,
 				D5B86DD118C4636800042BD9 /* BlackKnight.png in Resources */,
 				D5B86DD318C4636800042BD9 /* BlackPawn.png in Resources */,
 				D5B86DD518C4636800042BD9 /* BlackQueen.png in Resources */,

@@ -49,8 +49,8 @@
         self.layer.borderColor = [UIColor clearColor].CGColor;
         
         // Initialize the view with an arbitrary image that will be overwritten
-        UIImage* whitePawnImage = [UIImage imageNamed: @"WhitePawn.png"];
-        _currentImageView = [[UIImageView alloc] initWithImage: whitePawnImage];
+        UIImage* startImage = [UIImage imageNamed: @"NullPiece.png"];
+        _currentImageView = [[UIImageView alloc] initWithImage: startImage];
         [self addSubview:_currentImageView];
         
         [self update];
@@ -103,16 +103,9 @@
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
     NSString* pieceDescription = [piece description];
     
-    // If square is empty, hide the image
-    if ([pieceDescription isEqualToString:@"NullPiece"]) {
-        _currentImageView.alpha = 0.0;
-    }
-    // Otherwise, find and update to the correct image
-    else {
-        _currentImageView.alpha = 1.0;
-        UIImage* newImage = [UIImage imageNamed:[pieceDescription stringByAppendingString: @".png"]];
-        _currentImageView.image = newImage;
-    }
+    // Change to image of correct piece
+    UIImage* newImage = [UIImage imageNamed:[pieceDescription stringByAppendingString: @".png"]];
+    _currentImageView.image = newImage;
     
     // Update the highlighting of the square
     [self updateHighlighted];
@@ -179,20 +172,15 @@
     // Next highlight the proper squares based on whose turn it
     // is and which piece is tapped.
     
-    // First, check if the square tapped contains a piece.
+    // Check if the square tapped contains a piece.
     if (![_board isEmptySquareAtColumn:_column andRow:_row])
     {
-        // TODO: Remove debug statements.
-        NSLog(@"Trying to move again!!!");
         // Next, get the piece in the square
         DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
         
         // Next, check if the piece is of the proper color
         if ([_board nextMove] == [piece getPlayer])
         {
-            // TODO: Remove debug statements
-//            NSLog(@"YUPYUP");
-            
             // At this point, we know the user has tapped a
             // square containing a piece that is of the same
             // color as the player who is set to make the next
