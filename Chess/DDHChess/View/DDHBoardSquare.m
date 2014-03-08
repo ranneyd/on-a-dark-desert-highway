@@ -1,5 +1,5 @@
 //
-//  DDHBoardSquare.m
+//  DDHBoardSquare.m - Implementation of the single square view
 //  DDHChess
 //
 //  Created by Dustin Kane, Will Clausen, and Zakkai Davidson on 3/4/14. Adapted from code by Colin Eberhardt.
@@ -41,7 +41,14 @@
     
     // Question mark squares
     UIImageView* _questionMarkView;
+    
+    // Temporary image handling (under test)
+    UIImageView* _currentImage;
 }
+
+// **********************
+// ** Public Functions **
+// **********************
 
 // Creation method for squares.
 - (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHBoard *)board
@@ -67,6 +74,11 @@
         self.layer.borderWidth = 1.0f;
         self.layer.borderColor = [UIColor clearColor].CGColor;
         
+        UIImage* whitePawnImage = [UIImage imageNamed: @"WhitePawn.png"];
+        _currentImage = [[UIImageView alloc] initWithImage: whitePawnImage];
+        _currentImage.alpha = 1.0;
+        [self addSubview:_currentImage];
+        
         [self update];
     }
     
@@ -79,6 +91,10 @@
     
     return self;
 }
+
+// ***********************
+// ** Private Functions **
+// ***********************
 
 // Method that stores the proper background color and displays it.
 -(void) setColor
@@ -100,7 +116,7 @@
 // Method that creates and adds the views for all of the possible white pieces to a given square.
 - (void) initWhitePieceViews
 {
-    
+    // For each image, load the file, initialize it as a subview, and make it invisible
     UIImage* whitePawnImage = [UIImage imageNamed: @"WhitePawn.png"];
     _whitePawnView = [[UIImageView alloc] initWithImage: whitePawnImage];
     _whitePawnView.alpha = 0.0;
@@ -135,7 +151,7 @@
 // Method that creates and adds the views for all of the possible black pieces to a given square.
 - (void) initBlackPieceViews
 {
-    
+    // For each image, load the file, initialize it as a subview, and make it invisible
     UIImage* blackPawnImage = [UIImage imageNamed: @"blackPawn.png"];
     _blackPawnView = [[UIImageView alloc] initWithImage: blackPawnImage];
     _blackPawnView.alpha = 0.0;
@@ -167,6 +183,7 @@
     [self addSubview:_blackKingView];
 }
 
+// Creates the views for the question mark (random) squares
 -(void) initQuestionMarkView
 {
     UIImage* questionMarkImage = [UIImage imageNamed: @"questionMark.png"];
@@ -176,23 +193,34 @@
 }
 
 
-// Method that updates the UI state.
+// Method that updates the UIView state.
 - (void)update
 {
     // Update the image on the square
-    // TODO: Remove debug statements
-//    NSLog(@"ABOUT TO DIE!");
-//    NSLog(@"Column is: %d and Row is: %d", _column, _row);
     DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
-    // TODO: Remove debug statements
-    //NSLog(@"Piece is: %@", [piece description]);
-    [self updateWhitePieceImageForPiece:piece];
+
+//    [self updateWhitePieceImageForPiece:piece];
     
-    [self updateBlackPieceImageForPiece:piece];
+//    [self updateBlackPieceImageForPiece:piece];
+    
+//    _currentImage.alpha = 0.0;
+    
+    NSString* pieceDescription = [piece description];
+    
+    NSLog(@"Description is: %@", pieceDescription);
+    if ([pieceDescription isEqualToString:@"NullPiece"]) {
+//        UIImage* newImage = [UIImage imageNamed: @"questionMark.png"];
+//        _currentImage.image = newImage;
+        _currentImage.alpha = 0.0;
+    }
+    else {
+        _currentImage.alpha = 1.0;
+        UIImage* newImage = [UIImage imageNamed:[pieceDescription stringByAppendingString: @".png"]];
+        _currentImage.image = newImage;
+    }
     
     // Update the highlighting of the square.
     [self updateHighlighted];
-    
 }
 
 // Method that handles which white piece to display based which
@@ -231,16 +259,14 @@
 // Update the highlighted status of a square.
 - (void) updateHighlighted
 {
-    //self.layer.borderColor = [UIColor blackColor].CGColor;
     
     // If the square has the piece the user selected, put a white border around the piece.
     if ([ _board highlightOwnerAtColumn:_column andRow:_row]) {
         NSLog(@"Never getting here?");
-        self.layer.borderColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1].CGColor;
+        self.layer.borderColor = [UIColor orangeColor].CGColor;
     }
-    
     // If the square is a place the selected piece could move, highlight it yellow with black borders.
-    if ([_board highlightedAtColumn:_column andRow:_row]) {
+    else if ([_board highlightedAtColumn:_column andRow:_row]) {
         self.layer.borderColor = [UIColor blackColor].CGColor;
         self.backgroundColor = [UIColor yellowColor];
     }
@@ -267,8 +293,7 @@
     }
 }
 
-// YOYOYO DUSTIN YOU SHOULD READ THIS SO YOU CAN MAKE THE
-// METHODS I REQUEST IN IT
+// Handles user input based on the state of the board
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
     // TODO: Remove debug statements.
