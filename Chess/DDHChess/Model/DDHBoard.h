@@ -32,6 +32,10 @@
 // ** Public Functions **
 // **********************
 
+// ********************
+// ** Initialization **
+// ********************
+
 // Initialize a board
 -(id) init;
 
@@ -41,18 +45,27 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
-// Returns pointer to piece at location
--(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
-
 // Changes whose turn it is
 -(void) invertState;
 
-// Getters for private data
+
+// ***************************
+// ** Getters (and Setters) **
+// ***************************
+
+// Returns the number of columns
 -(NSUInteger) getColumns;
+
+// Returns the number of rows
 -(NSUInteger) getRows;
 
 
+// ************************************
+// ** Piece Interaction and Movement **
+// ************************************
 
+// Returns pointer to piece at location
+-(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
 
 // Puts the piece on the piece stack and in the piece array
 // ASSUMES: piece object already has correct coordinates as its x and y and belongs to the board.
@@ -61,28 +74,40 @@
 // Returns true if square has no piece in it. Shocking, I know
 -(BOOL) isEmptySquareAtColumn:(NSInteger) column andRow:(NSInteger) row;
 
+-(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
+-(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
+
+
+// ***************************
+// ** Additional Game Logic **
+// ***************************
+
+-(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player;
+
+-(BOOL) isHighlightOwnerAtColumn:(NSUInteger)columen andRow:(NSUInteger)row;
+
+// TODO
+ -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
+
+// TODO
+//-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
+
+
+// *************************
+// ** UI Helper Functions **
+// *************************
+
 -(BOOL) highlightedAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
 -(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
 -(void) clearHighlighting;
 
--(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row;
-
 -(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row;
-
--(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
-
 
 
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
--(BOOL) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongingToPlayer:(ChessPlayer)player;
-
--(BOOL) highlightOwnerAtColumn:(NSUInteger)columen andRow:(NSUInteger)row;
-
--(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
-
-//-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
 
 @end

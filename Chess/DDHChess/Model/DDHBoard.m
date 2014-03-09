@@ -32,6 +32,10 @@
     NSUInteger _columns; // Number of columns in the board
 }
 
+// ********************
+// ** Initialization **
+// ********************
+
 - (id) init
 {
     if (self = [super init]){
@@ -119,13 +123,10 @@
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
--(void)invertState
-{
-    if ([self nextMove] == ChessPlayerBlack)
-        self.nextMove = ChessPlayerWhite;
-    else
-        self.nextMove = ChessPlayerBlack;
-}
+
+// ***************************
+// ** Getters (and Setters) **
+// ***************************
 
 -(NSUInteger) getColumns
 {
@@ -136,6 +137,12 @@
 {
     return _rows;
 }
+
+
+// ************************************
+// ** Piece Interaction and Movement **
+// ************************************
+
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
@@ -157,9 +164,15 @@
     return [pieceDescription isEqualToString:@"NullPiece"];
 }
 
--(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
+-(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
-    return _highlightBoard[column][row] == YES;
+    [self moveHighlightOwnerToColumn:column andRow:row];
+}
+
+-(void) moveHighlightOwnerToColumn:(NSUInteger)columnn andRow:(NSUInteger)row
+{
+    NSLog(@"Moving piece at column: %d and row: %d", [_locOfHighlightOwner x], [_locOfHighlightOwner y]);
+    [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
 }
 
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
@@ -187,17 +200,121 @@
     [self invertState];
 }
 
--(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row
+
+// ***************************
+// ** Additional Game Logic **
+// ***************************
+
+-(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player
 {
-    if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
-        [_delegate pieceChangedAtColumn:column addRow:row];
+    [self checkBoundsForColumn:column andRow:row];
+    
+    if (![self isEmptySquareAtColumn:column andRow:row]) {
+        DDHPiece* piece = [self pieceAtColumn:column andRow:row];
+        return [piece getPlayer] != _nextMove;
+    }
+    return YES;
+}
+
+-(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row
+{
+    return [_locOfHighlightOwner x] == column && [_locOfHighlightOwner y] == row;
 }
 
 
--(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row
+//-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
+//{
+//    NSInteger kingColumn = -1;
+//    NSInteger kingRow = -1;
+//
+//    // First, we need to find the King of the player.
+//    // Let's iterate over all the pieces to find the King.
+//    for (int row = 0; row < _rows; row++) {
+//        for (int col = 0; col < _columns; col++) {
+//            DDHPiece* piece = [_pieces objectAtColumn:col andRow:row];
+//
+//            if ([piece getPlayer] == player) {
+//                NSString* pieceDescription = [piece description];
+//                if ([pieceDescription rangeOfString:@"King"].location != NSNotFound) {
+//                    // We found the King!
+//                    // Get the location
+//                    NSInteger kingColumn = [piece x];
+//                    NSInteger kingRow = [piece y];
+//                }
+//            }
+//        }
+//    }
+//
+//    // Iterate over all enemy pieces to determine if they are attacking the player's king.
+//    for (int row = 0; row < _rows; row++) {
+//        for (int col = 0; col < _columns; col++) {
+//            DDHPiece* piece = [_pieces objectAtColumn:col andRow:row];
+//
+//            if ([piece getPlayer] != player) {
+//                if ([piece couldAttackAtColumn:kingColumn andRow:kingRow]) {
+//                    return YES;
+//                }
+//            }
+//        }
+//    }
+//}
+/*
+ 
+ // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
+ // with their moves and if, after all the pieces are through, the given spot is highlighted, the king can't move there
+ // ie can't move into check.
+ -(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn:(NSInteger)column andRow:(NSInteger) row
+ {
+ // I sincerely wish pointers in objective C weren't so stupid
+ 
+ // We're going to store the current state of the highlighted board here.
+ NSUInteger oldHighlighting[8][8];
+ 
+ // Iterate over the highlighted board and save it into the temporary save location
+ for(int i = 0; i < 8; i++)
+ for(int j = 0; j < 8; j++)
+ oldHighlighting[i][j] = _highlightBoard[i][j];
+ 
+ // Clear the highlighting
+ [self clearHighlighting];
+ // If we find that our spot is hit, we set this to NO
+ BOOL result = YES;
+ 
+ // Iterate over all pieces
+ for(DDHPiece* piece in _pieceList){
+ // _pieceList has nils in it to preserve indices after piece deletion. We have to avoid those and
+ // we don't want to consider moves from our own pieces.
+ if(piece != nil && [piece getPlayer] != player){
+ // Highlight possible moves
+ [piece highlightMoves];
+ // If the square we're looking at is highlighted, we'll return NO later and break the loop now
+ 
+ // Putting here and not outside the loop for performance. Don't want to go through every piece if
+ // The first piece can hit that spot.
+ if ([self highlightedAtColumn:column andRow:row]){
+ result = NO;
+ break;
+ }
+ }
+ }
+ 
+ // Set the highlight board back to its original state.
+ for(int i = 0; i < 8; i++)
+ for(int j = 0; j < 8; j++)
+ _highlightBoard[i][j] = oldHighlighting[i][j];
+ return result;
+ }
+ 
+ */
+
+
+// *************************
+// ** UI Helper Functions **
+// *************************
+
+-(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    if (column < 0 || column >= _columns || row < 0 || row >= _rows)
-        [NSException raise:NSRangeException format:@"row or column out of bounds"];
+    return _highlightBoard[column][row] == YES;
 }
 
 -(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
@@ -223,11 +340,6 @@
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
--(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row
-{
-    [self moveHighlightOwnerToColumn:column andRow:row];
-}
-
 
 -(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row
 {
@@ -242,18 +354,12 @@
     return highlighting;
 }
 
--(void) moveHighlightOwnerToColumn:(NSUInteger)columnn andRow:(NSUInteger)row
-{
-    NSLog(@"Moving piece at column: %d and row: %d", [_locOfHighlightOwner x], [_locOfHighlightOwner y]);
-    [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
-}
-
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     NSMutableArray* allHighlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
     NSMutableArray* properHighlighting = [[NSMutableArray alloc] init];
     for (DDHTuple *location in allHighlighting){
-        if ([self pieceAtColumn:[location x] andRow:[location y] notBelongingToPlayer:_nextMove]) {
+        if ([self doesPieceAtColumn:[location x] andRow:[location y] notBelongToPlayer:_nextMove]) {
             [properHighlighting addObject:location];
         }
     }
@@ -264,105 +370,30 @@
     }
 }
 
--(BOOL) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongingToPlayer:(ChessPlayer)player
+
+
+
+
+
+-(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row
 {
-    [self checkBoundsForColumn:column andRow:row];
-    
-    if (![self isEmptySquareAtColumn:column andRow:row]) {
-        DDHPiece* piece = [self pieceAtColumn:column andRow:row];
-        return [piece getPlayer] != _nextMove;
-    }
-    return YES;
+    if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
+        [_delegate pieceChangedAtColumn:column addRow:row];
 }
 
--(BOOL) highlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row
+-(void)invertState
 {
-    return [_locOfHighlightOwner x] == column && [_locOfHighlightOwner y] == row;
+    if ([self nextMove] == ChessPlayerBlack)
+        self.nextMove = ChessPlayerWhite;
+    else
+        self.nextMove = ChessPlayerBlack;
 }
 
-//-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
-//{
-//    NSInteger kingColumn = -1;
-//    NSInteger kingRow = -1;
-//    
-//    // First, we need to find the King of the player.
-//    // Let's iterate over all the pieces to find the King.
-//    for (int row = 0; row < _rows; row++) {
-//        for (int col = 0; col < _columns; col++) {
-//            DDHPiece* piece = [_pieces objectAtColumn:col andRow:row];
-//            
-//            if ([piece getPlayer] == player) {
-//                NSString* pieceDescription = [piece description];
-//                if ([pieceDescription rangeOfString:@"King"].location != NSNotFound) {
-//                    // We found the King!
-//                    // Get the location
-//                    NSInteger kingColumn = [piece x];
-//                    NSInteger kingRow = [piece y];
-//                }
-//            }
-//        }
-//    }
-//    
-//    // Iterate over all enemy pieces to determine if they are attacking the player's king.
-//    for (int row = 0; row < _rows; row++) {
-//        for (int col = 0; col < _columns; col++) {
-//            DDHPiece* piece = [_pieces objectAtColumn:col andRow:row];
-//            
-//            if ([piece getPlayer] != player) {
-//                if ([piece couldAttackAtColumn:kingColumn andRow:kingRow]) {
-//                    return YES;
-//                }
-//            }
-//        }
-//    }
-//}
-/*
-
-// Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
-// with their moves and if, after all the pieces are through, the given spot is highlighted, the king can't move there
-// ie can't move into check.
--(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn:(NSInteger)column andRow:(NSInteger) row
+-(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row
 {
-    // I sincerely wish pointers in objective C weren't so stupid
-    
-    // We're going to store the current state of the highlighted board here.
-    NSUInteger oldHighlighting[8][8];
-    
-    // Iterate over the highlighted board and save it into the temporary save location
-    for(int i = 0; i < 8; i++)
-        for(int j = 0; j < 8; j++)
-            oldHighlighting[i][j] = _highlightBoard[i][j];
-    
-    // Clear the highlighting
-    [self clearHighlighting];
-    // If we find that our spot is hit, we set this to NO
-    BOOL result = YES;
-    
-    // Iterate over all pieces
-    for(DDHPiece* piece in _pieceList){
-        // _pieceList has nils in it to preserve indices after piece deletion. We have to avoid those and
-        // we don't want to consider moves from our own pieces.
-        if(piece != nil && [piece getPlayer] != player){
-            // Highlight possible moves
-            [piece highlightMoves];
-            // If the square we're looking at is highlighted, we'll return NO later and break the loop now
-            
-            // Putting here and not outside the loop for performance. Don't want to go through every piece if
-            // The first piece can hit that spot.
-            if ([self highlightedAtColumn:column andRow:row]){
-                result = NO;
-                break;
-            }
-        }
-    }
-   
-    // Set the highlight board back to its original state.
-    for(int i = 0; i < 8; i++)
-        for(int j = 0; j < 8; j++)
-            _highlightBoard[i][j] = oldHighlighting[i][j];
-    return result;
+    if (column < 0 || column >= _columns || row < 0 || row >= _rows)
+        [NSException raise:NSRangeException format:@"row or column out of bounds"];
 }
- 
- */
+
 
 @end

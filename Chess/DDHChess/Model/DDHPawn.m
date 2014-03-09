@@ -66,7 +66,7 @@
     // Check if we can attack other pieces to the left.
     if ([self onBoard:board AtColumn:leftMove andRow:verticalMove]) {
         if (![board isEmptySquareAtColumn:leftMove andRow:verticalMove]) {
-            if ([board pieceAtColumn:leftMove andRow:verticalMove notBelongingToPlayer:[self getPlayer]]) {
+            if ([board doesPieceAtColumn:leftMove andRow:verticalMove notBelongToPlayer:[self getPlayer]]) {
                 [highlighting addObject:[[DDHTuple alloc] initWithX:leftMove andY:verticalMove]];
             }
         }
@@ -75,7 +75,7 @@
     // Check if the pawn can attack other pieces to the right.
     if ([self onBoard:board AtColumn:rightMove andRow:verticalMove]) {
         if (![board isEmptySquareAtColumn:rightMove andRow:verticalMove]) {
-            if ([board pieceAtColumn:rightMove andRow:verticalMove notBelongingToPlayer:[self getPlayer]]) {
+            if ([board doesPieceAtColumn:rightMove andRow:verticalMove notBelongToPlayer:[self getPlayer]]) {
                 [highlighting addObject:[[DDHTuple alloc] initWithX:rightMove andY:verticalMove]];
             }
         }
