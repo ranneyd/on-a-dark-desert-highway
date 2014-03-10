@@ -115,7 +115,7 @@
 - (void) updateHighlighted
 {
     // If the square has the piece the user selected, put a white border around the piece.
-    if ([ _board highlightOwnerAtColumn:_column andRow:_row]) {
+    if ([ _board isHighlightOwnerAtColumn:_column andRow:_row]) {
         self.layer.borderColor = [UIColor orangeColor].CGColor;
     }
     // If the square is a place the selected piece could move, highlight it yellow with black borders.
