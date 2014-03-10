@@ -3,8 +3,8 @@
 //  DDHChess
 //
 //  Contains the current state of the board. Also handles game logic,
-//  communication with pieces, and communication with views (which
-//  should probably be moved into a controller if time allows).
+//  communication with pieces, and communication with views through
+//  a delegate.
 //
 //  Created by Colin Eberhardt and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
 //  Copyright (c) 2014 Dark Desert Highway Software. All rights reserved.

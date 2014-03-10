@@ -1,5 +1,5 @@
 //
-//  DDHBoard.m
+//  DDHBoard.m - Implementation of the main board class
 //  DDHChess
 //
 //  Created by Colin Eberhardt and modified by Dustin Kane, Will Clausen and Zakkai Davidson on 2/15/14.
