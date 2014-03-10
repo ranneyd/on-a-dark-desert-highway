@@ -27,11 +27,13 @@
     // To be overridden
     return NULL;
 }
+
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
     [self setX:column];
     [self setY:row];
 }
+
 -(ChessPlayer)getPlayer
 {
     return _owner;
