@@ -64,10 +64,6 @@
 // Returns pointer to piece at location
 -(id) pieceAtColumn: (NSInteger) column andRow:(NSInteger)row;
 
-// Puts the piece on the piece stack and in the piece array
-// ASSUMES: piece object already has correct coordinates as its x and y and belongs to the board.
--(void) putPiece:(id) piece inColumn:(NSInteger) column andRow:(NSInteger) row;
-
 // Returns true if square has no piece in it. Shocking, I know
 -(BOOL) isEmptySquareAtColumn:(NSInteger) column andRow:(NSInteger) row;
 

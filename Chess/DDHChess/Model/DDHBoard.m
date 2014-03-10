@@ -201,13 +201,6 @@
     return [_pieces objectAtColumn:column andRow:row];
 }
 
--(void) putPiece:(DDHPiece *)piece inColumn:(NSInteger)column andRow:(NSInteger)row
-{
-    [self checkBoundsForColumn:column andRow:row];
-    [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    [self informDelegateOfPieceChangedAtColumn:column andRow:row];
-}
-
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     DDHPiece* piece = [_pieces objectAtColumn:column andRow:row];
