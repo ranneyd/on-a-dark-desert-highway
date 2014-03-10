@@ -27,10 +27,26 @@
 // ** Piece Interaction and Movement **
 // ************************************
 
+-(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
+
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
 
+// ***************************
+// ** Additional Game Logic **
+// ***************************
 
+// Changes whose turn it is
+-(void) invertState;
+
+// *************************
+// ** UI Helper Functions **
+// *************************
+
+-(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row;
+
+// Highlight the given location, using a delegate to tell the views
+-(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
 -(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row;
 
@@ -195,6 +211,7 @@
     [self moveHighlightOwnerToColumn:column andRow:row];
 }
 
+// PRIVATE
 -(void) moveHighlightOwnerToColumn:(NSUInteger)columnn andRow:(NSUInteger)row
 {
     NSLog(@"Moving piece at column: %d and row: %d", [_locOfHighlightOwner x], [_locOfHighlightOwner y]);
@@ -348,10 +365,6 @@
     return _highlightBoard[column][row] == YES;
 }
 
--(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
-{
-    _highlightBoard[column][row] = YES;
-}
 
 -(void) clearHighlighting
 {
@@ -371,20 +384,6 @@
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
-
--(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row
-{
-    DDHPiece* piece = [self pieceAtColumn:column andRow:row];
-    NSString* pieceDescription = [piece description];
-    if ([pieceDescription isEqualToString:@"NullPiece"])
-        return [[NSMutableArray alloc] init];
-    
-    NSMutableArray* highlighting = [piece highlightMovesWithBoard:self];
-    _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
-    [self informDelegateOfPieceChangedAtColumn:column andRow:row];
-    return highlighting;
-}
-
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     NSMutableArray* allHighlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
@@ -399,6 +398,26 @@
         [self highlightAtColumn:[location x] andRow: [location y]];
         [self informDelegateOfPieceChangedAtColumn:[location x] andRow:[location y]];
     }
+}
+
+// PRIVATE
+-(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row
+{
+    DDHPiece* piece = [self pieceAtColumn:column andRow:row];
+    NSString* pieceDescription = [piece description];
+    if ([pieceDescription isEqualToString:@"NullPiece"])
+        return [[NSMutableArray alloc] init];
+    
+    NSMutableArray* highlighting = [piece highlightMovesWithBoard:self];
+    _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
+    [self informDelegateOfPieceChangedAtColumn:column andRow:row];
+    return highlighting;
+}
+
+// PRIVATE
+-(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
+{
+    _highlightBoard[column][row] = YES;
 }
 
 // PRIVATE

@@ -71,21 +71,19 @@
 // Returns true if square has no piece in it. Shocking, I know
 -(BOOL) isEmptySquareAtColumn:(NSInteger) column andRow:(NSInteger) row;
 
+// Moves the currently selected piece to the given column and row
 -(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row;
-
--(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
 
 
 // ***************************
 // ** Additional Game Logic **
 // ***************************
 
+// Checks if the piece at a location does not belong to player
 -(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player;
 
--(BOOL) isHighlightOwnerAtColumn:(NSUInteger)columen andRow:(NSUInteger)row;
-
-// Changes whose turn it is
--(void) invertState;
+// Checks if the selected piece is at the given row and column
+-(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
 // TODO
  -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
@@ -98,15 +96,14 @@
 // ** UI Helper Functions **
 // *************************
 
+// Checks if the location should be/is highlighted
 -(BOOL) highlightedAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
--(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row;
-
+// Clears all highlighting on the board
 -(void) clearHighlighting;
 
--(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row;
-
-
+// Highlight
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
+
 
 @end
