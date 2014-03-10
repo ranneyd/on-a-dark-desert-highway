@@ -73,10 +73,10 @@
     DDH2DArray* _pieces; // Contains the location of pieces in the board
     id<DDHBoardDelegate> _delegate; // To communicate with the views to update UI
     DDHTuple* _locOfHighlightOwner; // Keeps track of location of selected piece
-    
-    // CHANGE FOR DYNAMICALLY SIZED BOARD
     NSUInteger _rows; // Number of rows in the board
     NSUInteger _columns; // Number of columns in the board
+    
+    // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
     BOOL _highlightBoard[8][8]; // Which parts of the board are currently highlighted
 }
 
@@ -107,8 +107,56 @@
 
 -(void) setToInitialState
 {
-    // clear le board
+    // Clear le board
     [self clearBoard];
+    
+    // Create a list of tuples that correspond to the initial piece layout. Change for custom layout
+    NSArray *whitePositions = [NSArray arrayWithObjects:
+                               [[DDHTuple alloc] initWithX:0 andY:0], [[DDHTuple alloc] initWithX:1 andY:0],
+                               [[DDHTuple alloc] initWithX:2 andY:0], [[DDHTuple alloc] initWithX:3 andY:0],
+                               [[DDHTuple alloc] initWithX:4 andY:0], [[DDHTuple alloc] initWithX:5 andY:0],
+                               [[DDHTuple alloc] initWithX:6 andY:0], [[DDHTuple alloc] initWithX:7 andY:0],
+                               [[DDHTuple alloc] initWithX:0 andY:1], [[DDHTuple alloc] initWithX:1 andY:1],
+                               [[DDHTuple alloc] initWithX:2 andY:1], [[DDHTuple alloc] initWithX:3 andY:1],
+                               [[DDHTuple alloc] initWithX:4 andY:1], [[DDHTuple alloc] initWithX:5 andY:1],
+                               [[DDHTuple alloc] initWithX:6 andY:1], [[DDHTuple alloc] initWithX:7 andY:1],nil];
+    NSArray *whitePieces = [NSArray arrayWithObjects:
+                            [DDHRook   class], [DDHKnight class],
+                            [DDHBishop class], [DDHQueen  class],
+                            [DDHKing   class], [DDHBishop class],
+                            [DDHKnight class], [DDHRook   class],
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHPawn class], [DDHPawn class],nil];
+//    NSDictionary *whiteDict = [NSDictionary dictionaryWithObjects:whitePieces forKeys:whitePositions];
+    NSArray *blackPositions = [NSArray arrayWithObjects:
+                               [[DDHTuple alloc] initWithX:0 andY:6], [[DDHTuple alloc] initWithX:1 andY:6],
+                               [[DDHTuple alloc] initWithX:2 andY:6], [[DDHTuple alloc] initWithX:3 andY:6],
+                               [[DDHTuple alloc] initWithX:4 andY:6], [[DDHTuple alloc] initWithX:5 andY:6],
+                               [[DDHTuple alloc] initWithX:6 andY:6], [[DDHTuple alloc] initWithX:7 andY:6],
+                               [[DDHTuple alloc] initWithX:0 andY:7], [[DDHTuple alloc] initWithX:1 andY:7],
+                               [[DDHTuple alloc] initWithX:2 andY:7], [[DDHTuple alloc] initWithX:3 andY:7],
+                               [[DDHTuple alloc] initWithX:4 andY:7], [[DDHTuple alloc] initWithX:5 andY:7],
+                               [[DDHTuple alloc] initWithX:6 andY:7], [[DDHTuple alloc] initWithX:7 andY:7],nil];
+    NSArray *blackPieces = [NSArray arrayWithObjects:
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHPawn class], [DDHPawn class],
+                            [DDHRook   class], [DDHKnight class],
+                            [DDHBishop class], [DDHQueen  class],
+                            [DDHKing   class], [DDHBishop class],
+                            [DDHKnight class], [DDHRook   class],nil];
+//    NSDictionary *blackDict = [NSDictionary dictionaryWithObjects:blackPieces forKeys:blackPositions];
+//
+//    // Loop through all positions and place the correct pieces
+//    for (DDHTuple *pos in whiteDict) {
+//        NSInteger x = [pos x];
+//        NSInteger y = [pos y];
+//        [_pieces replaceObjectAtColumn:x andRow:y withObject:
+//                [[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:x andRow:y]];
+//    }
     
     // Place the white pieces
     [_pieces replaceObjectAtColumn:0 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:0 andRow:1]];
@@ -158,7 +206,7 @@
 
 -(void) clearBoard
 {
-    // Someone figure out if this takes advantage of spacial locality
+    // Someone figure out if this takes advantage of spacial locality (?????)
     
     // Clear all highlighted squares
     [self clearHighlighting];
@@ -197,6 +245,7 @@
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
+    // Verify piece is inbounds and return it
     [self checkBoundsForColumn:column andRow:row];
     return [_pieces objectAtColumn:column andRow:row];
 }
