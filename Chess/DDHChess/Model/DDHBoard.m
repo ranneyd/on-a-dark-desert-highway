@@ -70,17 +70,14 @@
 
 @implementation DDHBoard
 {
+    DDH2DArray* _pieces; // Contains the location of pieces in the board
+    id<DDHBoardDelegate> _delegate; // To communicate with the views to update UI
+    DDHTuple* _locOfHighlightOwner; // Keeps track of location of selected piece
+    
     // CHANGE FOR DYNAMICALLY SIZED BOARD
-    
-    // 2D array representing which pieces are in each board location.
-    DDH2DArray* _pieces;
-    // 2D array representing which parts of the board are currently highlighted
-    BOOL _highlightBoard[8][8];
-    id<DDHBoardDelegate> _delegate;
-    DDHTuple* _locOfHighlightOwner;
-    
     NSUInteger _rows; // Number of rows in the board
     NSUInteger _columns; // Number of columns in the board
+    BOOL _highlightBoard[8][8]; // Which parts of the board are currently highlighted
 }
 
 // ********************
@@ -98,7 +95,10 @@
         // to be completely empty).
         _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns andObject:[[DDHNullPiece alloc] init]];
         
+        // Initialized the empty board
         [self clearBoard];
+        
+        // Create the delegate to communicate with the views
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
     }
@@ -108,7 +108,6 @@
 -(void) setToInitialState
 {
     // clear le board
-    
     [self clearBoard];
     
     // Place the white pieces
@@ -149,9 +148,10 @@
     [_pieces replaceObjectAtColumn:6 andRow:7 withObject:[[DDHKnight alloc]initWithPlayer:ChessPlayerBlack atColumn:6 andRow:7]];
     [_pieces replaceObjectAtColumn:7 andRow:7 withObject:[[DDHRook alloc]initWithPlayer:ChessPlayerBlack atColumn:7 andRow:7]];
     
-    // Nobody has highlighted anything yet. So the highlight owner should be updated accordingly
+    // Nobody has highlighted anything yet, so make it out of bounds
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:_columns + 1 andY:_rows + 1];
     
+    // Set who gets to move first
     _nextMove = ChessPlayerBlack;
 }
 
