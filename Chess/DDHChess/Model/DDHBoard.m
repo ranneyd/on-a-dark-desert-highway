@@ -27,9 +27,6 @@
 // ** Piece Interaction and Movement **
 // ************************************
 
-// Helper function to move the selected piece
--(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
-
 // Move a piece from an old postion to a new one
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
@@ -40,6 +37,7 @@
 
 // Changes whose turn it is
 -(void) invertState;
+
 
 // *************************
 // ** UI Helper Functions **
@@ -53,6 +51,7 @@
 
 // Tell the delegate that the views should be updated
 -(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row;
+
 
 // ******************************
 // ** General Helper Functions **
@@ -245,36 +244,31 @@
 
 - (DDHPiece*) pieceAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    // Verify piece is inbounds and return it
+    // Verify piece is inbounds and if so return it
     [self checkBoundsForColumn:column andRow:row];
     return [_pieces objectAtColumn:column andRow:row];
 }
 
 -(BOOL) isEmptySquareAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    DDHPiece* piece = [_pieces objectAtColumn:column andRow:row];
+    // If the piece we find is null, then the square is empty
+    DDHPiece* piece = [self pieceAtColumn:column andRow:row];
     NSString* pieceDescription = [piece description];
     return [pieceDescription isEqualToString:@"NullPiece"];
 }
 
 -(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
-    [self moveHighlightOwnerToColumn:column andRow:row];
-}
+    // Move the selected piece with private function
+    [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:column andRow:row];
 
-// PRIVATE
--(void) moveHighlightOwnerToColumn:(NSUInteger)columnn andRow:(NSUInteger)row
-{
-    NSLog(@"Moving piece at column: %d and row: %d", [_locOfHighlightOwner x], [_locOfHighlightOwner y]);
-    [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
 }
 
 // PRIVATE
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
 {
     // Get the piece from _pieces
-    DDHPiece* piece = [_pieces objectAtColumn:oldColumn andRow:oldRow];
-    // Get old position of the piece
+    DDHPiece* piece = [self pieceAtColumn:oldColumn andRow:oldRow];
     
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
@@ -288,10 +282,11 @@
     // Clear the highlighting
     [self clearHighlighting];
     
+    // Tell the correct views to update
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
-    
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
+    // Switch turns
     [self invertState];
 }
 
@@ -302,22 +297,24 @@
 
 -(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player
 {
-    [self checkBoundsForColumn:column andRow:row];
-    
+    // If there's a piece in the spot, check who's it is
     if (![self isEmptySquareAtColumn:column andRow:row]) {
         DDHPiece* piece = [self pieceAtColumn:column andRow:row];
         return [piece getPlayer] != _nextMove;
     }
+    // If it's empty, then it doesn't belong to the player
     return YES;
 }
 
 -(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
+    // Veryfy that highlighted piece is at the given row and column
     return [_locOfHighlightOwner x] == column && [_locOfHighlightOwner y] == row;
 }
 
 -(void)invertState
 {
+    // If white just moved, then black is next, and vice versa
     if ([self nextMove] == ChessPlayerBlack)
         self.nextMove = ChessPlayerWhite;
     else
@@ -417,12 +414,14 @@
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
+    // Check to see if the location should be/is highlighted
     return _highlightBoard[column][row] == YES;
 }
 
 
 -(void) clearHighlighting
 {
+    // Loop through all positions and remove highlighting
     for(int i = 0; i < _rows; i++)
     {
         for(int j = 0; j < _columns; j++)
@@ -441,14 +440,18 @@
 
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
+    // Get all possible moves that a piece can make
     NSMutableArray* allHighlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
+    // Create a way to keep track of what spaces a piece can actually move to (i.e. not taking it's own color piece)
     NSMutableArray* properHighlighting = [[NSMutableArray alloc] init];
+    
+    // Filter out all moves that would land on a piece of the same color
     for (DDHTuple *location in allHighlighting){
         if ([self doesPieceAtColumn:[location x] andRow:[location y] notBelongToPlayer:_nextMove]) {
             [properHighlighting addObject:location];
         }
     }
-    
+    // Highlight each space and tell the views to update
     for (DDHTuple *location in properHighlighting){
         [self highlightAtColumn:[location x] andRow: [location y]];
         [self informDelegateOfPieceChangedAtColumn:[location x] andRow:[location y]];
@@ -458,13 +461,18 @@
 // PRIVATE
 -(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row
 {
+    // Find the piece at the given location
     DDHPiece* piece = [self pieceAtColumn:column andRow:row];
+    // If the space was empty, it can't move anywhere
     NSString* pieceDescription = [piece description];
     if ([pieceDescription isEqualToString:@"NullPiece"])
         return [[NSMutableArray alloc] init];
     
+    // Get the moves the piece can make
     NSMutableArray* highlighting = [piece highlightMovesWithBoard:self];
+    // Mark that piece as selected
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
+    // Update the UI to show the selection
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     return highlighting;
 }
@@ -478,6 +486,7 @@
 // PRIVATE
 -(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row
 {
+    // Check if the delegate knows how to respond, and then tell it that a change was made
     if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
         [_delegate pieceChangedAtColumn:column addRow:row];
 }
@@ -490,6 +499,7 @@
 // PRIVATE
 -(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row
 {
+    // Make sure that the col and row are valid (i.e. actually on the board)
     if (column < 0 || column >= _columns || row < 0 || row >= _rows)
         [NSException raise:NSRangeException format:@"row or column out of bounds"];
 }
