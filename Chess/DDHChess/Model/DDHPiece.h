@@ -20,6 +20,8 @@
 
 -(id) initWithPlayer: (ChessPlayer) player atColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+-(BOOL) couldAttackAtColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board;
+
 // Sets the highlighted array of the board to the places that are moveable by this piece
 -(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board;
 
@@ -31,6 +33,8 @@
 -(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 
 -(BOOL**) blankHighlightingForBoard:(DDHBoard*) board;
+
+-(BOOL) kingInCheckAfterMovingToColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board;
 
 -(NSString*) description;
 

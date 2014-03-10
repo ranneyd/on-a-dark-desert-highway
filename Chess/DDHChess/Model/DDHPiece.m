@@ -22,6 +22,32 @@
     return self;
 }
 
+-(NSMutableArray*) attackablePositionsOnBoard:(DDHBoard*)board
+{
+    // To be overridden
+    return NULL;
+}
+
+// Method that returns true if the piece could attack at the given column on the given board.
+// Considers all possible moves by the piece, regardless of whether the piece is pinned.
+-(BOOL) couldAttackAtColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board
+{
+    NSMutableArray* attackablePositions = [self attackablePositionsOnBoard:board];
+    
+    // TODO: If we had some sort of way to sort the elements in attackablePositions we could
+    // make this faster via binary search.
+    for (DDHTuple* position in attackablePositions) {
+        // If the location given by the function call is attackable
+        if ([position x] == column && [position y] == row) {
+            // Return true
+            return YES;
+        }
+    }
+    
+    // Otherwise, return false.
+    return NO;
+}
+
 -(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
 {
     // To be overridden
@@ -67,17 +93,26 @@
     NSInteger oldColumn = [self x];
     NSInteger oldRow = [self y];
     
+    // Check if the move is valid
+    if (![self onBoard:board AtColumn:column andRow:row]) {
+        return NO;
+    }
+    
     // Find out if King is in check after moving by moving the piece and checking if
     // the King is in check.
     [self moveToColumn:column andRow:row];
+    [board makeMoveToColumn:column andRow:row];
     if ([board kingInCheckBelongingTo:[self getPlayer]])
     {
         // The move puts the King in check, so undo the move and return YES
         [self moveToColumn:oldColumn andRow:oldRow];
+        [board makeMoveToColumn:oldColumn andRow:oldRow];
         return YES;
     }
     
-    // Otherwise, the king is not in check, so return NO
+    // Otherwise, the king is not in check, so move the piece back and return NO
+    [self moveToColumn:oldColumn andRow:oldRow];
+    [board makeMoveToColumn:oldColumn andRow:oldRow];
     return NO;
 }
 
