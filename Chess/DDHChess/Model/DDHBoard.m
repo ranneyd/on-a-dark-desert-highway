@@ -27,8 +27,10 @@
 // ** Piece Interaction and Movement **
 // ************************************
 
+// Helper function to move the selected piece
 -(void) moveHighlightOwnerToColumn:(NSUInteger) columnn andRow:(NSUInteger) row;
 
+// Move a piece from an old postion to a new one
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
 
@@ -43,20 +45,27 @@
 // ** UI Helper Functions **
 // *************************
 
+// Highlight possible movements for a piece, using a delegate to inform the views
 -(NSMutableArray*) getHighlightedSquaresFromPieceAtColumn: (NSUInteger) column andRow:(NSUInteger) row;
 
-// Highlight the given location, using a delegate to tell the views
+// Change the state of a position in the private highlighted array
 -(void) highlightAtColumn: (NSInteger) column andRow:(NSInteger) row;
 
+// Tell the delegate that the views should be updated
 -(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row;
 
 // ******************************
 // ** General Helper Functions **
 // ******************************
 
+// Verify that a given location is in bounds
 -(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row;
 
 @end
+
+// ###########################
+// END OF PRIVATE DECLARATIONS
+// ###########################
 
 
 @implementation DDHBoard
@@ -166,9 +175,9 @@
 }
 
 
-// ***************************
-// ** Getters (and Setters) **
-// ***************************
+// *************
+// ** Getters **
+// *************
 
 -(NSUInteger) getColumns
 {
@@ -359,6 +368,10 @@
  
  */
 
+
+// *************************
+// ** UI Helper Functions **
+// *************************
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {

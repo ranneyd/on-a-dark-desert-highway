@@ -46,9 +46,9 @@
 -(void) clearBoard;
 
 
-// ***************************
-// ** Getters (and Setters) **
-// ***************************
+// *************
+// ** Getters **
+// *************
 
 // Returns the number of columns
 -(NSUInteger) getColumns;
@@ -102,8 +102,7 @@
 // Clears all highlighting on the board
 -(void) clearHighlighting;
 
-// Highlight
+// Highlight all moves a given piece can make
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
-
 
 @end
