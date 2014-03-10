@@ -45,9 +45,6 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
-// Changes whose turn it is
--(void) invertState;
-
 
 // ***************************
 // ** Getters (and Setters) **
@@ -87,6 +84,9 @@
 
 -(BOOL) isHighlightOwnerAtColumn:(NSUInteger)columen andRow:(NSUInteger)row;
 
+// Changes whose turn it is
+-(void) invertState;
+
 // TODO
  -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
 
@@ -108,6 +108,5 @@
 
 
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
-
 
 @end

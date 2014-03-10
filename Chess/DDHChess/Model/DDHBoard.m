@@ -17,6 +17,32 @@
 #import "DDHQueen.h"
 #import "DDHKing.h"
 
+@interface DDHBoard ()
+
+// ***********************
+// ** Private Functions **
+// ***********************
+
+// ************************************
+// ** Piece Interaction and Movement **
+// ************************************
+
+-(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
+
+
+
+
+-(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row;
+
+// ******************************
+// ** General Helper Functions **
+// ******************************
+
+-(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row;
+
+@end
+
+
 @implementation DDHBoard
 {
     // CHANGE FOR DYNAMICALLY SIZED BOARD
@@ -175,6 +201,7 @@
     [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:columnn andRow:row];
 }
 
+// PRIVATE
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
 {
     // Get the piece from _pieces
@@ -221,9 +248,16 @@
     return [_locOfHighlightOwner x] == column && [_locOfHighlightOwner y] == row;
 }
 
+-(void)invertState
+{
+    if ([self nextMove] == ChessPlayerBlack)
+        self.nextMove = ChessPlayerWhite;
+    else
+        self.nextMove = ChessPlayerBlack;
+}
 
-//-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
-//{
+-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
+{
 //    NSInteger kingColumn = -1;
 //    NSInteger kingRow = -1;
 //
@@ -257,7 +291,8 @@
 //            }
 //        }
 //    }
-//}
+    return NO;
+}
 /*
  
  // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
@@ -307,10 +342,6 @@
  
  */
 
-
-// *************************
-// ** UI Helper Functions **
-// *************************
 
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
@@ -370,25 +401,19 @@
     }
 }
 
-
-
-
-
-
+// PRIVATE
 -(void)informDelegateOfPieceChangedAtColumn:(NSInteger)column andRow:(NSInteger) row
 {
     if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
         [_delegate pieceChangedAtColumn:column addRow:row];
 }
 
--(void)invertState
-{
-    if ([self nextMove] == ChessPlayerBlack)
-        self.nextMove = ChessPlayerWhite;
-    else
-        self.nextMove = ChessPlayerBlack;
-}
 
+// ******************************
+// ** General Helper Functions **
+// ******************************
+
+// PRIVATE
 -(void)checkBoundsForColumn: (NSInteger) column andRow: (NSInteger) row
 {
     if (column < 0 || column >= _columns || row < 0 || row >= _rows)
