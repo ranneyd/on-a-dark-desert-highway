@@ -46,7 +46,7 @@
 -(void) clearBoard;
 
 // Deepish copy of board
--(id) copy;
+-(id) copyBoard;
 
 -(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
@@ -80,6 +80,9 @@
 // ** Additional Game Logic **
 // ***************************
 
+// Changes whose turn it is
+-(void) invertState;
+
 // Checks if the piece at a location does not belong to player
 -(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player;
 
@@ -91,6 +94,12 @@
 
 // TODO
 //-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
+
+-(void) putPiece:(DDHPiece*) piece inColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
+
+
+-(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 
 // *************************

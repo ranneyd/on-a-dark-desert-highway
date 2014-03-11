@@ -50,7 +50,6 @@
             //NSLog(@"Adding move for dx: %d and dy: %d", dx, dy);
             [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
     }
-    NSLog(@"Survived");
     return highlighting;
 }
 
