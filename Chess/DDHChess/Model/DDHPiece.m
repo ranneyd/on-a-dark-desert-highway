@@ -66,21 +66,10 @@
 // After the pawn moves to (column, row) location, is the King in check?
 -(BOOL) kingInCheckAfterMovingToColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board
 {
-    NSInteger oldColumn = [self x];
-    NSInteger oldRow = [self y];
-    
-    // Find out if King is in check after moving by moving the piece and checking if
-    // the King is in check.
-    [self moveToColumn:column andRow:row];
-    if ([board kingInCheckBelongingTo:[self getPlayer]])
-    {
-        // The move puts the King in check, so undo the move and return YES
-        [self moveToColumn:oldColumn andRow:oldRow];
-        return YES;
-    }
-    
-    // Otherwise, the king is not in check, so return NO
-    return NO;
+    DDHBoard* newBoard = [board copy];
+    [newBoard setHighlighterwithColumn:[self x] andRow:[self y]];
+    [newBoard makeMoveToColumn:column andRow:row];
+    return [newBoard kingInCheckBelongingTo:[self getPlayer]];
 }
 
 // TODO: Make use of board's kingInCheck function. Make copy of board as to not mess things up

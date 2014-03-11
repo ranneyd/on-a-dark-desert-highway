@@ -45,6 +45,11 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
+// Deepish copy of board
+-(id) copy;
+
+-(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
 
 // *************
 // ** Getters **

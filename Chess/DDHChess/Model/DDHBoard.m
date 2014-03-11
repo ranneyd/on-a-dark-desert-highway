@@ -23,6 +23,9 @@
 // ** Private Functions **
 // ***********************
 
+
+-(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows;
+
 // ************************************
 // ** Piece Interaction and Movement **
 // ************************************
@@ -105,6 +108,24 @@
         // Create the delegate to communicate with the views
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
+    }
+    return self;
+}
+
+-(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows
+{
+    if (self = [super init]){
+        // Set the size of the board. TODO: Change for dynamically allocated array.
+        _rows = rows;
+        _columns = columns;
+        
+        // Initialize the array of pieces. Set all pieces on the board to null pieces initially (i.e. set the board
+        // to be completely empty).
+        _pieces = [pieces copy];
+        
+        // Initialized the empty board
+        [self clearBoard];
+        
     }
     return self;
 }
@@ -230,6 +251,12 @@
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
+-(id) copy
+{
+    
+    return [[DDHBoard alloc] initWithPieces:_pieces andColumns:_rows andRows:_columns];
+}
+
 
 // *************
 // ** Getters **
@@ -245,6 +272,10 @@
     return _rows;
 }
 
+-(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row
+{
+    _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
+}
 
 // ************************************
 // ** Piece Interaction and Movement **
@@ -297,6 +328,13 @@
     
     // Switch turns
     [self invertState];
+    
+    if ([self kingInCheckBelongingTo:[self nextMove]]){
+        NSLog(@"%d in check", [self nextMove]);
+    }
+    else{
+        NSLog(@"%d not in check", [self nextMove]);
+    }
 }
 
 
