@@ -392,27 +392,27 @@
             if(![piece isKindOfClass:[DDHNullPiece class]]){
                 // If the piece is an enemy piece
                 if(player != [piece getPlayer]){
-                    NSLog(@"Checking %@", [piece description]);
+                    //NSLog(@"Checking %@", [piece description]);
                     
                     // Get the enemy piece's moves
-                    NSMutableArray *moves = [piece highlightMovesWithBoard:self];
+                    NSMutableArray *moves = [piece highlightMovesWithBoard:self andCheck:NO];
                     // look at each move
                     for (DDHTuple* move in moves){
-                        NSLog(@"Checking move of %@ to (%d, %d)", [piece description], [move x], [move y]);
+                        //NSLog(@"Checking move of %@ to (%d, %d)", [piece description], [move x], [move y]);
                         // A piece cannot take its own teammate, so we don't have to worry about a potential move taking the player's own king
                         // If a piece has a move that can take a king, we know it's bad.
                         if(([move x] == [whiteKing x] && [move y] == [whiteKing y]) ||
                            ([move x] == [blackKing x] && [move y] == [blackKing y])){
-                            NSLog(@"BADNESS HAPPENED?");
+                          //  NSLog(@"BADNESS HAPPENED?");
                             return YES;
                         }
                     }
-                    NSLog(@"We're safe...for now");
+                    //NSLog(@"We're safe...for now");
                 }
             }
         }
     }
-    NSLog(@"Returning No");
+    //NSLog(@"Returning No");
     return NO;
 }
 
@@ -422,20 +422,13 @@
    
     DDHPiece* oldPiece = [self pieceAtColumn:oldColumn andRow:oldRow];
     DDHPiece* newPiece = [self pieceAtColumn:column andRow:row];
-    NSLog(@"I am %@ and I'm at (%d, %d) moving to (%d, %d)", [oldPiece description], oldColumn, oldRow, column, row);
-    NSLog(@"%@ at (%d, %d)", [newPiece description],column, row);
+    //NSLog(@"I am %@ and I'm at (%d, %d) moving to (%d, %d)", [oldPiece description], oldColumn, oldRow, column, row);
+    //NSLog(@"%@ at (%d, %d)", [newPiece description],column, row);
 
     [self movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
     
-    NSLog(@"Checking check?");
+    //NSLog(@"Checking check?");
     BOOL movingIntoCheck = [self kingInCheckBelongingTo:[oldPiece getPlayer]];
-    if (movingIntoCheck){
-        NSLog(@"Def can't go there");
-    }
-    else{
-        NSLog(@"Can go there");
-    }
-    NSLog(@"Done Checking check");
     
     
     [self setHighlighterwithColumn:oldColumn andRow:oldRow];
@@ -443,13 +436,13 @@
     [self putPiece:newPiece inColumn: column andRow: row];
     [oldPiece moveToColumn:oldColumn andRow:oldRow];
     
-    DDHPiece *newPlace =[self pieceAtColumn:column andRow:row];
+    /*DDHPiece *newPlace =[self pieceAtColumn:column andRow:row];
     DDHPiece *oldPlace = [self pieceAtColumn:oldColumn andRow:oldRow];
-    NSLog(@"Piece now at (%d, %d) is %@ but that piece thinks it's at (%d, %d)", column, row,newPlace, [newPlace x], [newPlace y]);
-    NSLog(@"Piece now at (%d, %d) is %@ but that piece thinks it's at (%d, %d)", oldColumn, oldRow,oldPlace, [oldPlace x], [oldPlace y]);
+    //NSLog(@"Piece now at (%d, %d) is %@ but that piece thinks it's at (%d, %d)", column, row,newPlace, [newPlace x], [newPlace y]);
+    //NSLog(@"Piece now at (%d, %d) is %@ but that piece thinks it's at (%d, %d)", oldColumn, oldRow,oldPlace, [oldPlace x], [oldPlace y]);
+    */
     
-    
-    NSLog(@"I'm outro");
+    //NSLog(@"I'm outro");
     
     
     return movingIntoCheck;
@@ -569,7 +562,7 @@
         return [[NSMutableArray alloc] init];
     
     // Get the moves the piece can make
-    NSMutableArray* highlighting = [piece highlightMovesWithBoard:self];
+    NSMutableArray* highlighting = [piece highlightMovesWithBoard:self andCheck:YES];
     // Mark that piece as selected
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
     // Update the UI to show the selection

@@ -11,7 +11,7 @@
 
 @implementation DDHQueen
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -53,23 +53,25 @@
         int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
-            /*if([self movingIntoCheckinColumn:dx andRow:dy withBoard:board])
-                NSLog(@"Moving into check");*/
-            // If this spot has a piece in it...
-            if(![board isEmptySquareAtColumn:dx andRow:dy ]){
-                // if it is our piece, do nothing and get out of the loop because you can't go further
-                if([[board pieceAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
-                    break;
-                // If it isn't our piece, highlight that spot but exit the loop because we can't go further
-                else{
-                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
-                    break;
+            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+                /*if([self movingIntoCheckinColumn:dx andRow:dy withBoard:board])
+                 NSLog(@"Moving into check");*/
+                // If this spot has a piece in it...
+                if(![board isEmptySquareAtColumn:dx andRow:dy ]){
+                    // if it is our piece, do nothing and get out of the loop because you can't go further
+                    if([[board pieceAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
+                        break;
+                    // If it isn't our piece, highlight that spot but exit the loop because we can't go further
+                    else{
+                        [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                        break;
+                    }
                 }
-            }
-            // If the place is empty...
-            else{
-                // highlight the current spot
-                [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                // If the place is empty...
+                else{
+                    // highlight the current spot
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                }
             }
             // Keep going
             dx += [nextMove x];

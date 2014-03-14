@@ -22,7 +22,7 @@
     return self;
 }
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     // To be overridden
     return NULL;

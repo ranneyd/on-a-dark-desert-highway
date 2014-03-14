@@ -21,7 +21,7 @@
 -(id) initWithPlayer: (ChessPlayer) player atColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board;
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board andCheck:(BOOL)check;
 
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;

@@ -23,7 +23,7 @@
     return self;
 }
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     // Array of moves to be returned
     NSMutableArray* highlighting = [[NSMutableArray alloc] init];

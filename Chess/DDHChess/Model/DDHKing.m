@@ -51,12 +51,7 @@
         int dy = y + [nextMove y];
         if([self onBoard:board AtColumn:dx andRow:dy]) {
             if ([board doesPieceAtColumn:dx andRow:dy notBelongToPlayer:[self getPlayer]]) {
-                /*if([board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy]){
-                    NSLog(@"Can't do that!");
-                }
-                else{
-                    NSLog(@"Excuse me, I'm a rep from the King and he can totes go there");
-                }*/
+
                 [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
             }
         }

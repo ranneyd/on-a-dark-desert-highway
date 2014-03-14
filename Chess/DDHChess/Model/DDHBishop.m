@@ -11,7 +11,7 @@
 
 @implementation DDHBishop
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
