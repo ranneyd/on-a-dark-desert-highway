@@ -75,6 +75,11 @@
     
     // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
     BOOL _highlightBoard[8][8]; // Which parts of the board are currently highlighted
+    
+    
+    // Keep track of the kings
+    DDHKing* whiteKing;
+    DDHKing* blackKing;
 }
 
 // ********************
@@ -198,6 +203,10 @@
     
     // Nobody has highlighted anything yet, so make it out of bounds
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:_columns + 1 andY:_rows + 1];
+    
+    //
+    whiteKing = [_pieces objectAtColumn:4 andRow:0];
+    blackKing = [_pieces objectAtColumn:4 andRow:7];
     
     // Set who gets to move first
     _nextMove = ChessPlayerBlack;

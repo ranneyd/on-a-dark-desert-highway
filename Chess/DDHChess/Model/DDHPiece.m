@@ -116,4 +116,11 @@
     return NO;
 }
 
+// TODO: Make use of board's kingInCheck function. Make copy of board as to not mess things up
+
+-(BOOL)movingIntoCheckinColumn:(NSInteger)column andRow:(NSInteger)row withBoard:(DDHBoard *)board
+{
+    return NO;
+}
+
 @end
