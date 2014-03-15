@@ -68,8 +68,12 @@
 -(BOOL) isEmptySquareAtColumn:(NSInteger) column andRow:(NSInteger) row;
 
 // Moves the currently selected piece to the given column and row
--(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row;
+-(void) makeMoveToColumn:(NSInteger) column andRow:(NSInteger) row;
 
+// Move a piece from an old postion to a new one
+-(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
+
+-(void) undoLastMove;
 
 // ***************************
 // ** Additional Game Logic **
