@@ -48,7 +48,7 @@
         int dy = y + [nextMove y];
         //NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
         if([self onBoard:board AtColumn:dx andRow:dy]){
-            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+            if(YES ||  !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
                 [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
             }
         }

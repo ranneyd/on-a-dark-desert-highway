@@ -63,43 +63,5 @@
     return @"White";
 }
 
-// After the pawn moves to (column, row) location, is the King in check?
--(BOOL) kingInCheckAfterMovingToColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board
-{
-    return NO;
-}
-
-// TODO: Make use of board's kingInCheck function. Make copy of board as to not mess things up
-
-/*-(BOOL)movingIntoCheckinColumn:(NSInteger)column andRow:(NSInteger)row withBoard:(DDHBoard *)board
-{
-    NSLog(@"I am %@ and I'm at (%d, %d) moving to (%d, %d)", [self description], [self x], [self y], column, row);
-    DDHPiece* oldPiece = [board pieceAtColumn:column andRow:row];
-    NSLog(@"%@ at (%d, %d)", [oldPiece description],column, row);
-    NSUInteger oldX = [self x];
-    NSUInteger oldY = [self y];
-    
-    [board setHighlighterwithColumn:[self x] andRow:[self y]];
-    [board makeMoveToColumn:column andRow:row];
-    
-    NSLog(@"Checking check?");
-    BOOL movingIntoCheck = [board kingInCheckBelongingTo:[self getPlayer]];
-    NSLog(@"Done Checking check");
-    
-    
-    [board setHighlighterwithColumn:[oldPiece x] andRow:[oldPiece y]];
-    [board putPiece:self inColumn:oldX andRow:oldY];
-    [board putPiece:oldPiece inColumn: column andRow: row];
-    [board invertState];
-    
-    
-    NSLog(@"Piece now at (%d, %d) is %@", column, row,[board pieceAtColumn:column andRow:row]);
-    NSLog(@"Piece now at (%d, %d) is %@", oldX, oldY,[board pieceAtColumn:oldX andRow:oldY]);
-    
-    
-    NSLog(@"I'm outro");
-    
-    return movingIntoCheck;
-}*/
 
 @end

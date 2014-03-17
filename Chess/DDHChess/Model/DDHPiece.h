@@ -26,14 +26,16 @@
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;
 
+// Get player
 -(ChessPlayer) getPlayer;
 
+// Check if a position is on the given board
 -(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 
+// Return an array of blank highlighting
 -(BOOL**) blankHighlightingForBoard:(DDHBoard*) board;
 
+// Describe the piece
 -(NSString*) description;
-
--(BOOL) movingIntoCheckinColumn:(NSInteger) column andRow:(NSInteger) row withBoard:(DDHBoard*)board;
 
 @end
