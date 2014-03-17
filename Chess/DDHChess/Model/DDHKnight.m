@@ -7,6 +7,7 @@
 //
 
 #import "DDHKnight.h"
+#import "DDHBoard.h"
 
 @implementation DDHKnight
 
@@ -46,9 +47,13 @@
         int dx = x + [nextMove x];
         int dy = y + [nextMove y];
         //NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
-        if([self onBoard:board AtColumn:dx andRow:dy])
+        if([self onBoard:board AtColumn:dx andRow:dy]){
+            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+                [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+            }
+        }
             //NSLog(@"Adding move for dx: %d and dy: %d", dx, dy);
-            [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+
     }
     return highlighting;
 }

@@ -45,9 +45,8 @@
 // Sets every cell in board to empty
 -(void) clearBoard;
 
-// Deepish copy of board
--(id) copyBoard;
 
+// Set owner of highlighting
 -(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 
@@ -89,16 +88,13 @@
 // Checks if the selected piece is at the given row and column
 -(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
-// TODO
- -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
+// Checks if player is in check
+-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
 
-// TODO
-//-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
-
+// Puts a piece in a place. Only effects _pieces data member
 -(void) putPiece:(DDHPiece*) piece inColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
-
-
+// Checks to see if a piece moving from one point to another would put the player in check.
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 

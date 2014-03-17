@@ -33,6 +33,7 @@
 // Move a piece from an old postion to a new one
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
+// Housekeeping after moving a piece. Includes informing delegates, switching the current player and clearing highlighting
 -(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
 // ***************************
@@ -135,6 +136,7 @@
     // Clear le board
     [self clearBoard];
     
+    /*
     // Create a list of tuples that correspond to the initial piece layout. Change for custom layout
     NSArray *whitePositions = [NSArray arrayWithObjects:
                                [[DDHTuple alloc] initWithX:0 andY:0], [[DDHTuple alloc] initWithX:1 andY:0],
@@ -173,15 +175,7 @@
                             [DDHBishop class], [DDHQueen  class],
                             [DDHKing   class], [DDHBishop class],
                             [DDHKnight class], [DDHRook   class],nil];
-//    NSDictionary *blackDict = [NSDictionary dictionaryWithObjects:blackPieces forKeys:blackPositions];
-//
-//    // Loop through all positions and place the correct pieces
-//    for (DDHTuple *pos in whiteDict) {
-//        NSInteger x = [pos x];
-//        NSInteger y = [pos y];
-//        [_pieces replaceObjectAtColumn:x andRow:y withObject:
-//                [[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:x andRow:y]];
-//    }
+    */
     
     // Place the white pieces
     [_pieces replaceObjectAtColumn:0 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:0 andRow:1]];
@@ -224,7 +218,7 @@
     // Nobody has highlighted anything yet, so make it out of bounds
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:_columns + 1 andY:_rows + 1];
     
-    //
+    // Save pointers to the kings for check purposes.
     whiteKing = [_pieces objectAtColumn:4 andRow:0];
     blackKing = [_pieces objectAtColumn:4 andRow:7];
     
@@ -249,12 +243,6 @@
     
     // Let the UI know things have changed, so it will update every square as necessary.
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
-}
-
--(id) copyBoard
-{
-    
-    return [[DDHBoard alloc] initWithPieces:_pieces andColumns:_rows andRows:_columns];
 }
 
 
@@ -334,6 +322,8 @@
     // Switch turns
     [self invertState];
     
+    
+    // See if next player is now in check
     if ([self kingInCheckBelongingTo:[self nextMove]]){
         NSLog(@"%d in check", [self nextMove]);
     }
@@ -383,67 +373,56 @@
     // Iterate over the board
     for(int i = 0; i < _columns; i++){
         for (int j = 0; j < _rows; j++) {
-            //NSLog(@"(%d, %d)", i, j);
+            
             // Get a piece from the board
             DDHPiece *piece = [_pieces objectAtColumn:i andRow:j];
             
-            //NSLog(@"Checking piece %@", [piece description]);
             // If the piece is not a null piece
             if(![piece isKindOfClass:[DDHNullPiece class]]){
                 // If the piece is an enemy piece
                 if(player != [piece getPlayer]){
-                    //NSLog(@"Checking %@", [piece description]);
-                    
                     // Get the enemy piece's moves
                     NSMutableArray *moves = [piece highlightMovesWithBoard:self andCheck:NO];
                     // look at each move
                     for (DDHTuple* move in moves){
-                        //NSLog(@"Checking move of %@ to (%d, %d)", [piece description], [move x], [move y]);
                         // A piece cannot take its own teammate, so we don't have to worry about a potential move taking the player's own king
                         // If a piece has a move that can take a king, we know it's bad.
                         if(([move x] == [whiteKing x] && [move y] == [whiteKing y]) ||
                            ([move x] == [blackKing x] && [move y] == [blackKing y])){
-                          //  NSLog(@"BADNESS HAPPENED?");
                             return YES;
                         }
                     }
-                    //NSLog(@"We're safe...for now");
                 }
             }
         }
     }
-    //NSLog(@"Returning No");
     return NO;
 }
 
 
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
-   
-    DDHPiece* oldPiece = [self pieceAtColumn:oldColumn andRow:oldRow];
-    DDHPiece* newPiece = [self pieceAtColumn:column andRow:row];
-    //NSLog(@"I am %@ and I'm at (%d, %d) moving to (%d, %d)", [oldPiece description], oldColumn, oldRow, column, row);
-    //NSLog(@"%@ at (%d, %d)", [newPiece description],column, row);
-
+    // Moving piece. Checking if this piece moving would cause check
+    DDHPiece* movingPiece = [self pieceAtColumn:oldColumn andRow:oldRow];
+    // Occupant of the space the moving piece is moving to
+    DDHPiece* occupant = [self pieceAtColumn:column andRow:row];
+    
+    // Move the moving piece to the new position.
     [self movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
     
-    //NSLog(@"Checking check?");
-    BOOL movingIntoCheck = [self kingInCheckBelongingTo:[oldPiece getPlayer]];
+    // If this move causes the player to be in check, we are moving into check
+    BOOL movingIntoCheck = [self kingInCheckBelongingTo:[movingPiece getPlayer]];
     
     
+    // Set the highlighter back to the piece we were checking
     [self setHighlighterwithColumn:oldColumn andRow:oldRow];
-    [self putPiece:oldPiece inColumn:oldColumn andRow:oldRow];
-    [self putPiece:newPiece inColumn: column andRow: row];
-    [oldPiece moveToColumn:oldColumn andRow:oldRow];
-    
-    /*DDHPiece *newPlace =[self pieceAtColumn:column andRow:row];
-    DDHPiece *oldPlace = [self pieceAtColumn:oldColumn andRow:oldRow];
-    //NSLog(@"Piece now at (%d, %d) is %@ but that piece thinks it's at (%d, %d)", column, row,newPlace, [newPlace x], [newPlace y]);
-    //NSLog(@"Piece now at (%d, %d) is %@ but that piece thinks it's at (%d, %d)", oldColumn, oldRow,oldPlace, [oldPlace x], [oldPlace y]);
-    */
-    
-    //NSLog(@"I'm outro");
-    
+    // Put the moving piece back in its original position
+    [self putPiece:movingPiece inColumn:oldColumn andRow:oldRow];
+    // Put the old piece back in its place
+    [self putPiece:occupant inColumn: column andRow: row];
+    // Make sure the old piece knows internally where it is
+    [occupant moveToColumn:oldColumn andRow:oldRow];
+       
     
     return movingIntoCheck;
 }

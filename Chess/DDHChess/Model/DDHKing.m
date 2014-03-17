@@ -11,7 +11,7 @@
 
 @implementation DDHKing
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board;
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board andCheck:(BOOL)check;
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -50,9 +50,11 @@
         int dx = x + [nextMove x];
         int dy = y + [nextMove y];
         if([self onBoard:board AtColumn:dx andRow:dy]) {
-            if ([board doesPieceAtColumn:dx andRow:dy notBelongToPlayer:[self getPlayer]]) {
+            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+                if ([board doesPieceAtColumn:dx andRow:dy notBelongToPlayer:[self getPlayer]]) {
 
-                [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                }
             }
         }
     }
