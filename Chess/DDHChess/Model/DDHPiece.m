@@ -57,15 +57,27 @@
     return @"White";
 }
 
--(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL)check
 {
-    // Check if spot is on the board and (If the square is empty or occupied by an enemy piece)
-    BOOL success = ([self onBoard:board AtColumn:column andRow:row]
-                    && ([board isEmptySquareAtColumn:column andRow:row]
-                        || [board doesPieceAtColumn:row andRow:column notBelongToPlayer:[self getPlayer]]));
-    if (success)
-        [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
-    return success;
+    // Check if spot is on the board
+    if([self onBoard:board AtColumn:column andRow:row]){
+        if(!(check &&[board checkIfMoveFromColumn:[self x] andRow:[self y] toColumn:column andRow:row])){
+            // If the board is empty, we can move there, but there is no piece so return NO
+            if([board isEmptySquareAtColumn:column andRow:row]){
+                [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+            }
+            // If not empty (previous if returns) and not us, then it belongs to another player, so we can move there.
+            if ([[board pieceAtColumn:column andRow:row] getPlayer] != [self getPlayer]){
+                [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+            }
+        }
+        
+        if ([board isEmptySquareAtColumn:column andRow:row])
+            return NO;
+        else
+            return YES;
+    }
+    return YES;
 }
 
 

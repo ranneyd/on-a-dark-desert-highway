@@ -53,9 +53,13 @@
         int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
+            if ([self checkAndMoveToColumn:dx andRow:dy withBoard:board andHighlighting:highlighting andCheck: check]){
+                break;
+            }
+                       
+            
+            /*
             if( !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
-                /*if([self movingIntoCheckinColumn:dx andRow:dy withBoard:board])
-                 NSLog(@"Moving into check");*/
                 // If this spot has a piece in it...
                 if(![board isEmptySquareAtColumn:dx andRow:dy ]){
                     // if it is our piece, do nothing and get out of the loop because you can't go further
@@ -72,7 +76,7 @@
                     // highlight the current spot
                     [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
                 }
-            }
+            }*/
             // Keep going
             dx += [nextMove x];
             dy += [nextMove y];

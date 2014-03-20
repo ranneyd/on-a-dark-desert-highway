@@ -38,7 +38,7 @@
 -(NSString*) description;
 
 // Checks if the move is on the board, to an empty space or enemy piece and that the move doesn't put the player in check. Adjusts highlighting accordingly.
-// Returns YES if the move succeeded and NO otherwise.
--(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting;
+// Returns YES if the spot in question had a piece in it or was off the board
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL) check;
 
 @end
