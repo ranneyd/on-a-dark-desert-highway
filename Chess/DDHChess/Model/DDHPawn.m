@@ -40,41 +40,47 @@
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
         NSInteger verticalDoubleMove = row + 2*pow(-1, [self getPlayer]);
         
-        [self pacifistCheckAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting];
+        [self checkAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
     }
     
     // Check if the pawn can move forward.
-    [self pacifistCheckAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting];
+    [self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
     
     // Check if we can attack other pieces to the left.
-    [self warmongerCheckAndMoveToColumn:leftMove andRow:verticalMove withBoard:board andHighlighting:highlighting];
+    [self checkAndMoveToColumn:leftMove andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:NO];
     
     // Check if the pawn can attack other pieces to the right.
-    [self warmongerCheckAndMoveToColumn:rightMove andRow:verticalMove withBoard:board andHighlighting:highlighting];
+    [self checkAndMoveToColumn:rightMove andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:NO];
  
     return highlighting;
 }
 
-// Like checkAndMoveTo... except doesn't work if the desired square has any piece, including an enemy
--(void) pacifistCheckAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting{
+-(void) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL) check andPacifist:(BOOL) pacifist{
     // Check if the pawn can move forward.
     if ([self onBoard:board AtColumn:column andRow:row]) {
-        // If the square in front of the pawn is empty, it can move there.
-        if ([board isEmptySquareAtColumn:column andRow:row]) {
-            [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+        // Make sure we aren't moving into check
+        if(!(check &&[board checkIfMoveFromColumn:[self x] andRow:[self y] toColumn:column andRow:row])){
+            // Pacifist means this is a non-attacking move
+            if(pacifist){
+                // Pacifist moves only work if the space is empty
+                if ([board isEmptySquareAtColumn:column andRow:row]) {
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+                }
+            }
+            // If not in pacifist mode, in warmonger mode, aka the piece MUST attack
+            else{
+                // make sure the space has an enemy piece in it.
+                if ([self warmongerWithBoard:board atColumn:column andRow:row]) {
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+                }
+            }
         }
     }
 }
 
-// Like checkAndMoveTo... except only works if the desired square has an enemy
--(void) warmongerCheckAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting{
-    // Check if spot is on board
-    if ([self onBoard:board AtColumn:column andRow:row]) {
-        // If the square in front of the pawn is not empty and the piece in it does not belong to us
-        if (![board isEmptySquareAtColumn:column andRow:row] && [board doesPieceAtColumn:column andRow:row notBelongToPlayer:[self getPlayer]]) {
-            [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
-        }
-    }
+// True if the place is not empty and the piece in that place is an enemy piece.
+-(BOOL) warmongerWithBoard:(DDHBoard*) board atColumn:(NSUInteger) column andRow:(NSUInteger) row{
+    return ![board isEmptySquareAtColumn:column andRow:row] && [board doesPieceAtColumn:column andRow:row notBelongToPlayer:[self getPlayer]];
 }
 
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
