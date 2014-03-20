@@ -10,6 +10,14 @@
 
 @implementation DDHNullPiece
 
+- (id) init
+{
+    if (self = [super init]){
+        [self setPlayer:ChessPlayerNull];
+    }
+    return self;
+}
+
 -(NSString*) description
 {
     return @"NullPiece";

@@ -15,7 +15,8 @@
 // Make our lives easier by defining chess players as ints
 typedef NS_ENUM(NSUInteger, ChessPlayer){
     ChessPlayerWhite = 0,
-    ChessPlayerBlack = 1
+    ChessPlayerBlack = 1,
+    ChessPlayerNull = 2
 };
 
 

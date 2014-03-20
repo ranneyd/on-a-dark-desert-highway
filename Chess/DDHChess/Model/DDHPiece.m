@@ -44,23 +44,28 @@
     return column >= 0 && column < [board getColumns] && row >= 0 && row < [board getRows];
 }
 
--(BOOL**) blankHighlightingForBoard:(DDHBoard*) board
+-(void) setPlayer:(ChessPlayer) player
 {
-    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
-    // Should be size of rows*columns
-    BOOL** highlighting = malloc([board getRows]*[board getColumns]);
-    // Initialize everything to false
-    for (int i = 0; i < [board getRows]; i++)
-        for (int j = 0; j < [board getColumns]; j++)
-            highlighting[i][j] = NO;
-    return highlighting;
+    _owner = player;
 }
+
 
 -(NSString*) description
 {
     if (_owner == ChessPlayerBlack)
         return @"Black";
     return @"White";
+}
+
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting
+{
+    // Check if spot is on the board and (If the square is empty or occupied by an enemy piece)
+    BOOL success = ([self onBoard:board AtColumn:column andRow:row]
+                    && ([board isEmptySquareAtColumn:column andRow:row]
+                        || [board doesPieceAtColumn:row andRow:column notBelongToPlayer:[self getPlayer]]));
+    if (success)
+        [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+    return success;
 }
 
 

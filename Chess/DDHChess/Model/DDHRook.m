@@ -41,7 +41,7 @@
         int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
-            if( YES || !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+            if( !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
 
                 // If this spot has a piece in it...
                 if(![board isEmptySquareAtColumn:dx andRow:dy]){

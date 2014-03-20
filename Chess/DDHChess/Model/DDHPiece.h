@@ -32,10 +32,13 @@
 // Check if a position is on the given board
 -(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 
-// Return an array of blank highlighting
--(BOOL**) blankHighlightingForBoard:(DDHBoard*) board;
+-(void) setPlayer:(ChessPlayer) player;
 
 // Describe the piece
 -(NSString*) description;
+
+// Checks if the move is on the board, to an empty space or enemy piece and that the move doesn't put the player in check. Adjusts highlighting accordingly.
+// Returns YES if the move succeeded and NO otherwise.
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting;
 
 @end

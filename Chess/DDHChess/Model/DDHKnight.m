@@ -48,8 +48,10 @@
         int dy = y + [nextMove y];
         //NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
         if([self onBoard:board AtColumn:dx andRow:dy]){
-            if(YES ||  !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
-                [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+            if([[board pieceAtColumn:dx andRow:dy] getPlayer] != [self getPlayer]){
+                if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                }
             }
         }
             //NSLog(@"Adding move for dx: %d and dy: %d", dx, dy);

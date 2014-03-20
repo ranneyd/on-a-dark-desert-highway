@@ -50,7 +50,7 @@
         int dx = x + [nextMove x];
         int dy = y + [nextMove y];
         if([self onBoard:board AtColumn:dx andRow:dy]) {
-            if(YES || !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
                 if ([board doesPieceAtColumn:dx andRow:dy notBelongToPlayer:[self getPlayer]]) {
 
                     [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];

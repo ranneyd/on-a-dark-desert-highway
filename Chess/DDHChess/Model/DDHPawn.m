@@ -12,14 +12,11 @@
 
 @implementation DDHPawn
 {
-    BOOL hasNotMoved;
 }
 
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super initWithPlayer:player atColumn:column andRow:row];
-    hasNotMoved = YES
-    ;
     return self;
 }
 
@@ -39,57 +36,49 @@
     NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : -1;
     
     // Next check for ability to move two squares forward.
-    if (hasNotMoved) {
+    if (([self getPlayer] == ChessPlayerBlack && [self y] == 6) || ([self getPlayer] == ChessPlayerWhite && [self y] == 1)) {
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
         NSInteger verticalDoubleMove = row + 2*pow(-1, [self getPlayer]);
         
-        // Sanity check to make sure the move is on the board
-        if ([self onBoard:board AtColumn:column andRow:verticalDoubleMove]) {
-            
-            // Make sure both the square immediately in front of and two squares in front of the pawn are empty.
-            if ([board isEmptySquareAtColumn:column andRow:verticalDoubleMove] && [board isEmptySquareAtColumn:column andRow:verticalMove]) {
-                [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:verticalDoubleMove]];
-            }
-        }
-        
+        [self pacifistCheckAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting];
     }
     
     // Check if the pawn can move forward.
-    if ([self onBoard:board AtColumn:column andRow:verticalMove]) {
-        
-        // If the square in front of the pawn is empty, it can move there.
-        if ([board isEmptySquareAtColumn:column andRow:verticalMove]) {
-            [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:verticalMove]];
-        }
-    }
+    [self pacifistCheckAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting];
     
     // Check if we can attack other pieces to the left.
-    if ([self onBoard:board AtColumn:leftMove andRow:verticalMove]) {
-        if (![board isEmptySquareAtColumn:leftMove andRow:verticalMove]) {
-            if ([board doesPieceAtColumn:leftMove andRow:verticalMove notBelongToPlayer:[self getPlayer]]) {
-                [highlighting addObject:[[DDHTuple alloc] initWithX:leftMove andY:verticalMove]];
-            }
-        }
-    }
+    [self warmongerCheckAndMoveToColumn:leftMove andRow:verticalMove withBoard:board andHighlighting:highlighting];
     
     // Check if the pawn can attack other pieces to the right.
-    if ([self onBoard:board AtColumn:rightMove andRow:verticalMove]) {
-        if (![board isEmptySquareAtColumn:rightMove andRow:verticalMove]) {
-            if ([board doesPieceAtColumn:rightMove andRow:verticalMove notBelongToPlayer:[self getPlayer]]) {
-                [highlighting addObject:[[DDHTuple alloc] initWithX:rightMove andY:verticalMove]];
-            }
-        }
-    }
+    [self warmongerCheckAndMoveToColumn:rightMove andRow:verticalMove withBoard:board andHighlighting:highlighting];
  
     return highlighting;
 }
 
+// Like checkAndMoveTo... except doesn't work if the desired square has any piece, including an enemy
+-(void) pacifistCheckAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting{
+    // Check if the pawn can move forward.
+    if ([self onBoard:board AtColumn:column andRow:row]) {
+        // If the square in front of the pawn is empty, it can move there.
+        if ([board isEmptySquareAtColumn:column andRow:row]) {
+            [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+        }
+    }
+}
+
+// Like checkAndMoveTo... except only works if the desired square has an enemy
+-(void) warmongerCheckAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting{
+    // Check if spot is on board
+    if ([self onBoard:board AtColumn:column andRow:row]) {
+        // If the square in front of the pawn is not empty and the piece in it does not belong to us
+        if (![board isEmptySquareAtColumn:column andRow:row] && [board doesPieceAtColumn:column andRow:row notBelongToPlayer:[self getPlayer]]) {
+            [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+        }
+    }
+}
+
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    if (hasNotMoved)
-    {
-        hasNotMoved = NO;
-    }
     [self setX:column];
     [self setY:row];
 }

@@ -53,7 +53,7 @@
         int dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
-            if(YES || !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+            if( !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
                 /*if([self movingIntoCheckinColumn:dx andRow:dy withBoard:board])
                  NSLog(@"Moving into check");*/
                 // If this spot has a piece in it...

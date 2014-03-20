@@ -26,6 +26,9 @@
 
 -(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows;
 
+// Return an array of blank highlighting
+-(BOOL**) getBlankHighlighting;
+
 // ************************************
 // ** Piece Interaction and Movement **
 // ************************************
@@ -80,7 +83,7 @@
     NSUInteger _columns; // Number of columns in the board
     
     // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
-    BOOL _highlightBoard[8][8]; // Which parts of the board are currently highlighted
+    BOOL** _highlightBoard; // Which parts of the board are currently highlighted
     
     
     // Keep track of the kings
@@ -102,6 +105,8 @@
         // Initialize the array of pieces. Set all pieces on the board to null pieces initially (i.e. set the board
         // to be completely empty).
         _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns andObject:[[DDHNullPiece alloc] init]];
+        
+        _highlightBoard = [self getBlankHighlighting];
         
         // Initialized the empty board
         [self clearBoard];
@@ -265,6 +270,19 @@
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
 }
 
+-(BOOL**) getBlankHighlighting
+{
+    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
+    // Should be size of rows*columns
+    BOOL** highlighting = malloc([self getRows]*sizeof(BOOL**));
+    // Initialize everything to false
+    for (int i = 0; i < [self getRows]; i++){
+        highlighting[i] = malloc([self getColumns]*sizeof(BOOL*));
+        for (int j = 0; j < [self getColumns]; j++)
+            highlighting[i][j] = NO;
+    }
+    return highlighting;
+}
 
 // ************************************
 // ** Piece Interaction and Movement **
@@ -407,12 +425,18 @@
     // Occupant of the space the moving piece is moving to
     DDHPiece* occupant = [self pieceAtColumn:column andRow:row];
     
+    BOOL** highlighting = _highlightBoard;
+    
+    _highlightBoard = [self getBlankHighlighting];
+    
     // Move the moving piece to the new position.
     [self movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
     
     // If this move causes the player to be in check, we are moving into check
     BOOL movingIntoCheck = [self kingInCheckBelongingTo:[movingPiece getPlayer]];
     
+    free(_highlightBoard);
+    _highlightBoard = highlighting;
     
     // Set the highlighter back to the piece we were checking
     [self setHighlighterwithColumn:oldColumn andRow:oldRow];
@@ -421,10 +445,13 @@
     // Put the old piece back in its place
     [self putPiece:occupant inColumn: column andRow: row];
     // Make sure the old piece knows internally where it is
-    [occupant moveToColumn:oldColumn andRow:oldRow];
-       
-    
+    [occupant moveToColumn:column andRow:row];
+    NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
+    [movingPiece moveToColumn:oldColumn andRow:oldRow];
+    NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
     return movingIntoCheck;
+    
+    //return NO;
 }
 
 /*
@@ -514,6 +541,12 @@
 {
     // Get all possible moves that a piece can make
     NSMutableArray* allHighlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
+    
+    /*
+    
+    This should not be necessary. getHighlightedSquares should not give you squares with friendly pieces on them.
+     
+     
     // Create a way to keep track of what spaces a piece can actually move to (i.e. not taking it's own color piece)
     NSMutableArray* properHighlighting = [[NSMutableArray alloc] init];
     
@@ -523,8 +556,10 @@
             [properHighlighting addObject:location];
         }
     }
+     
     // Highlight each space and tell the views to update
-    for (DDHTuple *location in properHighlighting){
+    for (DDHTuple *location in properHighlighting){*/
+    for (DDHTuple* location in allHighlighting){
         [self highlightAtColumn:[location x] andRow: [location y]];
         [self informDelegateOfPieceChangedAtColumn:[location x] andRow:[location y]];
     }
