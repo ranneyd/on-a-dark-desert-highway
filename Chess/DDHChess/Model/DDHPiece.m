@@ -12,6 +12,7 @@
 @implementation DDHPiece
 {
     ChessPlayer _owner;
+    BOOL _hasMoved;
 }
 
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
@@ -19,6 +20,7 @@
     self = [super init];
     [self moveToColumn:column andRow:row];
     _owner = player;
+    _hasMoved = NO;
     return self;
 }
 
@@ -30,6 +32,7 @@
 
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
+    _hasMoved = YES;
     [self setX:column];
     [self setY:row];
 }
@@ -59,6 +62,8 @@
 
 -(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL)check
 {
+    
+    //NSLog(@"Checking piece %@ going to (%d,%d)", [self description], column, row);
     // Check if spot is on the board
     if([self onBoard:board AtColumn:column andRow:row]){
         if(!(check &&[board checkIfMoveFromColumn:[self x] andRow:[self y] toColumn:column andRow:row])){
@@ -78,6 +83,14 @@
             return YES;
     }
     return YES;
+}
+
+-(BOOL)hasMoved{
+    return _hasMoved;
+}
+
+-(void) setMoved:(BOOL) moved{
+    _hasMoved = moved;
 }
 
 

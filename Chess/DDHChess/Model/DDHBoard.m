@@ -425,6 +425,9 @@
     // Occupant of the space the moving piece is moving to
     DDHPiece* occupant = [self pieceAtColumn:column andRow:row];
     
+    BOOL moverMoved = [movingPiece hasMoved];
+    BOOL occupantMoved = [occupant hasMoved];
+    
     BOOL** highlighting = _highlightBoard;
     
     _highlightBoard = [self getBlankHighlighting];
@@ -446,9 +449,16 @@
     [self putPiece:occupant inColumn: column andRow: row];
     // Make sure the old piece knows internally where it is
     [occupant moveToColumn:column andRow:row];
-    NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
+    [occupant setMoved:occupantMoved];
+    
+    
+    //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
     [movingPiece moveToColumn:oldColumn andRow:oldRow];
-    NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
+    [movingPiece setMoved:moverMoved];
+    
+    
+    
+    //NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
     return movingIntoCheck;
     
     //return NO;

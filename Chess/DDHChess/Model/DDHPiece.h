@@ -41,4 +41,10 @@
 // Returns YES if the spot in question had a piece in it or was off the board
 -(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL) check;
 
+// True if the piece has moved.
+-(BOOL) hasMoved;
+
+// Sets whether or not the piece has moved.
+-(void) setMoved:(BOOL) moved;
+
 @end

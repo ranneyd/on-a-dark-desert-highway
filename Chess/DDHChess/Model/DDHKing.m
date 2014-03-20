@@ -8,6 +8,7 @@
 
 #import "DDHKing.h"
 #import "DDHBoard.h"
+#import "DDHRook.h"
 
 @implementation DDHKing
 
@@ -58,6 +59,39 @@
             }
         }
     }
+    
+    
+    // Castling
+    
+    // Cannot castle if the king has moved
+    if (![self hasMoved]){
+        // king side castle
+        DDHPiece* kingCastle = [board pieceAtColumn:[board getColumns]-1 andRow:y];
+        // If piece is a rook that hasn't moved. Remember, if it hasn't moved, it must be our rook
+        if ([kingCastle isKindOfClass:[DDHRook class]] &&
+            ![kingCastle hasMoved] &&
+            [board isEmptySquareAtColumn:x + 1 andRow:y] &&
+            [board isEmptySquareAtColumn:x + 2 andRow:y] ){
+            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:[board getColumns] -2 andRow:y])){
+                [highlighting addObject:[[DDHTuple alloc] initWithX: [board getColumns] -2 andY:y]];
+            }
+        }
+        
+        // queen side castle
+        
+        DDHPiece* queenCastle = [board pieceAtColumn:0 andRow:y];
+        if ([queenCastle isKindOfClass:[DDHRook class]] &&
+            ![queenCastle hasMoved] &&
+            [board isEmptySquareAtColumn:x - 1 andRow:y] &&
+            [board isEmptySquareAtColumn:x - 2 andRow:y] &&
+            [board isEmptySquareAtColumn:x - 3 andRow:y]){
+            if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn: 2 andRow:y])){
+                [highlighting addObject:[[DDHTuple alloc] initWithX: 2 andY:y]];
+            }
+        }
+    }
+ 
+    
     return highlighting;
 }
 

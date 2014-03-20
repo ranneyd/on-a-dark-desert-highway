@@ -46,9 +46,10 @@
         DDHTuple* nextMove = points[i];
         int dx = x + [nextMove x];
         int dy = y + [nextMove y];
-        if ([self checkAndMoveToColumn:dx andRow:dy withBoard:board andHighlighting:highlighting andCheck: check]){
-            break;
-        }
+        
+        NSLog(@"Moving %@ to (%d, %d)", [self description], dx,dy);
+        
+        [self checkAndMoveToColumn:dx andRow:dy withBoard:board andHighlighting:highlighting andCheck: check];
         
         /*//NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
         if([self onBoard:board AtColumn:dx andRow:dy]){
