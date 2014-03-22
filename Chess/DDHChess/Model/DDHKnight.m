@@ -44,10 +44,10 @@
     // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
     for(int i = 0; i < 8; i++){
         DDHTuple* nextMove = points[i];
-        int dx = x + [nextMove x];
-        int dy = y + [nextMove y];
+        long dx = x + [nextMove x];
+        long dy = y + [nextMove y];
         
-        NSLog(@"Moving %@ to (%d, %d)", [self description], dx,dy);
+        //NSLog(@"Moving %@ to (%d, %d)", [self description], dx,dy);
         
         [self checkAndMoveToColumn:dx andRow:dy withBoard:board andHighlighting:highlighting andCheck: check];
         

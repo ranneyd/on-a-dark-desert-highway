@@ -38,8 +38,8 @@
     for(int i = 0; i < 4; i++){
         // accumulate new positions. Don't want to include piece's current position.
         DDHTuple* nextMove = [points objectAtIndex:i];
-        int dx = x + [nextMove x];
-        int dy = y + [nextMove y];
+        long dx = x + [nextMove x];
+        long dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
             

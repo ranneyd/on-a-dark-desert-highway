@@ -27,7 +27,7 @@
     return self;
 }
 
--(int) count
+-(NSUInteger) count
 {
     return [_array count];
 }

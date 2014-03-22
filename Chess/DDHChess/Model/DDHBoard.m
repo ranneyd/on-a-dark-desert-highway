@@ -317,6 +317,23 @@
     // Get the piece from _pieces
     DDHPiece* piece = [self pieceAtColumn:oldColumn andRow:oldRow];
     
+    /*
+    // Check Castling
+    
+    if ([piece isKindOfClass:[DDHKing class]]){
+        if(column == [piece x] - 2){
+            [self movePieceAtColumn:0 andRow:oldRow ToColumn:3 andRow:oldRow];
+            [self afterMoveFromColumn:0 andRow:oldRow ToColumn:3 andRow:oldRow];
+        }
+        if(column == [piece x] + 2){
+            [self movePieceAtColumn:[self getColumns]-1 andRow:oldRow ToColumn:[self getColumns] -3 andRow:oldRow];
+            [self afterMoveFromColumn:[self getColumns]-1 andRow:oldRow ToColumn:[self getColumns] -3 andRow:oldRow];
+        }
+        
+    }
+    
+    */
+    
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
     
@@ -450,7 +467,19 @@
     // Make sure the old piece knows internally where it is
     [occupant moveToColumn:column andRow:row];
     [occupant setMoved:occupantMoved];
-    
+    /*
+    // Undo castling
+    if ([movingPiece isKindOfClass:[DDHKing class]]){
+        if(column == oldColumn - 2){
+            NSLog(@"Moving King left");
+            [self movePieceAtColumn:3 andRow:oldRow ToColumn:0 andRow:oldRow];
+        }
+        if(column == oldColumn + 2){
+            NSLog(@"Moving King right");
+            [self movePieceAtColumn:[self getColumns]-3 andRow:oldRow ToColumn:[self getColumns] -1 andRow:oldRow];
+        }
+        
+    }*/
     
     //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
     [movingPiece moveToColumn:oldColumn andRow:oldRow];
@@ -605,7 +634,7 @@
 {
     // Check if the delegate knows how to respond, and then tell it that a change was made
     if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
-        [_delegate pieceChangedAtColumn:column addRow:row];
+        [_delegate pieceChangedAtColumn:(int)column addRow:(int)row];
 }
 
 

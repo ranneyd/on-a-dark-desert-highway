@@ -48,8 +48,8 @@
     
     for(int i = 0; i < 8; i++){
         DDHTuple* nextMove = [points objectAtIndex:i];
-        int dx = x + [nextMove x];
-        int dy = y + [nextMove y];
+        long dx = x + [nextMove x];
+        long dy = y + [nextMove y];
         if([self onBoard:board AtColumn:dx andRow:dy]) {
             if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
                 if ([board doesPieceAtColumn:dx andRow:dy notBelongToPlayer:[self getPlayer]]) {
