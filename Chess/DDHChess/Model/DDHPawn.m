@@ -33,7 +33,7 @@
     
     // Variables for attacking other pieces. If the pawn can't move left or right,
     // set the values to be off the board!
-    NSInteger leftMove = column - 1 > 0 ? column - 1 : -1;
+    NSInteger leftMove = column - 1 >= 0 ? column - 1 : -1;
     NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : -1;
     
     // Next check for ability to move two squares forward.
