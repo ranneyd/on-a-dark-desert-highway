@@ -250,6 +250,28 @@
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
+// Create a copy of the entire board
+// Modeled after question by fuzzygoat on http://stackoverflow.com/questions/9907154/best-practice-when-implementing-copywithzone
+-(id) copyWithZone:(NSZone *)zone {
+    // Create a new DDHBoard object to be the copy
+    DDHBoard* boardCopy = [[[self class] allocWithZone:zone] init];
+    
+    // If the boardCopy was created, copy each of the values from self to this copy
+    if(boardCopy){
+        boardCopy->_rows = _rows;
+        boardCopy->_columns = _columns;
+        boardCopy->_pieces = [_pieces copyWithZone:zone];
+        boardCopy->_highlightBoard = [_highlightBoard copyWithZone:zone];
+        boardCopy->_boardDelegate = _boardDelegate;
+        boardCopy->_delegate = _delegate;
+        boardCopy->_nextMove = _nextMove;
+        boardCopy->_locOfHighlightOwner = _locOfHighlightOwner;
+        boardCopy->blackKing = blackKing;
+        boardCopy->whiteKing = whiteKing;
+    }
+    return boardCopy;
+}
+
 
 // *************
 // ** Getters **
@@ -274,16 +296,6 @@
 {
     DDH2DArray* highlighting = [[DDH2DArray alloc] initWithColumns:_columns andRow:_rows andObject:[NSNumber numberWithBool:NO]];
     return highlighting;
-//    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
-//    // Should be size of rows*columns
-//    BOOL** highlighting = malloc([self getRows]*sizeof(BOOL**));
-//    // Initialize everything to false
-//    for (int i = 0; i < [self getRows]; i++){
-//        highlighting[i] = malloc([self getColumns]*sizeof(BOOL*));
-//        for (int j = 0; j < [self getColumns]; j++)
-//            highlighting[i][j] = NO;
-//    }
-//    return highlighting;
 }
 
 // ************************************
@@ -439,36 +451,28 @@
 
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
-    // Moving piece. Checking if this piece moving would cause check
-    DDHPiece* movingPiece = [self pieceAtColumn:oldColumn andRow:oldRow];
-    // Occupant of the space the moving piece is moving to
-    DDHPiece* occupant = [self pieceAtColumn:column andRow:row];
+    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    DDHBoard* boardCopy = [self copy];
     
+    // Moving piece. Checking if this piece moving would cause check
+    DDHPiece* movingPiece = [boardCopy pieceAtColumn:oldColumn andRow:oldRow];
+    // Occupant of the space the moving piece is moving to
+    DDHPiece* occupant = [boardCopy pieceAtColumn:column andRow:row];
+    
+    // Remember data about the pieces too
     BOOL moverMoved = [movingPiece hasMoved];
     BOOL occupantMoved = [occupant hasMoved];
     
-    DDH2DArray* highlighting = [_highlightBoard copy];
-    
-    _highlightBoard = [self getBlankHighlighting];
-    
     // Move the moving piece to the new position.
-    [self movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
+    [boardCopy movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
     
     // If this move causes the player to be in check, we are moving into check
-    BOOL movingIntoCheck = [self kingInCheckBelongingTo:[movingPiece getPlayer]];
+    BOOL movingIntoCheck = [boardCopy kingInCheckBelongingTo:[movingPiece getPlayer]];
     
-//    free(_highlightBoard);
-    _highlightBoard = highlighting;
-    
-    // Set the highlighter back to the piece we were checking
-    [self setHighlighterwithColumn:oldColumn andRow:oldRow];
-    // Put the moving piece back in its original position
-    [self putPiece:movingPiece inColumn:oldColumn andRow:oldRow];
-    // Put the old piece back in its place
-    [self putPiece:occupant inColumn: column andRow: row];
     // Make sure the old piece knows internally where it is
     [occupant moveToColumn:column andRow:row];
     [occupant setMoved:occupantMoved];
+
     /*
     // Undo castling
     if ([movingPiece isKindOfClass:[DDHKing class]]){
@@ -484,10 +488,9 @@
     }*/
     
     //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
+    // Make sure that the moving piece knows where it is
     [movingPiece moveToColumn:oldColumn andRow:oldRow];
     [movingPiece setMoved:moverMoved];
-    
-    
     
     //NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
     return movingIntoCheck;

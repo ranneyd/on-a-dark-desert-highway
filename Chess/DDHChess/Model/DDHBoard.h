@@ -17,7 +17,7 @@
 #import "DDHTuple.h"
 
 /* The Board */
-@interface DDHBoard : NSObject
+@interface DDHBoard : NSObject <NSCopying>
 
 // *****************
 // ** Public Data **
@@ -49,6 +49,8 @@
 // Set owner of highlighting
 -(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+// Implementation of NSCopying protocol that allows for object copying
+-(id) copyWithZone:(NSZone *)zone;
 
 // *************
 // ** Getters **
