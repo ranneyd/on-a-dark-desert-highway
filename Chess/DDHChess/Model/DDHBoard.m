@@ -27,7 +27,7 @@
 -(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows;
 
 // Return an array of blank highlighting
--(BOOL**) getBlankHighlighting;
+-(DDH2DArray*) getBlankHighlighting;
 
 // ************************************
 // ** Piece Interaction and Movement **
@@ -83,7 +83,7 @@
     NSUInteger _columns; // Number of columns in the board
     
     // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
-    BOOL** _highlightBoard; // Which parts of the board are currently highlighted
+    DDH2DArray* _highlightBoard; // Which parts of the board are currently highlighted
     
     
     // Keep track of the kings
@@ -270,18 +270,20 @@
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
 }
 
--(BOOL**) getBlankHighlighting
+-(DDH2DArray*) getBlankHighlighting
 {
-    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
-    // Should be size of rows*columns
-    BOOL** highlighting = malloc([self getRows]*sizeof(BOOL**));
-    // Initialize everything to false
-    for (int i = 0; i < [self getRows]; i++){
-        highlighting[i] = malloc([self getColumns]*sizeof(BOOL*));
-        for (int j = 0; j < [self getColumns]; j++)
-            highlighting[i][j] = NO;
-    }
+    DDH2DArray* highlighting = [[DDH2DArray alloc] initWithColumns:_columns andRow:_rows andObject:[NSNumber numberWithBool:NO]];
     return highlighting;
+//    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
+//    // Should be size of rows*columns
+//    BOOL** highlighting = malloc([self getRows]*sizeof(BOOL**));
+//    // Initialize everything to false
+//    for (int i = 0; i < [self getRows]; i++){
+//        highlighting[i] = malloc([self getColumns]*sizeof(BOOL*));
+//        for (int j = 0; j < [self getColumns]; j++)
+//            highlighting[i][j] = NO;
+//    }
+//    return highlighting;
 }
 
 // ************************************
@@ -445,7 +447,7 @@
     BOOL moverMoved = [movingPiece hasMoved];
     BOOL occupantMoved = [occupant hasMoved];
     
-    BOOL** highlighting = _highlightBoard;
+    DDH2DArray* highlighting = [_highlightBoard copy];
     
     _highlightBoard = [self getBlankHighlighting];
     
@@ -455,7 +457,7 @@
     // If this move causes the player to be in check, we are moving into check
     BOOL movingIntoCheck = [self kingInCheckBelongingTo:[movingPiece getPlayer]];
     
-    free(_highlightBoard);
+//    free(_highlightBoard);
     _highlightBoard = highlighting;
     
     // Set the highlighter back to the piece we were checking
@@ -553,7 +555,7 @@
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     // Check to see if the location should be/is highlighted
-    return _highlightBoard[column][row] == YES;
+    return [[_highlightBoard objectAtColumn:column andRow:row] boolValue] == YES;
 }
 
 
@@ -564,7 +566,7 @@
     {
         for(int j = 0; j < _columns; j++)
         {
-            _highlightBoard[i][j] = NO;
+            [_highlightBoard replaceObjectAtColumn:i andRow:j withObject:[NSNumber numberWithBool:NO]];
         }
     }
     
@@ -626,7 +628,7 @@
 // PRIVATE
 -(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
 {
-    _highlightBoard[column][row] = YES;
+    [_highlightBoard replaceObjectAtColumn:column andRow:row withObject:[NSNumber numberWithBool:YES]];
 }
 
 // PRIVATE
