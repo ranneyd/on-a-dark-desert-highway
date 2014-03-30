@@ -89,6 +89,9 @@
     // Keep track of the kings
     DDHKing* whiteKing;
     DDHKing* blackKing;
+    
+    // Keep track of whether or not castling is happening
+    BOOL _castling;
 }
 
 // ********************
@@ -131,6 +134,7 @@
         
         // Initialized the empty board
         [self clearBoard];
+        
         
     }
     return self;
@@ -229,6 +233,7 @@
     
     // Set who gets to move first
     _nextMove = ChessPlayerBlack;
+    _castling = NO;
 }
 
 
@@ -268,6 +273,7 @@
         boardCopy->_locOfHighlightOwner = _locOfHighlightOwner;
         boardCopy->blackKing = blackKing;
         boardCopy->whiteKing = whiteKing;
+        boardCopy->_castling = _castling;
     }
     return boardCopy;
 }
@@ -331,22 +337,21 @@
     // Get the piece from _pieces
     DDHPiece* piece = [self pieceAtColumn:oldColumn andRow:oldRow];
     
-    /*
     // Check Castling
-    
     if ([piece isKindOfClass:[DDHKing class]]){
         if(column == [piece x] - 2){
+            _castling = YES;
             [self movePieceAtColumn:0 andRow:oldRow ToColumn:3 andRow:oldRow];
             [self afterMoveFromColumn:0 andRow:oldRow ToColumn:3 andRow:oldRow];
         }
         if(column == [piece x] + 2){
+            _castling = YES;
             [self movePieceAtColumn:[self getColumns]-1 andRow:oldRow ToColumn:[self getColumns] -3 andRow:oldRow];
             [self afterMoveFromColumn:[self getColumns]-1 andRow:oldRow ToColumn:[self getColumns] -3 andRow:oldRow];
         }
         
     }
     
-    */
     
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
@@ -368,9 +373,12 @@
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
-    // Switch turns
-    [self invertState];
-    
+    // Switch turns if we aren't castling
+    if(!_castling){
+        [self invertState];
+    } else {
+        _castling = NO;
+    }
     
     // See if next player is now in check
     if ([self kingInCheckBelongingTo:[self nextMove]]){
