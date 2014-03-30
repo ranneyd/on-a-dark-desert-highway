@@ -361,11 +361,35 @@
     
     // Change the new position in the board to our piece index
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
+    
 
 }
 
 -(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
 {
+    // See if next player is now in check
+    if ([self kingInCheckBelongingTo:[self nextMove]]){
+        NSLog(@"%d in check", [self nextMove]);
+    }
+    else{
+        NSLog(@"%d not in check", [self nextMove]);
+    }
+    
+    // Get the piece from _pieces
+    DDHPiece* piece = [self pieceAtColumn:column andRow:row];
+    
+    // Check for pawn promotion after movement
+    if([piece isKindOfClass:[DDHPawn class]]){
+        // If a black pawn has made it to the top, make it a queen
+        if(row == 0){
+            [_pieces replaceObjectAtColumn:column andRow:row withObject:[[DDHQueen alloc] initWithPlayer:ChessPlayerBlack atColumn:column andRow:row]];
+        }
+        // If a white pawn has made it to the bottom, make it a queen
+        if(row == _columns - 1){
+            [_pieces replaceObjectAtColumn:column andRow:row withObject:[[DDHQueen alloc] initWithPlayer:ChessPlayerWhite atColumn:column andRow:row]];
+        }
+    }
+    
     // Clear the highlighting
     [self clearHighlighting];
     
@@ -378,14 +402,6 @@
         [self invertState];
     } else {
         _castling = NO;
-    }
-    
-    // See if next player is now in check
-    if ([self kingInCheckBelongingTo:[self nextMove]]){
-        NSLog(@"%d in check", [self nextMove]);
-    }
-    else{
-        NSLog(@"%d not in check", [self nextMove]);
     }
 }
 
