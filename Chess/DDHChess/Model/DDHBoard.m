@@ -481,20 +481,6 @@
     [occupant moveToColumn:column andRow:row];
     [occupant setMoved:occupantMoved];
 
-    /*
-    // Undo castling
-    if ([movingPiece isKindOfClass:[DDHKing class]]){
-        if(column == oldColumn - 2){
-            NSLog(@"Moving King left");
-            [self movePieceAtColumn:3 andRow:oldRow ToColumn:0 andRow:oldRow];
-        }
-        if(column == oldColumn + 2){
-            NSLog(@"Moving King right");
-            [self movePieceAtColumn:[self getColumns]-3 andRow:oldRow ToColumn:[self getColumns] -1 andRow:oldRow];
-        }
-        
-    }*/
-    
     //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
     // Make sure that the moving piece knows where it is
     [movingPiece moveToColumn:oldColumn andRow:oldRow];
