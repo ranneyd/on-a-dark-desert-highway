@@ -28,6 +28,7 @@
     NSInteger column = [self x];
     NSInteger row = [self y];
     
+    // Up or down depending on player
     NSInteger verticalMove = row + pow(-1, [self getPlayer]);
     
     // Variables for attacking other pieces. If the pawn can't move left or right,
@@ -39,12 +40,17 @@
     if (([self getPlayer] == ChessPlayerBlack && [self y] == 6) || ([self getPlayer] == ChessPlayerWhite && [self y] == 1)) {
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
         NSInteger verticalDoubleMove = row + 2*pow(-1, [self getPlayer]);
-        
-        [self checkAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
+
+        // Only check if the pawn can move two spaces if it can move one
+        if([self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES]){
+            [self checkAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
+        }
+    } else {
+        // If it can't double jump, it may still be able to move one space
+        [self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
     }
     
-    // Check if the pawn can move forward.
-    [self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
+    
     
     // Check if we can attack other pieces to the left.
     [self checkAndMoveToColumn:leftMove andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:NO];
@@ -55,7 +61,8 @@
     return highlighting;
 }
 
--(void) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL) check andPacifist:(BOOL) pacifist{
+// Highlights the move if it is a valid move and returns whether or not it highlighted
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL) check andPacifist:(BOOL) pacifist{
     // Check if the pawn can move forward.
     if ([self onBoard:board AtColumn:column andRow:row]) {
         // Make sure we aren't moving into check
@@ -65,6 +72,7 @@
                 // Pacifist moves only work if the space is empty
                 if ([board isEmptySquareAtColumn:column andRow:row]) {
                     [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+                    return YES;
                 }
             }
             // If not in pacifist mode, in warmonger mode, aka the piece MUST attack
@@ -72,10 +80,12 @@
                 // make sure the space has an enemy piece in it.
                 if ([self warmongerWithBoard:board atColumn:column andRow:row]) {
                     [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
+                    return YES;
                 }
             }
         }
     }
+    return NO;
 }
 
 // True if the place is not empty and the piece in that place is an enemy piece.
