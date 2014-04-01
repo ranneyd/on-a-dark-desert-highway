@@ -8,35 +8,34 @@
 
 #import <Foundation/Foundation.h>
 #import "DDHViewController.h"
-#import "DDHBoard.h"
-#import "DDHChessBoardView.h"
+#import "DDHRandomChessController.h"
+
+@interface DDHViewController()
+@property (weak, nonatomic) IBOutlet UIButton *randomChessButton;
+
+@end
 
 @implementation DDHViewController
 {
-    DDHBoard* _board; // Contains the board on which the game will be played
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Create the board object
-    _board = [[DDHBoard alloc] init];
-    // Initialize the board
-    [_board setToInitialState];
     
-
-    // Set background color. For displaying images, use self.backgroundImage.image = [UIImage imageNamed: @"image.png"]
-    self.view.backgroundColor = [UIColor blackColor];
-    
-    // Create and initialize view to display the board and add it to this controller
-    DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
-    [self.view addSubview:chessBoard];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)randomChessAction:(id)sender
+{
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil];
+    
+    [self presentViewController:controller animated:NO completion:nil];
 }
 
 @end
