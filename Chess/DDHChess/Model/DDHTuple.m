@@ -18,4 +18,8 @@
     return me;
 }
 
+-(NSString*) description{
+    return [NSString stringWithFormat:@"(%d,%d)", (int)[self x], (int)[self y]];
+}
+
 @end

@@ -12,6 +12,7 @@
 @implementation DDHPiece
 {
     ChessPlayer _owner;
+    BOOL _hasMoved;
 }
 
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
@@ -19,6 +20,7 @@
     self = [super init];
     [self moveToColumn:column andRow:row];
     _owner = player;
+    _hasMoved = NO;
     return self;
 }
 
@@ -56,6 +58,7 @@
 
 -(void) moveToColumn:(NSInteger)column andRow:(NSInteger)row
 {
+    _hasMoved = YES;
     [self setX:column];
     [self setY:row];
 }
@@ -70,17 +73,11 @@
     return column >= 0 && column < [board getColumns] && row >= 0 && row < [board getRows];
 }
 
--(BOOL**) blankHighlightingForBoard:(DDHBoard*) board
+-(void) setPlayer:(ChessPlayer) player
 {
-    // New Array of booleans on heap (double pointers because 2d array in C means pointers to pointers? It was yelling at me otherwise)
-    // Should be size of rows*columns
-    BOOL** highlighting = malloc([board getRows]*[board getColumns]);
-    // Initialize everything to false
-    for (int i = 0; i < [board getRows]; i++)
-        for (int j = 0; j < [board getColumns]; j++)
-            highlighting[i][j] = NO;
-    return highlighting;
+    _owner = player;
 }
+
 
 -(NSString*) description
 {
@@ -89,8 +86,7 @@
     return @"White";
 }
 
-// After the pawn moves to (column, row) location, is the King in check?
--(BOOL) kingInCheckAfterMovingToColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL)check
 {
     //NSLog(@"Checking if king in check after moving to column:%d and row:%d", column, row);
     NSInteger oldColumn = [self x];
@@ -116,11 +112,13 @@
     return NO;
 }
 
-// TODO: Make use of board's kingInCheck function. Make copy of board as to not mess things up
-
--(BOOL)movingIntoCheckinColumn:(NSInteger)column andRow:(NSInteger)row withBoard:(DDHBoard *)board
-{
-    return NO;
+-(BOOL)hasMoved{
+    return _hasMoved;
 }
+
+-(void) setMoved:(BOOL) moved{
+    _hasMoved = moved;
+}
+
 
 @end

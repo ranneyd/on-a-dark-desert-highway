@@ -92,7 +92,9 @@
                 //NSLog(@"Survived kingInCheck!");
             }
         }
-        
+    } else {
+        // If it can't double jump, it may still be able to move one space
+        [self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
     }
     
     // Check if the pawn can move forward.

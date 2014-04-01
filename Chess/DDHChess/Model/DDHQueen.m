@@ -49,16 +49,29 @@
     for(int i = 0; i < 8; i++){
         // accumulate new positions. Don't want to include piece's current position.
         DDHTuple* nextMove = [points objectAtIndex:i];
-        int dx = x + [nextMove x];
-        int dy = y + [nextMove y];
+        long dx = x + [nextMove x];
+        long dy = y + [nextMove y];
         // While we're still on the board.
         while([self onBoard:board AtColumn:dx andRow:dy]){
-            // If this spot has a piece in it...
-            if(![board isEmptySquareAtColumn:dx andRow:dy ]){
-                // if it is our piece, do nothing and get out of the loop because you can't go further
-                if([[board pieceAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
-                    break;
-                // If it isn't our piece, highlight that spot but exit the loop because we can't go further
+            if ([self checkAndMoveToColumn:dx andRow:dy withBoard:board andHighlighting:highlighting andCheck: check]){
+                break;
+            }
+                       
+            
+            /*
+            if( !(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+                // If this spot has a piece in it...
+                if(![board isEmptySquareAtColumn:dx andRow:dy ]){
+                    // if it is our piece, do nothing and get out of the loop because you can't go further
+                    if([[board pieceAtColumn:dx andRow:dy] getPlayer] == [self getPlayer])
+                        break;
+                    // If it isn't our piece, highlight that spot but exit the loop because we can't go further
+                    else{
+                        [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                        break;
+                    }
+                }
+                // If the place is empty...
                 else{
                     [attackable addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
                     break;

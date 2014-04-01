@@ -45,4 +45,23 @@
     [_array replaceObjectAtIndex:[self rows]*row + column withObject:object];
 }
 
+// Copy the entire array
+// Modeled after question by fuzzygoat on http://stackoverflow.com/questions/9907154/best-practice-when-implementing-copywithzone
+-(id)copyWithZone:(NSZone *)zone
+{
+    // Create the array with the space allocated for the arbitrary objects
+    DDH2DArray* arrayCopy = [[[self class] allocWithZone:zone] initWithColumns:self.columns andRow:self.rows
+                                                                     andObject:[self objectAtColumn:0 andRow:0]];
+    // If the object was created, loop through all the objects in the array and make them the same
+    // NOTE: Does not copy the objects in the array, just the array itself. TODO
+    if(arrayCopy){
+        for (int c=0; c<self.columns; ++c){
+            for (int r=0; r<self.rows; ++r){
+                [arrayCopy replaceObjectAtColumn:c andRow:r withObject:[self objectAtColumn:c andRow:r]];
+            }
+        }
+    }
+    return arrayCopy;
+}
+
 @end

@@ -7,10 +7,11 @@
 //
 
 #import "DDHKnight.h"
+#import "DDHBoard.h"
 
 @implementation DDHKnight
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -43,14 +44,22 @@
     // Iterate over moves. If on the board, go there. Knights don't have any other criteria for movement.
     for(int i = 0; i < 8; i++){
         DDHTuple* nextMove = points[i];
-        int dx = x + [nextMove x];
-        int dy = y + [nextMove y];
-        //NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
-        if([self onBoard:board AtColumn:dx andRow:dy])
-            //NSLog(@"Adding move for dx: %d and dy: %d", dx, dy);
-            [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+        long dx = x + [nextMove x];
+        long dy = y + [nextMove y];
+        
+        //NSLog(@"Moving %@ to (%d, %d)", [self description], dx,dy);
+        
+        [self checkAndMoveToColumn:dx andRow:dy withBoard:board andHighlighting:highlighting andCheck: check];
+        
+        /*//NSLog(@"Is this working: %d and: %d", [nextMove x], [nextMove y]);
+        if([self onBoard:board AtColumn:dx andRow:dy]){
+            if([[board pieceAtColumn:dx andRow:dy] getPlayer] != [self getPlayer]){
+                if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
+                }
+            }
+        }*/
     }
-    NSLog(@"Survived");
     return highlighting;
 }
 

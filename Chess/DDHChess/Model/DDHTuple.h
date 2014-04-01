@@ -16,4 +16,6 @@
 
 -(id) initWithX: (NSInteger) x andY:(NSInteger) y;
 
+-(NSString*) description;
+
 @end

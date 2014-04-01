@@ -17,7 +17,7 @@
 #import "DDHTuple.h"
 
 /* The Board */
-@interface DDHBoard : NSObject
+@interface DDHBoard : NSObject <NSCopying>
 
 // *****************
 // ** Public Data **
@@ -46,6 +46,12 @@
 -(void) clearBoard;
 
 
+// Set owner of highlighting
+-(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
+// Implementation of NSCopying protocol that allows for object copying
+-(id) copyWithZone:(NSZone *)zone;
+
 // *************
 // ** Getters **
 // *************
@@ -55,6 +61,7 @@
 
 // Returns the number of rows
 -(NSUInteger) getRows;
+
 
 
 // ************************************
@@ -79,17 +86,23 @@
 // ** Additional Game Logic **
 // ***************************
 
+// Changes whose turn it is
+-(void) invertState;
+
 // Checks if the piece at a location does not belong to player
 -(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player;
 
 // Checks if the selected piece is at the given row and column
 -(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
-// TODO
- -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
+// Checks if player is in check
+-(BOOL) kingInCheckBelongingTo:(ChessPlayer)player;
 
-// TODO
-//-(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn: (NSInteger) column andRow: (NSInteger) row;
+// Puts a piece in a place. Only effects _pieces data member
+-(void) putPiece:(DDHPiece*) piece inColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
+// Checks to see if a piece moving from one point to another would put the player in check.
+-(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 
 // *************************

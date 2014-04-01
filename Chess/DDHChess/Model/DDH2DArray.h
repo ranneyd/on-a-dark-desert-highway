@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDH2DArray : NSObject
+@interface DDH2DArray : NSObject <NSCopying>
 
 @property NSUInteger rows;
 
@@ -25,4 +25,6 @@
 // Replace the object at one location in the 2D array with another object
 -(void) replaceObjectAtColumn:(NSUInteger)column andRow:(NSUInteger)row withObject:(id)object;
 
+// Implementation of NSCopying protocol that allows for object copying
+-(id) copyWithZone:(NSZone *)zone;
 @end

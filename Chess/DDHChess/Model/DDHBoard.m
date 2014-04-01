@@ -23,6 +23,12 @@
 // ** Private Functions **
 // ***********************
 
+
+-(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows;
+
+// Return an array of blank highlighting
+-(DDH2DArray*) getBlankHighlighting;
+
 // ************************************
 // ** Piece Interaction and Movement **
 // ************************************
@@ -32,8 +38,7 @@
 // ** Additional Game Logic **
 // ***************************
 
-// Changes whose turn it is
--(void) invertState;
+
 
 
 // *************************
@@ -74,12 +79,15 @@
     NSUInteger _columns; // Number of columns in the board
     
     // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
-    BOOL _highlightBoard[8][8]; // Which parts of the board are currently highlighted
+    DDH2DArray* _highlightBoard; // Which parts of the board are currently highlighted
     
     
     // Keep track of the kings
     DDHKing* whiteKing;
     DDHKing* blackKing;
+    
+    // Keep track of whether or not castling is happening
+    BOOL _castling;
 }
 
 // ********************
@@ -110,11 +118,31 @@
     return self;
 }
 
+-(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows
+{
+    if (self = [super init]){
+        // Set the size of the board. TODO: Change for dynamically allocated array.
+        _rows = rows;
+        _columns = columns;
+        
+        // Initialize the array of pieces. Set all pieces on the board to null pieces initially (i.e. set the board
+        // to be completely empty).
+        _pieces = [pieces copy];
+        
+        // Initialized the empty board
+        [self clearBoard];
+        
+        
+    }
+    return self;
+}
+
 -(void) setToInitialState
 {
     // Clear le board
     [self clearBoard];
     
+    /*
     // Create a list of tuples that correspond to the initial piece layout. Change for custom layout
     NSArray *whitePositions = [NSArray arrayWithObjects:
                                [[DDHTuple alloc] initWithX:0 andY:0], [[DDHTuple alloc] initWithX:1 andY:0],
@@ -153,15 +181,7 @@
                             [DDHBishop class], [DDHQueen  class],
                             [DDHKing   class], [DDHBishop class],
                             [DDHKnight class], [DDHRook   class],nil];
-//    NSDictionary *blackDict = [NSDictionary dictionaryWithObjects:blackPieces forKeys:blackPositions];
-//
-//    // Loop through all positions and place the correct pieces
-//    for (DDHTuple *pos in whiteDict) {
-//        NSInteger x = [pos x];
-//        NSInteger y = [pos y];
-//        [_pieces replaceObjectAtColumn:x andRow:y withObject:
-//                [[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:x andRow:y]];
-//    }
+    */
     
     // Place the white pieces
     [_pieces replaceObjectAtColumn:0 andRow:1 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:0 andRow:1]];
@@ -204,12 +224,13 @@
     // Nobody has highlighted anything yet, so make it out of bounds
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:_columns + 1 andY:_rows + 1];
     
-    //
+    // Save pointers to the kings for check purposes.
     whiteKing = [_pieces objectAtColumn:4 andRow:0];
     blackKing = [_pieces objectAtColumn:4 andRow:7];
     
     // Set who gets to move first
     _nextMove = ChessPlayerBlack;
+    _castling = NO;
 }
 
 
@@ -231,6 +252,29 @@
     [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
 }
 
+// Create a copy of the entire board
+// Modeled after question by fuzzygoat on http://stackoverflow.com/questions/9907154/best-practice-when-implementing-copywithzone
+-(id) copyWithZone:(NSZone *)zone {
+    // Create a new DDHBoard object to be the copy
+    DDHBoard* boardCopy = [[[self class] allocWithZone:zone] init];
+    
+    // If the boardCopy was created, copy each of the values from self to this copy
+    if(boardCopy){
+        boardCopy->_rows = _rows;
+        boardCopy->_columns = _columns;
+        boardCopy->_pieces = [_pieces copyWithZone:zone];
+        boardCopy->_highlightBoard = [_highlightBoard copyWithZone:zone];
+        boardCopy->_boardDelegate = _boardDelegate;
+        boardCopy->_delegate = _delegate;
+        boardCopy->_nextMove = _nextMove;
+        boardCopy->_locOfHighlightOwner = _locOfHighlightOwner;
+        boardCopy->blackKing = blackKing;
+        boardCopy->whiteKing = whiteKing;
+        boardCopy->_castling = _castling;
+    }
+    return boardCopy;
+}
+
 
 // *************
 // ** Getters **
@@ -246,6 +290,16 @@
     return _rows;
 }
 
+-(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row
+{
+    _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
+}
+
+-(DDH2DArray*) getBlankHighlighting
+{
+    DDH2DArray* highlighting = [[DDH2DArray alloc] initWithColumns:_columns andRow:_rows andObject:[NSNumber numberWithBool:NO]];
+    return highlighting;
+}
 
 // ************************************
 // ** Piece Interaction and Movement **
@@ -271,7 +325,7 @@
 {
     // Move the selected piece with private function
     [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:column andRow:row];
-
+    [self afterMoveFromColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:column andRow:row];
 }
 
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
@@ -290,6 +344,22 @@
     // Get the piece from _pieces
     DDHPiece* piece = [self pieceAtColumn:oldColumn andRow:oldRow];
     
+    // Check Castling
+    if ([piece isKindOfClass:[DDHKing class]]){
+        if(column == [piece x] - 2){
+            _castling = YES;
+            [self movePieceAtColumn:0 andRow:oldRow ToColumn:3 andRow:oldRow];
+            [self afterMoveFromColumn:0 andRow:oldRow ToColumn:3 andRow:oldRow];
+        }
+        if(column == [piece x] + 2){
+            _castling = YES;
+            [self movePieceAtColumn:[self getColumns]-1 andRow:oldRow ToColumn:[self getColumns] -3 andRow:oldRow];
+            [self afterMoveFromColumn:[self getColumns]-1 andRow:oldRow ToColumn:[self getColumns] -3 andRow:oldRow];
+        }
+        
+    }
+    
+    
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
     
@@ -298,7 +368,11 @@
     
     // Change the new position in the board to our piece index
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    
+
+}
+
+-(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
+{
     // Clear the highlighting
     [self clearHighlighting];
     
@@ -306,8 +380,25 @@
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
-    // Switch turns
-    [self invertState];
+    // Switch turns if we aren't castling
+    if(!_castling){
+        [self invertState];
+    } else {
+        _castling = NO;
+    }
+    
+    // See if next player is now in check
+    if ([self kingInCheckBelongingTo:[self nextMove]]){
+        NSLog(@"%d in check", [self nextMove]);
+    }
+    else{
+        NSLog(@"%d not in check", [self nextMove]);
+    }
+}
+
+-(void) putPiece:(DDHPiece *)piece inColumn:(NSUInteger)column andRow:(NSUInteger) row
+{
+    [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
 }
 
 -(void) undoLastMove
@@ -444,6 +535,57 @@
     //NSLog(@"King NOT IN CHECK");
     return NO;
 }
+
+
+-(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row
+{
+    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    DDHBoard* boardCopy = [self copy];
+    
+    // Moving piece. Checking if this piece moving would cause check
+    DDHPiece* movingPiece = [boardCopy pieceAtColumn:oldColumn andRow:oldRow];
+    // Occupant of the space the moving piece is moving to
+    DDHPiece* occupant = [boardCopy pieceAtColumn:column andRow:row];
+    
+    // Remember data about the pieces too
+    BOOL moverMoved = [movingPiece hasMoved];
+    BOOL occupantMoved = [occupant hasMoved];
+    
+    // Move the moving piece to the new position.
+    [boardCopy movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
+    
+    // If this move causes the player to be in check, we are moving into check
+    BOOL movingIntoCheck = [boardCopy kingInCheckBelongingTo:[movingPiece getPlayer]];
+    
+    // Make sure the old piece knows internally where it is
+    [occupant moveToColumn:column andRow:row];
+    [occupant setMoved:occupantMoved];
+
+    /*
+    // Undo castling
+    if ([movingPiece isKindOfClass:[DDHKing class]]){
+        if(column == oldColumn - 2){
+            NSLog(@"Moving King left");
+            [self movePieceAtColumn:3 andRow:oldRow ToColumn:0 andRow:oldRow];
+        }
+        if(column == oldColumn + 2){
+            NSLog(@"Moving King right");
+            [self movePieceAtColumn:[self getColumns]-3 andRow:oldRow ToColumn:[self getColumns] -1 andRow:oldRow];
+        }
+        
+    }*/
+    
+    //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
+    // Make sure that the moving piece knows where it is
+    [movingPiece moveToColumn:oldColumn andRow:oldRow];
+    [movingPiece setMoved:moverMoved];
+    
+    //NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
+    return movingIntoCheck;
+    
+    //return NO;
+}
+
 /*
  
  // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
@@ -494,6 +636,9 @@
  */
 
 
+
+
+
 // *************************
 // ** UI Helper Functions **
 // *************************
@@ -501,7 +646,7 @@
 -(BOOL) highlightedAtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     // Check to see if the location should be/is highlighted
-    return _highlightBoard[column][row] == YES;
+    return [[_highlightBoard objectAtColumn:column andRow:row] boolValue] == YES;
 }
 
 
@@ -512,7 +657,7 @@
     {
         for(int j = 0; j < _columns; j++)
         {
-            _highlightBoard[i][j] = NO;
+            [_highlightBoard replaceObjectAtColumn:i andRow:j withObject:[NSNumber numberWithBool:NO]];
         }
     }
     
@@ -529,6 +674,12 @@
     // Get all possible moves that a piece can make
     //NSLog(@"Getting highlighted squares from piece at column:%d andRow:%d", column, row);
     NSMutableArray* allHighlighting = [self getHighlightedSquaresFromPieceAtColumn:column andRow:row];
+    
+    /*
+    
+    This should not be necessary. getHighlightedSquares should not give you squares with friendly pieces on them.
+     
+     
     // Create a way to keep track of what spaces a piece can actually move to (i.e. not taking it's own color piece)
     NSMutableArray* properHighlighting = [[NSMutableArray alloc] init];
     
@@ -538,8 +689,10 @@
             [properHighlighting addObject:location];
         }
     }
+     
     // Highlight each space and tell the views to update
-    for (DDHTuple *location in properHighlighting){
+    for (DDHTuple *location in properHighlighting){*/
+    for (DDHTuple* location in allHighlighting){
         [self highlightAtColumn:[location x] andRow: [location y]];
         [self informDelegateOfPieceChangedAtColumn:[location x] andRow:[location y]];
     }
@@ -568,7 +721,7 @@
 // PRIVATE
 -(void) highlightAtColumn:(NSInteger)column andRow:(NSInteger)row;
 {
-    _highlightBoard[column][row] = YES;
+    [_highlightBoard replaceObjectAtColumn:column andRow:row withObject:[NSNumber numberWithBool:YES]];
 }
 
 // PRIVATE
@@ -576,7 +729,7 @@
 {
     // Check if the delegate knows how to respond, and then tell it that a change was made
     if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
-        [_delegate pieceChangedAtColumn:column addRow:row];
+        [_delegate pieceChangedAtColumn:(int)column addRow:(int)row];
 }
 
 

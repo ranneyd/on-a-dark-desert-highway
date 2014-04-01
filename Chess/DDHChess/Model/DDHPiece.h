@@ -23,21 +23,31 @@
 -(BOOL) couldAttackAtColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board;
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board andCheck:(BOOL)check;
 
 // Changes the x and y properties of this piece
 -(void) moveToColumn: (NSInteger) column andRow:(NSInteger)row;
 
+// Get player
 -(ChessPlayer) getPlayer;
 
+// Check if a position is on the given board
 -(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 
--(BOOL**) blankHighlightingForBoard:(DDHBoard*) board;
+-(void) setPlayer:(ChessPlayer) player;
 
 -(BOOL) kingInCheckAfterMovingToColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board;
 
 -(NSString*) description;
 
--(BOOL) movingIntoCheckinColumn:(NSInteger) column andRow:(NSInteger) row withBoard:(DDHBoard*)board;
+// Checks if the move is on the board, to an empty space or enemy piece and that the move doesn't put the player in check. Adjusts highlighting accordingly.
+// Returns YES if the spot in question had a piece in it or was off the board
+-(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL) check;
+
+// True if the piece has moved.
+-(BOOL) hasMoved;
+
+// Sets whether or not the piece has moved.
+-(void) setMoved:(BOOL) moved;
 
 @end
