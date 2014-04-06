@@ -11,8 +11,6 @@
 #import "DDHBoard.h"
 
 @implementation DDHPawn
-{
-}
 
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {

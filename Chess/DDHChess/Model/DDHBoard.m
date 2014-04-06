@@ -92,6 +92,9 @@
     
     // Keep track of whether or not castling is happening
     BOOL _castling;
+    
+    // Double jumping pawns for en passant
+    DDHPiece* _pawnThatDoubleMovedLastTurn;
 }
 
 // ********************
@@ -233,7 +236,10 @@
     
     // Set who gets to move first
     _nextMove = ChessPlayerBlack;
+    
+    // Flags to handle special piece movements and rules
     _castling = NO;
+    _pawnThatDoubleMovedLastTurn = nil;
 }
 
 
@@ -274,6 +280,7 @@
         boardCopy->blackKing = blackKing;
         boardCopy->whiteKing = whiteKing;
         boardCopy->_castling = _castling;
+        boardCopy->_pawnThatDoubleMovedLastTurn = _pawnThatDoubleMovedLastTurn;
     }
     return boardCopy;
 }
@@ -375,11 +382,18 @@
         NSLog(@"%d not in check", [self nextMove]);
     }
     
+    // Check if double move pawn flag from last turn should be reset
+    if (_pawnThatDoubleMovedLastTurn) {
+        _pawnThatDoubleMovedLastTurn = nil;
+    }
+    
     // Get the piece from _pieces
     DDHPiece* piece = [self pieceAtColumn:column andRow:row];
     
-    // Check for pawn promotion after movement
+    // Check for pawn promotion after movement and change flags for en passant
     if([piece isKindOfClass:[DDHPawn class]]){
+        // Pawn promotion
+        
         // If a black pawn has made it to the top, make it a queen
         if(row == 0){
             [_pieces replaceObjectAtColumn:column andRow:row withObject:[[DDHQueen alloc] initWithPlayer:ChessPlayerBlack atColumn:column andRow:row]];
@@ -388,7 +402,15 @@
         if(row == _columns - 1){
             [_pieces replaceObjectAtColumn:column andRow:row withObject:[[DDHQueen alloc] initWithPlayer:ChessPlayerWhite atColumn:column andRow:row]];
         }
+        
+        // En passant TODO
+        
+        // If the pawn moved two spaces, then update it's flag
+        if((row == oldRow - 2) || (row == oldRow + 2)){
+            _pawnThatDoubleMovedLastTurn = piece;
+        }
     }
+    NSLog(@"Pawn that moved last turn: %@", [_pawnThatDoubleMovedLastTurn description]);
     
     // Clear the highlighting
     [self clearHighlighting];
