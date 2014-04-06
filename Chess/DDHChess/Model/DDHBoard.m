@@ -364,6 +364,15 @@
         
     }
     
+    // Check en passant
+    if ([piece isKindOfClass:[DDHPawn class]]){
+        // If the piece to the left or the right of the pawn is the double jumped pawn, as is of the opposite color, then we can take it
+        if(([self pieceAtColumn:column andRow:[piece y]] == _pawnThatDoubleMovedLastTurn) &&
+                         [self doesPieceAtColumn:column andRow:row notBelongToPlayer:_nextMove]){
+            [_pieces replaceObjectAtColumn:column andRow:[piece y] withObject:[[DDHNullPiece alloc] init]];
+        }
+    }
+    
     
     // Make sure the piece's internal x and y are updated to the new position
     [piece moveToColumn:column andRow:row];
