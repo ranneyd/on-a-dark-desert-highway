@@ -62,7 +62,8 @@
 // Returns the number of rows
 -(NSUInteger) getRows;
 
-
+// Get the pawn that double jumped last turn
+-(DDHPiece*) getPawnThatDoubleMovedLastTurn;
 
 // ************************************
 // ** Piece Interaction and Movement **

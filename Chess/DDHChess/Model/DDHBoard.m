@@ -300,6 +300,11 @@
     return _rows;
 }
 
+-(DDHPiece*) getPawnThatDoubleMovedLastTurn
+{
+    return _pawnThatDoubleMovedLastTurn;
+}
+
 -(void) setHighlighterwithColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
     _locOfHighlightOwner = [[DDHTuple alloc] initWithX:column andY:row];
