@@ -72,8 +72,11 @@
             ![kingCastle hasMoved] &&
             [board isEmptySquareAtColumn:x + 1 andRow:y] &&
             [board isEmptySquareAtColumn:x + 2 andRow:y] ){
+            // Make sure that we are not moving through or into check
             if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:[board getColumns] -2 andRow:y])){
-                [highlighting addObject:[[DDHTuple alloc] initWithX: [board getColumns] -2 andY:y]];
+                if(![board checkIfMoveFromColumn:x andRow:y toColumn:[board getColumns] -3 andRow:y]){
+                    [highlighting addObject:[[DDHTuple alloc] initWithX: [board getColumns] -2 andY:y]];
+                }
             }
         }
         
@@ -85,8 +88,11 @@
             [board isEmptySquareAtColumn:x - 1 andRow:y] &&
             [board isEmptySquareAtColumn:x - 2 andRow:y] &&
             [board isEmptySquareAtColumn:x - 3 andRow:y]){
+            // Make sure that we are not moving through or into check
             if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn: 2 andRow:y])){
-                [highlighting addObject:[[DDHTuple alloc] initWithX: 2 andY:y]];
+                if(![board checkIfMoveFromColumn:x andRow:y toColumn: 3 andRow:y]){
+                    [highlighting addObject:[[DDHTuple alloc] initWithX: 2 andY:y]];
+                }
             }
         }
     }
