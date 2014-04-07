@@ -11,7 +11,7 @@
 
 @implementation DDHQueen
 
--(NSMutableArray*) attackablePositionsOnBoard:(DDHBoard*)board
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     NSUInteger x = [self x];
     NSUInteger y = [self y];
@@ -43,7 +43,7 @@
     // down 1 right 1
     [points addObject:[[DDHTuple alloc] initWithX:1 andY:1]];
     
-    NSMutableArray *attackable = [[NSMutableArray alloc]init];
+    NSMutableArray *highlighting = [[NSMutableArray alloc]init];
     
     // Iterate over move types. Either up and left, up and right, etc...
     for(int i = 0; i < 8; i++){
@@ -73,43 +73,16 @@
                 }
                 // If the place is empty...
                 else{
-                    [attackable addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
-                    break;
+                    // highlight the current spot
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
                 }
-            }
-            // If the place is empty...
-            else{
-                // highlight the current spot
-                [attackable addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
-            }
+            }*/
             // Keep going
             dx += [nextMove x];
             dy += [nextMove y];
         }
         
     }
-    return attackable;
-}
-
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
-{
-    // Array of possible moves to be highlighted.
-    NSMutableArray *highlighting = [[NSMutableArray alloc]init];
-    
-    // Array of all possible moves.
-    NSMutableArray *attackable = [self attackablePositionsOnBoard:board];
-    
-    for (DDHTuple* position in attackable) {
-        NSInteger positionColumn = [position x];
-        NSInteger positionRow = [position y];
-        // Check if moving to this square puts the king in check. If it doesn't put the king in check, add the move
-        // to the list of possible moves.
-        if (![self kingInCheckAfterMovingToColumn:positionColumn andRow:positionRow onBoard:board]) {
-            [highlighting addObject:[[DDHTuple alloc] initWithX:positionColumn andY:positionRow]];
-        }
-    }
-    
-    // Iterate over move types. Either up and left, up and right, etc...
     return highlighting;
 }
 -(NSString*) description

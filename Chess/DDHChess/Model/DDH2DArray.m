@@ -27,9 +27,9 @@
     return self;
 }
 
--(id) objectAtIndex:(NSUInteger)index
+-(NSUInteger) count
 {
-    return [_array objectAtIndex:index];
+    return [_array count];
 }
 
 // Get the object at a particular location in the 2D array
