@@ -114,7 +114,7 @@
 // Update the highlighted status of a square.
 - (void) updateHighlighted
 {
-    // If the square has the piece the user selected, put a white border around the piece.
+    // If the square has the piece the user selected, put an orange border around the piece.
     if ([ _board isHighlightOwnerAtColumn:_column andRow:_row]) {
         self.layer.borderColor = [UIColor orangeColor].CGColor;
     }
@@ -186,6 +186,7 @@
             // color as the player who is set to make the next
             // move, so highlight the squares that piece can
             // move to.
+            //NSLog(@"Highlighting for piece at column:%d and row:%d", _column, _row);
             [_board highlightMovesForPieceAtColumn:_column andRow:_row];
         }
     }

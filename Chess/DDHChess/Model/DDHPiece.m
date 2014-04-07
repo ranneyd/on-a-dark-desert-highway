@@ -24,7 +24,33 @@
     return self;
 }
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
+-(NSMutableArray*) attackablePositionsOnBoard:(DDHBoard*)board
+{
+    // To be overridden
+    return NULL;
+}
+
+// Method that returns true if the piece could attack at the given column on the given board.
+// Considers all possible moves by the piece, regardless of whether the piece is pinned.
+-(BOOL) couldAttackAtColumn:(NSInteger)column andRow:(NSInteger)row onBoard:(DDHBoard*)board
+{
+    NSMutableArray* attackablePositions = [self attackablePositionsOnBoard:board];
+    
+    // TODO: If we had some sort of way to sort the elements in attackablePositions we could
+    // make this faster via binary search.
+    for (DDHTuple* position in attackablePositions) {
+        // If the location given by the function call is attackable
+        if ([position x] == column && [position y] == row) {
+            // Return true
+            return YES;
+        }
+    }
+    
+    // Otherwise, return false.
+    return NO;
+}
+
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
 {
     // To be overridden
     return NULL;
@@ -62,27 +88,28 @@
 
 -(BOOL) checkAndMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row withBoard:(DDHBoard*) board andHighlighting:(NSMutableArray*) highlighting andCheck:(BOOL)check
 {
+    //NSLog(@"Checking if king in check after moving to column:%d and row:%d", column, row);
+    NSInteger oldColumn = [self x];
+    NSInteger oldRow = [self y];
     
-    //NSLog(@"Checking piece %@ going to (%d,%d)", [self description], column, row);
-    // Check if spot is on the board
-    if([self onBoard:board AtColumn:column andRow:row]){
-        if(!(check &&[board checkIfMoveFromColumn:[self x] andRow:[self y] toColumn:column andRow:row])){
-            // If the board is empty, we can move there, but there is no piece so return NO
-            if([board isEmptySquareAtColumn:column andRow:row]){
-                [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
-            }
-            // If not empty (previous if returns) and not us, then it belongs to another player, so we can move there.
-            if ([[board pieceAtColumn:column andRow:row] getPlayer] != [self getPlayer]){
-                [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
-            }
-        }
-        
-        if ([board isEmptySquareAtColumn:column andRow:row])
-            return NO;
-        else
-            return YES;
+    // Check if the move is valid
+    if (![self onBoard:board AtColumn:column andRow:row]) {
+        return NO;
     }
-    return YES;
+    
+    // Find out if King is in check after moving by moving the piece and checking if
+    // the King is in check.
+    [board movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
+    if ([board kingInCheckBelongingTo:[self getPlayer]])
+    {
+        // The move puts the King in check, so undo the move and return YES
+        [board undoLastMove];
+        return YES;
+    }
+    
+    // Otherwise, the king is not in check, so move the piece back and return NO
+    [board undoLastMove];
+    return NO;
 }
 
 -(BOOL)hasMoved{

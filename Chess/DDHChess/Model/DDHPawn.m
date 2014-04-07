@@ -15,18 +15,20 @@
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super initWithPlayer:player atColumn:column andRow:row];
+    startingLocation = [[DDHTuple alloc] initWithX:column andY:row];
     return self;
 }
 
--(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
+-(NSMutableArray*) attackablePositionsOnBoard:(DDHBoard*)board
 {
-    // Array of moves to be returned
-    NSMutableArray* highlighting = [[NSMutableArray alloc] init];
+    // Array of moves to be returned.
+    NSMutableArray* attackable = [[NSMutableArray alloc] init];
     
+    // Location of the piece currently.
     NSInteger column = [self x];
     NSInteger row = [self y];
     
-    // Up or down depending on player
+    // Row one in front of the pawn based on color of piece.
     NSInteger verticalMove = row + pow(-1, [self getPlayer]);
     
     // Variables for attacking other pieces. If the pawn can't move left or right,
@@ -34,14 +36,58 @@
     NSInteger leftMove = column - 1 >= 0 ? column - 1 : -1;
     NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : -1;
     
+    // Pawns can (usually) only attack in two locations (one square diagonally forward along both diagonals),
+    // so check those two locations.
+    
+    // Check if we can attack other pieces to the left.
+    if ([self onBoard:board AtColumn:leftMove andRow:verticalMove]) {
+        if (![board isEmptySquareAtColumn:leftMove andRow:verticalMove]) {
+            if ([board doesPieceAtColumn:leftMove andRow:verticalMove notBelongToPlayer:[self getPlayer]]) {
+                [attackable addObject:[[DDHTuple alloc] initWithX:leftMove andY:verticalMove]];
+            }
+        }
+    }
+    
+    // Check if the pawn can attack other pieces to the right.
+    if ([self onBoard:board AtColumn:rightMove andRow:verticalMove]) {
+        if (![board isEmptySquareAtColumn:rightMove andRow:verticalMove]) {
+            if ([board doesPieceAtColumn:rightMove andRow:verticalMove notBelongToPlayer:[self getPlayer]]) {
+                [attackable addObject:[[DDHTuple alloc] initWithX:rightMove andY:verticalMove]];
+            }
+        }
+    }
+    
+    return attackable;
+}
+
+-(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board
+{
+    
+    // Array of moves to be returned
+    NSMutableArray* highlighting = [[NSMutableArray alloc] init];
+    
+    NSInteger column = [self x];
+    NSInteger row = [self y];
+    
+    NSInteger verticalMove = row + pow(-1, [self getPlayer]);
+    
     // Next check for ability to move two squares forward.
-    if (([self getPlayer] == ChessPlayerBlack && [self y] == 6) || ([self getPlayer] == ChessPlayerWhite && [self y] == 1)) {
+    if ([self hasNotMoved]) {
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
         NSInteger verticalDoubleMove = row + 2*pow(-1, [self getPlayer]);
-
-        // Only check if the pawn can move two spaces if it can move one
-        if([self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES]){
-            [self checkAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
+        
+        // Sanity check to make sure the move is on the board
+        if ([self onBoard:board AtColumn:column andRow:verticalDoubleMove]) {
+            
+            // Make sure both the square immediately in front of and two squares in front of the pawn are empty.
+            if ([board isEmptySquareAtColumn:column andRow:verticalDoubleMove] && [board isEmptySquareAtColumn:column andRow:verticalMove]) {
+                // Finally check if moving to this square puts the king in check.
+                //NSLog(@"Going into kingInCheck for doubleVertical move!");
+                if (![self kingInCheckAfterMovingToColumn:column andRow:verticalDoubleMove onBoard:board]) {
+                    [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:verticalDoubleMove]];
+                }
+                //NSLog(@"Survived kingInCheck!");
+            }
         }
     } else {
         // If it can't double jump, it may still be able to move one space
@@ -137,6 +183,11 @@
 {
     [self setX:column];
     [self setY:row];
+}
+
+-(BOOL) hasNotMoved
+{
+    return [self x] == [startingLocation x] && [self y] == [startingLocation y];
 }
 
 - (NSString*) description
