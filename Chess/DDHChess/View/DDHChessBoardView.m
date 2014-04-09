@@ -9,7 +9,9 @@
 #import "DDHChessBoardView.h"
 #import "DDHBoardSquare.h"
 
-@implementation DDHChessBoardView
+@implementation DDHChessBoardView{
+    UILabel *player;
+}
 
 - (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board
 {
@@ -32,11 +34,31 @@
                 [self addSubview:square];
             }
         }
+        player = [[UILabel alloc] initWithFrame:CGRectMake(170, 600, 500, 100)];
         
+        [player setText:@"White's Turn"];
+        player.backgroundColor = [UIColor clearColor];
+        player.textColor = [UIColor whiteColor];
+        
+        player.font = [UIFont fontWithName:@"TrebuchetMS" size:50];
+        
+        UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 250, 15)];
+        
+        [label1 setText:@"Check!"];
+        
+        [self addSubview:player];
+        [self addSubview:label1];
         // The DDHChessBoardView should be invisible. The square themselves have the correct colors
         self.backgroundColor = [UIColor clearColor];
+        
+        
     }
     return self;
+}
+
+-(void) setPlayer:(NSString*) text
+{
+    [player setText:text];
 }
 
 @end

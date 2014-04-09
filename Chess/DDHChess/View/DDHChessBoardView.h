@@ -18,4 +18,6 @@
 // Initialize the main view within a certain frame and specific board
 - (id) initWithFrame:(CGRect)frame andBoard:(DDHBoard *)board;
 
+-(void) setPlayer:(NSString*) text;
+
 @end
