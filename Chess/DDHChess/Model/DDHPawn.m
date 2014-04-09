@@ -35,7 +35,7 @@
     NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : -1;
     
     // Next check for ability to move two squares forward.
-    if (([self getPlayer] == ChessPlayerBlack && [self y] == 6) || ([self getPlayer] == ChessPlayerWhite && [self y] == 1)) {
+    if (([self getPlayer] == ChessPlayerBlack && [self y] == 1) || ([self getPlayer] == ChessPlayerWhite && [self y] == 6)) {
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
         NSInteger verticalDoubleMove = row + 2*pow(-1, [self getPlayer]);
 

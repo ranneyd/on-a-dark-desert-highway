@@ -24,6 +24,8 @@
     
     // View to display current image depending on state of square
     UIImageView* _currentImageView;
+    
+    BOOL _upsideDown;
 }
 
 // **********************
@@ -40,6 +42,7 @@
         _row = row;
         _column = column;
         _board = board;
+        _upsideDown = NO;
         
         // Determine color of square based on position in board
         [self setColor];
@@ -149,6 +152,18 @@
     }
 }
 
+-(void) rotate
+{
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationRepeatCount:1];
+    _currentImageView.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
+    [UIView commitAnimations];
+    
+    _upsideDown = !_upsideDown;
+}
+
 // **************************
 // ** User Input Functions **
 // **************************
@@ -161,6 +176,7 @@
     {
         [_board makeMoveToColumn:_column andRow:_row];
         [_board clearHighlighting];
+        
         return;
     }
     
