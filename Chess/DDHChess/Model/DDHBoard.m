@@ -235,7 +235,7 @@
     blackKing = [_pieces objectAtColumn:4 andRow:7];
     
     // Set who gets to move first
-    _nextMove = ChessPlayerBlack;
+    _nextMove = ChessPlayerWhite;
     
     // Flags to handle special piece movements and rules
     _castling = NO;
