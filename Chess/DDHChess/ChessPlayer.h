@@ -14,8 +14,8 @@
 
 // Make our lives easier by defining chess players as ints
 typedef NS_ENUM(int, ChessPlayer){
-    ChessPlayerWhite = 0,
-    ChessPlayerBlack = 1,
+    ChessPlayerWhite = 1,
+    ChessPlayerBlack = 0,
     ChessPlayerNull = 2
 };
 

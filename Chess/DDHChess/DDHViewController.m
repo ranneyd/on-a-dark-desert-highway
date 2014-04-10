@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DDHViewController.h"
 #import "DDHRandomChessController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DDHViewController()
 @property (weak, nonatomic) IBOutlet UIButton *randomChessButton;
@@ -21,8 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    
+    _randomChessButton.layer.cornerRadius = 10;
 }
 
 - (void)didReceiveMemoryWarning
