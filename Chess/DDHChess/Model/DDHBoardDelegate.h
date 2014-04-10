@@ -13,4 +13,6 @@
 
 -(void) pieceChangedAtColumn:(int)column addRow:(int)row;
 
+-(void) rotate;
+
 @end

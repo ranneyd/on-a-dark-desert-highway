@@ -433,6 +433,7 @@
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
+    
     // Switch turns if we aren't castling
     if(!_castling){
         [self invertState];
@@ -475,6 +476,10 @@
         self.nextMove = ChessPlayerWhite;
     else
         self.nextMove = ChessPlayerBlack;
+    
+    // rotate
+    
+    [_delegate rotate];
 }
 
 -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
