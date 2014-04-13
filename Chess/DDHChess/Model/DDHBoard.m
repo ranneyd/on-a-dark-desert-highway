@@ -43,8 +43,8 @@
 // ** Additional Game Logic **
 // ***************************
 
-
-
+// Checks to see if the current player is in checkmate
+-(BOOL) checkForCheckmate;
 
 // *************************
 // ** UI Helper Functions **
@@ -366,7 +366,7 @@
     
     // Check en passant
     if ([piece isKindOfClass:[DDHPawn class]]){
-        // If the piece to the left or the right of the pawn is the double jumped pawn, as is of the opposite color, then we can take it
+        // If the piece to the left or the right of the pawn is the double jumped pawn, and is of the opposite color, then we can take it
         if(([self pieceAtColumn:column andRow:[piece y]] == _pawnThatDoubleMovedLastTurn) &&
                          [self doesPieceAtColumn:column andRow:row notBelongToPlayer:_nextMove]){
             [_pieces replaceObjectAtColumn:column andRow:[piece y] withObject:[[DDHNullPiece alloc] init]];
@@ -388,14 +388,6 @@
 
 -(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
 {
-    // See if next player is now in check
-    if ([self kingInCheckBelongingTo:[self nextMove]]){
-        NSLog(@"%d in check", [self nextMove]);
-    }
-    else{
-        NSLog(@"%d not in check", [self nextMove]);
-    }
-    
     // Check if double move pawn flag from last turn should be reset
     if (_pawnThatDoubleMovedLastTurn) {
         _pawnThatDoubleMovedLastTurn = nil;
@@ -424,7 +416,6 @@
             _pawnThatDoubleMovedLastTurn = piece;
         }
     }
-    NSLog(@"Pawn that moved last turn: %@", [_pawnThatDoubleMovedLastTurn description]);
     
     // Clear the highlighting
     [self clearHighlighting];
@@ -439,6 +430,19 @@
         [self invertState];
     } else {
         _castling = NO;
+    }
+    
+    // See if next player is now in check
+    if ([self kingInCheckBelongingTo:[self nextMove]]){
+        NSLog(@"%d in check", [self nextMove]);
+    }
+    else{
+        NSLog(@"%d not in check", [self nextMove]);
+    }
+    
+    // Check if the move has put the player in checkmate
+    if ([self checkForCheckmate]){
+        NSLog(@"GAME OVER!");
     }
 }
 
@@ -548,6 +552,28 @@
     return movingIntoCheck;
     
     //return NO;
+}
+
+// PRIVATE
+-(BOOL) checkForCheckmate
+{
+    BOOL checkmate = YES; // If no pieces can move
+    BOOL dobreak = NO;
+    for(int r=0; !dobreak && r<[self getRows]; ++r){
+        for (int c=0; c<[self getColumns]; ++c) {
+            if(![self doesPieceAtColumn:c andRow:r notBelongToPlayer:_nextMove]){
+                NSMutableArray* highlighting = [self getHighlightedSquaresFromPieceAtColumn:c andRow:r];
+                if([highlighting count]){
+                    checkmate = NO; // If a piece can move, then the game keeps going
+                    NSLog(@"%@ at (%i,%i)can still move, so there's no checkmate", [self pieceAtColumn:c andRow:r], r,c);
+                    NSLog(@"it's moves are %@", highlighting);
+                    dobreak = YES;
+                    break;
+                }
+            }
+        }
+    }
+    return checkmate;
 }
 
 /*
