@@ -50,16 +50,11 @@
 -(id)copyWithZone:(NSZone *)zone
 {
     // Create the array with the space allocated for the arbitrary objects
-    DDH2DArray* arrayCopy = [[[self class] allocWithZone:zone] initWithColumns:self.columns andRow:self.rows
+    DDH2DArray* arrayCopy = [[[self class] allocWithZone:zone] initWithColumns:[self columns] andRow:[self rows]
                                                                      andObject:[self objectAtColumn:0 andRow:0]];
-    // If the object was created, loop through all the objects in the array and make them the same
-    // NOTE: Does not copy the objects in the array, just the array itself. TODO
-    if(arrayCopy){
-        for (int c=0; c<self.columns; ++c){
-            for (int r=0; r<self.rows; ++r){
-                [arrayCopy replaceObjectAtColumn:c andRow:r withObject:[self objectAtColumn:c andRow:r]];
-            }
-        }
+    // If the object was created, create a deep copy of the array (calls copyWithZone on items in array)
+    if (arrayCopy){
+        arrayCopy->_array = [[NSMutableArray alloc] initWithArray:_array copyItems:YES];
     }
     return arrayCopy;
 }

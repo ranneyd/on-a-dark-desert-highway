@@ -24,6 +24,19 @@
     return self;
 }
 
+-(id) copyWithZone:(NSZone *)zone
+{
+    // Create a new DDHBoard object to be the copy
+    DDHPiece* pieceCopy = [[[self class] allocWithZone:zone] initWithPlayer:[self getPlayer] atColumn:[self x] andRow:[self y]];
+    
+    // If the boardCopy was created, copy each of the values from self to this copy
+    if(pieceCopy){
+        pieceCopy->_hasMoved = _hasMoved;
+        pieceCopy->_index = [self index];
+    }
+    return pieceCopy;
+}
+
 -(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*)board andCheck:(BOOL) check
 {
     // To be overridden

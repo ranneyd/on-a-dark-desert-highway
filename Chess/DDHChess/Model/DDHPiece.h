@@ -12,13 +12,16 @@
 
 @class DDHBoard;
 
-@interface DDHPiece : NSObject
+@interface DDHPiece : NSObject <NSCopying>
 
 @property NSInteger x;
 @property NSInteger y;
 @property int index;
 
 -(id) initWithPlayer: (ChessPlayer) player atColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
+// Implements NSCopying protocol
+-(id) copyWithZone:(NSZone *)zone;
 
 // Sets the highlighted array of the board to the places that are moveable by this piece
 -(NSMutableArray*) highlightMovesWithBoard:(DDHBoard*) board andCheck:(BOOL)check;
