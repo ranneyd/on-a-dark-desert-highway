@@ -50,10 +50,10 @@
         DDHTuple* nextMove = [points objectAtIndex:i];
         long dx = x + [nextMove x];
         long dy = y + [nextMove y];
+        // Make sure the potential move is on the board, then check to make sure it's a valid move.
         if([self onBoard:board AtColumn:dx andRow:dy]) {
             if(!(check && [board checkIfMoveFromColumn:x andRow:y toColumn:dx andRow:dy])){
                 if ([board doesPieceAtColumn:dx andRow:dy notBelongToPlayer:[self getPlayer]]) {
-
                     [highlighting addObject:[[DDHTuple alloc] initWithX:dx andY:dy]];
                 }
             }

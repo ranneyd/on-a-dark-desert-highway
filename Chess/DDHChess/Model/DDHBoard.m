@@ -277,10 +277,10 @@
         boardCopy->_delegate = _delegate;
         boardCopy->_nextMove = _nextMove;
         boardCopy->_locOfHighlightOwner = _locOfHighlightOwner;
-        boardCopy->blackKing = blackKing;
-        boardCopy->whiteKing = whiteKing;
+        boardCopy->blackKing = [boardCopy->_pieces objectAtColumn:[blackKing x] andRow:[blackKing y]];
+        boardCopy->whiteKing = [boardCopy->_pieces objectAtColumn:[whiteKing x] andRow:[whiteKing y]];
         boardCopy->_castling = _castling;
-        boardCopy->_pawnThatDoubleMovedLastTurn = _pawnThatDoubleMovedLastTurn;
+        boardCopy->_pawnThatDoubleMovedLastTurn = [boardCopy->_pieces objectAtColumn:[_pawnThatDoubleMovedLastTurn x] andRow:[_pawnThatDoubleMovedLastTurn y]];
     }
     return boardCopy;
 }
@@ -382,7 +382,7 @@
     
     // Change the new position in the board to our piece index
     [_pieces replaceObjectAtColumn:column andRow:row withObject:piece];
-    
+    //NSLog(@"Moved the %@ to (%lu, %lu), but the king is at (%lu, %lu)", piece, column, row, [whiteKing x], [whiteKing y]);
 
 }
 
@@ -507,7 +507,7 @@
                         // If a piece has a move that can take a king, we know it's bad.
                         if(([move x] == [whiteKing x] && [move y] == [whiteKing y]) ||
                            ([move x] == [blackKing x] && [move y] == [blackKing y])){
-                            NSLog(@"You's in check dawg");
+                            //NSLog(@"You's in check dawg. Dat %@ can take you", piece);
                             return YES;
                         }
                     }
@@ -529,6 +529,7 @@
     // Occupant of the space the moving piece is moving to
     DDHPiece* occupant = [boardCopy pieceAtColumn:column andRow:row];
     
+    
     // Remember data about the pieces too
     BOOL moverMoved = [movingPiece hasMoved];
     BOOL occupantMoved = [occupant hasMoved];
@@ -538,6 +539,8 @@
     
     // If this move causes the player to be in check, we are moving into check
     BOOL movingIntoCheck = [boardCopy kingInCheckBelongingTo:[movingPiece getPlayer]];
+    
+    //NSLog(@"Homie, you %@ want to move to (%lu,%lu)? Well that would make check %d", movingPiece, (unsigned long)column, (unsigned long)row, movingIntoCheck);
     
     // Make sure the old piece knows internally where it is
     [occupant moveToColumn:column andRow:row];
@@ -551,7 +554,6 @@
     //NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
     return movingIntoCheck;
     
-    //return NO;
 }
 
 // PRIVATE
@@ -565,8 +567,8 @@
                 NSMutableArray* highlighting = [self getHighlightedSquaresFromPieceAtColumn:c andRow:r];
                 if([highlighting count]){
                     checkmate = NO; // If a piece can move, then the game keeps going
-                    NSLog(@"%@ at (%i,%i)can still move, so there's no checkmate", [self pieceAtColumn:c andRow:r], r,c);
-                    NSLog(@"it's moves are %@", highlighting);
+                    //NSLog(@"%@ at (%i,%i)can still move, so there's no checkmate", [self pieceAtColumn:c andRow:r], r,c);
+                    //NSLog(@"it's moves are %@", highlighting);
                     dobreak = YES;
                     break;
                 }
