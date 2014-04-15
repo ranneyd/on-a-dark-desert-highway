@@ -95,6 +95,8 @@
     
     // Double jumping pawns for en passant
     DDHPiece* _pawnThatDoubleMovedLastTurn;
+    
+    DDHChessBoardView* _boardView;
 }
 
 // ********************
@@ -122,6 +124,11 @@
         _delegate = (id)_boardDelegate;
     }
     return self;
+}
+
+-(void) addBoardView:(DDHChessBoardView*) boardView
+{
+    _boardView = boardView;
 }
 
 -(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows
@@ -476,14 +483,21 @@
 -(void)invertState
 {
     // If white just moved, then black is next, and vice versa
-    if ([self nextMove] == ChessPlayerBlack)
+    if ([self nextMove] == ChessPlayerBlack){
         self.nextMove = ChessPlayerWhite;
-    else
+        NSLog(@"It's white's turn!");
+        [_boardView setPlayerText:@"White's Move"];
+    }
+    else{
         self.nextMove = ChessPlayerBlack;
+        NSLog(@"It's black's turn!");
+        [_boardView setPlayerText:@"Black's Move"];
+    }
     
     // rotate
     
     [_delegate rotate];
+   
 }
 
 -(BOOL) kingInCheckBelongingTo:(ChessPlayer)player
