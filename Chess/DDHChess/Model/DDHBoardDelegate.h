@@ -13,6 +13,8 @@
 
 -(void) pieceChangedAtColumn:(int)column addRow:(int)row;
 
+-(void) explodeAtColumn:(int)column addRow:(int)row;
+
 -(void) rotate;
 
 @end

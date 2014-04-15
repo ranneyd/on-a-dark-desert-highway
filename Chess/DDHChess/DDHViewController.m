@@ -43,4 +43,11 @@
     [self presentViewController:controller animated:NO completion:nil];
 }
 
+- (IBAction)boringChessAction:(id)sender
+{
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil];
+    
+    [self presentViewController:controller animated:NO completion:nil];
+}
+
 @end

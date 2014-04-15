@@ -152,6 +152,27 @@
     }
 }
 
+// image.
+-(void) explodeAtColumn:(int)column addRow:(int)row
+{
+    // Note that if the board sends the message with column and row values equal to -1,
+    // then the board wants every square to update its state.
+    if (column == _column && row == _row){
+         NSMutableArray * imageArray = [[NSMutableArray alloc] init];
+         for (NSInteger i = 1; i <= 90; i++){
+             [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%ld.png", i < 10? @"0" : @"", (long)i]]];
+         }
+         UIImageView * explosion = [[UIImageView alloc] initWithFrame:
+                                    CGRectMake(-45, 50, 50, 50)];
+         explosion.animationImages = imageArray;
+         explosion.animationDuration = 2;
+         explosion.contentMode = UIViewContentModeBottomLeft;
+         [self addSubview:explosion];
+         [explosion setAnimationRepeatCount:1];
+         [explosion startAnimating];
+    }
+}
+
 -(void) rotate
 {
     [UIView beginAnimations:nil context:nil];

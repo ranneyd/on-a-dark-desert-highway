@@ -53,18 +53,21 @@
     [self.view addSubview:chessBoard];
     
     
-    
+    /* The spark that lit the powder keg
+     
+     
     NSMutableArray * imageArray = [[NSMutableArray alloc] init];
     for (NSInteger i = 1; i <= 90; i++){
-        [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%d.png", i < 10? @"0" : @"", i]]];
+        [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%ld.png", i < 10? @"0" : @"", (long)i]]];
     }
-	UIImageView * ryuJump = [[UIImageView alloc] initWithFrame:
+	UIImageView * explosion = [[UIImageView alloc] initWithFrame:
                              CGRectMake(160, 120, 150, 130)];
-	ryuJump.animationImages = imageArray;
-	ryuJump.animationDuration = 1.1;
-	ryuJump.contentMode = UIViewContentModeBottomLeft;
-	[self.view addSubview:ryuJump];
-	[ryuJump startAnimating];
+	explosion.animationImages = imageArray;
+	explosion.animationDuration = 1.1;
+	explosion.contentMode = UIViewContentModeBottomLeft;
+	[self.view addSubview:explosion];
+	[explosion setAnimationRepeatCount:1];
+    [explosion startAnimating];*/
 }
 
 - (void)didReceiveMemoryWarning

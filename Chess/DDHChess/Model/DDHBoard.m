@@ -344,7 +344,10 @@
 }
 
 -(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row
-{
+{    
+    if (![[self pieceAtColumn:column andRow:row]isKindOfClass:[DDHNullPiece class]]){
+        [self informDelegateOfExplosionAtColumn:column andRow:row];
+    }
     // Move the selected piece with private function
     [self movePieceAtColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:column andRow:row];
     [self afterMoveFromColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:column andRow:row];
@@ -431,7 +434,6 @@
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
-    
     // Switch turns if we aren't castling
     if(!_castling){
         [self invertState];
@@ -440,7 +442,9 @@
     }
     
     // See if next player is now in check
-    if ([self kingInCheckBelongingTo:[self nextMove]]){
+    BOOL check =[self kingInCheckBelongingTo:[self nextMove]];
+    
+    if (check){
         [[_controller check] setTextColor:[UIColor whiteColor]];
         [[_controller check2] setTextColor:[UIColor whiteColor]];
     }
@@ -449,12 +453,21 @@
         [[_controller check2] setTextColor:[UIColor blackColor]];
     }
     
-    // Check if the move has put the player in checkmate
+    // Check if the move has put the player in checkmate, but actually checks if the player has no available moves
     if ([self checkForCheckmate]){
-        [[_controller check] setText:@"Checkmate!"];
-        [[_controller check2] setText:@"Checkmate!"];
-        [[_controller check] setTextColor:[UIColor whiteColor]];
-        [[_controller check2] setTextColor:[UIColor whiteColor]];
+        //if you have no moves and are in check, then that's checkmate
+        if(check){
+            [[_controller check] setText:@"Checkmate!"];
+            [[_controller check2] setText:@"Checkmate!"];
+            [[_controller check] setTextColor:[UIColor whiteColor]];
+            [[_controller check2] setTextColor:[UIColor whiteColor]];
+        }
+        else{
+            [[_controller check] setText:@"Stalemate :("];
+            [[_controller check2] setText:@"Stalemate :(s"];
+            [[_controller check] setTextColor:[UIColor whiteColor]];
+            [[_controller check2] setTextColor:[UIColor whiteColor]];
+        }
     }
 }
 
@@ -739,6 +752,12 @@
     // Check if the delegate knows how to respond, and then tell it that a change was made
     if([_delegate respondsToSelector:@selector(pieceChangedAtColumn:addRow:)])
         [_delegate pieceChangedAtColumn:(int)column addRow:(int)row];
+}
+-(void)informDelegateOfExplosionAtColumn:(NSInteger)column andRow:(NSInteger) row
+{
+    // Check if the delegate knows how to respond, and then tell it that a change was made
+    if([_delegate respondsToSelector:@selector(explodeAtColumn:addRow:)])
+        [_delegate explodeAtColumn:(int)column addRow:(int)row];
 }
 
 
