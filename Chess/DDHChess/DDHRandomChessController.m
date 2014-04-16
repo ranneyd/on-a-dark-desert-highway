@@ -45,6 +45,7 @@
     
     // Create and initialize view to display the board and add it to this controller
     DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
+    [_board addBoardView:chessBoard];
     [self.view addSubview:chessBoard];
 }
 

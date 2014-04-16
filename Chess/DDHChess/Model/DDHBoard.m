@@ -486,12 +486,12 @@
     if ([self nextMove] == ChessPlayerBlack){
         self.nextMove = ChessPlayerWhite;
         NSLog(@"It's white's turn!");
-        [_boardView setPlayerText:@"White's Move"];
+        [[_boardView player] setText:@"White's Turn"];
     }
     else{
         self.nextMove = ChessPlayerBlack;
         NSLog(@"It's black's turn!");
-        [_boardView setPlayerText:@"Black's Move"];
+        [[_boardView player] setText:@"Black's Turn"];
     }
     
     // rotate
