@@ -10,6 +10,7 @@
 #import "DDHRandomChessController.h"
 #import "DDHBoard.h"
 #import "DDHChessBoardView.h"
+#import "DDHChessInfoView.h"
 
 @interface DDHRandomChessController ()
 
@@ -33,9 +34,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    DDHChessInfoView* info = [[DDHChessInfoView alloc] initWithFrame:[[UIScreen mainScreen]applicationFrame]];
+    
     
     // Create the board object
-    _board = [[DDHBoard alloc] init];
+    _board = [[DDHBoard alloc] initWithView:info];
     // Initialize the board
     [_board setToInitialState];
     
@@ -45,8 +48,9 @@
     
     // Create and initialize view to display the board and add it to this controller
     DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
-    [_board addBoardView:chessBoard];
+    
     [self.view addSubview:chessBoard];
+    [self.view addSubview:info];
 }
 
 - (void)didReceiveMemoryWarning

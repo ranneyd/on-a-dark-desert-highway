@@ -10,4 +10,7 @@
 
 @interface DDHRandomChessController : UIViewController
 
+@property (strong, nonatomic) UILabel *player;
+@property (retain, nonatomic) NSString *playerText;
+
 @end

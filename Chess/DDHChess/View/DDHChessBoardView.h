@@ -15,9 +15,6 @@
 
 @interface DDHChessBoardView : UIView
 
-@property (strong, nonatomic) UILabel *player;
-@property (retain, nonatomic) NSString *playerText;
-
 // Initialize the main view within a certain frame and specific board
 - (id) initWithFrame:(CGRect)frame andBoard:(DDHBoard *)board;
 

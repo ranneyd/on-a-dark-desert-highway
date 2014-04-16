@@ -15,9 +15,7 @@
 #import "DDHPiece.h"
 #import "ChessPlayer.h"
 #import "DDHTuple.h"
-#import "DDHChessBoardView.h"
-
-@class DDHChessBoardView;
+#import "DDHChessInfoView.h"
 
 /* The Board */
 @interface DDHBoard : NSObject <NSCopying>
@@ -40,11 +38,7 @@
 // ********************
 
 // Initialize a board
--(id) init;
-
-// Give the board access to the view to add stuff to it
--(void) addBoardView:(DDHChessBoardView*) boardView;
-
+-(id) initWithView:(DDHChessInfoView *) controller;
 
 // Places pieces in proper places for chess and sets which player moves first
 -(void) setToInitialState;

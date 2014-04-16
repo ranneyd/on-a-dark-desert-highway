@@ -96,14 +96,14 @@
     // Double jumping pawns for en passant
     DDHPiece* _pawnThatDoubleMovedLastTurn;
     
-    DDHChessBoardView* _boardView;
+    DDHChessInfoView* _controller;
 }
 
 // ********************
 // ** Initialization **
 // ********************
 
-- (id) init
+- (id) initWithView:(DDHChessInfoView *)controller
 {
     if (self = [super init]){
         // Set the size of the board. TODO: Change for dynamically allocated array.
@@ -122,13 +122,10 @@
         // Create the delegate to communicate with the views
         _boardDelegate = [[DDHMulticastDelegate alloc] init];
         _delegate = (id)_boardDelegate;
+        
+        _controller = controller;
     }
     return self;
-}
-
--(void) addBoardView:(DDHChessBoardView*) boardView
-{
-    _boardView = boardView;
 }
 
 -(id) initWithPieces:(DDH2DArray*) pieces andColumns:(NSUInteger) columns andRows:(NSUInteger) rows
@@ -486,12 +483,12 @@
     if ([self nextMove] == ChessPlayerBlack){
         self.nextMove = ChessPlayerWhite;
         NSLog(@"It's white's turn!");
-        [[_boardView player] setText:@"White's Turn"];
+        //[[_controller player] setText:@"White's Turn"];
     }
     else{
         self.nextMove = ChessPlayerBlack;
         NSLog(@"It's black's turn!");
-        [[_boardView player] setText:@"Black's Turn"];
+        //[[_controller player] setText:@"Black's Turn"];
     }
     
     // rotate
