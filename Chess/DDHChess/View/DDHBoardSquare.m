@@ -27,6 +27,10 @@
     UIImageView* _currentImageView;
     
     BOOL _upsideDown;
+    
+    BOOL _pulsating;
+    
+    UIView *_highlight;
 }
 
 // **********************
@@ -44,6 +48,9 @@
         _column = column;
         _board = board;
         _upsideDown = NO;
+        _pulsating = NO;
+        
+        
         
         // Determine color of square based on position in board
         [self setColor];
@@ -56,6 +63,12 @@
         UIImage* startImage = [UIImage imageNamed: @"NullPiece.png"];
         _currentImageView = [[UIImageView alloc] initWithImage: startImage];
         [self addSubview:_currentImageView];
+        
+        _highlight = [[UIView alloc]initWithFrame:CGRectMake(0,0, frame.size.width,frame.size.height)];
+        [_highlight setBackgroundColor:[UIColor clearColor]];
+        [_highlight setUserInteractionEnabled:NO];
+        
+        [self addSubview:_highlight];
         
         [self update];
     }
@@ -124,15 +137,18 @@
     }
     // If the square is a place the selected piece could move, highlight it yellow with black borders.
     else if ([_board highlightedAtColumn:_column andRow:_row]) {
-        self.layer.borderColor = [UIColor blackColor].CGColor;
-        self.backgroundColor = [UIColor yellowColor];
+        //_highlight.layer.borderColor = [UIColor blackColor].CGColor;
+        _highlight.backgroundColor = [UIColor yellowColor];
+        _pulsating = YES;
+        [self pulsate];
     }
     // Otherwise, restore the color to default
     else
     {
-        self.backgroundColor = _color;
+        _highlight.backgroundColor = [UIColor clearColor];
         // If the piece isn't highlighted, no need to display the border
         self.layer.borderColor = [UIColor clearColor].CGColor;
+        _pulsating = NO;
     }
 }
 
@@ -199,7 +215,6 @@
     {
         [_board makeMoveToColumn:_column andRow:_row];
         [_board clearHighlighting];
-        
         return;
     }
     
@@ -237,6 +252,35 @@
         }
     }
     
+}
+-(void) pulsate
+{
+    if(_pulsating){
+        CGRect frame = _highlight.frame;
+        int oldHeight = frame.size.height;
+        int oldWidth = frame.size.width;
+        //int oldX = frame.origin.x;
+        //int oldY = frame.origin.y;
+        [UIView animateWithDuration:1.5f animations:^{
+            CGRect theFrame = _highlight.frame;
+            theFrame.size.height = 0;
+            theFrame.size.width = 0;
+            theFrame.origin.x = oldWidth/2;
+            theFrame.origin.y = oldHeight/2;
+            _highlight.frame = theFrame;
+        } completion:^(BOOL finished){
+            CGRect theFrame = _highlight.frame;
+            theFrame.size.height = oldHeight;
+            theFrame.size.width = oldWidth;
+            theFrame.origin.x = 0;
+            theFrame.origin.y = 0;
+            _highlight.frame = theFrame;
+            [self pulsate];
+        }];
+    }
+    else{
+        return;
+    }
 }
 
 @end
