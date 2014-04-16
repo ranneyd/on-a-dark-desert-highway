@@ -8,6 +8,7 @@
 
 #import "DDHBoardSquare.h"
 #import "DDHBoard.h"
+#import "DDHPawn.h"
 
 // This class handles the UI for individual squares in our chessboard
 @implementation DDHBoardSquare
@@ -215,6 +216,13 @@
     {
         // Next, get the piece in the square
         DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
+        
+        if([piece isKindOfClass:[DDHPawn class]]){
+            if([(DDHPawn*)piece click] == 5 && [piece getPlayer] == [_board nextMove]){
+                [_board destroyPieceAtColumn:_column andRow:_row];
+                [_board clearHighlighting];
+            }
+        }
         
         // Next, check if the piece is of the proper color
         if ([_board nextMove] == [piece getPlayer])

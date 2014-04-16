@@ -15,6 +15,7 @@
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super initWithPlayer:player atColumn:column andRow:row];
+    [self setNumClicks:0];
     return self;
 }
 
@@ -144,6 +145,10 @@
     if ([self getPlayer] == ChessPlayerBlack)
         return @"BlackPawn";
     return @"WhitePawn";
+}
+-(int) click
+{
+    return ++self.numClicks;
 }
 
 @end

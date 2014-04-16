@@ -102,6 +102,7 @@
 // Checks to see if a piece moving from one point to another would put the player in check.
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+-(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // *************************
 // ** UI Helper Functions **

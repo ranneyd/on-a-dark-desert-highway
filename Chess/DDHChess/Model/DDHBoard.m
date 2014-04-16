@@ -512,6 +512,17 @@
         //[[_controller player] setText:@"Black's Turn"];
     }
     
+    //reset pawn click counters
+    
+    for (int i = 0; i < _columns; i++){
+        for(int j = 0; j < _rows; j++){
+            DDHPiece *piece = [_pieces objectAtColumn:i andRow:j];
+            if ([piece isKindOfClass:[DDHPawn class]]){
+                [(DDHPawn *)piece setNumClicks:0];
+            }
+        }
+    }
+    
     // rotate
     
     [_delegate rotate];
@@ -659,9 +670,11 @@
  }
  
  */
-
-
-
+-(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row
+{
+    [self informDelegateOfExplosionAtColumn:column andRow:row];
+    [_pieces replaceObjectAtColumn:column andRow:row withObject:[[DDHNullPiece alloc] init]];
+}
 
 
 // *************************
