@@ -8,6 +8,7 @@
 
 #import "DDHChessBoardView.h"
 #import "DDHBoardSquare.h"
+#import <stdlib.h>
 
 @implementation DDHChessBoardView{
 
@@ -29,8 +30,19 @@
         {
             for(int col = 0; col < 8; col++)
             {
+                int maxDist = 1000;
+                int offset = arc4random() % maxDist;
+                
                 // Create a DDHBoardSquare at each position on the board
-                DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight, columnWidth, rowHeight) column:col row:row board:board];
+                DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight-offset, columnWidth, rowHeight) column:col row:row board:board];
+                
+                [UIView animateWithDuration:(float)offset/(float)maxDist animations:^{
+                    square.frame = CGRectOffset(square.frame, 0, offset+50);
+                } completion:^(BOOL finished){
+                    [UIView animateWithDuration:0.2f animations:^{
+                        square.frame = CGRectOffset(square.frame, 0, -50);
+                    }];
+                }];
                 
                 // Make sure that we keep track of each square
                 [self addSubview:square];
