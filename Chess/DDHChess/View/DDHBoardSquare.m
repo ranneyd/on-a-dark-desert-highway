@@ -218,7 +218,7 @@
         DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
         
         if([piece isKindOfClass:[DDHPawn class]]){
-            if([(DDHPawn*)piece click] == 5 && [piece getPlayer] == [_board nextMove]){
+            if([(DDHPawn*)piece click] == 50 && [piece getPlayer] == [_board nextMove]){
                 [_board destroyPieceAtColumn:_column andRow:_row];
                 [_board clearHighlighting];
             }
