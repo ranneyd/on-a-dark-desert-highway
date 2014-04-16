@@ -274,7 +274,7 @@
                 }];
             }
             else{
-                [_highlight setAlpha:1];
+                [self killPulse];
                 _animating = NO;
             }
         }];
@@ -283,6 +283,7 @@
 -(void) killPulse
 {
     _pulsating = NO;
+    [_highlight setAlpha:1];
     [_highlight.layer removeAllAnimations];
 }
 
