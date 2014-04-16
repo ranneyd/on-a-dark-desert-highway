@@ -19,13 +19,14 @@
 @implementation DDHRandomChessController
 {
     DDHBoard* _board; // Contains the board on which the game will be played
+    BOOL random;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) rand
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        random = rand;
     }
     return self;
 }
@@ -40,7 +41,10 @@
     // Create the board object
     _board = [[DDHBoard alloc] initWithView:info];
     // Initialize the board
-    [_board setToInitialState];
+    if(random)
+        [_board setToInitialRandomState];
+    else
+        [_board setToInitialState];
     
     
     // Set background color. For displaying images, use self.backgroundImage.image = [UIImage imageNamed: @"image.png"]

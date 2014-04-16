@@ -16,6 +16,8 @@
 #import "DDHBishop.h"
 #import "DDHQueen.h"
 #import "DDHKing.h"
+#import "DDHRandomSquare.h"
+#import "RandomSquare.h"
 
 @interface DDHBoard ()
 
@@ -85,6 +87,7 @@
     // TODO CHANGE FOR DYNAMICALLY SIZED BOARD
     DDH2DArray* _highlightBoard; // Which parts of the board are currently highlighted
     
+    DDH2DArray* _randomSquares;
     
     // Keep track of the kings
     DDHKing* whiteKing;
@@ -113,6 +116,8 @@
         // Initialize the array of pieces. Set all pieces on the board to null pieces initially (i.e. set the board
         // to be completely empty).
         _pieces = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns andObject:[[DDHNullPiece alloc] init]];
+        
+        _randomSquares = [[DDH2DArray alloc] initWithColumns:_rows andRow:_columns andObject:[[DDHRandomSquare alloc] initNull]];
         
         _highlightBoard = [self getBlankHighlighting];
         
@@ -151,47 +156,6 @@
 {
     // Clear le board
     [self clearBoard];
-    
-    /*
-    // Create a list of tuples that correspond to the initial piece layout. Change for custom layout
-    NSArray *whitePositions = [NSArray arrayWithObjects:
-                               [[DDHTuple alloc] initWithX:0 andY:0], [[DDHTuple alloc] initWithX:1 andY:0],
-                               [[DDHTuple alloc] initWithX:2 andY:0], [[DDHTuple alloc] initWithX:3 andY:0],
-                               [[DDHTuple alloc] initWithX:4 andY:0], [[DDHTuple alloc] initWithX:5 andY:0],
-                               [[DDHTuple alloc] initWithX:6 andY:0], [[DDHTuple alloc] initWithX:7 andY:0],
-                               [[DDHTuple alloc] initWithX:0 andY:1], [[DDHTuple alloc] initWithX:1 andY:1],
-                               [[DDHTuple alloc] initWithX:2 andY:1], [[DDHTuple alloc] initWithX:3 andY:1],
-                               [[DDHTuple alloc] initWithX:4 andY:1], [[DDHTuple alloc] initWithX:5 andY:1],
-                               [[DDHTuple alloc] initWithX:6 andY:1], [[DDHTuple alloc] initWithX:7 andY:1],nil];
-    NSArray *whitePieces = [NSArray arrayWithObjects:
-                            [DDHRook   class], [DDHKnight class],
-                            [DDHBishop class], [DDHQueen  class],
-                            [DDHKing   class], [DDHBishop class],
-                            [DDHKnight class], [DDHRook   class],
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHPawn class], [DDHPawn class],nil];
-//    NSDictionary *whiteDict = [NSDictionary dictionaryWithObjects:whitePieces forKeys:whitePositions];
-    NSArray *blackPositions = [NSArray arrayWithObjects:
-                               [[DDHTuple alloc] initWithX:0 andY:6], [[DDHTuple alloc] initWithX:1 andY:6],
-                               [[DDHTuple alloc] initWithX:2 andY:6], [[DDHTuple alloc] initWithX:3 andY:6],
-                               [[DDHTuple alloc] initWithX:4 andY:6], [[DDHTuple alloc] initWithX:5 andY:6],
-                               [[DDHTuple alloc] initWithX:6 andY:6], [[DDHTuple alloc] initWithX:7 andY:6],
-                               [[DDHTuple alloc] initWithX:0 andY:7], [[DDHTuple alloc] initWithX:1 andY:7],
-                               [[DDHTuple alloc] initWithX:2 andY:7], [[DDHTuple alloc] initWithX:3 andY:7],
-                               [[DDHTuple alloc] initWithX:4 andY:7], [[DDHTuple alloc] initWithX:5 andY:7],
-                               [[DDHTuple alloc] initWithX:6 andY:7], [[DDHTuple alloc] initWithX:7 andY:7],nil];
-    NSArray *blackPieces = [NSArray arrayWithObjects:
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHPawn class], [DDHPawn class],
-                            [DDHRook   class], [DDHKnight class],
-                            [DDHBishop class], [DDHQueen  class],
-                            [DDHKing   class], [DDHBishop class],
-                            [DDHKnight class], [DDHRook   class],nil];
-    */
     
     // Place the white pieces
     [_pieces replaceObjectAtColumn:0 andRow:6 withObject:[[DDHPawn alloc]initWithPlayer:ChessPlayerWhite atColumn:0 andRow:6]];
@@ -247,6 +211,20 @@
     
     NSLog(@"Life Happened");
 }
+
+-(void) setToInitialRandomState
+{
+    [self setToInitialState];
+    
+    for(int i = 0; i < _columns; i++){
+        for(int j = 0; j < _rows; j++){
+            [_randomSquares replaceObjectAtColumn:i andRow:j withObject:[[DDHRandomSquare alloc] initWithColumn:i andRow:j andBoard:self]];
+        }
+    }
+    
+    NSLog(@"Life Happened");
+}
+
 
 
 -(void) clearBoard
@@ -439,6 +417,12 @@
         [self invertState];
     } else {
         _castling = NO;
+    }
+    
+    DDHRandomSquare * rSquare = [_randomSquares objectAtColumn:column andRow:row];
+    if([rSquare type] != NullSquare){
+        NSLog(@"In here");
+        [rSquare trigger];
     }
     
     // See if next player is now in check

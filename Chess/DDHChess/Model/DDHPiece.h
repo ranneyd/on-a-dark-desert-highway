@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ChessPlayer.h"
 #import "DDHTuple.h"
+#import "DDHBoard.h"
 
 @class DDHBoard;
 

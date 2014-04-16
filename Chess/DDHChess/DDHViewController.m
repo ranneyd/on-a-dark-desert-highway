@@ -38,14 +38,14 @@
 
 - (IBAction)randomChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
     
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)boringChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO];
     
     [self presentViewController:controller animated:NO completion:nil];
 }

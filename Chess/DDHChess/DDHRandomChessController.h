@@ -13,4 +13,6 @@
 @property (strong, nonatomic) UILabel *player;
 @property (retain, nonatomic) NSString *playerText;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) random;
+
 @end

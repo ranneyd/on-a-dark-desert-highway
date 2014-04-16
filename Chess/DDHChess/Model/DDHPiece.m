@@ -7,7 +7,6 @@
 //
 
 #import "DDHPiece.h"
-#import "DDHBoard.h"
 
 @implementation DDHPiece
 {

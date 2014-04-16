@@ -17,6 +17,7 @@
 #import "DDHTuple.h"
 #import "DDHChessInfoView.h"
 
+@class DDHPiece;
 /* The Board */
 @interface DDHBoard : NSObject <NSCopying>
 
@@ -42,6 +43,8 @@
 
 // Places pieces in proper places for chess and sets which player moves first
 -(void) setToInitialState;
+
+-(void) setToInitialRandomState;
 
 // Sets every cell in board to empty
 -(void) clearBoard;
