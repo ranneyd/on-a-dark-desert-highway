@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5A1C97218C4631200429914"
                BuildableName = "DDHChess.app"
-               BlueprintName = "DDHChess"
-               ReferencedContainer = "container:DDHChess.xcodeproj">
+               BlueprintName = "Chess?"
+               ReferencedContainer = "container:Chess?.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5A1C98D18C4631300429914"
                BuildableName = "DDHChessTests.xctest"
-               BlueprintName = "DDHChessTests"
-               ReferencedContainer = "container:DDHChess.xcodeproj">
+               BlueprintName = "Chess?Tests"
+               ReferencedContainer = "container:Chess?.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5A1C97218C4631200429914"
             BuildableName = "DDHChess.app"
-            BlueprintName = "DDHChess"
-            ReferencedContainer = "container:DDHChess.xcodeproj">
+            BlueprintName = "Chess?"
+            ReferencedContainer = "container:Chess?.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5A1C97218C4631200429914"
             BuildableName = "DDHChess.app"
-            BlueprintName = "DDHChess"
-            ReferencedContainer = "container:DDHChess.xcodeproj">
+            BlueprintName = "Chess?"
+            ReferencedContainer = "container:Chess?.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5A1C97218C4631200429914"
             BuildableName = "DDHChess.app"
-            BlueprintName = "DDHChess"
-            ReferencedContainer = "container:DDHChess.xcodeproj">
+            BlueprintName = "Chess?"
+            ReferencedContainer = "container:Chess?.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
