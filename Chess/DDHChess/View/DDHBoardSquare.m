@@ -171,6 +171,7 @@
 // Handles user input based on the state of the board
 - (void)cellTapped: (UITapGestureRecognizer *)recognizer
 {
+    NSLog(@"Yo I got tapped yo");
     // If the square is highlighted, tell the board to move there and end
     if ([_board highlightedAtColumn:_column andRow:_row])
     {

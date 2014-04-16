@@ -47,10 +47,10 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     // Create and initialize view to display the board and add it to this controller
-    DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,160,600, 585) andBoard:_board];
+    DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,([[UIScreen mainScreen]applicationFrame].size.height - 585.0)/2.0,600, 585) andBoard:_board];
     
-    [self.view addSubview:chessBoard];
     [self.view addSubview:info];
+    [self.view addSubview:chessBoard];
 }
 
 - (void)didReceiveMemoryWarning

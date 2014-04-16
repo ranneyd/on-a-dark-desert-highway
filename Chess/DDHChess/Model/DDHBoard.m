@@ -244,6 +244,8 @@
     // Flags to handle special piece movements and rules
     _castling = NO;
     _pawnThatDoubleMovedLastTurn = nil;
+    
+    NSLog(@"Life Happened");
 }
 
 
@@ -285,6 +287,7 @@
         boardCopy->whiteKing = [boardCopy->_pieces objectAtColumn:[whiteKing x] andRow:[whiteKing y]];
         boardCopy->_castling = _castling;
         boardCopy->_pawnThatDoubleMovedLastTurn = [boardCopy->_pieces objectAtColumn:[_pawnThatDoubleMovedLastTurn x] andRow:[_pawnThatDoubleMovedLastTurn y]];
+        boardCopy->_controller = _controller;
     }
     return boardCopy;
 }
@@ -438,15 +441,20 @@
     
     // See if next player is now in check
     if ([self kingInCheckBelongingTo:[self nextMove]]){
-        NSLog(@"%d in check", [self nextMove]);
+        [[_controller check] setTextColor:[UIColor whiteColor]];
+        [[_controller check2] setTextColor:[UIColor whiteColor]];
     }
     else{
-        NSLog(@"%d not in check", [self nextMove]);
+        [[_controller check] setTextColor:[UIColor blackColor]];
+        [[_controller check2] setTextColor:[UIColor blackColor]];
     }
     
     // Check if the move has put the player in checkmate
     if ([self checkForCheckmate]){
-        NSLog(@"GAME OVER!");
+        [[_controller check] setText:@"Checkmate!"];
+        [[_controller check2] setText:@"Checkmate!"];
+        [[_controller check] setTextColor:[UIColor whiteColor]];
+        [[_controller check2] setTextColor:[UIColor whiteColor]];
     }
 }
 

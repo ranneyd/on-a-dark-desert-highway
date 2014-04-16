@@ -403,6 +403,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Dark Desert Highway Software";
 				TargetAttributes = {
+					D5A1C97218C4631200429914 = {
+						DevelopmentTeam = T9HDTSCW4C;
+					};
 					D5A1C98D18C4631300429914 = {
 						TestTargetID = D5A1C97218C4631200429914;
 					};
@@ -626,10 +629,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DDHChess/DDHChess-Prefix.pch";
 				INFOPLIST_FILE = "DDHChess/DDHChess-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -639,10 +645,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DDHChess/DDHChess-Prefix.pch";
 				INFOPLIST_FILE = "DDHChess/DDHChess-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
