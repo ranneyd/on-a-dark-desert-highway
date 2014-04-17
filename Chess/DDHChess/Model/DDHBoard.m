@@ -558,6 +558,7 @@
     
     // Moving piece. Checking if this piece moving would cause check
     DDHPiece* movingPiece = [boardCopy pieceAtColumn:oldColumn andRow:oldRow];
+    /*
     // Occupant of the space the moving piece is moving to
     DDHPiece* occupant = [boardCopy pieceAtColumn:column andRow:row];
     
@@ -565,7 +566,7 @@
     // Remember data about the pieces too
     BOOL moverMoved = [movingPiece hasMoved];
     BOOL occupantMoved = [occupant hasMoved];
-    
+    */
     // Move the moving piece to the new position.
     [boardCopy movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
     
@@ -575,14 +576,14 @@
     //NSLog(@"Homie, you %@ want to move to (%lu,%lu)? Well that would make check %d", movingPiece, (unsigned long)column, (unsigned long)row, movingIntoCheck);
     
     // Make sure the old piece knows internally where it is
-    [occupant moveToColumn:column andRow:row];
+    /*[occupant moveToColumn:column andRow:row];
     [occupant setMoved:occupantMoved];
 
     //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
     // Make sure that the moving piece knows where it is
     [movingPiece moveToColumn:oldColumn andRow:oldRow];
     [movingPiece setMoved:moverMoved];
-    
+    */
     //NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
     return movingIntoCheck;
     
