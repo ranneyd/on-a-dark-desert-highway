@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5A1C97218C4631200429914"
-               BuildableName = "DDHChess.app"
+               BuildableName = "Chess?.app"
                BlueprintName = "Chess?"
                ReferencedContainer = "container:Chess?.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D5A1C98D18C4631300429914"
-               BuildableName = "DDHChessTests.xctest"
+               BuildableName = "Chess?Tests.xctest"
                BlueprintName = "Chess?Tests"
                ReferencedContainer = "container:Chess?.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5A1C97218C4631200429914"
-            BuildableName = "DDHChess.app"
+            BuildableName = "Chess?.app"
             BlueprintName = "Chess?"
             ReferencedContainer = "container:Chess?.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5A1C97218C4631200429914"
-            BuildableName = "DDHChess.app"
+            BuildableName = "Chess?.app"
             BlueprintName = "Chess?"
             ReferencedContainer = "container:Chess?.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D5A1C97218C4631200429914"
-            BuildableName = "DDHChess.app"
+            BuildableName = "Chess?.app"
             BlueprintName = "Chess?"
             ReferencedContainer = "container:Chess?.xcodeproj">
          </BuildableReference>

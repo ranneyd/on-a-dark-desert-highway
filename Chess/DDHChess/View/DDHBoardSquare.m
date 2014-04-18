@@ -139,8 +139,10 @@
     else if ([_board highlightedAtColumn:_column andRow:_row]) {
         //_highlight.layer.borderColor = [UIColor blackColor].CGColor;
         _highlight.backgroundColor = [UIColor yellowColor];
-        _pulsating = YES;
-        [self pulsate];
+        if (!_pulsating){
+            _pulsating = YES;
+            [self pulsate];
+        }
     }
     // Otherwise, restore the color to default
     else
@@ -149,6 +151,7 @@
         // If the piece isn't highlighted, no need to display the border
         self.layer.borderColor = [UIColor clearColor].CGColor;
         _pulsating = NO;
+        [self killPulse];
     }
 }
 
@@ -281,6 +284,10 @@
     else{
         return;
     }
+}
+-(void) killPulse
+{
+    [_highlight.layer removeAllAnimations];
 }
 
 @end

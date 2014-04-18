@@ -9,6 +9,7 @@
 #import "DDHPawn.h"
 #import "DDHTuple.h"
 #import "DDHBoard.h"
+#import "DDHNullPiece.h"
 
 @implementation DDHPawn
 
@@ -35,19 +36,16 @@
     NSInteger leftMove = column - 1 >= 0 ? column - 1 : -1;
     NSInteger rightMove = column + 1 < [board getColumns] ? column + 1 : -1;
     
-    // Next check for ability to move two squares forward.
-    if (([self getPlayer] == ChessPlayerBlack && [self y] == 1) || ([self getPlayer] == ChessPlayerWhite && [self y] == 6)) {
+    // Next check if in initial state and nothing in front
+    if ((([self getPlayer] == ChessPlayerBlack && [self y] == 1) && [board isEmptySquareAtColumn:[self x] andRow:2]) || (([self getPlayer] == ChessPlayerWhite && [self y] == 6) && [board isEmptySquareAtColumn:[self x] andRow:5])) {
         // Make pawn highlight two squares in front...note the direction of "front" is based on the player
         NSInteger verticalDoubleMove = row + 2*pow(-1, [self getPlayer]);
 
         // Only check if the pawn can move two spaces if it can move one
-        if([self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES]){
-            [self checkAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
-        }
-    } else {
-        // If it can't double jump, it may still be able to move one space
-        [self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
+        [self checkAndMoveToColumn:column andRow:verticalDoubleMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
     }
+    // If it can't double jump, it may still be able to move one space
+    [self checkAndMoveToColumn:column andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:YES];
     
     // Check if we can attack other pieces to the left.
     [self checkAndMoveToColumn:leftMove andRow:verticalMove withBoard:board andHighlighting:highlighting andCheck:check andPacifist:NO];
