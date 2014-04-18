@@ -29,6 +29,7 @@
     BOOL _upsideDown;
     
     BOOL _pulsating;
+    BOOL _animating;
     
     UIView *_highlight;
 }
@@ -49,26 +50,29 @@
         _board = board;
         _upsideDown = NO;
         _pulsating = NO;
-        
+        _animating = NO;
         
         
         // Determine color of square based on position in board
         [self setColor];
         
         // Set additional values for squares.
-        self.layer.borderWidth = 1.0f;
         self.layer.borderColor = [UIColor clearColor].CGColor;
+        
+        int borderWidth = 2;
+        
+        _highlight = [[UIView alloc]initWithFrame:CGRectMake(borderWidth,borderWidth, frame.size.width-borderWidth*2,frame.size.height-borderWidth*2)];
+        [_highlight setBackgroundColor:[UIColor clearColor]];
+        //[[_highlight layer] setBorderWidth:borderWidth];
+        //[[_highlight layer] setBorderColor:[UIColor clearColor].CGColor];
+        [_highlight setUserInteractionEnabled:NO];
+
+        [self addSubview:_highlight];
         
         // Initialize the view with an arbitrary image that will be overwritten
         UIImage* startImage = [UIImage imageNamed: @"NullPiece.png"];
         _currentImageView = [[UIImageView alloc] initWithImage: startImage];
         [self addSubview:_currentImageView];
-        
-        _highlight = [[UIView alloc]initWithFrame:CGRectMake(0,0, frame.size.width,frame.size.height)];
-        [_highlight setBackgroundColor:[UIColor clearColor]];
-        [_highlight setUserInteractionEnabled:NO];
-        
-        [self addSubview:_highlight];
         
         [self update];
     }
@@ -137,20 +141,18 @@
     }
     // If the square is a place the selected piece could move, highlight it yellow with black borders.
     else if ([_board highlightedAtColumn:_column andRow:_row]) {
-        //_highlight.layer.borderColor = [UIColor blackColor].CGColor;
+        //_highlight.layer.borderColor = (_color == [UIColor blackColor] ? [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1].CGColor : [UIColor blackColor].CGColor);
         _highlight.backgroundColor = [UIColor yellowColor];
-        if (!_pulsating){
-            _pulsating = YES;
-            [self pulsate];
-        }
+        [self killPulse];
+        _pulsating = YES;
+        [self pulsate];
     }
     // Otherwise, restore the color to default
     else
     {
         _highlight.backgroundColor = [UIColor clearColor];
         // If the piece isn't highlighted, no need to display the border
-        self.layer.borderColor = [UIColor clearColor].CGColor;
-        _pulsating = NO;
+        //self.layer.borderColor = [UIColor clearColor].CGColor;
         [self killPulse];
     }
 }
@@ -185,7 +187,7 @@
          UIImageView * explosion = [[UIImageView alloc] initWithFrame:
                                     CGRectMake(-45, 50, 50, 50)];
          explosion.animationImages = imageArray;
-         explosion.animationDuration = 2;
+         explosion.animationDuration = 2.5f;
          explosion.contentMode = UIViewContentModeBottomLeft;
          [self addSubview:explosion];
          [explosion setAnimationRepeatCount:1];
@@ -258,35 +260,29 @@
 }
 -(void) pulsate
 {
-    if(_pulsating){
-        CGRect frame = _highlight.frame;
-        int oldHeight = frame.size.height;
-        int oldWidth = frame.size.width;
-        //int oldX = frame.origin.x;
-        //int oldY = frame.origin.y;
-        [UIView animateWithDuration:1.5f animations:^{
-            CGRect theFrame = _highlight.frame;
-            theFrame.size.height = 0;
-            theFrame.size.width = 0;
-            theFrame.origin.x = oldWidth/2;
-            theFrame.origin.y = oldHeight/2;
-            _highlight.frame = theFrame;
+    if(_pulsating && !_animating){
+        _animating = YES;
+        [UIView animateWithDuration:1 animations:^{
+            [_highlight setAlpha:0.5];
         } completion:^(BOOL finished){
-            CGRect theFrame = _highlight.frame;
-            theFrame.size.height = oldHeight;
-            theFrame.size.width = oldWidth;
-            theFrame.origin.x = 0;
-            theFrame.origin.y = 0;
-            _highlight.frame = theFrame;
-            [self pulsate];
+            if(_pulsating){
+                [UIView animateWithDuration:1 animations:^{
+                    [_highlight setAlpha:1];
+                } completion:^(BOOL finished){
+                    _animating = NO;
+                    [self pulsate];
+                }];
+            }
+            else{
+                [_highlight setAlpha:1];
+                _animating = NO;
+            }
         }];
-    }
-    else{
-        return;
     }
 }
 -(void) killPulse
 {
+    _pulsating = NO;
     [_highlight.layer removeAllAnimations];
 }
 

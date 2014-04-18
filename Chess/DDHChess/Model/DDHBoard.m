@@ -280,7 +280,7 @@
         boardCopy->_pieces = [_pieces copyWithZone:zone];
         boardCopy->_highlightBoard = [_highlightBoard copyWithZone:zone];
         boardCopy->_boardDelegate = _boardDelegate;
-        boardCopy->_delegate = _delegate;
+        boardCopy->_delegate = nil;
         boardCopy->_nextMove = _nextMove;
         boardCopy->_locOfHighlightOwner = _locOfHighlightOwner;
         boardCopy->blackKing = [boardCopy->_pieces objectAtColumn:[blackKing x] andRow:[blackKing y]];
@@ -379,7 +379,7 @@
         // If the piece to the left or the right of the pawn is the double jumped pawn, and is of the opposite color, then we can take it
         if(([self pieceAtColumn:column andRow:[piece y]] == _pawnThatDoubleMovedLastTurn) &&
                          [self doesPieceAtColumn:column andRow:row notBelongToPlayer:_nextMove]){
-            [_pieces replaceObjectAtColumn:column andRow:[piece y] withObject:[[DDHNullPiece alloc] init]];
+            [self destroyPieceAtColumn:column andRow:[piece y]];
         }
     }
     
