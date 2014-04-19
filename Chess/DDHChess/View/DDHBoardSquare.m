@@ -9,6 +9,8 @@
 #import "DDHBoardSquare.h"
 #import "DDHBoard.h"
 #import "DDHPawn.h"
+#import "DDHRandomSquare.h"
+#import "QuartzCore/QuartzCore.h"
 
 // This class handles the UI for individual squares in our chessboard
 @implementation DDHBoardSquare
@@ -32,6 +34,7 @@
     BOOL _animating;
     
     UIView *_highlight;
+    UIImageView* _questionMark;
 }
 
 // **********************
@@ -59,6 +62,10 @@
         // Set additional values for squares.
         self.layer.borderColor = [UIColor clearColor].CGColor;
         
+        if ([board randomAtColumn:column andRow:row])
+            _questionMark = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"questionMark.png"]];
+            [self addSubview:_questionMark];
+        
         int borderWidth = 2;
         
         _highlight = [[UIView alloc]initWithFrame:CGRectMake(borderWidth,borderWidth, frame.size.width-borderWidth*2,frame.size.height-borderWidth*2)];
@@ -66,7 +73,8 @@
         //[[_highlight layer] setBorderWidth:borderWidth];
         //[[_highlight layer] setBorderColor:[UIColor clearColor].CGColor];
         [_highlight setUserInteractionEnabled:NO];
-
+        [_questionMark setUserInteractionEnabled:NO];
+        
         [self addSubview:_highlight];
         
         // Initialize the view with an arbitrary image that will be overwritten
@@ -128,6 +136,8 @@
     UIImage* newImage = [UIImage imageNamed:[pieceDescription stringByAppendingString: @".png"]];
     _currentImageView.image = newImage;
     
+    if(![_board randomAtColumn:_column andRow:_row])
+        [_questionMark setImage:[UIImage imageNamed: @"NullPiece.png"]];
     // Update the highlighting of the square
     [self updateHighlighted];
 }
@@ -287,5 +297,28 @@
     [_highlight.layer removeAllAnimations];
 }
 
+-(void) randomLandAtColumn:(NSUInteger)column addRow:(NSUInteger)row withSquare:(DDHRandomSquare*) square
+{
+    if (column == _column && row == _row){
+        
+        [[self superview] bringSubviewToFront:self];
+        float duration = 2.0;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [UIView setAnimationRepeatCount:21];
+        _questionMark.transform = CGAffineTransformMakeRotation(M_PI);
+        [UIView commitAnimations];
+        
+        [UIView animateWithDuration:duration animations:^{
+            CGRect qMark = [_questionMark frame];
+            int scale = 10;
+            [_questionMark setAlpha:0];
+            [_questionMark setFrame:CGRectMake(qMark.origin.x - qMark.size.width*scale/2.0, qMark.origin.y - qMark.size.height*scale/2.0, qMark.size.width*scale, qMark.size.height*scale)];
+        } completion:^(BOOL finished){
+            [square trigger];
+        }];
+    }
+}
 
 @end

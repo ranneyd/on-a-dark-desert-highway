@@ -10,7 +10,7 @@
 
 @interface DDHPawn : DDHPiece
 
-@property NSInteger numClicks;
+@property int numClicks;
 -(int) click;
 
 @end

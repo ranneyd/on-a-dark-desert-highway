@@ -217,8 +217,11 @@
     [self setToInitialState];
     
     for(int i = 0; i < _columns; i++){
-        for(int j = 0; j < _rows; j++){
-            [_randomSquares replaceObjectAtColumn:i andRow:j withObject:[[DDHRandomSquare alloc] initWithColumn:i andRow:j andBoard:self]];
+        // Don't want spaces initially occupied by pieces
+        for(int j = 2; j < _rows-2; j++){
+            // 1/4 chance of there being a random square
+            if(arc4random()%4 == 0)
+                [_randomSquares replaceObjectAtColumn:i andRow:j withObject:[[DDHRandomSquare alloc] initWithColumn:i andRow:j andBoard:self]];
         }
     }
     
@@ -419,10 +422,9 @@
         _castling = NO;
     }
     
-    DDHRandomSquare * rSquare = [_randomSquares objectAtColumn:column andRow:row];
-    if([rSquare type] != NullSquare){
+    if([self randomAtColumn:column andRow:row]){
         NSLog(@"In here");
-        [rSquare trigger];
+        [_delegate randomLandAtColumn:column addRow:row withSquare:[_randomSquares objectAtColumn:column andRow:row]];
     }
     
     // See if next player is now in check
@@ -758,7 +760,11 @@
         [_delegate explodeAtColumn:(int)column addRow:(int)row];
 }
 
-
+-(BOOL) randomAtColumn:(NSUInteger)column andRow:(NSUInteger)row
+{
+    DDHRandomSquare *square = [_randomSquares objectAtColumn:column andRow:row];
+    return [square type] != NullSquare && [square active];
+}
 // ******************************
 // ** General Helper Functions **
 // ******************************

@@ -18,6 +18,8 @@
 @property DDHBoard *board;
 @property NSUInteger x;
 @property NSUInteger y;
+@property BOOL active;
+
 
 -(id) initWithColumn:(NSUInteger) column andRow:(NSUInteger) row andBoard:(DDHBoard *) board;
 

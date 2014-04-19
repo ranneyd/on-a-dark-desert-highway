@@ -23,6 +23,7 @@
     [self setY:row];
     [self setBoard:board];
     
+    [self setActive:YES];
     _delegate = (id)[[DDHMulticastDelegate alloc] init];
     
     return self;
@@ -46,9 +47,12 @@
         case DestroyPiece:
             [self popupWithTitle:@"Random Square: Landmine!" andMessage:@"You stepped on a land mine! You die now!"];
             [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
+            
+            [self setActive:NO];
             break;
         default:
             NSLog(@"Default");
+            [self setActive:NO];
             break;
     }
 }

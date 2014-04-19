@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ChessPlayer.h"
+#import "DDHRandomSquare.h"
 
 @protocol DDHBoardDelegate <NSObject>
 
@@ -16,5 +17,7 @@
 -(void) explodeAtColumn:(int)column addRow:(int)row;
 
 -(void) rotate;
+
+-(void) randomLandAtColumn:(NSUInteger)column addRow:(NSUInteger)row withSquare:(DDHRandomSquare*) square;
 
 @end

@@ -120,4 +120,6 @@
 // Highlight all moves a given piece can make
 -(void) highlightMovesForPieceAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
+-(BOOL) randomAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
 @end
