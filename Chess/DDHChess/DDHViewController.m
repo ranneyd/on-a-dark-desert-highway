@@ -28,7 +28,44 @@
     
     _boringChessButton.layer.cornerRadius = 5;
     _boringChessButton.layer.masksToBounds = YES;
+    
+    
+    for (int i = 0; i < 10; i++){
+        UIImageView *queen = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"WhiteQueen.png"]];
+        [queen setAlpha:0.8];
+        [self.view addSubview:queen];
+        [self.view sendSubviewToBack:queen];
+        
+        int x = [self setPieceRandomTop:queen];
+        CGRect rect = [queen frame];
+        [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)self.view.frame.size.height+100) - 50 , rect.size.width, rect.size.height)];
+        
+        [self fallPiece:queen atX:x];
 }
+    
+    
+    
+}
+
+-(void) fallPiece:(UIImageView*) piece atX:(int) x{
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView commitAnimations];
+    
+    double distance = self.view.frame.size.height +100 - [piece frame].origin.y;
+    double speed = 200;
+    [UIView animateWithDuration: distance/speed animations:^{
+        [piece setFrame:CGRectMake(x, self.view.frame.size.height + 100, 100, 100)];
+    } completion:^(BOOL finished){
+        [self fallPiece:piece atX:[self setPieceRandomTop:piece]];
+    }];
+}
+-(int) setPieceRandomTop:(UIImageView*) piece
+{
+    int x = arc4random()%((int)self.view.frame.size.width + 98) -99;
+    [piece setFrame:CGRectMake(x, -99, 100, 100)];
+    return x;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
