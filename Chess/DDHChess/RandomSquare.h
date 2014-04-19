@@ -15,14 +15,12 @@
 // Make our lives easier by defining chess players as ints
 typedef NS_ENUM(int, RandomSquare){
     DestroyPiece = 0,
-    TeleportPlayer = 1,
+    TeleportPiece = 1,
     TeleportEnemy = 2,
     DestroyEnemy = 3,
     FallThrough = 4,
     NullSquare = 5,
     NumTypes = 6
 };
-
-
 
 #endif

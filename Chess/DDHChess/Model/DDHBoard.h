@@ -82,6 +82,8 @@
 // Moves the currently selected piece to the given column and row
 -(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+// Move a piece from an old postion to a new one
+-(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
 // ***************************
 // ** Additional Game Logic **

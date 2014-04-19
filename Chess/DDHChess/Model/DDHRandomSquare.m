@@ -8,13 +8,38 @@
 
 #import "DDHRandomSquare.h"
 #import "DDHBoardDelegate.h"
+#import "DDHKing.h"
 
+
+@interface DDHRandomSquare ()
+
+// Random square effect functions
+
+// Destroys the piece that landed on square
+-(void) destroyPiece;
+
+// Teleports the piece to a random location
+-(void) teleportPiece;
+
+// Teleports a random enemy piece to a random location
+-(void) teleportEnemy;
+
+// Destroys a random enemy piece
+-(void) destroyEnemy;
+
+// Renders the space unusable
+-(void) fallThrough;
+
+// Helper function to get find a valid enemy piece
+-(DDHPiece *) getEnemyPiece;
+
+@end
 
 @implementation DDHRandomSquare {
     id<DDHBoardDelegate> _delegate;
 }
 
--(id) initWithColumn:(NSUInteger)column andRow:(NSUInteger)row andBoard:(DDHBoard *) board
+-(id) initWithColumn:(NSUInteger)column andRow:(NSUInteger)row andBoard:(DDHBoard *) board andDelegate: (id) boardDelegate
 {
     self = [super init];
     
@@ -24,7 +49,7 @@
     [self setBoard:board];
     
     [self setActive:YES];
-    _delegate = (id)[[DDHMulticastDelegate alloc] init];
+    _delegate = boardDelegate; //(id)[[DDHMulticastDelegate alloc] init];
     
     return self;
 }
@@ -38,6 +63,7 @@
     [self setY:0];
     [self setBoard:NULL];
     
+    _delegate = (id)[[DDHMulticastDelegate alloc] init];
     return self;
 }
 
@@ -45,22 +71,117 @@
 {
     switch ([self type]){
         case DestroyPiece:
-            [self popupWithTitle:@"Random Square: Landmine!" andMessage:@"You stepped on a land mine! You die now!"];
-            [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
-            
-            [self setActive:NO];
+            [self destroyPiece];
+            break;
+        case TeleportPiece:
+            [self teleportPiece];
+            break;
+        case TeleportEnemy:
+            [self teleportEnemy];
+            break;
+        case DestroyEnemy:
+            [self destroyEnemy];
+            break;
+        case FallThrough:
+            [self fallThrough];
             break;
         default:
-            NSLog(@"Default");
+            NSLog(@"Square type is: %d", [self type]);
+
             [self setActive:NO];
             break;
     }
 }
+
 -(void) popupWithTitle:(NSString*) title andMessage:(NSString *) message
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Okay!" otherButtonTitles:nil];
     [alert show];
 }
 
+// Random square effect functions
+
+-(void) destroyPiece
+{
+    [self popupWithTitle:@"Landmine!" andMessage:@"You stepped on a land mine! You die now!"];
+    
+    // Destroy the piece that landed on the square
+    [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
+    
+    [self setActive:NO];
+}
+
+-(void) teleportPiece
+{
+    [self popupWithTitle:@"Teleport!" andMessage:@"Turns out that was a teleporter... Where do you think you'll land?"];
+    
+    // Get a random position on the board
+    NSInteger newCol = arc4random()%[_board getColumns];
+    NSInteger newRow = arc4random()%[_board getRows];
+    
+    // Keep looking until the space is empty
+    while (![[self board] isEmptySquareAtColumn:newCol andRow:newRow]){
+        newCol = arc4random()%[_board getColumns];
+        newRow = arc4random()%[_board getRows];
+    }
+    
+    // Moves the piece to the open position
+    NSLog(@"Teleporting Piece");
+    [[self board] movePieceAtColumn:_x andRow:_y ToColumn:newCol andRow:newRow];
+    
+    
+    // Update all squares to display the change
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
+    
+    [self setActive:NO];
+}
+
+-(void) teleportEnemy
+{
+    [self popupWithTitle:@"Teleport Enemy!" andMessage:@"Something has happened to one of your opponent's piece!"];
+    
+    [self setActive:NO];
+}
+
+-(void) destroyEnemy
+{
+    [self popupWithTitle:@"Missile!" andMessage:@"You found a missile and launched it at the enemy. Too bad it doesn't have a targeting system"];
+
+    DDHPiece* enemyPiece = [self getEnemyPiece];
+    // Destroy the enemy piece
+    [_board destroyPieceAtColumn:[enemyPiece x] andRow:[enemyPiece y]];
+    
+    [self setActive:NO];
+}
+
+-(void) fallThrough
+{
+    [self popupWithTitle:@"Random Square: Bottomless Pit!" andMessage:@"Great job, buddy. Now no one can go there. Way to go."];
+    
+    [self setActive:NO];
+}
+
+
+// Helper functions
+-(DDHPiece *) getEnemyPiece
+{
+    // Get the player that moved to the space
+    DDHPiece* playerPiece = [_board pieceAtColumn:_x andRow:_y];
+    ChessPlayer player = [playerPiece getPlayer];
+    
+    // Get a random position on the board
+    NSInteger targetCol = arc4random()%[_board getColumns];
+    NSInteger targetRow = arc4random()%[_board getRows];
+    DDHPiece* targetPiece = [_board pieceAtColumn:targetCol andRow:targetRow];
+    
+    // Keep looking until you find an enemy piece that isn't the king
+    while(([targetPiece getPlayer] == player) || ([targetPiece getPlayer] == ChessPlayerNull) || [targetPiece isMemberOfClass:[DDHKing class]]){
+        targetCol = arc4random()%[_board getColumns];
+        targetRow = arc4random()%[_board getRows];
+        targetPiece = [_board pieceAtColumn:targetCol andRow:targetRow];
+    }
+
+    return targetPiece;
+}
 
 @end

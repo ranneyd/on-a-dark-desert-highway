@@ -21,7 +21,7 @@
 @property BOOL active;
 
 
--(id) initWithColumn:(NSUInteger) column andRow:(NSUInteger) row andBoard:(DDHBoard *) board;
+-(id) initWithColumn:(NSUInteger) column andRow:(NSUInteger) row andBoard:(DDHBoard *) board andDelegate: boardDelegate;
 
 -(id) initNull;
 

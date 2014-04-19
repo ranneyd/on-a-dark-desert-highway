@@ -35,9 +35,6 @@
 // ** Piece Interaction and Movement **
 // ************************************
 
-// Move a piece from an old postion to a new one
--(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
-
 // Housekeeping after moving a piece. Includes informing delegates, switching the current player and clearing highlighting
 -(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 
@@ -221,7 +218,7 @@
         for(int j = 2; j < _rows-2; j++){
             // 1/4 chance of there being a random square
             if(arc4random()%4 == 0)
-                [_randomSquares replaceObjectAtColumn:i andRow:j withObject:[[DDHRandomSquare alloc] initWithColumn:i andRow:j andBoard:self]];
+                [_randomSquares replaceObjectAtColumn:i andRow:j withObject:[[DDHRandomSquare alloc] initWithColumn:i andRow:j andBoard:self andDelegate:_delegate]];
         }
     }
     
@@ -334,7 +331,6 @@
     [self afterMoveFromColumn:[_locOfHighlightOwner x] andRow:[_locOfHighlightOwner y] ToColumn:column andRow:row];
 }
 
-// PRIVATE
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row
 {
     // Get the piece from _pieces
