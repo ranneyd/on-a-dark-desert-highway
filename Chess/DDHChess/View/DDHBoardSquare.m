@@ -62,10 +62,12 @@
         // Set additional values for squares.
         self.layer.borderColor = [UIColor clearColor].CGColor;
         
-        if ([board randomAtColumn:column andRow:row])
+        if ([board randomAtColumn:column andRow:row]){
             _questionMark = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"questionMark.png"]];
+            //[[_questionMark layer] setFrame:CGRectMake(frame.size.width/2.0, frame.size.height/2.0, 0, 0)];
             [self addSubview:_questionMark];
-        
+            //[self setBackgroundColor:[UIColor greenColor]];
+        }
         int borderWidth = 2;
         
         _highlight = [[UIView alloc]initWithFrame:CGRectMake(borderWidth,borderWidth, frame.size.width-borderWidth*2,frame.size.height-borderWidth*2)];
