@@ -15,8 +15,12 @@
 #import <UIKit/UIKit.h>
 #import "DDHBoard.h"
 #import "DDHBoardDelegate.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface DDHBoardSquare : UIView <DDHBoardDelegate>
+{
+    SystemSoundID _explosionSound;
+}
 
 // Initialize square at given postion with pointer to the board it belongs to
 -(id) initWithFrame:(CGRect) frame column:(NSInteger) column row:(NSInteger)row board:(DDHBoard *)board;

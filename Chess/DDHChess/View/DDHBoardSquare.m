@@ -204,6 +204,11 @@
          [self addSubview:explosion];
          [explosion setAnimationRepeatCount:1];
          [explosion startAnimating];
+        
+        NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"wav"];
+        NSURL *pewPewURL = [NSURL fileURLWithPath:explosionPath];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &_explosionSound);
+        AudioServicesPlaySystemSound(_explosionSound);
     }
 }
 
