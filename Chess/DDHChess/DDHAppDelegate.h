@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class DDHViewController;
 
-@interface DDHAppDelegate : UIResponder <UIApplicationDelegate>
+
+
+@interface DDHAppDelegate : UIResponder <UIApplicationDelegate, AVAudioPlayerDelegate>
+{
+    AVAudioPlayer *_backgroundMusicPlayer;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

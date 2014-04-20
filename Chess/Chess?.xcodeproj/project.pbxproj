@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2414ABC41903A1BF0037A168 /* sail.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2414ABC31903A1BF0037A168 /* sail.m4a */; };
 		9357F65E18C469640034FF67 /* DDHNullPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 9357F65D18C469640034FF67 /* DDHNullPiece.m */; };
 		93EEB0C318EB3478000DC31F /* DDHRandomChessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */; };
 		D511C8DA1903322F000883F2 /* playchess1.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8D91903322F000883F2 /* playchess1.png */; };
@@ -175,6 +176,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2414ABC31903A1BF0037A168 /* sail.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sail.m4a; sourceTree = "<group>"; };
 		9357F65C18C469640034FF67 /* DDHNullPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHNullPiece.h; path = Model/DDHNullPiece.h; sourceTree = "<group>"; };
 		9357F65D18C469640034FF67 /* DDHNullPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHNullPiece.m; path = Model/DDHNullPiece.m; sourceTree = "<group>"; };
 		93EEB0C118EB3478000DC31F /* DDHRandomChessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHRandomChessController.h; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 		D5B86DB418C4635600042BD9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				2414ABC31903A1BF0037A168 /* sail.m4a */,
 				D5A71F8F190349070043C769 /* questionMark@2x.png */,
 				D511C8DF19034857000883F2 /* questionMark.png */,
 				D511C8DB190332C3000883F2 /* playchess2.png */,
@@ -823,6 +826,7 @@
 				D5B1EC7018FE447E001B8067 /* explosion1_0033.png in Resources */,
 				D5B1EC7918FE447E001B8067 /* explosion1_0042.png in Resources */,
 				D5B1EC5D18FE447E001B8067 /* explosion1_0014.png in Resources */,
+				2414ABC41903A1BF0037A168 /* sail.m4a in Resources */,
 				D5B1EC8718FE447E001B8067 /* explosion1_0056.png in Resources */,
 				D5B1EC9318FE447E001B8067 /* explosion1_0068.png in Resources */,
 				D5A71F90190349070043C769 /* questionMark@2x.png in Resources */,
