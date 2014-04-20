@@ -107,6 +107,9 @@
 // Checks to see if a piece moving from one point to another would put the player in check.
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+// Checks if a move will put a given player in check
+-(BOOL) doesMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row causeCheckForPlayer: (ChessPlayer) player;
+
 -(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // *************************

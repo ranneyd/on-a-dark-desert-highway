@@ -543,7 +543,6 @@
     return NO;
 }
 
-
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
     // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
@@ -581,6 +580,20 @@
     return movingIntoCheck;
     
 }
+
+-(BOOL) doesMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row causeCheckForPlayer: (ChessPlayer) player
+{
+    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    DDHBoard* boardCopy = [self copy];
+    
+    // Move the moving piece to the new position.
+    [boardCopy movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
+    
+    // If this move causes the player to be in check, we are moving into check
+    return [boardCopy kingInCheckBelongingTo:player];
+    
+}
+
 
 // PRIVATE
 -(BOOL) checkForCheckmate
