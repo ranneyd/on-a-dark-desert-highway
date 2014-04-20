@@ -64,7 +64,7 @@
         
         if ([board randomAtColumn:column andRow:row]){
             _questionMark = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"questionMark.png"]];
-            //[[_questionMark layer] setFrame:CGRectMake(frame.size.width/2.0, frame.size.height/2.0, 0, 0)];
+            [[_questionMark layer] setFrame:CGRectMake(frame.size.width/4.0,frame.size.height/4.0,frame.size.width/2.0,frame.size.height/2.0)];
             [self addSubview:_questionMark];
             //[self setBackgroundColor:[UIColor greenColor]];
         }
@@ -214,6 +214,7 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationRepeatCount:1];
     _currentImageView.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
+    _questionMark.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
     [UIView commitAnimations];
     
     _upsideDown = !_upsideDown;
@@ -314,7 +315,7 @@
         
         [UIView animateWithDuration:duration animations:^{
             CGRect qMark = [_questionMark frame];
-            int scale = 10;
+            int scale = 20;
             [_questionMark setAlpha:0];
             [_questionMark setFrame:CGRectMake(qMark.origin.x - qMark.size.width*scale/2.0, qMark.origin.y - qMark.size.height*scale/2.0, qMark.size.width*scale, qMark.size.height*scale)];
         } completion:^(BOOL finished){

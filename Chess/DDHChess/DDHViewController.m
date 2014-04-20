@@ -13,6 +13,7 @@
 
 @interface DDHViewController()
 @property (weak, nonatomic) IBOutlet UIButton *randomChessButton;
+@property (weak, nonatomic) IBOutlet UIButton *randomChessSuperButton;
 @property (weak, nonatomic) IBOutlet UIButton *boringChessButton;
 
 @end
@@ -24,10 +25,28 @@
 {
     [super viewDidLoad];
     _randomChessButton.layer.cornerRadius = 20;
-    _randomChessButton.layer.masksToBounds = YES;
+    _randomChessButton.layer.shadowRadius= 3.0f;
+    _randomChessButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    _randomChessButton.layer.shadowOpacity = 0.5f;
+    _randomChessButton.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
+    _randomChessButton.layer.masksToBounds = NO;
+    
+    
+    _randomChessSuperButton.layer.cornerRadius = 20;
+    _randomChessSuperButton.layer.shadowRadius= 3.0f;
+    _randomChessSuperButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    _randomChessSuperButton.layer.shadowOpacity = 0.5f;
+    _randomChessSuperButton.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
+    _randomChessSuperButton.layer.masksToBounds = NO;
+    
+    
     
     _boringChessButton.layer.cornerRadius = 5;
     _boringChessButton.layer.masksToBounds = YES;
+    _boringChessButton.layer.shadowRadius= 1.0f;
+    _boringChessButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    _boringChessButton.layer.shadowOpacity = 0.5f;
+    _boringChessButton.layer.shadowOffset = CGSizeMake(3.0f, 3.0f);
     
     
     for (int i = 0; i < 10; i++){
@@ -74,6 +93,13 @@
 }
 
 - (IBAction)randomChessAction:(id)sender
+{
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
+    
+    [self presentViewController:controller animated:NO completion:nil];
+}
+
+- (IBAction)superRandomChessAction:(id)sender
 {
     DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
     
