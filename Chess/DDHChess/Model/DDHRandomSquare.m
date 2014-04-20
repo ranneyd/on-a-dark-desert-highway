@@ -107,6 +107,13 @@
 {
     [self popupWithTitle:@"Landmine!" andMessage:@"You stepped on a landmine! You die now!"];
     
+    // Landmines can't blow up kings
+    if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]]){
+        [self setType:NullSquare];
+        [self trigger];
+        return;
+    }
+    
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
     
