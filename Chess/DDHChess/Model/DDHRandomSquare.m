@@ -44,7 +44,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:DestroyPiece]; // For testing purposes. Remove for release
+    [self setType:FallThrough]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -105,7 +105,7 @@
 
 -(void) destroyPiece
 {
-    // Landmines can't blow up kings
+    // Landmines can't blow up kings or put the player in check
     if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]] || [_board doesDestructionCauseCheckAtColumn:_x andRow:_y]){
         [self setType:NullSquare];
         [self trigger];
@@ -203,6 +203,13 @@
 
 -(void) fallThrough
 {
+    // Bottomless pits can't take kings or put the player in check
+    if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]] || [_board doesDestructionCauseCheckAtColumn:_x andRow:_y]){
+        [self setType:NullSquare];
+        [self trigger];
+        return;
+    }
+    
     [self popupWithTitle:@"Bottomless Pit!" andMessage:@"Great job, buddy. Now no one can go there. Way to go."];
     
     // Destroy the piece that landed on the square
