@@ -144,7 +144,11 @@
 
     // If there is a wall there, change the color and image
     if(![_board hasNoWallAtColumn:_column andRow:_row]){
-        self.backgroundColor = [UIColor darkGrayColor];
+        //self.backgroundColor = [UIColor darkGrayColor];
+        UIImageView* hole = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hole.png"]];
+        [hole setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        [self addSubview:hole];
+        [self sendSubviewToBack:hole];
     }
     
     // Update the highlighting of the square
