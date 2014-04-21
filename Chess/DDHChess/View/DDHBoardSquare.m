@@ -142,9 +142,9 @@
         [_questionMark setImage:[UIImage imageNamed: @"NullPiece.png"]];
     }
 
-    // If there is a wall there, change the color to blue FIXME
+    // If there is a wall there, change the color and image
     if(![_board hasNoWallAtColumn:_column andRow:_row]){
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor darkGrayColor];
     }
     
     // Update the highlighting of the square
