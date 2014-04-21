@@ -602,6 +602,21 @@
     
 }
 
+-(BOOL) doesDestructionCauseCheckAtColumn:(NSUInteger) column andRow:(NSUInteger) row
+{
+    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    DDHBoard* boardCopy = [self copy];
+    
+    // Piece being destroyed
+    DDHPiece* pieceToDie = [boardCopy pieceAtColumn:column andRow:row];
+    
+    // Destroy the piece and see what happens
+    [boardCopy destroyPieceAtColumn:column andRow:row];
+    
+    // If this move causes the player to be in check, we are moving into check
+    return [boardCopy kingInCheckBelongingTo:[pieceToDie getPlayer]];
+}
+
 
 // PRIVATE
 -(BOOL) checkForCheckmate

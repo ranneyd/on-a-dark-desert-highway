@@ -44,7 +44,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:FallThrough]; // For testing purposes. Remove for release
+    [self setType:DestroyPiece]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -106,7 +106,7 @@
 -(void) destroyPiece
 {
     // Landmines can't blow up kings
-    if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]]){
+    if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]] || [_board doesDestructionCauseCheckAtColumn:_x andRow:_y]){
         [self setType:NullSquare];
         [self trigger];
         return;
