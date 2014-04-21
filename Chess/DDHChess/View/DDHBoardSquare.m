@@ -326,7 +326,7 @@
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [UIView setAnimationRepeatCount:21];
-        _questionMark.transform = CGAffineTransformMakeRotation(M_PI);
+        _questionMark.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
         [UIView commitAnimations];
         
         [UIView animateWithDuration:duration animations:^{

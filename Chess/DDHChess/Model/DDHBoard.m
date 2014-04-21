@@ -412,17 +412,18 @@
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
+    if([self randomAtColumn:column andRow:row]){
+        NSLog(@"In here");
+        [_delegate randomLandAtColumn:column addRow:row withSquare:[_randomSquares objectAtColumn:column andRow:row]];
+    }
+    
     // Switch turns if we aren't castling
     if(!_castling){
         [self invertState];
     } else {
         _castling = NO;
     }
-    
-    if([self randomAtColumn:column andRow:row]){
-        NSLog(@"In here");
-        [_delegate randomLandAtColumn:column addRow:row withSquare:[_randomSquares objectAtColumn:column andRow:row]];
-    }
+
     
     // See if next player is now in check
     BOOL check =[self kingInCheckBelongingTo:[self nextMove]];
