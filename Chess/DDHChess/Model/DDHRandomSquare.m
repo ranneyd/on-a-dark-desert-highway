@@ -43,8 +43,8 @@
 {
     self = [super init];
     
-//    [self setType:arc4random()%NumTypes];
-    [self setType:FallThrough]; // For testing purposes. Remove for release
+    [self setType:arc4random()%NumTypes];
+//    [self setType:FallThrough]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
