@@ -266,6 +266,7 @@
         boardCopy->_castling = _castling;
         boardCopy->_pawnThatDoubleMovedLastTurn = [boardCopy->_pieces objectAtColumn:[_pawnThatDoubleMovedLastTurn x] andRow:[_pawnThatDoubleMovedLastTurn y]];
         boardCopy->_controller = _controller;
+        boardCopy->_randomSquares = _randomSquares;
     }
     return boardCopy;
 }
@@ -318,7 +319,7 @@
     // If the piece we find is null, then the square is empty
     DDHPiece* piece = [self pieceAtColumn:column andRow:row];
     NSString* pieceDescription = [piece description];
-    return [pieceDescription isEqualToString:@"NullPiece"];
+    return [pieceDescription isEqualToString:@"NullPiece"] && [self hasNoWallAtColumn:column andRow:row];
 }
 
 -(void) makeMoveToColumn:(NSUInteger) column andRow:(NSUInteger) row
@@ -468,10 +469,17 @@
     // If there's a piece in the spot, check who's it is
     if (![self isEmptySquareAtColumn:column andRow:row]) {
         DDHPiece* piece = [self pieceAtColumn:column andRow:row];
-        return [piece getPlayer] != player;
+        return ([piece getPlayer] != player && [self hasNoWallAtColumn:column andRow:row]);
     }
     // If it's empty, then it doesn't belong to the player
     return YES;
+}
+
+-(BOOL) hasNoWallAtColumn:(NSInteger)column andRow:(NSInteger)row
+{
+    // If there is an inactive FallThrough square, then we cant move there
+    DDHRandomSquare *square = [_randomSquares objectAtColumn:column andRow:row];
+    return !([square type] == FallThrough && ![square active]);
 }
 
 -(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row

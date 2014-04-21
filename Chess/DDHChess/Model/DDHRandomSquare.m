@@ -43,8 +43,8 @@
 {
     self = [super init];
     
-    [self setType:arc4random()%NumTypes];
-//    [self setType:TeleportEnemy]; // For testing purposes. Remove for release
+//    [self setType:arc4random()%NumTypes];
+    [self setType:FallThrough]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -105,14 +105,15 @@
 
 -(void) destroyPiece
 {
-    [self popupWithTitle:@"Landmine!" andMessage:@"You stepped on a landmine! You die now!"];
-    
     // Landmines can't blow up kings
     if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]]){
         [self setType:NullSquare];
         [self trigger];
         return;
     }
+    
+    // Display the message
+    [self popupWithTitle:@"Landmine!" andMessage:@"You stepped on a landmine! You die now!"];
     
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
@@ -204,7 +205,13 @@
 {
     [self popupWithTitle:@"Bottomless Pit!" andMessage:@"Great job, buddy. Now no one can go there. Way to go."];
     
+    // Destroy the piece that landed on the square
+    [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
+    
     [self setActive:NO];
+    
+    // Update all squares to display the change
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
 }
 
 

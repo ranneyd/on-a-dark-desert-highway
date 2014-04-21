@@ -84,7 +84,7 @@
                 [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
             }
             // If not empty (previous if returns) and not us, then it belongs to another player, so we can move there.
-            if ([[board pieceAtColumn:column andRow:row] getPlayer] != [self getPlayer]){
+            if (([[board pieceAtColumn:column andRow:row] getPlayer] != [self getPlayer]) && [board hasNoWallAtColumn:column andRow:row]){
                 [highlighting addObject:[[DDHTuple alloc] initWithX:column andY:row]];
             }
         }

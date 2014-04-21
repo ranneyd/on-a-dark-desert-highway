@@ -138,8 +138,15 @@
     UIImage* newImage = [UIImage imageNamed:[pieceDescription stringByAppendingString: @".png"]];
     _currentImageView.image = newImage;
     
-    if(![_board randomAtColumn:_column andRow:_row])
+    if(![_board randomAtColumn:_column andRow:_row]){
         [_questionMark setImage:[UIImage imageNamed: @"NullPiece.png"]];
+    }
+
+    // If there is a wall there, change the color to blue FIXME
+    if(![_board hasNoWallAtColumn:_column andRow:_row]){
+        self.backgroundColor = [UIColor whiteColor];
+    }
+    
     // Update the highlighting of the square
     [self updateHighlighted];
 }
@@ -206,8 +213,8 @@
          [explosion startAnimating];
         
         NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"wav"];
-        NSURL *pewPewURL = [NSURL fileURLWithPath:explosionPath];
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)pewPewURL, &_explosionSound);
+        NSURL *explosionURL = [NSURL fileURLWithPath:explosionPath];
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)explosionURL, &_explosionSound);
         AudioServicesPlaySystemSound(_explosionSound);
     }
 }

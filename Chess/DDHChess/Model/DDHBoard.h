@@ -95,6 +95,9 @@
 // Checks if the piece at a location does not belong to player
 -(BOOL) doesPieceAtColumn:(NSInteger)column andRow:(NSInteger)row notBelongToPlayer:(ChessPlayer)player;
 
+// Checks if there is a blocked wall at the given position
+-(BOOL) hasNoWallAtColumn:(NSInteger)column andRow:(NSInteger)row;
+
 // Checks if the selected piece is at the given row and column
 -(BOOL) isHighlightOwnerAtColumn:(NSUInteger)column andRow:(NSUInteger)row;
 
