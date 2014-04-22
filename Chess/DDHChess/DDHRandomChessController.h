@@ -17,7 +17,7 @@
 @property (retain, nonatomic) NSString *playerText;
 @property (strong, nonatomic) DDHMenuViewController* menu;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) random;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) random andParent:(UIViewController *) parent;
 
 -(IBAction)settings:(id)sender;
 

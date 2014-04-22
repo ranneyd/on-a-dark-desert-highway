@@ -11,6 +11,7 @@
 #import "DDHBoard.h"
 #import "DDHChessBoardView.h"
 #import "DDHChessInfoView.h"
+#import "DDHViewController.h"
 
 @interface DDHRandomChessController ()
 
@@ -21,16 +22,18 @@
     DDHBoard* _board; // Contains the board on which the game will be played
     BOOL random;
     BOOL quit;
+    DDHViewController* parent_;
 }
 
 @synthesize transitionController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) rand
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) rand andParent:(UIViewController *)parent
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         random = rand;
         quit = NO;
+        parent_ = (DDHViewController *)parent;
         //[self setMenu:[[DDHMenuViewController alloc] init]];
     }
     return self;
@@ -101,7 +104,7 @@
 {
     NSLog(@":D");
     [self dismissViewControllerAnimated:NO completion:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [parent_ startFalling:self];
 
 }
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DDHViewController.h"
-#import "DDHRandomChessController.h"
+
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
 
@@ -69,6 +69,9 @@
 
 -(void) loadPieces
 {
+    NSLog(@"loading raining pieces");
+    
+    
     for (int i = 0; i < 10; i++){
         UIImageView *queen = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"WhiteQueen.png"]];
         [queen setAlpha:0.8];
@@ -77,8 +80,10 @@
         
         int x = [self setPieceRandomTop:queen];
         CGRect rect = [queen frame];
-        [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)self.view.frame.size.height+100) - 50 , rect.size.width, rect.size.height)];
-        
+        [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)[[UIScreen mainScreen]applicationFrame].size.height+100) - 50 , rect.size.width, rect.size.height)];
+        NSLog(@"%f",queen.frame.origin.y);
+        [self.view addSubview:queen];
+        [self.view sendSubviewToBack:queen];
         [self fallPiece:queen atX:x];
     }
 }
@@ -88,7 +93,8 @@
         [UIView commitAnimations];
         
         double distance = self.view.frame.size.height +100 - [piece frame].origin.y;
-        double speed = 200;
+        NSLog(@"Distance: %f", distance);
+        double speed = 200.0;
         [UIView animateWithDuration: distance/speed animations:^{
             [piece setFrame:CGRectMake(x, self.view.frame.size.height + 100, 100, 100)];
         } completion:^(BOOL finished){
@@ -102,6 +108,13 @@
     [piece setFrame:CGRectMake(x, -99, 100, 100)];
     return x;
 }
+-(void) startFalling: (DDHRandomChessController *) caller
+{
+    NSLog(@"FAlling");
+    [caller dismissViewControllerAnimated:YES completion:nil];
+    falling = YES;
+    [self loadPieces];
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -112,21 +125,21 @@
 
 - (IBAction)randomChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES andParent:self];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)superRandomChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES andParent:self];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)boringChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO andParent:self];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }

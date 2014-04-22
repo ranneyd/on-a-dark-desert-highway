@@ -10,8 +10,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDHRandomChessController.h"
 @interface DDHViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIImageView *gameOverImage;
+
+-(void) startFalling:(DDHRandomChessController *) caller;
 
 @end
