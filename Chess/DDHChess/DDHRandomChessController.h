@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DDHMenuViewController.h"
+#import "TransitionDelegate.h"
 
 @interface DDHRandomChessController : UIViewController
 
+@property (strong, nonatomic) TransitionDelegate *transitionController;
 @property (strong, nonatomic) UILabel *player;
 @property (retain, nonatomic) NSString *playerText;
 @property (strong, nonatomic) DDHMenuViewController* menu;

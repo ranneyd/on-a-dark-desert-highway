@@ -28,7 +28,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    options = [NSArray arrayWithObjects:@"Quit to Main Menu", @"Enable Scary Music", nil];
+    NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"defaultPrefs" withExtension:@"plist"]];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    //options = [[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] objectForKey:@"root"] allKeys];
+    options = [NSArray arrayWithObjects:@"Quit to Main Menu", @"Enable Scary Music", @"Enable Scary Sound Effects", @"Enable Scary Explosions", @"Highlight Legal Moves", nil];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -42,19 +45,52 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
+    NSString *text =[options objectAtIndex:indexPath.row];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     
-    cell.textLabel.text = [options objectAtIndex:indexPath.row];
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    if (([text  isEqual: @"Enable Scary Music"] && [settings boolForKey:@"musicOn"]) ||
+        ([text  isEqual: @"Enable Scary Sound Effects"] && [settings boolForKey:@"soundEffectsOn"]) ||
+        ([text  isEqual: @"Enable Scary Explosions"] && [settings boolForKey:@"explosionsOn"]) ||
+        ([text  isEqual: @"Highlight Legal Moves"] && [settings boolForKey:@"highlightingOn"]))
+        cell.accessoryType =  UITableViewCellAccessoryCheckmark;
+    cell.textLabel.text = text;
     return cell;
 }
 
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    NSString *text = [options objectAtIndex:indexPath.row];
+    if ([text isEqualToString:@"Quit to Main Menu"]){
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+        [selectedCell setAccessoryType: ([selectedCell accessoryType] == UITableViewCellAccessoryNone ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone)];
+        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+        if ([text isEqualToString:@"Enable Scary Music"])
+            [settings setBool:![settings boolForKey:@"musicOn"] forKey:@"musicOn"];
+        if ([text isEqualToString:@"Enable Scary Sound Effects"])
+            [settings setBool:![settings boolForKey:@"soundEffectsOn"] forKey:@"soundEffectsOn"];
+        if ([text isEqualToString:@"Enable Scary Explosions"])
+            [settings setBool:![settings boolForKey:@"explosionsOn"] forKey:@"explosionsOn"];
+        if ([text isEqualToString:@"Highlight Legal Moves"])
+            [settings setBool:![settings boolForKey:@"highlightingOn"] forKey:@"highlightingOn"];
+
+    }
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

@@ -16,6 +16,7 @@
 
 @end
 
+
 @implementation DDHRandomChessController
 {
     DDHBoard* _board; // Contains the board on which the game will be played
@@ -57,9 +58,20 @@
     [self.view addSubview:info];
     [self.view addSubview:chessBoard];
     
-    UIButton * settings = [[UIButton alloc] initWithFrame:CGRectMake(700,700,100,100)];
+    CGSize size = self.view.frame.size;
+    int width = 100;
+    int height = 50;
+    UIButton * settings = [[UIButton alloc] initWithFrame:CGRectMake(size.width-width - 50,size.height-height - 50,width,height)];
     [settings addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
-    [settings setBackgroundColor:[UIColor greenColor]];
+    [settings setBackgroundColor: [UIColor clearColor]];
+    settings.layer.borderColor = [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1].CGColor;
+    settings.layer.borderWidth = 2;
+    settings.layer.cornerRadius = 10;
+    settings.layer.masksToBounds = NO;
+    
+    [settings setTitle:@"Settings" forState:UIControlStateNormal];
+    //[[settings titleLabel] setTextColor:[UIColor colorWithRed:0.502 green:0 blue:0 alpha:1]];
+     
     [self.view addSubview:settings];
 }
 
@@ -67,8 +79,11 @@
 {
     DDHMenuViewController *controller = [[DDHMenuViewController alloc] initWithNibName:nil bundle:nil];
     
+    controller.view.backgroundColor = [UIColor clearColor];
+    [controller setTransitioningDelegate:self.transitioningDelegate];
+    self.navigationController.modalPresentationStyle = UIModalPresentationCustom;
     
-    [self presentViewController:controller animated:NO completion:nil];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
