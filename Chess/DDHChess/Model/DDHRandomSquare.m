@@ -74,8 +74,8 @@
 {
     self = [super init];
     
-    [self setType:arc4random()%NumTypes];
-//    [self setType:CarpetBomb]; // For testing purposes. Remove for release
+    //[self setType:arc4random()%NumTypes];
+    [self setType:CarpetBomb]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -320,7 +320,7 @@
     // Update the square to display the change
     [_delegate pieceChangedAtColumn:[randomPos x] addRow:[randomPos y]];
     
-    [self setActive:NO];
+    [self popupWithTitle:@"New Piece" andMessage:@"You have drafted a new soldier into your army.\n \"We met as soul mates on Parris Island. We left as inmates from an asylum. And we were sharp, as sharp as knives, and we were so gung ho to lay down our lives...\" - Billy Joel "];
 }
 
 -(void) enemyDoubleAgent
@@ -429,16 +429,18 @@
     DDHPiece* posPiece = [_board pieceAtColumn:_x andRow:_y];
     
 
-    for (long c = 0; c < [_board getColumns]; ++c){
+    for (int c = 0; c < [_board getColumns]; ++c){
         
         // Can't blow up kings or put the player in check (or things that are off the board)
         if (![[_board pieceAtColumn:c andRow:_y] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:c andRow:_y] &&
-                                                                                                        [posPiece onBoard:_board AtColumn:c andRow:_y]){
+                                                                                                    [posPiece onBoard:_board AtColumn:c andRow:_y]){
             [[self board] destroyPieceAtColumn:c andRow:_y];
+            //[[self board] informDelegateOfExplosionAtColumn:c andRow:_y];
+            [NSThread sleepForTimeInterval:0.25];
         }
     }
     
-    [self setActive:NO];
+    [self popupWithTitle:@"Airstrike" andMessage:@"You got a 5 kill streak and have earned an airstrike (I bet you young whipersnappers don't remember Call of Duty 4)."];
 }
 
 

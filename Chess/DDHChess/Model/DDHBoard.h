@@ -139,4 +139,5 @@
 
 -(BOOL) randomAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+-(void)informDelegateOfExplosionAtColumn:(NSInteger)column andRow:(NSInteger) row;
 @end
