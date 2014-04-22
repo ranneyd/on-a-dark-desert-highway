@@ -27,6 +27,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         random = rand;
+        //[self setMenu:[[DDHMenuViewController alloc] init]];
     }
     return self;
 }
@@ -56,22 +57,18 @@
     [self.view addSubview:info];
     [self.view addSubview:chessBoard];
     
+    UIButton * settings = [[UIButton alloc] initWithFrame:CGRectMake(700,700,100,100)];
+    [settings addTarget:self action:@selector(settings:) forControlEvents:UIControlEventTouchUpInside];
+    [settings setBackgroundColor:[UIColor greenColor]];
+    [self.view addSubview:settings];
+}
+
+- (IBAction)settings:(id) sender
+{
+    DDHMenuViewController *controller = [[DDHMenuViewController alloc] initWithNibName:nil bundle:nil];
     
-    /* The spark that lit the powder keg
-     
-     
-    NSMutableArray * imageArray = [[NSMutableArray alloc] init];
-    for (NSInteger i = 1; i <= 90; i++){
-        [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%ld.png", i < 10? @"0" : @"", (long)i]]];
-    }
-	UIImageView * explosion = [[UIImageView alloc] initWithFrame:
-                             CGRectMake(160, 120, 150, 130)];
-	explosion.animationImages = imageArray;
-	explosion.animationDuration = 1.1;
-	explosion.contentMode = UIViewContentModeBottomLeft;
-	[self.view addSubview:explosion];
-	[explosion setAnimationRepeatCount:1];
-    [explosion startAnimating];*/
+    
+    [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

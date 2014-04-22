@@ -160,7 +160,7 @@
 {
     // If the square has the piece the user selected, put an orange border around the piece.
     if ([ _board isHighlightOwnerAtColumn:_column andRow:_row]) {
-        self.layer.borderColor = [UIColor orangeColor].CGColor;
+        self.layer.backgroundColor = [UIColor orangeColor].CGColor;
     }
     // If the square is a place the selected piece could move, highlight it yellow with black borders.
     else if ([_board highlightedAtColumn:_column andRow:_row]) {
@@ -175,7 +175,7 @@
     {
         _highlight.backgroundColor = [UIColor clearColor];
         // If the piece isn't highlighted, no need to display the border
-        //self.layer.borderColor = [UIColor clearColor].CGColor;
+        self.layer.backgroundColor = _color.CGColor;
         [self killPulse];
     }
 }

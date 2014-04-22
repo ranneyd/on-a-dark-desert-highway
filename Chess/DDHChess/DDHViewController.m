@@ -106,6 +106,8 @@
 {
     DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
     
+    
+    
     [self presentViewController:controller animated:NO completion:nil];
 }
 

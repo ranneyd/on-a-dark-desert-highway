@@ -15,6 +15,7 @@
 		D521281719024BC1006C6DE5 /* chess.png in Resources */ = {isa = PBXBuildFile; fileRef = D521281619024BC1006C6DE5 /* chess.png */; };
 		D52F505A1905FEF200D2A5F6 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52F50581905FEF200D2A5F6 /* explosion.wav */; };
 		D52F505B1905FEF200D2A5F6 /* metal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D52F50591905FEF200D2A5F6 /* metal.mp3 */; };
+		D52F508919061FE000D2A5F6 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = D52F508819061FE000D2A5F6 /* defaultPrefs.plist */; };
 		D597C5D71905B99A00FDCE28 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = D597C5D61905B99A00FDCE28 /* hole.png */; };
 		D5A1C97718C4631300429914 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97618C4631300429914 /* Foundation.framework */; };
 		D5A1C97918C4631300429914 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97818C4631300429914 /* CoreGraphics.framework */; };
@@ -163,6 +164,8 @@
 		D5DA09A618FE667E000E10A8 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DA09A418FE667E000E10A8 /* icon@2x.png */; };
 		D5DA09A918FE71B5000E10A8 /* DDHRandomSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DA09A818FE71B5000E10A8 /* DDHRandomSquare.m */; };
 		D5DE7A9F18C69E6D00506C67 /* NullPiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DE7A9E18C69E6D00506C67 /* NullPiece.png */; };
+		D5F07D921906540700BCDB5C /* DDHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F07D901906540700BCDB5C /* DDHMenuViewController.m */; };
+		D5F07D931906540700BCDB5C /* DDHMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F07D911906540700BCDB5C /* DDHMenuViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +189,7 @@
 		D521281619024BC1006C6DE5 /* chess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chess.png; path = Assets/chess.png; sourceTree = "<group>"; };
 		D52F50581905FEF200D2A5F6 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explosion.wav; path = Assets/explosion.wav; sourceTree = "<group>"; };
 		D52F50591905FEF200D2A5F6 /* metal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal.mp3; path = Assets/metal.mp3; sourceTree = "<group>"; };
+		D52F508819061FE000D2A5F6 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
 		D597C5D61905B99A00FDCE28 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hole.png; path = Assets/hole.png; sourceTree = "<group>"; };
 		D5A1C97318C4631200429914 /* Chess?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A1C97618C4631300429914 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -357,6 +361,9 @@
 		D5DA09A818FE71B5000E10A8 /* DDHRandomSquare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHRandomSquare.m; path = Model/DDHRandomSquare.m; sourceTree = "<group>"; };
 		D5DA09AA18FE71E0000E10A8 /* RandomSquare.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RandomSquare.h; sourceTree = "<group>"; };
 		D5DE7A9E18C69E6D00506C67 /* NullPiece.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NullPiece.png; path = Assets/NullPiece.png; sourceTree = "<group>"; };
+		D5F07D8F1906540700BCDB5C /* DDHMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHMenuViewController.h; sourceTree = "<group>"; };
+		D5F07D901906540700BCDB5C /* DDHMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHMenuViewController.m; sourceTree = "<group>"; };
+		D5F07D911906540700BCDB5C /* DDHMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDHMenuViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +430,9 @@
 				D5B86E1518C463B800042BD9 /* DDHViewController.m */,
 				93EEB0C118EB3478000DC31F /* DDHRandomChessController.h */,
 				93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */,
+				D5F07D8F1906540700BCDB5C /* DDHMenuViewController.h */,
+				D5F07D901906540700BCDB5C /* DDHMenuViewController.m */,
+				D5F07D911906540700BCDB5C /* DDHMenuViewController.xib */,
 				D5B86E0C18C4639E00042BD9 /* View */,
 				D5B86E0818C4638700042BD9 /* Util */,
 				D5B86DE518C4636C00042BD9 /* Model */,
@@ -430,6 +440,7 @@
 				D5A1C98518C4631300429914 /* DDHAppDelegate.h */,
 				D5A1C98618C4631300429914 /* DDHAppDelegate.m */,
 				D5A1C97D18C4631300429914 /* Supporting Files */,
+				D52F508819061FE000D2A5F6 /* defaultPrefs.plist */,
 			);
 			path = DDHChess;
 			sourceTree = "<group>";
@@ -777,6 +788,7 @@
 				D5B1EC6D18FE447E001B8067 /* explosion1_0030.png in Resources */,
 				D5B1EC6718FE447E001B8067 /* explosion1_0024.png in Resources */,
 				D5B1EC9918FE447E001B8067 /* explosion1_0074.png in Resources */,
+				D5F07D931906540700BCDB5C /* DDHMenuViewController.xib in Resources */,
 				D5B1EC5918FE447E001B8067 /* explosion1_0010.png in Resources */,
 				D5A1C98118C4631300429914 /* InfoPlist.strings in Resources */,
 				D597C5D71905B99A00FDCE28 /* hole.png in Resources */,
@@ -857,6 +869,7 @@
 				D5B1EC6E18FE447E001B8067 /* explosion1_0031.png in Resources */,
 				D5B1EC7518FE447E001B8067 /* explosion1_0038.png in Resources */,
 				D5B1EC5718FE447E001B8067 /* explosion1_0008.png in Resources */,
+				D52F508919061FE000D2A5F6 /* defaultPrefs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +891,7 @@
 				D5B86E0718C4637A00042BD9 /* DDHTuple.m in Sources */,
 				D5B86E0118C4637A00042BD9 /* DDHKnight.m in Sources */,
 				D5DA09A918FE71B5000E10A8 /* DDHRandomSquare.m in Sources */,
+				D5F07D921906540700BCDB5C /* DDHMenuViewController.m in Sources */,
 				D5A1C98318C4631300429914 /* main.m in Sources */,
 				D5B86E0218C4637A00042BD9 /* DDHPawn.m in Sources */,
 				D5B86E1918C463B800042BD9 /* DDHViewController.m in Sources */,
