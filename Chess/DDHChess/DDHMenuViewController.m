@@ -7,6 +7,9 @@
 //
 
 #import "DDHMenuViewController.h"
+#import "DDHViewController.h"
+#import "DDHRandomChessController.h"
+
 
 @interface DDHMenuViewController ()
 
@@ -15,12 +18,13 @@
 @implementation DDHMenuViewController
 {
     NSArray *options;
+    DDHRandomChessController *parent_;
 }
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andParent: (UIViewController *) parent
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        parent_ = (DDHRandomChessController *)parent;
     }
     return self;
 }
@@ -31,7 +35,7 @@
     NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"defaultPrefs" withExtension:@"plist"]];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
     //options = [[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] objectForKey:@"root"] allKeys];
-    options = [NSArray arrayWithObjects:@"Quit to Main Menu", @"Enable Scary Music", @"Enable Scary Sound Effects", @"Enable Scary Explosions", @"Highlight Legal Moves", nil];
+    options = [NSArray arrayWithObjects:@"Quit to Main Menu", @"Enable Scary Music", @"Enable Scary Sound Effects", @"Enable Scary Explosions", @"Highlight Legal Moves", @"Back", nil];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -68,8 +72,14 @@
 {
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *text = [options objectAtIndex:indexPath.row];
-    if ([text isEqualToString:@"Quit to Main Menu"]){
-        [self dismissViewControllerAnimated:YES completion:nil];
+    if ([text isEqualToString:@"Back"]){
+        
+    }
+    else if ([text isEqualToString:@"Quit to Main Menu"]){
+        NSLog(@"Quit");
+        [parent_ quitView];
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        //[self presentViewController:[[self parentViewController] parentViewController] animated:YES completion:nil];
     }
     else{
         [selectedCell setAccessoryType: ([selectedCell accessoryType] == UITableViewCellAccessoryNone ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone)];

@@ -23,10 +23,12 @@
 @implementation DDHViewController
 {
     AVAudioPlayer *_player;
+    BOOL falling;
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    falling = YES;
     _randomChessButton.layer.cornerRadius = 20;
     _randomChessButton.layer.shadowRadius= 3.0f;
     _randomChessButton.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -51,19 +53,8 @@
     _boringChessButton.layer.shadowOpacity = 0.5f;
     _boringChessButton.layer.shadowOffset = CGSizeMake(3.0f, 3.0f);
     
+    [self loadPieces];
     
-    for (int i = 0; i < 10; i++){
-        UIImageView *queen = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"WhiteQueen.png"]];
-        [queen setAlpha:0.8];
-        [self.view addSubview:queen];
-        [self.view sendSubviewToBack:queen];
-        
-        int x = [self setPieceRandomTop:queen];
-        CGRect rect = [queen frame];
-        [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)self.view.frame.size.height+100) - 50 , rect.size.width, rect.size.height)];
-        
-        [self fallPiece:queen atX:x];
-    }
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"metal" ofType:@"mp3"];
     NSURL *file = [[NSURL alloc] initFileURLWithPath:path];
@@ -76,17 +67,34 @@
 
 }
 
+-(void) loadPieces
+{
+    for (int i = 0; i < 10; i++){
+        UIImageView *queen = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"WhiteQueen.png"]];
+        [queen setAlpha:0.8];
+        [self.view addSubview:queen];
+        [self.view sendSubviewToBack:queen];
+        
+        int x = [self setPieceRandomTop:queen];
+        CGRect rect = [queen frame];
+        [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)self.view.frame.size.height+100) - 50 , rect.size.width, rect.size.height)];
+        
+        [self fallPiece:queen atX:x];
+    }
+}
 -(void) fallPiece:(UIImageView*) piece atX:(int) x{
-    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
-    [UIView commitAnimations];
-    
-    double distance = self.view.frame.size.height +100 - [piece frame].origin.y;
-    double speed = 200;
-    [UIView animateWithDuration: distance/speed animations:^{
-        [piece setFrame:CGRectMake(x, self.view.frame.size.height + 100, 100, 100)];
-    } completion:^(BOOL finished){
-        [self fallPiece:piece atX:[self setPieceRandomTop:piece]];
-    }];
+    if (falling){
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView commitAnimations];
+        
+        double distance = self.view.frame.size.height +100 - [piece frame].origin.y;
+        double speed = 200;
+        [UIView animateWithDuration: distance/speed animations:^{
+            [piece setFrame:CGRectMake(x, self.view.frame.size.height + 100, 100, 100)];
+        } completion:^(BOOL finished){
+            [self fallPiece:piece atX:[self setPieceRandomTop:piece]];
+        }];
+    }
 }
 -(int) setPieceRandomTop:(UIImageView*) piece
 {
@@ -105,23 +113,21 @@
 - (IBAction)randomChessAction:(id)sender
 {
     DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
-    
-    
-    
+    falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)superRandomChessAction:(id)sender
 {
     DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
-    
+    falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)boringChessAction:(id)sender
 {
     DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO];
-    
+    falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 

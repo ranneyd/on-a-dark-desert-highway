@@ -21,4 +21,6 @@
 
 -(IBAction)settings:(id)sender;
 
+-(void)quitView;
+
 @end

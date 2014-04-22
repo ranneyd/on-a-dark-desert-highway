@@ -16,18 +16,21 @@
 
 @end
 
-
 @implementation DDHRandomChessController
 {
     DDHBoard* _board; // Contains the board on which the game will be played
     BOOL random;
+    BOOL quit;
 }
+
+@synthesize transitionController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) rand
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         random = rand;
+        quit = NO;
         //[self setMenu:[[DDHMenuViewController alloc] init]];
     }
     return self;
@@ -73,17 +76,20 @@
     //[[settings titleLabel] setTextColor:[UIColor colorWithRed:0.502 green:0 blue:0 alpha:1]];
      
     [self.view addSubview:settings];
+    
+    
+    self.transitionController = [[TransitionDelegate alloc] init];
 }
 
 - (IBAction)settings:(id) sender
 {
-    DDHMenuViewController *controller = [[DDHMenuViewController alloc] initWithNibName:nil bundle:nil];
+    DDHMenuViewController *controller = [[DDHMenuViewController alloc] initWithNibName:nil bundle:nil andParent:self];
     
-    controller.view.backgroundColor = [UIColor clearColor];
-    [controller setTransitioningDelegate:self.transitioningDelegate];
-    self.navigationController.modalPresentationStyle = UIModalPresentationCustom;
+    //controller.view.backgroundColor = [UIColor clear];
+    [controller setTransitioningDelegate:transitionController];
+    controller.modalPresentationStyle= UIModalPresentationCustom;
     
-    [self presentViewController:controller animated:YES completion:nil];
+    [self presentViewController:controller animated:YES completion: nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,5 +97,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void) quitView
+{
+    NSLog(@":D");
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
+}
 @end
