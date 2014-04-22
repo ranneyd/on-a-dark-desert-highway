@@ -10,6 +10,8 @@
 #import "DDHViewController.h"
 #import "DDHRandomChessController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface DDHViewController()
 @property (weak, nonatomic) IBOutlet UIButton *randomChessButton;
@@ -20,6 +22,7 @@
 
 @implementation DDHViewController
 {
+    AVAudioPlayer *_player;
 }
 - (void)viewDidLoad
 {
@@ -60,10 +63,17 @@
         [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)self.view.frame.size.height+100) - 50 , rect.size.width, rect.size.height)];
         
         [self fallPiece:queen atX:x];
-}
+    }
     
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"metal" ofType:@"mp3"];
+    NSURL *file = [[NSURL alloc] initFileURLWithPath:path];
     
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:nil];
     
+    _player.numberOfLoops = -1;
+    [_player prepareToPlay];
+    [_player play];
+
 }
 
 -(void) fallPiece:(UIImageView*) piece atX:(int) x{
