@@ -13,8 +13,8 @@
 		D511C8DC190332C3000883F2 /* playchess2.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8DB190332C3000883F2 /* playchess2.png */; };
 		D511C8E019034857000883F2 /* questionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8DF19034857000883F2 /* questionMark.png */; };
 		D521281719024BC1006C6DE5 /* chess.png in Resources */ = {isa = PBXBuildFile; fileRef = D521281619024BC1006C6DE5 /* chess.png */; };
-		D52F50561905F0AE00D2A5F6 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52F50541905F0AE00D2A5F6 /* explosion.wav */; };
-		D52F50571905F0AE00D2A5F6 /* metal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D52F50551905F0AE00D2A5F6 /* metal.mp3 */; };
+		D52F505A1905FEF200D2A5F6 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52F50581905FEF200D2A5F6 /* explosion.wav */; };
+		D52F505B1905FEF200D2A5F6 /* metal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D52F50591905FEF200D2A5F6 /* metal.mp3 */; };
 		D597C5D71905B99A00FDCE28 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = D597C5D61905B99A00FDCE28 /* hole.png */; };
 		D5A1C97718C4631300429914 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97618C4631300429914 /* Foundation.framework */; };
 		D5A1C97918C4631300429914 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97818C4631300429914 /* CoreGraphics.framework */; };
@@ -184,8 +184,8 @@
 		D511C8DB190332C3000883F2 /* playchess2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playchess2.png; path = Assets/playchess2.png; sourceTree = "<group>"; };
 		D511C8DF19034857000883F2 /* questionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = questionMark.png; path = Assets/questionMark.png; sourceTree = "<group>"; };
 		D521281619024BC1006C6DE5 /* chess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chess.png; path = Assets/chess.png; sourceTree = "<group>"; };
-		D52F50541905F0AE00D2A5F6 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explosion.wav; path = Assets/explosion.wav; sourceTree = "<group>"; };
-		D52F50551905F0AE00D2A5F6 /* metal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal.mp3; path = Assets/metal.mp3; sourceTree = "<group>"; };
+		D52F50581905FEF200D2A5F6 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explosion.wav; path = Assets/explosion.wav; sourceTree = "<group>"; };
+		D52F50591905FEF200D2A5F6 /* metal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal.mp3; path = Assets/metal.mp3; sourceTree = "<group>"; };
 		D597C5D61905B99A00FDCE28 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hole.png; path = Assets/hole.png; sourceTree = "<group>"; };
 		D5A1C97318C4631200429914 /* Chess?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A1C97618C4631300429914 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -466,8 +466,8 @@
 		D5B86DB418C4635600042BD9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D52F50541905F0AE00D2A5F6 /* explosion.wav */,
-				D52F50551905F0AE00D2A5F6 /* metal.mp3 */,
+				D52F50581905FEF200D2A5F6 /* explosion.wav */,
+				D52F50591905FEF200D2A5F6 /* metal.mp3 */,
 				D5A71F9319035BA30043C769 /* sail.m4a */,
 				D597C5D61905B99A00FDCE28 /* hole.png */,
 				D5A71F8F190349070043C769 /* questionMark@2x.png */,
@@ -744,7 +744,7 @@
 				D5B1EC6918FE447E001B8067 /* explosion1_0026.png in Resources */,
 				D5B1EC5318FE447E001B8067 /* explosion1_0004.png in Resources */,
 				D5B1ECA218FE447E001B8067 /* explosion1_0083.png in Resources */,
-				D52F50561905F0AE00D2A5F6 /* explosion.wav in Resources */,
+				D52F505A1905FEF200D2A5F6 /* explosion.wav in Resources */,
 				D5B86DD318C4636800042BD9 /* BlackPawn.png in Resources */,
 				D5B1EC7118FE447E001B8067 /* explosion1_0034.png in Resources */,
 				D5B1ECA618FE447E001B8067 /* explosion1_0087.png in Resources */,
@@ -819,7 +819,7 @@
 				D5B1ECA818FE447E001B8067 /* explosion1_0089.png in Resources */,
 				D5B1EC5418FE447E001B8067 /* explosion1_0005.png in Resources */,
 				D5B1EC9F18FE447E001B8067 /* explosion1_0080.png in Resources */,
-				D52F50571905F0AE00D2A5F6 /* metal.mp3 in Resources */,
+				D52F505B1905FEF200D2A5F6 /* metal.mp3 in Resources */,
 				D5B1EC5A18FE447E001B8067 /* explosion1_0011.png in Resources */,
 				D5B1EC8B18FE447E001B8067 /* explosion1_0060.png in Resources */,
 				D5B86DCE18C4636800042BD9 /* BlackBishop@2x.png in Resources */,
