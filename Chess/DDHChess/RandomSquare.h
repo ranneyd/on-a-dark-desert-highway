@@ -20,7 +20,8 @@ typedef NS_ENUM(int, RandomSquare){
     DestroyEnemy = 3,
     FallThrough = 4,
     NullSquare = 5,
-    NumTypes = 6
+    HugeLandmine = 6,
+    NumTypes = 7
 };
 
 #endif

@@ -30,6 +30,9 @@
 // Renders the space unusable
 -(void) fallThrough;
 
+// Blow up everything around it
+-(void) hugeLandmine;
+
 // Helper function to get find a valid enemy piece
 -(DDHPiece *) getEnemyPiece;
 
@@ -43,8 +46,8 @@
 {
     self = [super init];
     
-    [self setType:arc4random()%NumTypes];
-//    [self setType:FallThrough]; // For testing purposes. Remove for release
+//    [self setType:arc4random()%NumTypes];
+    [self setType:HugeLandmine]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -85,6 +88,9 @@
             break;
         case FallThrough:
             [self fallThrough];
+            break;
+        case HugeLandmine:
+            [self hugeLandmine];
             break;
         default:
             NSLog(@"Square type is: %d", [self type]);
@@ -219,6 +225,23 @@
     
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
+}
+
+-(void) hugeLandmine
+{
+    // Get a piece for checking boundaries
+    DDHPiece* posPiece = [_board pieceAtColumn:_x andRow:_y];
+    
+    for (long r = _y - 1; r <= _y + 1; ++r){
+        for (long c = _x - 1; c <= _x + 1; ++c){
+            
+            // Landmines can't blow up kings or put the player in check (or things that are off the board)
+            if (![[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:_x andRow:_y] &&
+                                                                                        [posPiece onBoard:_board AtColumn:c andRow:r]){
+                [[self board] destroyPieceAtColumn:c andRow:r];
+            }
+        }
+    }
 }
 
 

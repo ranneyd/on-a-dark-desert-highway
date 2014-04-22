@@ -691,6 +691,7 @@
 -(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
     [self informDelegateOfExplosionAtColumn:column andRow:row];
+    [self checkBoundsForColumn:column andRow:row];
     [_pieces replaceObjectAtColumn:column andRow:row withObject:[[DDHNullPiece alloc] init]];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
 }
