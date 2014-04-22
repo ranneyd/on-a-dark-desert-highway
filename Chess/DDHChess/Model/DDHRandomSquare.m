@@ -216,11 +216,11 @@
         return;
     }
     
-    [self popupWithTitle:@"Bottomless Pit!" andMessage:@"Great job, buddy. Now no one can go there. Way to go."];
+    [self popupWithTitle:@"Bottomless Pit!" andMessage:@"You feel the earth crumbling beneath your feet. You gasp as the ground buckles and collapses below you and you plunge down the bowels of Hell...\n\n Now no one is going to touch that square with a 15 foot pole"];
     
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
-    
+
     [self setActive:NO];
     
     // Update all squares to display the change

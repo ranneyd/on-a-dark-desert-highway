@@ -9,9 +9,10 @@
 #import "DDHChessBoardView.h"
 #import "DDHBoardSquare.h"
 #import <stdlib.h>
+#import <AVFoundation/AVFoundation.h>
 
 @implementation DDHChessBoardView{
-
+    
 }
 
 - (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board
@@ -49,7 +50,10 @@
             }
         }
     }
+    
+
     return self;
+    
 }
 
 

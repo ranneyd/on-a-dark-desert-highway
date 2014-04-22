@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2414ABC41903A1BF0037A168 /* sail.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2414ABC31903A1BF0037A168 /* sail.m4a */; };
-		2414ABC61903A5610037A168 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2414ABC51903A5610037A168 /* explosion.wav */; };
 		9357F65E18C469640034FF67 /* DDHNullPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 9357F65D18C469640034FF67 /* DDHNullPiece.m */; };
 		93EEB0C318EB3478000DC31F /* DDHRandomChessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */; };
 		D511C8DA1903322F000883F2 /* playchess1.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8D91903322F000883F2 /* playchess1.png */; };
 		D511C8DC190332C3000883F2 /* playchess2.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8DB190332C3000883F2 /* playchess2.png */; };
 		D511C8E019034857000883F2 /* questionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8DF19034857000883F2 /* questionMark.png */; };
 		D521281719024BC1006C6DE5 /* chess.png in Resources */ = {isa = PBXBuildFile; fileRef = D521281619024BC1006C6DE5 /* chess.png */; };
+		D52F505A1905FEF200D2A5F6 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = D52F50581905FEF200D2A5F6 /* explosion.wav */; };
+		D52F505B1905FEF200D2A5F6 /* metal.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D52F50591905FEF200D2A5F6 /* metal.mp3 */; };
+		D597C5D71905B99A00FDCE28 /* hole.png in Resources */ = {isa = PBXBuildFile; fileRef = D597C5D61905B99A00FDCE28 /* hole.png */; };
 		D5A1C97718C4631300429914 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97618C4631300429914 /* Foundation.framework */; };
 		D5A1C97918C4631300429914 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97818C4631300429914 /* CoreGraphics.framework */; };
 		D5A1C97B18C4631300429914 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A1C97A18C4631300429914 /* UIKit.framework */; };
@@ -27,6 +28,7 @@
 		D5A1C99A18C4631300429914 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5A1C99818C4631300429914 /* InfoPlist.strings */; };
 		D5A1C99C18C4631300429914 /* DDHChessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D5A1C99B18C4631300429914 /* DDHChessTests.m */; };
 		D5A71F90190349070043C769 /* questionMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5A71F8F190349070043C769 /* questionMark@2x.png */; };
+		D5A71F9619035BA30043C769 /* sail.m4a in Resources */ = {isa = PBXBuildFile; fileRef = D5A71F9319035BA30043C769 /* sail.m4a */; };
 		D5B1EC5018FE447E001B8067 /* explosion1_0001.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B1EBF618FE447D001B8067 /* explosion1_0001.png */; };
 		D5B1EC5118FE447E001B8067 /* explosion1_0002.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B1EBF718FE447D001B8067 /* explosion1_0002.png */; };
 		D5B1EC5218FE447E001B8067 /* explosion1_0003.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B1EBF818FE447D001B8067 /* explosion1_0003.png */; };
@@ -155,9 +157,6 @@
 		D5B86E1118C463AB00042BD9 /* DDHBoardSquare.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B86E0E18C463AB00042BD9 /* DDHBoardSquare.m */; };
 		D5B86E1218C463AB00042BD9 /* DDHChessBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B86E1018C463AB00042BD9 /* DDHChessBoardView.m */; };
 		D5B86E1918C463B800042BD9 /* DDHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B86E1518C463B800042BD9 /* DDHViewController.m */; };
-		D5B86E1A18C463B800042BD9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1618C463B800042BD9 /* Default-568h@2x.png */; };
-		D5B86E1B18C463B800042BD9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1718C463B800042BD9 /* Default.png */; };
-		D5B86E1C18C463B800042BD9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1818C463B800042BD9 /* Default@2x.png */; };
 		D5B86E1F18C463C400042BD9 /* DDHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B86E1D18C463C400042BD9 /* DDHViewController.xib */; };
 		D5BDA88318FE27590032DD7F /* DDHChessInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BDA88218FE27590032DD7F /* DDHChessInfoView.m */; };
 		D5DA09A518FE667E000E10A8 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DA09A318FE667D000E10A8 /* icon.png */; };
@@ -177,8 +176,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2414ABC31903A1BF0037A168 /* sail.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sail.m4a; sourceTree = "<group>"; };
-		2414ABC51903A5610037A168 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
 		9357F65C18C469640034FF67 /* DDHNullPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHNullPiece.h; path = Model/DDHNullPiece.h; sourceTree = "<group>"; };
 		9357F65D18C469640034FF67 /* DDHNullPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHNullPiece.m; path = Model/DDHNullPiece.m; sourceTree = "<group>"; };
 		93EEB0C118EB3478000DC31F /* DDHRandomChessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHRandomChessController.h; sourceTree = "<group>"; };
@@ -187,6 +184,9 @@
 		D511C8DB190332C3000883F2 /* playchess2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playchess2.png; path = Assets/playchess2.png; sourceTree = "<group>"; };
 		D511C8DF19034857000883F2 /* questionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = questionMark.png; path = Assets/questionMark.png; sourceTree = "<group>"; };
 		D521281619024BC1006C6DE5 /* chess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chess.png; path = Assets/chess.png; sourceTree = "<group>"; };
+		D52F50581905FEF200D2A5F6 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = explosion.wav; path = Assets/explosion.wav; sourceTree = "<group>"; };
+		D52F50591905FEF200D2A5F6 /* metal.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = metal.mp3; path = Assets/metal.mp3; sourceTree = "<group>"; };
+		D597C5D61905B99A00FDCE28 /* hole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hole.png; path = Assets/hole.png; sourceTree = "<group>"; };
 		D5A1C97318C4631200429914 /* Chess?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chess?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A1C97618C4631300429914 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D5A1C97818C4631300429914 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -203,6 +203,7 @@
 		D5A1C99918C4631300429914 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D5A1C99B18C4631300429914 /* DDHChessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHChessTests.m; sourceTree = "<group>"; };
 		D5A71F8F190349070043C769 /* questionMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "questionMark@2x.png"; path = "Assets/questionMark@2x.png"; sourceTree = "<group>"; };
+		D5A71F9319035BA30043C769 /* sail.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = sail.m4a; path = Assets/sail.m4a; sourceTree = "<group>"; };
 		D5B1EBF618FE447D001B8067 /* explosion1_0001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion1_0001.png; path = Assets/explosion1_0001.png; sourceTree = "<group>"; };
 		D5B1EBF718FE447D001B8067 /* explosion1_0002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion1_0002.png; path = Assets/explosion1_0002.png; sourceTree = "<group>"; };
 		D5B1EBF818FE447D001B8067 /* explosion1_0003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explosion1_0003.png; path = Assets/explosion1_0003.png; sourceTree = "<group>"; };
@@ -347,9 +348,6 @@
 		D5B86E1318C463B800042BD9 /* ChessPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChessPlayer.h; sourceTree = "<group>"; };
 		D5B86E1418C463B800042BD9 /* DDHViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHViewController.h; sourceTree = "<group>"; };
 		D5B86E1518C463B800042BD9 /* DDHViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHViewController.m; sourceTree = "<group>"; };
-		D5B86E1618C463B800042BD9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D5B86E1718C463B800042BD9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D5B86E1818C463B800042BD9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D5B86E1E18C463C400042BD9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DDHViewController.xib; sourceTree = "<group>"; };
 		D5BDA88118FE27590032DD7F /* DDHChessInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHChessInfoView.h; path = View/DDHChessInfoView.h; sourceTree = "<group>"; };
 		D5BDA88218FE27590032DD7F /* DDHChessInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHChessInfoView.m; path = View/DDHChessInfoView.m; sourceTree = "<group>"; };
@@ -425,9 +423,6 @@
 				D5B86E1518C463B800042BD9 /* DDHViewController.m */,
 				93EEB0C118EB3478000DC31F /* DDHRandomChessController.h */,
 				93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */,
-				D5B86E1618C463B800042BD9 /* Default-568h@2x.png */,
-				D5B86E1718C463B800042BD9 /* Default.png */,
-				D5B86E1818C463B800042BD9 /* Default@2x.png */,
 				D5B86E0C18C4639E00042BD9 /* View */,
 				D5B86E0818C4638700042BD9 /* Util */,
 				D5B86DE518C4636C00042BD9 /* Model */,
@@ -471,8 +466,10 @@
 		D5B86DB418C4635600042BD9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				2414ABC51903A5610037A168 /* explosion.wav */,
-				2414ABC31903A1BF0037A168 /* sail.m4a */,
+				D52F50581905FEF200D2A5F6 /* explosion.wav */,
+				D52F50591905FEF200D2A5F6 /* metal.mp3 */,
+				D5A71F9319035BA30043C769 /* sail.m4a */,
+				D597C5D61905B99A00FDCE28 /* hole.png */,
 				D5A71F8F190349070043C769 /* questionMark@2x.png */,
 				D511C8DF19034857000883F2 /* questionMark.png */,
 				D511C8DB190332C3000883F2 /* playchess2.png */,
@@ -747,6 +744,7 @@
 				D5B1EC6918FE447E001B8067 /* explosion1_0026.png in Resources */,
 				D5B1EC5318FE447E001B8067 /* explosion1_0004.png in Resources */,
 				D5B1ECA218FE447E001B8067 /* explosion1_0083.png in Resources */,
+				D52F505A1905FEF200D2A5F6 /* explosion.wav in Resources */,
 				D5B86DD318C4636800042BD9 /* BlackPawn.png in Resources */,
 				D5B1EC7118FE447E001B8067 /* explosion1_0034.png in Resources */,
 				D5B1ECA618FE447E001B8067 /* explosion1_0087.png in Resources */,
@@ -771,24 +769,22 @@
 				D5B1EC8618FE447E001B8067 /* explosion1_0055.png in Resources */,
 				D5B86DD618C4636800042BD9 /* BlackQueen@2x.png in Resources */,
 				D5B1EC8318FE447E001B8067 /* explosion1_0052.png in Resources */,
-				D5B86E1A18C463B800042BD9 /* Default-568h@2x.png in Resources */,
 				D5B1EC6018FE447E001B8067 /* explosion1_0017.png in Resources */,
 				D5B1EC7E18FE447E001B8067 /* explosion1_0047.png in Resources */,
 				D5DA09A618FE667E000E10A8 /* icon@2x.png in Resources */,
 				D5DA09A518FE667E000E10A8 /* icon.png in Resources */,
-				D5B86E1B18C463B800042BD9 /* Default.png in Resources */,
 				D5B1ECA518FE447E001B8067 /* explosion1_0086.png in Resources */,
 				D5B1EC6D18FE447E001B8067 /* explosion1_0030.png in Resources */,
 				D5B1EC6718FE447E001B8067 /* explosion1_0024.png in Resources */,
 				D5B1EC9918FE447E001B8067 /* explosion1_0074.png in Resources */,
 				D5B1EC5918FE447E001B8067 /* explosion1_0010.png in Resources */,
 				D5A1C98118C4631300429914 /* InfoPlist.strings in Resources */,
+				D597C5D71905B99A00FDCE28 /* hole.png in Resources */,
 				D5B1EC6B18FE447E001B8067 /* explosion1_0028.png in Resources */,
 				D5B1EC7418FE447E001B8067 /* explosion1_0037.png in Resources */,
 				D5B1ECA918FE447E001B8067 /* explosion1_0090.png in Resources */,
 				D5B1EC8218FE447E001B8067 /* explosion1_0051.png in Resources */,
 				D5B1EC7618FE447E001B8067 /* explosion1_0039.png in Resources */,
-				D5B86E1C18C463B800042BD9 /* Default@2x.png in Resources */,
 				D5B1EC6A18FE447E001B8067 /* explosion1_0027.png in Resources */,
 				D5B1EC6818FE447E001B8067 /* explosion1_0025.png in Resources */,
 				D5B1EC9518FE447E001B8067 /* explosion1_0070.png in Resources */,
@@ -823,13 +819,14 @@
 				D5B1ECA818FE447E001B8067 /* explosion1_0089.png in Resources */,
 				D5B1EC5418FE447E001B8067 /* explosion1_0005.png in Resources */,
 				D5B1EC9F18FE447E001B8067 /* explosion1_0080.png in Resources */,
+				D52F505B1905FEF200D2A5F6 /* metal.mp3 in Resources */,
 				D5B1EC5A18FE447E001B8067 /* explosion1_0011.png in Resources */,
 				D5B1EC8B18FE447E001B8067 /* explosion1_0060.png in Resources */,
 				D5B86DCE18C4636800042BD9 /* BlackBishop@2x.png in Resources */,
 				D5B1EC7018FE447E001B8067 /* explosion1_0033.png in Resources */,
 				D5B1EC7918FE447E001B8067 /* explosion1_0042.png in Resources */,
 				D5B1EC5D18FE447E001B8067 /* explosion1_0014.png in Resources */,
-				2414ABC41903A1BF0037A168 /* sail.m4a in Resources */,
+				D5A71F9619035BA30043C769 /* sail.m4a in Resources */,
 				D5B1EC8718FE447E001B8067 /* explosion1_0056.png in Resources */,
 				D5B1EC9318FE447E001B8067 /* explosion1_0068.png in Resources */,
 				D5A71F90190349070043C769 /* questionMark@2x.png in Resources */,
@@ -838,7 +835,6 @@
 				D5B86DDD18C4636800042BD9 /* WhiteKnight.png in Resources */,
 				D5B86DD818C4636800042BD9 /* BlackRook@2x.png in Resources */,
 				D5B1ECA318FE447E001B8067 /* explosion1_0084.png in Resources */,
-				2414ABC61903A5610037A168 /* explosion.wav in Resources */,
 				D5B1EC7D18FE447E001B8067 /* explosion1_0046.png in Resources */,
 				D5B1EC5C18FE447E001B8067 /* explosion1_0013.png in Resources */,
 				D5B1EC7A18FE447E001B8067 /* explosion1_0043.png in Resources */,

@@ -144,7 +144,11 @@
 
     // If there is a wall there, change the color and image
     if(![_board hasNoWallAtColumn:_column andRow:_row]){
-        self.backgroundColor = [UIColor darkGrayColor];
+        //self.backgroundColor = [UIColor darkGrayColor];
+        UIImageView* hole = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hole.png"]];
+        [hole setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        [self addSubview:hole];
+        [self sendSubviewToBack:hole];
     }
     
     // Update the highlighting of the square
@@ -263,9 +267,9 @@
         DDHPiece* piece = [_board pieceAtColumn:_column andRow:_row];
         
         if([piece isKindOfClass:[DDHPawn class]]){
-            if([(DDHPawn*)piece click] == 50 && [piece getPlayer] == [_board nextMove]){
+            if([(DDHPawn*)piece click] == 50 && [piece getPlayer] == [_board nextMove] && ![_board doesDestructionCauseCheckAtColumn:_column andRow:_row]){
                 [_board destroyPieceAtColumn:_column andRow:_row];
-                [_board clearHighlighting];
+                [_board afterMoveFromColumn:_column andRow:_row ToColumn:_column andRow:_row];
             }
         }
         
@@ -322,7 +326,7 @@
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [UIView setAnimationRepeatCount:21];
-        _questionMark.transform = CGAffineTransformMakeRotation(M_PI);
+        _questionMark.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
         [UIView commitAnimations];
         
         [UIView animateWithDuration:duration animations:^{

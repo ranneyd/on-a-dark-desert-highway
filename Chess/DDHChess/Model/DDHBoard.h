@@ -84,7 +84,8 @@
 
 // Move a piece from an old postion to a new one
 -(void) movePieceAtColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
-
+// Housekeeping after moving a piece. Includes informing delegates, switching the current player and clearing highlighting
+-(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
 // ***************************
 // ** Additional Game Logic **
 // ***************************
