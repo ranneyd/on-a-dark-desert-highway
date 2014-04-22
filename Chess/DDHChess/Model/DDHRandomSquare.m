@@ -412,8 +412,6 @@
             [srcPiece moveToColumn:destCol andRow:destRow];
             [destPiece moveToColumn:c andRow:r];
             
-            NSLog(@"(%li,%li)", c, r);
-            NSLog(@"(%li,%li)", destCol, destRow);
         }
     }
     
