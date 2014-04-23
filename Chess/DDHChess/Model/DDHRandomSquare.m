@@ -74,8 +74,8 @@
 {
     self = [super init];
     
-    //[self setType:arc4random()%NumTypes];
-    [self setType:CarpetBomb]; // For testing purposes. Remove for release
+    [self setType:arc4random()%NumTypes];
+    //[self setType:CarpetBomb]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -273,7 +273,7 @@
             }
         }
     }
-
+    [self popupWithTitle:@"Comet" andMessage:@"A commet strikes the board and decimates everything where it lands."];
 }
 -(void) lukeSkywalker
 {
@@ -331,13 +331,15 @@
     // Get the player that landed on the square
     ChessPlayer player = [[_board pieceAtColumn:_x andRow:_y] getPlayer];
     
-    // Change the piece to the current player's colo
+    // Change the piece to the current player's color
     [enemyPiece setPlayer:player];
     
     // Update the square to display the change
     [_delegate pieceChangedAtColumn:[enemyPiece x] addRow:[enemyPiece y]];
     
-    [self setActive:NO];
+    [self popupWithTitle:@"Spy Uncovered" andMessage:@"A sleeper agent you've had living in the enemy kingdom since infancy has been awoken! Someone spoke the trigger phrase (\"Jaden Smith is a master philosopher\") and has now remembered his true identity and his mission."];
+    
+    
 }
 
 -(void) playerDoubleAgent
@@ -364,7 +366,7 @@
     // Update the square to display the change
     [_delegate pieceChangedAtColumn:[playerPiece x] addRow:[playerPiece y]];
     
-    [self setActive:NO];
+    [self popupWithTitle:@"A Spy in Your Ranks!" andMessage:@"It turns out one of your pieces was a spy! That bastard! Curse his sudden but inevitable betrayal! You trusted him. You treated him as your brother. You and he did things you would never do with any other man. Little did you know, the whole time, he was plotting your demise..."];
 }
 
 -(void) changeSides
@@ -419,8 +421,7 @@
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
     
     NSLog(@"Done moving pieces!");
-    
-    [self setActive:NO];
+    [self popupWithTitle:@"Trade Places" andMessage:@"Just like that Eddie Murphy movie, you and the enemy have switched positions!"];
 }
 
 -(void) carpetBomb
