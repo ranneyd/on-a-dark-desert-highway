@@ -141,21 +141,21 @@
 
 - (IBAction)randomChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES andParent:self];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)superRandomChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES andParent:self];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (IBAction)boringChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO andParent:self];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }

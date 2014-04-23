@@ -22,19 +22,16 @@
     DDHBoard* _board; // Contains the board on which the game will be played
     BOOL random;
     BOOL quit;
-    DDHViewController* parent_;
 }
 
 @synthesize transitionController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) rand andParent:(UIViewController *)parent
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) rand
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         random = rand;
         quit = NO;
-        parent_ = (DDHViewController *)parent;
-        //[self setMenu:[[DDHMenuViewController alloc] init]];
     }
     return self;
 }
@@ -104,7 +101,7 @@
 {
     NSLog(@":D");
     [self dismissViewControllerAnimated:NO completion:nil];
-    [parent_ startFalling:self];
+    [(DDHViewController *)[self presentingViewController] startFalling:self];
 
 }
 @end
