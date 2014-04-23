@@ -72,7 +72,6 @@
 
 -(void) loadPieces
 {
-    NSLog(@"loading raining pieces");
     
     NSArray *pieces = [NSArray arrayWithObjects: @"WhiteQueen.png",
                                                  @"WhiteKing.png",
@@ -97,7 +96,6 @@
         int x = [self setPieceRandomTop:queen];
         CGRect rect = [queen frame];
         [queen setFrame:CGRectMake(rect.origin.x, arc4random()%((int)[[UIScreen mainScreen]applicationFrame].size.height+100) - 50 , rect.size.width, rect.size.height)];
-        NSLog(@"%f",queen.frame.origin.y);
         [self.view addSubview:queen];
         [self.view sendSubviewToBack:queen];
         [self fallPiece:queen atX:x];
@@ -108,12 +106,10 @@
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         [UIView commitAnimations];
         double distance = self.view.frame.size.height +100 - [piece frame].origin.y;
-        NSLog(@"Distance: %f", distance);
         double speed = 200.0;
         [UIView animateWithDuration: distance/speed animations:^{
             [piece setFrame:CGRectMake(x, self.view.frame.size.height + 100, 100, 100)];
         } completion:^(BOOL finished){
-            NSLog(@"done");
             [self fallPiece:piece atX:[self setPieceRandomTop:piece]];
         }];
     }
@@ -126,7 +122,6 @@
 }
 -(void) startFalling: (DDHRandomChessController *) caller
 {
-    NSLog(@"FAlling");
     [caller dismissViewControllerAnimated:YES completion:nil];
     falling = YES;
     [self loadPieces];

@@ -11,12 +11,15 @@
 #import "DDHBoard.h"
 #import "DDHNullPiece.h"
 
-@implementation DDHPawn
+@implementation DDHPawn{
+    BOOL isLuke;
+}
 
 -(id) initWithPlayer:(ChessPlayer) player atColumn:(NSUInteger)column andRow:(NSUInteger)row
 {
     self = [super initWithPlayer:player atColumn:column andRow:row];
     [self setNumClicks:0];
+    isLuke = NO;
     return self;
 }
 
@@ -137,12 +140,25 @@
     [self setX:column];
     [self setY:row];
 }
+-(void) setToLuke
+{
+    isLuke = YES;
+}
 
 - (NSString*) description
 {
-    if ([self getPlayer] == ChessPlayerBlack)
-        return @"BlackPawn";
-    return @"WhitePawn";
+    if ([self getPlayer] == ChessPlayerBlack){
+        if (isLuke)
+            return @"DarthVader";
+        else
+            return @"BlackPawn";
+    }
+    else{
+        if(isLuke)
+            return @"LukeSkywalker";
+        else
+            return @"WhitePawn";
+    }
 }
 -(int) click
 {

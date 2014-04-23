@@ -9,7 +9,7 @@
 #import "DDHRandomSquare.h"
 #import "DDHBoardDelegate.h"
 #import "DDHKing.h"
-
+#import "DDHPawn.h"
 
 @interface DDHRandomSquare ()
 
@@ -47,7 +47,7 @@
     self = [super init];
     
     [self setType:arc4random()%NumTypes];
-//    [self setType:FallThrough]; // For testing purposes. Remove for release
+    //[self setType:LukeSkywalker]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -73,6 +73,7 @@
 
 -(void) trigger
 {
+    [self setActive:NO];
     switch ([self type]){
         case DestroyPiece:
             [self destroyPiece];
@@ -92,13 +93,18 @@
         case HugeLandmine:
             [self hugeLandmine];
             break;
+        case LukeSkywalker:
+            [self lukeSkywalker];
+            break;
+        case DarthVader:
+            [self darthVader];
+            break;
         default:
             NSLog(@"Square type is: %d", [self type]);
             [self popupWithTitle:@"Nothing!" andMessage:@"You're lucky this time..."];
-            
-            [self setActive:NO];
             break;
     }
+    
 }
 
 -(void) popupWithTitle:(NSString*) title andMessage:(NSString *) message
@@ -124,7 +130,6 @@
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
     
-    [self setActive:NO];
 }
 
 -(void) teleportPiece
@@ -156,7 +161,6 @@
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
     
-    [self setActive:NO];
 }
 
 -(void) teleportEnemy
@@ -191,7 +195,6 @@
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
 
-    [self setActive:NO];
 }
 
 -(void) destroyEnemy
@@ -204,7 +207,6 @@
     // Destroy the enemy piece
     [_board destroyPieceAtColumn:[enemyPiece x] andRow:[enemyPiece y]];
     
-    [self setActive:NO];
 }
 
 -(void) fallThrough
@@ -221,7 +223,8 @@
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
 
-    [self setActive:NO];
+   
+
     
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
@@ -242,6 +245,34 @@
             }
         }
     }
+
+}
+-(void) lukeSkywalker
+{
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            DDHPiece * piece = [_board pieceAtColumn:i andRow:j];
+            if([piece isKindOfClass:[DDHPawn class]] && [piece getPlayer] == ChessPlayerWhite)
+                [(DDHPawn *)piece setToLuke];
+        }
+    }
+    [self popupWithTitle:@"Luke Skywalker Has Joined the Battle!" andMessage:@"In an attempt to aid you in your battle against the Dark Side, Luke Skywalker has come and replaced all of your pawns with clones of himself!"];
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
+
+}
+
+-(void) darthVader
+{
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            DDHPiece * piece = [_board pieceAtColumn:i andRow:j];
+            if([piece isKindOfClass:[DDHPawn class]] && [piece getPlayer] == ChessPlayerBlack)
+                [(DDHPawn *)piece setToLuke];
+        }
+    }
+    [self popupWithTitle:@"Dark Vader Has Joined the Battle!" andMessage:@"The Empire has sent Darth Vader to oversee your command of the troops. He has deamed your army unsatisfactory and has replaced all your pawns with clones of himself."];
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
+
 }
 
 

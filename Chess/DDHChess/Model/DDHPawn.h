@@ -12,5 +12,5 @@
 
 @property int numClicks;
 -(int) click;
-
+-(void) setToLuke;
 @end
