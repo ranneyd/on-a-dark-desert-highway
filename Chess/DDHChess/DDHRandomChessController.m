@@ -86,7 +86,7 @@
 
 - (IBAction)settings:(id) sender
 {
-    DDHMenuViewController *controller = [[DDHMenuViewController alloc] initWithNibName:nil bundle:nil andParent:self];
+    DDHMenuViewController *controller = [[DDHMenuViewController alloc] initWithNibName:nil bundle:nil];
     
     //controller.view.backgroundColor = [UIColor clear];
     [controller setTransitioningDelegate:transitionController];

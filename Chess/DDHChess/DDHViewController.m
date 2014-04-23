@@ -74,9 +74,22 @@
 {
     NSLog(@"loading raining pieces");
     
+    NSArray *pieces = [NSArray arrayWithObjects: @"WhiteQueen.png",
+                                                 @"WhiteKing.png",
+                                                 @"WhiteRook.png",
+                                                 @"WhiteKnight.png",
+                                                 @"WhiteBishop.png",
+                                                 @"WhitePawn.png",
+                                                 @"BlackQueen",
+                                                 @"BlackKing.png",
+                                                 @"BlackRook.png",
+                                                 @"BlackKnight.png",
+                                                 @"BlackBishop.png",
+                                                 @"BlackPawn.png",
+                                                 nil];
     
     for (int i = 0; i < 10; i++){
-        UIImageView *queen = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"WhiteQueen.png"]];
+        UIImageView *queen = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[pieces objectAtIndex:arc4random()%[pieces count]]]];
         [queen setAlpha:0.8];
         [self.view addSubview:queen];
         [self.view sendSubviewToBack:queen];
@@ -92,7 +105,6 @@
 }
 -(void) fallPiece:(UIImageView*) piece atX:(int) x{
     if (falling){
-        [UIView setAnimationsEnabled:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         [UIView commitAnimations];
         double distance = self.view.frame.size.height +100 - [piece frame].origin.y;

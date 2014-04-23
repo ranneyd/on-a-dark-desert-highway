@@ -10,7 +10,5 @@
 
 @interface DDHMenuViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andParent: (UIViewController *) parent;
-
 
 @end

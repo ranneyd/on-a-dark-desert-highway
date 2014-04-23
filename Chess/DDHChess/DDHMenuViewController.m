@@ -17,14 +17,12 @@
 
 @implementation DDHMenuViewController
 {
-    NSArray *options;
-    DDHRandomChessController *parent_;
-}
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andParent: (UIViewController *) parent
+    NSArray *options;}
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        parent_ = (DDHRandomChessController *)parent;
+
     }
     return self;
 }
@@ -77,7 +75,7 @@
     }
     else if ([text isEqualToString:@"Quit to Main Menu"]){
         NSLog(@"Quit");
-        [parent_ quitView];
+        [(DDHRandomChessController *)[self presentingViewController] quitView];
         //[self dismissViewControllerAnimated:YES completion:nil];
         //[self presentViewController:[[self parentViewController] parentViewController] animated:YES completion:nil];
     }
@@ -87,9 +85,9 @@
         if ([text isEqualToString:@"Enable Scary Music"]){
             [settings setBool:![settings boolForKey:@"musicOn"] forKey:@"musicOn"];
             if ([settings boolForKey:@"musicOn"])
-                [[(DDHViewController *)[parent_ presentingViewController] getPlayer] play];
+                [[(DDHViewController *)[[self presentingViewController] presentingViewController] getPlayer] play];
             else
-                [[(DDHViewController *)[parent_ presentingViewController] getPlayer] stop];
+                [[(DDHViewController *)[[self presentingViewController] presentingViewController] getPlayer] stop];
         }
         if ([text isEqualToString:@"Enable Scary Sound Effects"])
             [settings setBool:![settings boolForKey:@"soundEffectsOn"] forKey:@"soundEffectsOn"];
