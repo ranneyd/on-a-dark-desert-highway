@@ -35,7 +35,7 @@
     NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"defaultPrefs" withExtension:@"plist"]];
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
     //options = [[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] objectForKey:@"root"] allKeys];
-    options = [NSArray arrayWithObjects:@"Quit to Main Menu", @"Enable Scary Music", @"Enable Scary Sound Effects", @"Enable Scary Explosions", @"Highlight Legal Moves", @"Back", nil];
+    options = [NSArray arrayWithObjects:@"Back", @"Enable Scary Music", @"Enable Scary Sound Effects", @"Enable Scary Explosions", @"Highlight Legal Moves", @"Quit to Main Menu", nil];
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -73,7 +73,7 @@
     UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *text = [options objectAtIndex:indexPath.row];
     if ([text isEqualToString:@"Back"]){
-        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else if ([text isEqualToString:@"Quit to Main Menu"]){
         NSLog(@"Quit");
@@ -84,8 +84,13 @@
     else{
         [selectedCell setAccessoryType: ([selectedCell accessoryType] == UITableViewCellAccessoryNone ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone)];
         NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
-        if ([text isEqualToString:@"Enable Scary Music"])
+        if ([text isEqualToString:@"Enable Scary Music"]){
             [settings setBool:![settings boolForKey:@"musicOn"] forKey:@"musicOn"];
+            if ([settings boolForKey:@"musicOn"])
+                [[(DDHViewController *)[parent_ presentingViewController] getPlayer] play];
+            else
+                [[(DDHViewController *)[parent_ presentingViewController] getPlayer] stop];
+        }
         if ([text isEqualToString:@"Enable Scary Sound Effects"])
             [settings setBool:![settings boolForKey:@"soundEffectsOn"] forKey:@"soundEffectsOn"];
         if ([text isEqualToString:@"Enable Scary Explosions"])

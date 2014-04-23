@@ -10,7 +10,6 @@
 #import "DDHViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
-#import <AVFoundation/AVFoundation.h>
 
 
 @interface DDHViewController()
@@ -22,7 +21,7 @@
 
 @implementation DDHViewController
 {
-    AVAudioPlayer *_player;
+    AVAudioPlayer *player_;
     BOOL falling;
 }
 - (void)viewDidLoad
@@ -59,11 +58,15 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"metal" ofType:@"mp3"];
     NSURL *file = [[NSURL alloc] initFileURLWithPath:path];
     
-    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:nil];
+    player_ = [[AVAudioPlayer alloc] initWithContentsOfURL:file error:nil];
     
-    _player.numberOfLoops = -1;
-    [_player prepareToPlay];
-    [_player play];
+    player_.numberOfLoops = -1;
+    [player_ prepareToPlay];
+    
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    if ([settings boolForKey:@"musicOn"])
+        [player_ play];
 
 }
 
@@ -89,15 +92,16 @@
 }
 -(void) fallPiece:(UIImageView*) piece atX:(int) x{
     if (falling){
+        [UIView setAnimationsEnabled:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         [UIView commitAnimations];
-        
         double distance = self.view.frame.size.height +100 - [piece frame].origin.y;
         NSLog(@"Distance: %f", distance);
         double speed = 200.0;
         [UIView animateWithDuration: distance/speed animations:^{
             [piece setFrame:CGRectMake(x, self.view.frame.size.height + 100, 100, 100)];
         } completion:^(BOOL finished){
+            NSLog(@"done");
             [self fallPiece:piece atX:[self setPieceRandomTop:piece]];
         }];
     }
@@ -144,4 +148,8 @@
     [self presentViewController:controller animated:NO completion:nil];
 }
 
+-(AVAudioPlayer *) getPlayer
+{
+    return player_;
+}
 @end

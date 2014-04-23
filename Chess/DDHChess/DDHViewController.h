@@ -11,10 +11,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DDHRandomChessController.h"
+#import <AVFoundation/AVFoundation.h>
+
 @interface DDHViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIImageView *gameOverImage;
 
 -(void) startFalling:(DDHRandomChessController *) caller;
 
+-(AVAudioPlayer *) getPlayer;
 @end

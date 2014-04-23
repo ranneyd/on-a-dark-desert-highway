@@ -165,10 +165,13 @@
     // If the square is a place the selected piece could move, highlight it yellow with black borders.
     else if ([_board highlightedAtColumn:_column andRow:_row]) {
         //_highlight.layer.borderColor = (_color == [UIColor blackColor] ? [UIColor colorWithRed:0.502 green:0 blue:0 alpha:1].CGColor : [UIColor blackColor].CGColor);
-        _highlight.backgroundColor = [UIColor yellowColor];
-        [self killPulse];
-        _pulsating = YES;
-        [self pulsate];
+        NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+        if ([settings boolForKey:@"highlightingOn"]){
+            _highlight.backgroundColor = [UIColor yellowColor];
+            [self killPulse];
+            _pulsating = YES;
+            [self pulsate];
+        }
     }
     // Otherwise, restore the color to default
     else
@@ -200,9 +203,10 @@
 // image.
 -(void) explodeAtColumn:(int)column addRow:(int)row
 {
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     // Note that if the board sends the message with column and row values equal to -1,
     // then the board wants every square to update its state.
-    if (column == _column && row == _row){
+    if ([settings boolForKey:@"explosionsOn"] && column == _column && row == _row){
          NSMutableArray * imageArray = [[NSMutableArray alloc] init];
          for (NSInteger i = 1; i <= 90; i++){
              [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%ld.png", i < 10? @"0" : @"", (long)i]]];
@@ -216,10 +220,12 @@
          [explosion setAnimationRepeatCount:1];
          [explosion startAnimating];
         
-        NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"wav"];
-        NSURL *explosionURL = [NSURL fileURLWithPath:explosionPath];
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)explosionURL, &_explosionSound);
-        AudioServicesPlaySystemSound(_explosionSound);
+        if([settings boolForKey:@"soundEffectsOn"]){
+            NSString *explosionPath = [[NSBundle mainBundle] pathForResource:@"explosion" ofType:@"wav"];
+            NSURL *explosionURL = [NSURL fileURLWithPath:explosionPath];
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)explosionURL, &_explosionSound);
+            AudioServicesPlaySystemSound(_explosionSound);
+        }
     }
 }
 
