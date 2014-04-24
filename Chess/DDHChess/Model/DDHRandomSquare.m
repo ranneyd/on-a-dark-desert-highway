@@ -49,6 +49,9 @@
 // Turns a player's piece into the opponent's color
 -(void) playerDoubleAgent;
 
+// Switch all the of the player's piece positions with the opponent's
+-(void) changeSides;
+
 // Helper function to get find a valid enemy piece
 -(DDHPiece *) getEnemyPiece;
 
@@ -69,7 +72,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:PlayerDoubleAgent]; // For testing purposes. Remove for release
+    [self setType:ChangeSides]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -122,6 +125,9 @@
             break;
         case PlayerDoubleAgent:
             [self playerDoubleAgent];
+            break;
+        case ChangeSides:
+            [self changeSides];
             break;
         default:
             NSLog(@"Square type is: %d", [self type]);
@@ -323,6 +329,64 @@
     
     // Update the square to display the change
     [_delegate pieceChangedAtColumn:[playerPiece x] addRow:[playerPiece y]];
+    
+    [self setActive:NO];
+}
+
+-(void) changeSides
+{
+    // Get the players
+    ChessPlayer player = [[_board pieceAtColumn:_x andRow:_y] getPlayer];
+    ChessPlayer opponent = [[self getEnemyPiece] getPlayer];
+    
+    // If the moved caused check, then don't change sides
+    if ([_board kingInCheckBelongingTo:opponent]){
+        [self setType:NullSquare];
+        [self trigger];
+        return;
+    }
+    
+    // Iterate over the entire board and swap the position of pieces (but only go upto the center row, or else all piece move back)
+    for (NSInteger r=0; r<[_board getRows]/2; ++r){
+        for (NSInteger c=0; c<[_board getColumns]; ++c){
+            // Get the destination row and column, adjusting for indexing from 0
+            NSInteger destCol = [_board getColumns] - 1 - c;
+            NSInteger destRow = [_board getRows] - 1 - r;
+            
+            // Remeber the pieces so that we don't over write them
+            DDHPiece* srcPiece = [_board pieceAtColumn:c andRow:r];
+            DDHPiece* destPiece = [_board pieceAtColumn:destCol andRow:destRow];
+            
+            // Move the pieces on the board
+            [_board putPiece:srcPiece inColumn:destCol andRow:destRow];
+            [_board putPiece:destPiece inColumn:c andRow:r];
+            
+            // Change the color of the pieces
+            if ([srcPiece getPlayer] == player){
+                [srcPiece setPlayer:opponent];
+                NSLog(@"changing color");
+            } else {
+                [srcPiece setPlayer:player];
+            }
+            if ([destPiece getPlayer] == player){
+                [destPiece setPlayer:opponent];
+            } else {
+                [destPiece setPlayer:player];
+            }
+            
+            // Move the pieces internally to the correct place
+            [srcPiece moveToColumn:destCol andRow:destRow];
+            [destPiece moveToColumn:c andRow:r];
+            
+            NSLog(@"(%li,%li)", c, r);
+            NSLog(@"(%li,%li)", destCol, destRow);
+        }
+    }
+    
+    // Update all squares to display the change
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
+    
+    NSLog(@"Done moving pieces!");
     
     [self setActive:NO];
 }
