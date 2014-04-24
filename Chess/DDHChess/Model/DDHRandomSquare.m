@@ -101,6 +101,7 @@
 
 -(void) trigger
 {
+    [self setActive:NO];
     switch ([self type]){
         case DestroyPlayer:
             [self destroyPlayer];
@@ -138,10 +139,9 @@
         default:
             NSLog(@"Square type is: %d", [self type]);
             [self popupWithTitle:@"Nothing!" andMessage:@"You're lucky this time..."];
-            
-            [self setActive:NO];
             break;
     }
+    
 }
 
 -(void) popupWithTitle:(NSString*) title andMessage:(NSString *) message
@@ -167,7 +167,6 @@
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
     
-    [self setActive:NO];
 }
 
 -(void) teleportPlayer
@@ -192,7 +191,6 @@
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
     
-    [self setActive:NO];
 }
 
 -(void) teleportEnemy
@@ -220,7 +218,6 @@
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
 
-    [self setActive:NO];
 }
 
 -(void) destroyEnemy
@@ -233,7 +230,6 @@
     // Destroy the enemy piece
     [_board destroyPieceAtColumn:[enemyPiece x] andRow:[enemyPiece y]];
     
-    [self setActive:NO];
 }
 
 -(void) fallThrough
@@ -250,7 +246,8 @@
     // Destroy the piece that landed on the square
     [[self board] destroyPieceAtColumn:[self x] andRow:[self y]];
 
-    [self setActive:NO];
+   
+
     
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
