@@ -9,6 +9,7 @@
 #import "DDHRandomSquare.h"
 #import "DDHBoardDelegate.h"
 #import "DDHKing.h"
+#import "DDHTuple.h"
 
 
 @interface DDHRandomSquare ()
@@ -46,8 +47,8 @@
 {
     self = [super init];
     
-    [self setType:arc4random()%NumTypes];
-//    [self setType:FallThrough]; // For testing purposes. Remove for release
+//    [self setType:arc4random()%NumTypes];
+    [self setType:TeleportEnemy]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -129,18 +130,11 @@
 
 -(void) teleportPiece
 {
-    // Get a random position on the board
-    NSInteger newCol = arc4random()%[_board getColumns];
-    NSInteger newRow = arc4random()%[_board getRows];
-    
-    // Keep looking until the space is empty and doesn't contain a random square
-    while (![_board isEmptySquareAtColumn:newCol andRow:newRow] || [_board randomAtColumn:newCol andRow:newRow]){
-        newCol = arc4random()%[_board getColumns];
-        newRow = arc4random()%[_board getRows];
-    }
+    // Get an open position on the board
+    DDHTuple* randomPos = [self getRandomEmptyPosition];
     
     // Make sure that moving the piece won't put the player in check
-    if ([_board checkIfMoveFromColumn:_x andRow:_y toColumn:newCol andRow:newRow]){
+    if ([_board checkIfMoveFromColumn:_x andRow:_y toColumn:[randomPos x] andRow:[randomPos y]]){
         [self setType:NullSquare];
         [self trigger];
         return;
@@ -151,7 +145,7 @@
     
     // Moves the piece to the open position
     NSLog(@"Teleporting Piece");
-    [_board movePieceAtColumn:_x andRow:_y ToColumn:newCol andRow:newRow];
+    [_board movePieceAtColumn:_x andRow:_y ToColumn:[randomPos x] andRow:[randomPos y]];
     
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
@@ -166,19 +160,12 @@
     // Get a valid enemy piece
     DDHPiece* enemyPiece = [self getEnemyPiece];
     
-    // Get a random position on the board
-    NSInteger newCol = arc4random()%[_board getColumns];
-    NSInteger newRow = arc4random()%[_board getRows];
-    
-    // Keep looking until the space is empty and doesn't contain a random square
-    while (![_board isEmptySquareAtColumn:newCol andRow:newRow] || [_board randomAtColumn:newCol andRow:newRow]){
-        newCol = arc4random()%[_board getColumns];
-        newRow = arc4random()%[_board getRows];
-    }
+    // Get an open position on the board
+    DDHTuple* randomPos = [self getRandomEmptyPosition];
     
     // Check that the move won't put the player in check
     ChessPlayer player = [[_board pieceAtColumn:_x andRow:_y] getPlayer];
-    if ([_board doesMoveFromColumn:[enemyPiece x] andRow:[enemyPiece y] toColumn:newCol andRow:newRow causeCheckForPlayer:player]){
+    if ([_board doesMoveFromColumn:[enemyPiece x] andRow:[enemyPiece y] toColumn:[randomPos x] andRow:[randomPos y] causeCheckForPlayer:player]){
         [self setType:NullSquare];
         [self trigger];
         return;
@@ -186,7 +173,7 @@
     
     // Moves the piece to the open position
     NSLog(@"Teleporting Piece");
-    [_board movePieceAtColumn:[enemyPiece x] andRow:[enemyPiece y] ToColumn:newCol andRow:newRow];
+    [_board movePieceAtColumn:[enemyPiece x] andRow:[enemyPiece y] ToColumn:[randomPos x] andRow:[randomPos y]];
     
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
@@ -265,6 +252,21 @@
     }
 
     return targetPiece;
+}
+
+-(DDHTuple *) getRandomEmptyPosition
+{
+    // Get a random position on the board
+    NSInteger newCol = arc4random()%[_board getColumns];
+    NSInteger newRow = arc4random()%[_board getRows];
+    
+    // Keep looking until the space is empty and doesn't contain a random square
+    while (![_board isEmptySquareAtColumn:newCol andRow:newRow] || [_board randomAtColumn:newCol andRow:newRow]){
+        newCol = arc4random()%[_board getColumns];
+        newRow = arc4random()%[_board getRows];
+    }
+
+    return [[DDHTuple alloc] initWithX:newCol andY:newRow];
 }
 
 @end
