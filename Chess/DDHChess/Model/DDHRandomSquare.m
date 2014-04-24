@@ -9,7 +9,13 @@
 #import "DDHRandomSquare.h"
 #import "DDHBoardDelegate.h"
 #import "DDHKing.h"
+#import "DDHPawn.h"
+#import "DDHRook.h"
+#import "DDHKnight.h"
+#import "DDHBishop.h"
+#import "DDHQueen.h"
 #import "DDHTuple.h"
+
 
 
 @interface DDHRandomSquare ()
@@ -34,8 +40,14 @@
 // Blow up everything around it
 -(void) hugeLandmine;
 
+// Spawns a new piece somewhere on the board
+-(void) newPiece;
+
 // Helper function to get find a valid enemy piece
 -(DDHPiece *) getEnemyPiece;
+
+// Helper function to find an open position on the board
+-(DDHTuple *) getRandomEmptyPosition;
 
 @end
 
@@ -48,7 +60,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:TeleportEnemy]; // For testing purposes. Remove for release
+    [self setType:NewPiece]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -92,6 +104,9 @@
             break;
         case HugeLandmine:
             [self hugeLandmine];
+            break;
+        case NewPiece:
+            [self newPiece];
             break;
         default:
             NSLog(@"Square type is: %d", [self type]);
@@ -229,8 +244,29 @@
             }
         }
     }
+    
+    [self setActive:NO];
 }
 
+-(void) newPiece
+{
+    // Get an open position on the board
+    DDHTuple* randomPos = [self getRandomEmptyPosition];
+    
+    // Make sure that the new piece belongs to the right player
+    ChessPlayer player = [[_board pieceAtColumn:_x andRow:_y] getPlayer];
+    
+    // Create a new piece (of a random non-king type) and place it on the board
+    NSArray* pieceTypes = [[NSArray alloc] initWithObjects: [DDHPawn class], [DDHBishop class], [DDHKnight class], [DDHQueen class], [DDHRook class], nil];
+    NSInteger randomIndex = arc4random()%[pieceTypes count];
+    DDHPiece* newPiece = [[[pieceTypes objectAtIndex:randomIndex] alloc] initWithPlayer:player atColumn:[randomPos x] andRow:[randomPos y]];
+    [_board putPiece:newPiece inColumn:[randomPos x] andRow:[randomPos y]];
+    
+    // Update the square to display the change
+    [_delegate pieceChangedAtColumn:[randomPos x] addRow:[randomPos y]];
+    
+    [self setActive:NO];
+}
 
 // Helper functions
 -(DDHPiece *) getEnemyPiece
