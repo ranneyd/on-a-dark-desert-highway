@@ -52,6 +52,9 @@
 // Switch all the of the player's piece positions with the opponent's
 -(void) changeSides;
 
+// Destroy all valid pieces in a row
+-(void) carpetBomb;
+
 // Helper function to get find a valid enemy piece
 -(DDHPiece *) getEnemyPiece;
 
@@ -72,7 +75,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:ChangeSides]; // For testing purposes. Remove for release
+    [self setType:CarpetBomb]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -128,6 +131,9 @@
             break;
         case ChangeSides:
             [self changeSides];
+            break;
+        case CarpetBomb:
+            [self carpetBomb];
             break;
         default:
             NSLog(@"Square type is: %d", [self type]);
@@ -259,7 +265,7 @@
         for (long c = _x - 1; c <= _x + 1; ++c){
             
             // Landmines can't blow up kings or put the player in check (or things that are off the board)
-            if (![[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:_x andRow:_y] &&
+            if (![[_board pieceAtColumn:c andRow:r] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:c andRow:r] &&
                                                                                         [posPiece onBoard:_board AtColumn:c andRow:r]){
                 [[self board] destroyPieceAtColumn:c andRow:r];
             }
@@ -387,6 +393,24 @@
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
     
     NSLog(@"Done moving pieces!");
+    
+    [self setActive:NO];
+}
+
+-(void) carpetBomb
+{
+    // Get a piece for checking boundaries
+    DDHPiece* posPiece = [_board pieceAtColumn:_x andRow:_y];
+    
+
+    for (long c = 0; c < [_board getColumns]; ++c){
+        
+        // Can't blow up kings or put the player in check (or things that are off the board)
+        if (![[_board pieceAtColumn:c andRow:_y] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:c andRow:_y] &&
+                                                                                                        [posPiece onBoard:_board AtColumn:c andRow:_y]){
+            [[self board] destroyPieceAtColumn:c andRow:_y];
+        }
+    }
     
     [self setActive:NO];
 }

@@ -25,7 +25,8 @@ typedef NS_ENUM(int, RandomSquare){
     EnemyDoubleAgent = 8,
     PlayerDoubleAgent = 9,
     ChangeSides = 10,
-    NumTypes = 11
+    CarpetBomb = 11,
+    NumTypes = 12
 };
 
 #endif
