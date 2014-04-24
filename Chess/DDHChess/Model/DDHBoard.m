@@ -552,7 +552,7 @@
 
 -(BOOL) checkIfMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
-    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    // Create a copy of the board
     DDHBoard* boardCopy = [self copy];
     
     // Moving piece. Checking if this piece moving would cause check
@@ -590,7 +590,7 @@
 
 -(BOOL) doesMoveFromColumn:(NSUInteger) oldColumn andRow:(NSUInteger) oldRow toColumn:(NSUInteger) column andRow:(NSUInteger) row causeCheckForPlayer: (ChessPlayer) player
 {
-    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    // Create a copy of the board
     DDHBoard* boardCopy = [self copy];
     
     // Move the moving piece to the new position.
@@ -603,7 +603,7 @@
 
 -(BOOL) doesDestructionCauseCheckAtColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
-    // Create a copy of the board. NOTE: Does not copy individual pieces, so we still need to remember that
+    // Create a copy of the board
     DDHBoard* boardCopy = [self copy];
     
     // Piece being destroyed
@@ -614,6 +614,18 @@
     
     // If this move causes the player to be in check, we are moving into check
     return [boardCopy kingInCheckBelongingTo:[pieceToDie getPlayer]];
+}
+
+-(BOOL) doesNewPiece: (DDHPiece *) piece atColumn: (NSInteger) column andRow: (NSInteger) row causeCheckForPlayer: (ChessPlayer) player
+{
+    // Create a copy of the board
+    DDHBoard* boardCopy = [self copy];
+    
+    // Place the new piece on the board
+    [boardCopy putPiece:piece inColumn:column andRow:row];
+    
+    // Check to see if the player is now in check
+    return [boardCopy kingInCheckBelongingTo:player];
 }
 
 

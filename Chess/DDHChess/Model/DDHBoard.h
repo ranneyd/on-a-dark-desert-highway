@@ -119,6 +119,9 @@
 // Check if destroying a piece will cause check
 -(BOOL) doesDestructionCauseCheckAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
+// Check if a new piece at a given position will cause check
+-(BOOL) doesNewPiece: (DDHPiece *) piece atColumn: (NSInteger) column andRow: (NSInteger) row causeCheckForPlayer: (ChessPlayer) player;
+
 -(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 // *************************

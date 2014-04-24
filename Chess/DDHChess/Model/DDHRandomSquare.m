@@ -52,6 +52,9 @@
 // Helper function to get find a valid enemy piece
 -(DDHPiece *) getEnemyPiece;
 
+// Helper function to get find a valid piece from the current player
+-(DDHPiece *) getPlayerPiece;
+
 // Helper function to find an open position on the board
 -(DDHTuple *) getRandomEmptyPosition;
 
@@ -66,7 +69,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:EnemyDoubleAgent]; // For testing purposes. Remove for release
+    [self setType:PlayerDoubleAgent]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -297,6 +300,33 @@
     [self setActive:NO];
 }
 
+-(void) playerDoubleAgent
+{
+    // Get a valid piece
+    DDHPiece* playerPiece = [self getPlayerPiece];
+    
+    // Get the opponent's color
+    ChessPlayer opponent = [[self getEnemyPiece] getPlayer];
+    
+    // Create a new piece to check if the move is valid
+    DDHPiece* doubleAgent = [[[playerPiece class] alloc] initWithPlayer:opponent atColumn:[playerPiece x] andRow:[playerPiece y]];
+    
+    // If changing the piece to a double agent would cause check, don't do anything
+    if ([_board doesNewPiece:doubleAgent atColumn:[doubleAgent x] andRow:[doubleAgent y] causeCheckForPlayer:[playerPiece getPlayer]]){
+        [self setType:NullSquare];
+        [self trigger];
+        return;
+    }
+    
+    // Change the piece to the opponent
+    [playerPiece setPlayer:opponent];
+    
+    // Update the square to display the change
+    [_delegate pieceChangedAtColumn:[playerPiece x] addRow:[playerPiece y]];
+    
+    [self setActive:NO];
+}
+
 // Helper functions
 -(DDHPiece *) getEnemyPiece
 {
@@ -319,6 +349,26 @@
     return targetPiece;
 }
 
+-(DDHPiece *) getPlayerPiece
+{
+    // Get the player that moved to the space
+    DDHPiece* playerPiece = [_board pieceAtColumn:_x andRow:_y];
+    ChessPlayer player = [playerPiece getPlayer];
+    
+    // Get a random position on the board
+    NSInteger targetCol = arc4random()%[_board getColumns];
+    NSInteger targetRow = arc4random()%[_board getRows];
+    DDHPiece* targetPiece = [_board pieceAtColumn:targetCol andRow:targetRow];
+    
+    // Keep looking until you find an enemy piece that isn't the king
+    while(([targetPiece getPlayer] != player) || [targetPiece isMemberOfClass:[DDHKing class]]){
+        targetCol = arc4random()%[_board getColumns];
+        targetRow = arc4random()%[_board getRows];
+        targetPiece = [_board pieceAtColumn:targetCol andRow:targetRow];
+    }
+    
+    return targetPiece;
+}
 
 -(DDHTuple *) getRandomEmptyPosition
 {
