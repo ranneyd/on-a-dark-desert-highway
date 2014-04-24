@@ -123,9 +123,14 @@
             break;
         case NewPiece:
             [self newPiece];
+        case LukeSkywalker:
+            [self lukeSkywalker];
             break;
         case EnemyDoubleAgent:
             [self enemyDoubleAgent];
+            break;
+        case DarthVader:
+            [self darthVader];
             break;
         case PlayerDoubleAgent:
             [self playerDoubleAgent];
@@ -268,8 +273,34 @@
             }
         }
     }
+
+}
+-(void) lukeSkywalker
+{
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            DDHPiece * piece = [_board pieceAtColumn:i andRow:j];
+            if([piece isKindOfClass:[DDHPawn class]] && [piece getPlayer] == ChessPlayerWhite)
+                [(DDHPawn *)piece setToLuke];
+        }
+    }
+    [self popupWithTitle:@"Luke Skywalker Has Joined the Battle!" andMessage:@"In an attempt to aid you in your battle against the Dark Side, Luke Skywalker has come and replaced all of your pawns with clones of himself!"];
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
     
-    [self setActive:NO];
+}
+
+-(void) darthVader
+{
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){
+            DDHPiece * piece = [_board pieceAtColumn:i andRow:j];
+            if([piece isKindOfClass:[DDHPawn class]] && [piece getPlayer] == ChessPlayerBlack)
+                [(DDHPawn *)piece setToLuke];
+        }
+    }
+    [self popupWithTitle:@"Dark Vader Has Joined the Battle!" andMessage:@"The Empire has sent Darth Vader to oversee your command of the troops. He has deamed your army unsatisfactory and has replaced all your pawns with clones of himself."];
+    [_delegate pieceChangedAtColumn:-1 addRow:-1];
+    
 }
 
 -(void) newPiece
@@ -411,6 +442,7 @@
     
     [self setActive:NO];
 }
+
 
 // Helper functions
 -(DDHPiece *) getEnemyPiece
