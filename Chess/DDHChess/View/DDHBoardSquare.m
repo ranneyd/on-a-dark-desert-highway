@@ -190,7 +190,7 @@
 // This function is called by the Board class through a delegate
 // to let the Board Square know it should display an updated
 // image.
--(void) pieceChangedAtColumn:(int)column addRow:(int)row
+-(void) pieceChangedAtColumn:(NSInteger)column addRow:(NSInteger)row
 {
     // Note that if the board sends the message with column and row values equal to -1,
     // then the board wants every square to update its state.
@@ -201,7 +201,7 @@
 }
 
 // image.
--(void) explodeAtColumn:(int)column addRow:(int)row
+-(void) explodeAtColumn:(NSInteger)column addRow:(NSInteger)row
 {
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     // Note that if the board sends the message with column and row values equal to -1,

@@ -12,9 +12,9 @@
 
 @protocol DDHBoardDelegate <NSObject>
 
--(void) pieceChangedAtColumn:(int)column addRow:(int)row;
+-(void) pieceChangedAtColumn:(NSInteger)column addRow:(NSInteger)row;
 
--(void) explodeAtColumn:(int)column addRow:(int)row;
+-(void) explodeAtColumn:(NSInteger)column addRow:(NSInteger)row;
 
 -(void) rotate;
 
