@@ -23,10 +23,10 @@
 // Random square effect functions
 
 // Destroys the piece that landed on square
--(void) destroyPiece;
+-(void) destroyPlayer;
 
 // Teleports the piece to a random location
--(void) teleportPiece;
+-(void) teleportPlayer;
 
 // Teleports a random enemy piece to a random location
 -(void) teleportEnemy;
@@ -42,6 +42,12 @@
 
 // Spawns a new piece somewhere on the board
 -(void) newPiece;
+
+// Turns an opponent's piece to the other color
+-(void) enemyDoubleAgent;
+
+// Turns a player's piece into the opponent's color
+-(void) playerDoubleAgent;
 
 // Helper function to get find a valid enemy piece
 -(DDHPiece *) getEnemyPiece;
@@ -60,7 +66,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:NewPiece]; // For testing purposes. Remove for release
+    [self setType:EnemyDoubleAgent]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -87,11 +93,11 @@
 -(void) trigger
 {
     switch ([self type]){
-        case DestroyPiece:
-            [self destroyPiece];
+        case DestroyPlayer:
+            [self destroyPlayer];
             break;
-        case TeleportPiece:
-            [self teleportPiece];
+        case TeleportPlayer:
+            [self teleportPlayer];
             break;
         case TeleportEnemy:
             [self teleportEnemy];
@@ -107,6 +113,12 @@
             break;
         case NewPiece:
             [self newPiece];
+            break;
+        case EnemyDoubleAgent:
+            [self enemyDoubleAgent];
+            break;
+        case PlayerDoubleAgent:
+            [self playerDoubleAgent];
             break;
         default:
             NSLog(@"Square type is: %d", [self type]);
@@ -125,7 +137,7 @@
 
 // Random square effect functions
 
--(void) destroyPiece
+-(void) destroyPlayer
 {
     // Landmines can't blow up kings or put the player in check
     if ([[_board pieceAtColumn:_x andRow:_y] isMemberOfClass:[DDHKing class]] || [_board doesDestructionCauseCheckAtColumn:_x andRow:_y]){
@@ -143,7 +155,7 @@
     [self setActive:NO];
 }
 
--(void) teleportPiece
+-(void) teleportPlayer
 {
     // Get an open position on the board
     DDHTuple* randomPos = [self getRandomEmptyPosition];
@@ -268,6 +280,23 @@
     [self setActive:NO];
 }
 
+-(void) enemyDoubleAgent
+{
+    // Get a valid enemy piece
+    DDHPiece* enemyPiece = [self getEnemyPiece];
+    
+    // Get the player that landed on the square
+    ChessPlayer player = [[_board pieceAtColumn:_x andRow:_y] getPlayer];
+    
+    // Change the piece to the current player's colo
+    [enemyPiece setPlayer:player];
+    
+    // Update the square to display the change
+    [_delegate pieceChangedAtColumn:[enemyPiece x] addRow:[enemyPiece y]];
+    
+    [self setActive:NO];
+}
+
 // Helper functions
 -(DDHPiece *) getEnemyPiece
 {
@@ -289,6 +318,7 @@
 
     return targetPiece;
 }
+
 
 -(DDHTuple *) getRandomEmptyPosition
 {
