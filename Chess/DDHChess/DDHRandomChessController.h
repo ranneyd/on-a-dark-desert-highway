@@ -19,6 +19,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andRandom: (BOOL) random;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSuperRandom: (BOOL) random;
+
 -(IBAction)settings:(id)sender;
 
 -(void)quitView;

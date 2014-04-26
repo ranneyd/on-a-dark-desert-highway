@@ -123,14 +123,15 @@
             break;
         case NewPiece:
             [self newPiece];
+            break;
         case LukeSkywalker:
-            [self lukeSkywalker];
+            [_board luke] ? [self popupWithTitle:@"Luke Skywalker" andMessage:@"Your pawns are already Luke Skywalker. What a waste of a square."] : [self lukeSkywalker];
             break;
         case EnemyDoubleAgent:
             [self enemyDoubleAgent];
             break;
         case DarthVader:
-            [self darthVader];
+            [_board vader] ? [self popupWithTitle:@"Darth Vader" andMessage:@"Your pawns are already Darth Vader. What a waste of a square."] : [self darthVader];
             break;
         case PlayerDoubleAgent:
             [self playerDoubleAgent];
@@ -286,7 +287,7 @@
     }
     [self popupWithTitle:@"Luke Skywalker Has Joined the Battle!" andMessage:@"In an attempt to aid you in your battle against the Dark Side, Luke Skywalker has come and replaced all of your pawns with clones of himself!"];
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
-    
+    [_board setLuke:YES];
 }
 
 -(void) darthVader
@@ -300,7 +301,7 @@
     }
     [self popupWithTitle:@"Dark Vader Has Joined the Battle!" andMessage:@"The Empire has sent Darth Vader to oversee your command of the troops. He has deamed your army unsatisfactory and has replaced all your pawns with clones of himself."];
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
-    
+    [_board setLuke:YES];
 }
 
 -(void) newPiece
@@ -416,7 +417,9 @@
             
         }
     }
-    
+    BOOL luke = [_board luke];
+    [_board setLuke:[_board vader]];
+    [_board setVader:luke];
     // Update all squares to display the change
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
     
@@ -437,7 +440,7 @@
                                                                                                     [posPiece onBoard:_board AtColumn:c andRow:_y]){
             [[self board] destroyPieceAtColumn:c andRow:_y];
             //[[self board] informDelegateOfExplosionAtColumn:c andRow:_y];
-            [NSThread sleepForTimeInterval:0.25];
+            [NSThread sleepForTimeInterval:0.1];
         }
     }
     

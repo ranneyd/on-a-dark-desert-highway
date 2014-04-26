@@ -23,7 +23,7 @@
 }
 
 // Initialize square at given postion with pointer to the board it belongs to
--(id) initWithFrame:(CGRect) frame column:(NSInteger) column row:(NSInteger)row board:(DDHBoard *)board;
+- (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHBoard *)board andSuper:(BOOL) superRandom;
 
 // NOTE: All other communication with DDHBoardSquare is done through the DDHBoardDelegate.
 //       This allows all squares to be updated at the same time through a single delegate.

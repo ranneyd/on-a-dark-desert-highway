@@ -143,7 +143,7 @@
 
 - (IBAction)superRandomChessAction:(id)sender
 {
-    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:YES];
+    DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andSuperRandom:YES];
     falling = NO;
     [self presentViewController:controller animated:NO completion:nil];
 }

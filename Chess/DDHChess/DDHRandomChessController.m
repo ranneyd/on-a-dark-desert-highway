@@ -22,6 +22,7 @@
     DDHBoard* _board; // Contains the board on which the game will be played
     BOOL random;
     BOOL quit;
+    BOOL _superRandom;
 }
 
 @synthesize transitionController;
@@ -32,6 +33,18 @@
     if (self) {
         random = rand;
         quit = NO;
+        _superRandom = NO;
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andSuperRandom: (BOOL) superRandom
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        random = YES;
+        quit = NO;
+        _superRandom = superRandom;
     }
     return self;
 }
@@ -56,7 +69,7 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     // Create and initialize view to display the board and add it to this controller
-    DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,([[UIScreen mainScreen]applicationFrame].size.height - 585.0)/2.0,600, 585) andBoard:_board];
+    DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,([[UIScreen mainScreen]applicationFrame].size.height - 585.0)/2.0,600, 585) andBoard:_board andSuperRandom:_superRandom];
     
     [self.view addSubview:info];
     [self.view addSubview:chessBoard];

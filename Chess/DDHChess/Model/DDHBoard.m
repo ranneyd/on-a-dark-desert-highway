@@ -95,6 +95,9 @@
     DDHPiece* _pawnThatDoubleMovedLastTurn;
     
     DDHChessInfoView* _controller;
+    
+    BOOL luke;
+    BOOL vader;
 }
 
 // ********************
@@ -124,6 +127,8 @@
         _delegate = (id)_boardDelegate;
         
         _controller = controller;
+        [self setLuke:NO];
+        [self setVader:NO];
     }
     return self;
 }
@@ -710,6 +715,7 @@
 }
 
 
+
 // *************************
 // ** UI Helper Functions **
 // *************************
@@ -806,6 +812,7 @@
     if([_delegate respondsToSelector:@selector(explodeAtColumn:addRow:)])
         [_delegate explodeAtColumn:(int)column addRow:(int)row];
 }
+
 
 -(BOOL) randomAtColumn:(NSUInteger)column andRow:(NSUInteger)row
 {

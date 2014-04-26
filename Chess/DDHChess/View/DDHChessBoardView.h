@@ -16,6 +16,6 @@
 @interface DDHChessBoardView : UIView
 
 // Initialize the main view within a certain frame and specific board
-- (id) initWithFrame:(CGRect)frame andBoard:(DDHBoard *)board;
+- (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board andSuperRandom:(BOOL) superRandom;
 
 @end

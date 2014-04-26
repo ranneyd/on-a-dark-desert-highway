@@ -35,6 +35,11 @@
     
     UIView *_highlight;
     UIImageView* _questionMark;
+    
+    BOOL _superRandom;
+    
+    NSMutableArray * imageArray;
+    
 }
 
 // **********************
@@ -42,7 +47,7 @@
 // **********************
 
 // Creation method for squares.
-- (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHBoard *)board
+- (id)initWithFrame:(CGRect)frame column:(NSInteger)column row:(NSInteger)row board:(DDHBoard *)board andSuper:(BOOL) superRandom
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -55,6 +60,7 @@
         _pulsating = NO;
         _animating = NO;
         
+        _superRandom = superRandom;
         
         // Determine color of square based on position in board
         [self setColor];
@@ -65,6 +71,8 @@
         if ([board randomAtColumn:column andRow:row]){
             _questionMark = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"questionMark.png"]];
             [[_questionMark layer] setFrame:CGRectMake(frame.size.width/4.0,frame.size.height/4.0,frame.size.width/2.0,frame.size.height/2.0)];
+            if(_superRandom)
+                [_questionMark setAlpha:0];
             [self addSubview:_questionMark];
             //[self setBackgroundColor:[UIColor greenColor]];
         }
@@ -85,6 +93,13 @@
         [self addSubview:_currentImageView];
         
         [self update];
+        
+        
+        imageArray = [[NSMutableArray alloc] init];
+        for (NSInteger i = 1; i <= 90; i++){
+            [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%ld.png", i < 10? @"0" : @"", (long)i]]];
+        }
+        
     }
     
     // Add the square to the board.
@@ -207,10 +222,6 @@
     // Note that if the board sends the message with column and row values equal to -1,
     // then the board wants every square to update its state.
     if ([settings boolForKey:@"explosionsOn"] && column == _column && row == _row){
-         NSMutableArray * imageArray = [[NSMutableArray alloc] init];
-         for (NSInteger i = 1; i <= 90; i++){
-             [imageArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"explosion1_00%@%ld.png", i < 10? @"0" : @"", (long)i]]];
-         }
          UIImageView * explosion = [[UIImageView alloc] initWithFrame:
                                     CGRectMake(-45, 50, 50, 50)];
          explosion.animationImages = imageArray;
@@ -228,6 +239,7 @@
         }
     }
 }
+
 
 -(void) rotate
 {
@@ -332,6 +344,7 @@
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [UIView setAnimationRepeatCount:21];
+        [_questionMark setAlpha:1];
         _questionMark.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
         [UIView commitAnimations];
         

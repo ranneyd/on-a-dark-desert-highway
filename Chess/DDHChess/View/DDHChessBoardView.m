@@ -12,15 +12,13 @@
 #import <AVFoundation/AVFoundation.h>
 
 @implementation DDHChessBoardView{
-    
 }
 
-- (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board
+- (id)initWithFrame:(CGRect)frame andBoard:(DDHBoard*) board andSuperRandom:(BOOL) superRandom
 {
     // Initialize UIView and make sure it worked
     if (self = [super initWithFrame:frame])
     {
-        
         
         // Use size of frame to determine size of board squares
         float rowHeight = frame.size.height / 8.0;
@@ -35,7 +33,7 @@
                 int offset = arc4random() % maxDist;
                 
                 // Create a DDHBoardSquare at each position on the board
-                DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight-offset, columnWidth, rowHeight) column:col row:row board:board];
+                DDHBoardSquare * square = [[DDHBoardSquare alloc] initWithFrame:CGRectMake(col*columnWidth, row*rowHeight-offset, columnWidth, rowHeight) column:col row:row board:board andSuper:superRandom];
                 
                 [UIView animateWithDuration:(float)offset/(float)maxDist animations:^{
                     square.frame = CGRectOffset(square.frame, 0, offset+50);

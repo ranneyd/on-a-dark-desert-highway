@@ -30,6 +30,9 @@
 // Indicates the player who makes the next move
 @property ChessPlayer nextMove;
 
+@property BOOL luke;
+@property BOOL vader;
+
 // **********************
 // ** Public Functions **
 // **********************
