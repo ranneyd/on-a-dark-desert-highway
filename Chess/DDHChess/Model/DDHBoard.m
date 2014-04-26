@@ -96,8 +96,8 @@
     
     DDHChessInfoView* _controller;
     
-    BOOL luke;
-    BOOL vader;
+    BOOL _luke;
+    BOOL _vader;
 }
 
 // ********************
@@ -562,33 +562,13 @@
     
     // Moving piece. Checking if this piece moving would cause check
     DDHPiece* movingPiece = [boardCopy pieceAtColumn:oldColumn andRow:oldRow];
-    /*
-    // Occupant of the space the moving piece is moving to
-    DDHPiece* occupant = [boardCopy pieceAtColumn:column andRow:row];
-    
-    
-    // Remember data about the pieces too
-    BOOL moverMoved = [movingPiece hasMoved];
-    BOOL occupantMoved = [occupant hasMoved];
-    */
+
     // Move the moving piece to the new position.
     [boardCopy movePieceAtColumn:oldColumn andRow:oldRow ToColumn:column andRow:row];
     
     // If this move causes the player to be in check, we are moving into check
     BOOL movingIntoCheck = [boardCopy kingInCheckBelongingTo:[movingPiece getPlayer]];
     
-    //NSLog(@"Homie, you %@ want to move to (%lu,%lu)? Well that would make check %d", movingPiece, (unsigned long)column, (unsigned long)row, movingIntoCheck);
-    
-    // Make sure the old piece knows internally where it is
-    /*[occupant moveToColumn:column andRow:row];
-    [occupant setMoved:occupantMoved];
-
-    //NSLog(@"new x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", column, row, [occupant x], [occupant y]);
-    // Make sure that the moving piece knows where it is
-    [movingPiece moveToColumn:oldColumn andRow:oldRow];
-    [movingPiece setMoved:moverMoved];
-    */
-    //NSLog(@"old x,y is (%d,%d) and the moving piece thinks it lives in (%d,%d)", oldColumn, oldRow, [movingPiece x], [movingPiece y]);
     return movingIntoCheck;
     
 }
@@ -658,54 +638,6 @@
 
 
 
-/*
- 
- // Returns true if a King belonging to player could move to this spot. Iterates through pieces and highlights the board
- // with their moves and if, after all the pieces are through, the given spot is highlighted, the king can't move there
- // ie can't move into check.
- -(BOOL) kingBelongingTo:(ChessPlayer)player CouldMoveToColumn:(NSInteger)column andRow:(NSInteger) row
- {
- // I sincerely wish pointers in objective C weren't so stupid
- 
- // We're going to store the current state of the highlighted board here.
- NSUInteger oldHighlighting[8][8];
- 
- // Iterate over the highlighted board and save it into the temporary save location
- for(int i = 0; i < 8; i++)
- for(int j = 0; j < 8; j++)
- oldHighlighting[i][j] = _highlightBoard[i][j];
- 
- // Clear the highlighting
- [self clearHighlighting];
- // If we find that our spot is hit, we set this to NO
- BOOL result = YES;
- 
- // Iterate over all pieces
- for(DDHPiece* piece in _pieceList){
- // _pieceList has nils in it to preserve indices after piece deletion. We have to avoid those and
- // we don't want to consider moves from our own pieces.
- if(piece != nil && [piece getPlayer] != player){
- // Highlight possible moves
- [piece highlightMoves];
- // If the square we're looking at is highlighted, we'll return NO later and break the loop now
- 
- // Putting here and not outside the loop for performance. Don't want to go through every piece if
- // The first piece can hit that spot.
- if ([self highlightedAtColumn:column andRow:row]){
- result = NO;
- break;
- }
- }
- }
- 
- // Set the highlight board back to its original state.
- for(int i = 0; i < 8; i++)
- for(int j = 0; j < 8; j++)
- _highlightBoard[i][j] = oldHighlighting[i][j];
- return result;
- }
- 
- */
 -(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row
 {
     [self informDelegateOfExplosionAtColumn:column andRow:row];
