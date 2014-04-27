@@ -125,7 +125,11 @@
 // Check if a new piece at a given position will cause check
 -(BOOL) doesNewPiece: (DDHPiece *) piece atColumn: (NSInteger) column andRow: (NSInteger) row causeCheckForPlayer: (ChessPlayer) player;
 
+// Destroys the piece at a given location
 -(void) destroyPieceAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
+
+// Updates the random squares and resets them as necessary
+-(void) updateRandomSquares;
 
 // *************************
 // ** UI Helper Functions **

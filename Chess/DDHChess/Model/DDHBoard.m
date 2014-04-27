@@ -98,6 +98,11 @@
     
     BOOL _luke;
     BOOL _vader;
+    
+    // Information about random squares
+    NSInteger _currentRandomSquares; // Only accounts for active squares
+    NSInteger _maxRandomSquares; // Parameter set in setToInitialRandomState
+    
 }
 
 // ********************
@@ -147,7 +152,7 @@
         // Initialized the empty board
         [self clearBoard];
         
-        
+
     }
     return self;
 }
@@ -215,14 +220,20 @@
 -(void) setToInitialRandomState
 {
     [self setToInitialState];
+
+    // Set to determine number of random squares that can be on the board at one time
+    _maxRandomSquares = 8;
     
-    for(int i = 0; i < _columns; i++){
-        // Don't want spaces initially occupied by pieces
-        for(int j = 2; j < _rows-2; j++){
-            // 1/4 chance of there being a random square
-            if(arc4random()%4 == 0)
-                [_randomSquares replaceObjectAtColumn:i andRow:j withObject:[[DDHRandomSquare alloc] initWithColumn:i andRow:j andBoard:self andDelegate:_delegate]];
-        }
+    // Start with no squares
+    _currentRandomSquares = 0;
+    
+    // Get some random postions and place the correct number of squares
+    for (long i = 0; i < _maxRandomSquares; ++i){
+        // Get a random location on the board
+        DDHTuple* newLocation = [self getRandomEmptyPosition];
+        NSLog(@"Creating new square at (%li,%li)", [newLocation x], [newLocation y]);
+        [_randomSquares replaceObjectAtColumn:[newLocation x] andRow:[newLocation y] withObject:[[DDHRandomSquare alloc] initWithColumn:[newLocation x] andRow:[newLocation y] andBoard:self andDelegate:_delegate]];
+        ++_currentRandomSquares;
     }
     
     NSLog(@"Life Happened");
@@ -270,6 +281,8 @@
         boardCopy->_pawnThatDoubleMovedLastTurn = [boardCopy->_pieces objectAtColumn:[_pawnThatDoubleMovedLastTurn x] andRow:[_pawnThatDoubleMovedLastTurn y]];
         boardCopy->_controller = _controller;
         boardCopy->_randomSquares = _randomSquares;
+        boardCopy->_currentRandomSquares = _currentRandomSquares;
+        boardCopy->_maxRandomSquares = _maxRandomSquares;
     }
     return boardCopy;
 }
@@ -415,9 +428,11 @@
     [self informDelegateOfPieceChangedAtColumn:oldColumn andRow:oldRow];
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
     
+    // Handle if the piece landed on a random square
     if([self randomAtColumn:column andRow:row]){
-        NSLog(@"In here");
         [_delegate randomLandAtColumn:column addRow:row withSquare:[_randomSquares objectAtColumn:column andRow:row]];
+        --_currentRandomSquares;
+        [self updateRandomSquares];
     }
     
     // Switch turns if we aren't castling
@@ -646,7 +661,48 @@
     [self informDelegateOfPieceChangedAtColumn:column andRow:row];
 }
 
+-(void) updateRandomSquares
+{
+    NSLog(@"current squares: %li", _currentRandomSquares);
+    NSLog(@"max squares: %li", _maxRandomSquares);
+    // Make more random squares when the number gets too low
+    if (_currentRandomSquares < _maxRandomSquares/2){
+        // Get a random location on the board
+        DDHTuple* newLocation = [self getRandomEmptyPosition];
+        
+        // Figure out how many random squares to make
+        NSInteger numberOfSquares = _maxRandomSquares - _currentRandomSquares;
+        
+        // Create more random squares to get back to the max
+        for (long i = 0; i < numberOfSquares; ++i){
+            NSLog(@"Creating new square at (%li,%li)", [newLocation x], [newLocation y]);
+            [_randomSquares replaceObjectAtColumn:[newLocation x] andRow:[newLocation y] withObject:[[DDHRandomSquare alloc] initWithColumn:[newLocation x] andRow:[newLocation y] andBoard:self andDelegate:_delegate]];
+            ++_currentRandomSquares;
+            
+            // Update the new location
+            newLocation = [self getRandomEmptyPosition];
+            
+        }
+        
+        // Tell the delegate to update all the squares
+        [self informDelegateOfPieceChangedAtColumn:-1 andRow:-1];
+    }
+}
 
+-(DDHTuple *) getRandomEmptyPosition
+{
+    // Get a random position on the board
+    NSInteger newCol = arc4random()%[self getColumns];
+    NSInteger newRow = arc4random()%[self getRows];
+    
+    // Keep looking until the space is empty and doesn't contain a random square
+    while (![self isEmptySquareAtColumn:newCol andRow:newRow] || [self randomAtColumn:newCol andRow:newRow]){
+        newCol = arc4random()%[self getColumns];
+        newRow = arc4random()%[self getRows];
+    }
+    
+    return [[DDHTuple alloc] initWithX:newCol andY:newRow];
+}
 
 // *************************
 // ** UI Helper Functions **

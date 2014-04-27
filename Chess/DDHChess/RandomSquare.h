@@ -19,16 +19,16 @@ typedef NS_ENUM(int, RandomSquare){
     TeleportEnemy = 2,
     DestroyEnemy = 3,
     FallThrough = 4,
-    NullSquare = 5,
-    HugeLandmine = 6,
-    NewPiece = 7,
-    EnemyDoubleAgent = 8,
-    PlayerDoubleAgent = 9,
-    ChangeSides = 10,
-    CarpetBomb = 11,
-    LukeSkywalker = 12,
-    DarthVader = 13,
-    NumTypes = 14
+    HugeLandmine = 5,
+    NewPiece = 6,
+    EnemyDoubleAgent = 7,
+    PlayerDoubleAgent = 8,
+    ChangeSides = 9,
+    CarpetBomb = 10,
+    LukeSkywalker = 11,
+    DarthVader = 12,
+    NumTypes = 13,
+    NullSquare = 14
 };
 
 #endif
