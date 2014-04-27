@@ -350,6 +350,8 @@
         _questionMark.transform = CGAffineTransformMakeRotation(_upsideDown? 0 : M_PI);
         [UIView commitAnimations];
         
+        CGRect origFrame = _questionMark.frame;
+        
         [UIView animateWithDuration:duration animations:^{
             CGRect qMark = [_questionMark frame];
             int scale = 20;
@@ -357,6 +359,8 @@
             [_questionMark setFrame:CGRectMake(qMark.origin.x - qMark.size.width*scale/2.0, qMark.origin.y - qMark.size.height*scale/2.0, qMark.size.width*scale, qMark.size.height*scale)];
         } completion:^(BOOL finished){
             [square trigger];
+            _questionMark.transform = CGAffineTransformMakeRotation(M_PI);
+            _questionMark.frame = origFrame;
         }];
     }
 }

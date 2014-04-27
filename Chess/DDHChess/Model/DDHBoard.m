@@ -819,5 +819,8 @@
         [NSException raise:NSRangeException format:@"row or column out of bounds"];
 }
 
-
+-(BOOL) onBoardAtColumn :(NSInteger) column andRow:(NSInteger) row
+{
+    return column >= 0 && column < _columns && row >= 0 && row < _rows;
+}
 @end

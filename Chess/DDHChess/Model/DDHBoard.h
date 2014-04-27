@@ -147,4 +147,7 @@
 -(BOOL) randomAtColumn:(NSUInteger) column andRow:(NSUInteger) row;
 
 -(void)informDelegateOfExplosionAtColumn:(NSInteger)column andRow:(NSInteger) row;
+
+-(BOOL) onBoardAtColumn :(NSInteger) column andRow:(NSInteger) row;
+
 @end

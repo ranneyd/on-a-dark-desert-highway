@@ -268,7 +268,7 @@
         for (long c = _x - 1; c <= _x + 1; ++c){
             
             // Landmines can't blow up kings or put the player in check (or things that are off the board)
-            if (![[_board pieceAtColumn:c andRow:r] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:c andRow:r] &&
+            if ([_board onBoardAtColumn:c andRow:r] && ![[_board pieceAtColumn:c andRow:r] isMemberOfClass:[DDHKing class]] && ![_board doesDestructionCauseCheckAtColumn:c andRow:r] &&
                                                                                         [posPiece onBoard:_board AtColumn:c andRow:r]){
                 [[self board] destroyPieceAtColumn:c andRow:r];
             }
@@ -301,7 +301,7 @@
     }
     [self popupWithTitle:@"Dark Vader Has Joined the Battle!" andMessage:@"The Empire has sent Darth Vader to oversee your command of the troops. He has deamed your army unsatisfactory and has replaced all your pawns with clones of himself."];
     [_delegate pieceChangedAtColumn:-1 addRow:-1];
-    [_board setLuke:YES];
+    [_board setVader:YES];
 }
 
 -(void) newPiece
