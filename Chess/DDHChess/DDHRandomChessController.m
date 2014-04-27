@@ -10,7 +10,6 @@
 #import "DDHRandomChessController.h"
 #import "DDHBoard.h"
 #import "DDHChessBoardView.h"
-#import "DDHChessInfoView.h"
 #import "DDHViewController.h"
 
 @interface DDHRandomChessController ()
@@ -53,11 +52,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    DDHChessInfoView* info = [[DDHChessInfoView alloc] initWithFrame:[[UIScreen mainScreen]applicationFrame]];
+    [self setInfo: [[DDHChessInfoView alloc] initWithFrame:[[UIScreen mainScreen]applicationFrame]]];
     
     
     // Create the board object
-    _board = [[DDHBoard alloc] initWithView:info];
+    _board = [[DDHBoard alloc] initWithView:self];
     // Initialize the board
     if(random)
         [_board setToInitialRandomState];
@@ -71,7 +70,7 @@
     // Create and initialize view to display the board and add it to this controller
     DDHChessBoardView* chessBoard = [[DDHChessBoardView alloc] initWithFrame:CGRectMake(88,([[UIScreen mainScreen]applicationFrame].size.height - 585.0)/2.0,600, 585) andBoard:_board andSuperRandom:_superRandom];
     
-    [self.view addSubview:info];
+    [self.view addSubview:[self info]];
     [self.view addSubview:chessBoard];
     
     CGSize size = self.view.frame.size;

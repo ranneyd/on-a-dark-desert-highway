@@ -147,6 +147,7 @@
             [self popupWithTitle:@"Nothing!" andMessage:@"You're lucky this time..."];
             break;
     }
+    [_board checkUpdate];
     
 }
 

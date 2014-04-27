@@ -15,7 +15,7 @@
 #import "DDHPiece.h"
 #import "ChessPlayer.h"
 #import "DDHTuple.h"
-#import "DDHChessInfoView.h"
+#import "DDHRandomChessController.h"
 
 @class DDHPiece;
 /* The Board */
@@ -42,7 +42,7 @@
 // ********************
 
 // Initialize a board
--(id) initWithView:(DDHChessInfoView *) controller;
+-(id) initWithView:(DDHRandomChessController *) controller;
 
 // Places pieces in proper places for chess and sets which player moves first
 -(void) setToInitialState;
@@ -90,6 +90,8 @@
 
 // Housekeeping after moving a piece. Includes informing delegates, switching the current player and clearing highlighting
 -(void) afterMoveFromColumn:(NSInteger)oldColumn andRow:(NSUInteger)oldRow ToColumn:(NSInteger)column andRow:(NSInteger)row;
+
+-(void) checkUpdate;
 
 // ***************************
 // ** Additional Game Logic **

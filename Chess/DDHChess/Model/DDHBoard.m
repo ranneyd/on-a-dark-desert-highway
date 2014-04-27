@@ -94,7 +94,7 @@
     // Double jumping pawns for en passant
     DDHPiece* _pawnThatDoubleMovedLastTurn;
     
-    DDHChessInfoView* _controller;
+    DDHRandomChessController* _controller;
     
     BOOL _luke;
     BOOL _vader;
@@ -109,7 +109,7 @@
 // ** Initialization **
 // ********************
 
-- (id) initWithView:(DDHChessInfoView *)controller
+- (id) initWithView:(DDHRandomChessController *)controller
 {
     if (self = [super init]){
         // Set the size of the board. TODO: Change for dynamically allocated array.
@@ -442,35 +442,43 @@
         _castling = NO;
     }
 
+    [self checkUpdate];
     
+}
+
+-(void) checkUpdate
+{
     // See if next player is now in check
     BOOL check =[self kingInCheckBelongingTo:[self nextMove]];
     
+    DDHChessInfoView* info = [_controller info];
+    
     if (check){
-        [[_controller check] setTextColor:[UIColor whiteColor]];
-        [[_controller check2] setTextColor:[UIColor whiteColor]];
+        [[info check] setTextColor:[UIColor whiteColor]];
+        [[info check2] setTextColor:[UIColor whiteColor]];
     }
     else{
-        [[_controller check] setTextColor:[UIColor blackColor]];
-        [[_controller check2] setTextColor:[UIColor blackColor]];
+        [[info check] setTextColor:[UIColor blackColor]];
+        [[info check2] setTextColor:[UIColor blackColor]];
     }
     
     // Check if the move has put the player in checkmate, but actually checks if the player has no available moves
     if ([self checkForCheckmate]){
         //if you have no moves and are in check, then that's checkmate
         if(check){
-            [[_controller check] setText:@"Checkmate!"];
-            [[_controller check2] setText:@"Checkmate!"];
-            [[_controller check] setTextColor:[UIColor whiteColor]];
-            [[_controller check2] setTextColor:[UIColor whiteColor]];
+            [[info check] setText:@"Checkmate!"];
+            [[info check2] setText:@"Checkmate!"];
+            [[info check] setTextColor:[UIColor whiteColor]];
+            [[info check2] setTextColor:[UIColor whiteColor]];
         }
         else{
-            [[_controller check] setText:@"Stalemate :("];
-            [[_controller check2] setText:@"Stalemate :(s"];
-            [[_controller check] setTextColor:[UIColor whiteColor]];
-            [[_controller check2] setTextColor:[UIColor whiteColor]];
+            [[info check] setText:@"Stalemate :("];
+            [[info check2] setText:@"Stalemate :(s"];
+            [[info check] setTextColor:[UIColor whiteColor]];
+            [[info check2] setTextColor:[UIColor whiteColor]];
         }
     }
+    [self clearHighlighting];
 }
 
 -(void) putPiece:(DDHPiece *)piece inColumn:(NSUInteger)column andRow:(NSUInteger) row
