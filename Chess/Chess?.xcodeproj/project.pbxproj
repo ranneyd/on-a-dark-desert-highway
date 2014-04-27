@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9357F65E18C469640034FF67 /* DDHNullPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 9357F65D18C469640034FF67 /* DDHNullPiece.m */; };
 		93EEB0C318EB3478000DC31F /* DDHRandomChessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */; };
+		D50AB3E1190C9A9000F318C5 /* DDHPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D50AB3E0190C9A9000F318C5 /* DDHPopup.m */; };
 		D511C8DA1903322F000883F2 /* playchess1.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8D91903322F000883F2 /* playchess1.png */; };
 		D511C8DC190332C3000883F2 /* playchess2.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8DB190332C3000883F2 /* playchess2.png */; };
 		D511C8E019034857000883F2 /* questionMark.png in Resources */ = {isa = PBXBuildFile; fileRef = D511C8DF19034857000883F2 /* questionMark.png */; };
@@ -197,6 +198,8 @@
 		9357F65D18C469640034FF67 /* DDHNullPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHNullPiece.m; path = Model/DDHNullPiece.m; sourceTree = "<group>"; };
 		93EEB0C118EB3478000DC31F /* DDHRandomChessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHRandomChessController.h; sourceTree = "<group>"; };
 		93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHRandomChessController.m; sourceTree = "<group>"; };
+		D50AB3DF190C9A9000F318C5 /* DDHPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHPopup.h; path = View/DDHPopup.h; sourceTree = "<group>"; };
+		D50AB3E0190C9A9000F318C5 /* DDHPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHPopup.m; path = View/DDHPopup.m; sourceTree = "<group>"; };
 		D511C8D91903322F000883F2 /* playchess1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playchess1.png; path = Assets/playchess1.png; sourceTree = "<group>"; };
 		D511C8DB190332C3000883F2 /* playchess2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = playchess2.png; path = Assets/playchess2.png; sourceTree = "<group>"; };
 		D511C8DF19034857000883F2 /* questionMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = questionMark.png; path = Assets/questionMark.png; sourceTree = "<group>"; };
@@ -703,6 +706,8 @@
 				D5B86E1018C463AB00042BD9 /* DDHChessBoardView.m */,
 				D5BDA88118FE27590032DD7F /* DDHChessInfoView.h */,
 				D5BDA88218FE27590032DD7F /* DDHChessInfoView.m */,
+				D50AB3DF190C9A9000F318C5 /* DDHPopup.h */,
+				D50AB3E0190C9A9000F318C5 /* DDHPopup.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -955,6 +960,7 @@
 				D5B86E1918C463B800042BD9 /* DDHViewController.m in Sources */,
 				D5B86E0618C4637A00042BD9 /* DDHRook.m in Sources */,
 				D5F3E1821907BD73001D4A52 /* AnimatedTransitioning.m in Sources */,
+				D50AB3E1190C9A9000F318C5 /* DDHPopup.m in Sources */,
 				D5B86DFD18C4637A00042BD9 /* DDH2DArray.m in Sources */,
 				D5B86E0B18C4639600042BD9 /* DDHMulticastDelegate.m in Sources */,
 				D5B86E1218C463AB00042BD9 /* DDHChessBoardView.m in Sources */,
