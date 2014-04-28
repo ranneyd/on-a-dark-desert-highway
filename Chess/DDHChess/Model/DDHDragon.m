@@ -77,43 +77,28 @@
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
-    // Store moves in here.
-    NSMutableArray* points = [[NSMutableArray alloc] initWithCapacity:8];
+    // Store spaces to be exploded here
+    NSMutableArray* points = [[NSMutableArray alloc] initWithCapacity:4];
     
-    // left 2 up 1
-    [points addObject:[[DDHTuple alloc] initWithX:-2 andY:-1]];
-    // left 1 up 2
-    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:-2]];
-    // right 1 up 2
-    [points addObject:[[DDHTuple alloc] initWithX:1 andY:-2]];
-    // right 2 up 1
-    [points addObject:[[DDHTuple alloc] initWithX:2 andY:-1]];
-    // right 2 down 1
-    [points addObject:[[DDHTuple alloc] initWithX:2 andY:1]];
-    // right 1 down 2
-    [points addObject:[[DDHTuple alloc] initWithX:1 andY:2]];
-    // left 1 down 2
-    [points addObject:[[DDHTuple alloc] initWithX:-1 andY:2]];
-    // left 2 down 1
-    [points addObject:[[DDHTuple alloc] initWithX:-2 andY:1]];
-    // left 2 down 2
-    [points addObject:[[DDHTuple alloc] initWithX:-2 andY:2]];
-    // left 2 up 2
-    [points addObject:[[DDHTuple alloc] initWithX:-2 andY:-2]];
-    // right 2 down 2
-    [points addObject:[[DDHTuple alloc] initWithX:2 andY:2]];
-    // right 2 up 2
-    [points addObject:[[DDHTuple alloc] initWithX:2 andY:-2]];
+    // up
+    [points addObject:[[DDHTuple alloc] initWithX:x andY:y-1]];
+    // down
+    [points addObject:[[DDHTuple alloc] initWithX:x andY:y+1]];
+    // left
+    [points addObject:[[DDHTuple alloc] initWithX:x-1 andY:y]];
+    // right
+    [points addObject:[[DDHTuple alloc] initWithX:x+1 andY:y]];
 
-    for (long r = [self y] - 1; r <= [self y] + 1; ++r){
-        for (long c = [self x] - 1; c <= [self x] + 1; ++c){
-            // Landmines can't blow up kings or put the player in check (or things that are off the board)
-            if ([board onBoardAtColumn:c andRow:r] && ![[board pieceAtColumn:c andRow:r] isMemberOfClass:[DDHKing class]] &&
-                                 ![board doesDestructionCauseCheckAtColumn:c andRow:r] && [self onBoard:board AtColumn:c andRow:r]
-                                 && ![[board pieceAtColumn:c andRow:r]isMemberOfClass:[self class]]){
-                // Blow up the pieces at that position
-                [board destroyPieceAtColumn:c andRow:r];
-            }
+
+    for (DDHTuple* point in points){
+        NSInteger c = [point x];
+        NSInteger r = [point y];
+        
+        // Landmines can't blow up kings or put the player in check (or things that are off the board)
+        if ([board onBoardAtColumn:c andRow:r] && ![[board pieceAtColumn:c andRow:r] isMemberOfClass:[DDHKing class]] &&
+                             ![board doesDestructionCauseCheckAtColumn:c andRow:r] && [self onBoard:board AtColumn:c andRow:r]){
+            // Blow up the pieces at that position
+            [board destroyPieceAtColumn:c andRow:r];
         }
     }
 }

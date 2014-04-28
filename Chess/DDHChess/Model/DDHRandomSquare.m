@@ -278,7 +278,9 @@
     }
     
     // Place a dragon where the comet hit
-    [_board putPiece:[[DDHDragon alloc] initWithPlayer:[posPiece getPlayer] atColumn:_x andRow:_y ]inColumn:_x andRow:_y];
+    if (![posPiece isMemberOfClass:[DDHKing class]]){
+        [_board putPiece:[[DDHDragon alloc] initWithPlayer:[posPiece getPlayer] atColumn:_x andRow:_y ]inColumn:_x andRow:_y];
+    }
     
     // Update the UI to show the new piece
     [_delegate pieceChangedAtColumn:_x addRow:_y];
