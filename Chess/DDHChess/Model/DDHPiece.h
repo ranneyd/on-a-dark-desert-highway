@@ -33,6 +33,9 @@
 // Get player
 -(ChessPlayer) getPlayer;
 
+// Get opposite player
+-(ChessPlayer) getEnemy;
+
 // Check if a position is on the given board
 -(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row;
 

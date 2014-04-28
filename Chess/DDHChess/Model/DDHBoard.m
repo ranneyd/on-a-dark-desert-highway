@@ -424,6 +424,7 @@
     
     // Check for special dragon moves
     if([piece isKindOfClass:[DDHDragon class]]){
+        NSLog(@"Dragon has moved!!!!");
         // Blow up squares to each side
         [(DDHDragon *)piece explodeAfterMoveOnBoard:self];
     }
@@ -480,7 +481,7 @@
         }
         else{
             [[info check] setText:@"Stalemate :("];
-            [[info check2] setText:@"Stalemate :(s"];
+            [[info check2] setText:@"Stalemate :("];
             [[info check] setTextColor:[UIColor whiteColor]];
             [[info check2] setTextColor:[UIColor whiteColor]];
         }

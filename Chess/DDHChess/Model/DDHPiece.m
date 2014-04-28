@@ -54,6 +54,15 @@
     return _owner;
 }
 
+-(ChessPlayer) getEnemy
+{
+    if (_owner == ChessPlayerWhite){
+        return ChessPlayerBlack;
+    } else {
+        return ChessPlayerWhite;
+    }
+}
+
 -(BOOL) onBoard:(DDHBoard*)board AtColumn:(NSInteger)column andRow:(NSInteger)row
 {
     return column >= 0 && column < [board getColumns] && row >= 0 && row < [board getRows];

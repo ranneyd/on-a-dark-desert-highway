@@ -74,6 +74,7 @@
 
 -(void) explodeAfterMoveOnBoard:(DDHBoard *)board
 {
+                NSLog(@"Destroying piece");
     NSUInteger x = [self x];
     NSUInteger y = [self y];
     
@@ -89,14 +90,14 @@
     // right
     [points addObject:[[DDHTuple alloc] initWithX:x+1 andY:y]];
 
-
+    // Loop through spaces to blow up
     for (DDHTuple* point in points){
         NSInteger c = [point x];
         NSInteger r = [point y];
         
-        // Landmines can't blow up kings or put the player in check (or things that are off the board)
+        // Can't blow up kings or put the player in check (or things that are off the board)
         if ([board onBoardAtColumn:c andRow:r] && ![[board pieceAtColumn:c andRow:r] isMemberOfClass:[DDHKing class]] &&
-                             ![board doesDestructionCauseCheckAtColumn:c andRow:r] && [self onBoard:board AtColumn:c andRow:r]){
+                             (![board doesDestructionCauseCheckAtColumn:c andRow:r] || [board kingInCheckBelongingTo:[self getEnemy]]) && [self onBoard:board AtColumn:c andRow:r]){
             // Blow up the pieces at that position
             [board destroyPieceAtColumn:c andRow:r];
         }
