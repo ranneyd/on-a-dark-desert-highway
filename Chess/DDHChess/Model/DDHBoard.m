@@ -95,8 +95,6 @@
     // Double jumping pawns for en passant
     DDHPiece* _pawnThatDoubleMovedLastTurn;
     
-    DDHRandomChessController* _controller;
-    
     BOOL _luke;
     BOOL _vader;
     

@@ -19,5 +19,7 @@
 
 -(void) startFalling:(DDHRandomChessController *) caller;
 
--(AVAudioPlayer *) getPlayer;
+-(AVAudioPlayer *) getAudioPlayer;
+
+-(void) setAudioPlayer:(AVAudioPlayer *) audioPlayer;
 @end

@@ -27,8 +27,9 @@ typedef NS_ENUM(int, RandomSquare){
     CarpetBomb = 10,
     LukeSkywalker = 11,
     DarthVader = 12,
-    NumTypes = 13,
-    NullSquare = 14
+    RickRoll = 13,
+    NumTypes = 14,
+    NullSquare = 15
 };
 
 #endif

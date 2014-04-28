@@ -85,9 +85,9 @@
         if ([text isEqualToString:@"Enable Scary Music"]){
             [settings setBool:![settings boolForKey:@"musicOn"] forKey:@"musicOn"];
             if ([settings boolForKey:@"musicOn"])
-                [[(DDHViewController *)[[self presentingViewController] presentingViewController] getPlayer] play];
+                [[(DDHViewController *)[[self presentingViewController] presentingViewController] getAudioPlayer] play];
             else
-                [[(DDHViewController *)[[self presentingViewController] presentingViewController] getPlayer] stop];
+                [[(DDHViewController *)[[self presentingViewController] presentingViewController] getAudioPlayer] stop];
         }
         if ([text isEqualToString:@"Enable Scary Sound Effects"])
             [settings setBool:![settings boolForKey:@"soundEffectsOn"] forKey:@"soundEffectsOn"];

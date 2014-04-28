@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RandomSquare.h"
 #import "DDHBoard.h"
+#import "DDHViewController.h"
 
 @class DDHBoard;
 

@@ -33,6 +33,7 @@
 @property BOOL luke;
 @property BOOL vader;
 
+@property DDHRandomChessController * controller;
 // **********************
 // ** Public Functions **
 // **********************

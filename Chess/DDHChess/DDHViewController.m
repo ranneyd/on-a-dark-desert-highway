@@ -155,8 +155,16 @@
     [self presentViewController:controller animated:NO completion:nil];
 }
 
--(AVAudioPlayer *) getPlayer
+-(AVAudioPlayer *) getAudioPlayer
 {
     return player_;
 }
+-(void) setAudioPlayer:(AVAudioPlayer *) audioPlayer
+{
+    player_ = audioPlayer;
+    player_.numberOfLoops = -1;
+    [player_ prepareToPlay];
+    [player_ play];
+}
+
 @end

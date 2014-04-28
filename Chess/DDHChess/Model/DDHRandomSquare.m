@@ -76,7 +76,7 @@
     self = [super init];
     
 //    [self setType:arc4random()%NumTypes];
-    [self setType:HugeLandmine]; // For testing purposes. Remove for release
+    [self setType:RickRoll]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -142,6 +142,9 @@
             break;
         case CarpetBomb:
             [self carpetBomb];
+            break;
+        case RickRoll:
+            [self rickRoll];
             break;
         default:
             NSLog(@"Square type is: %d", [self type]);
@@ -458,6 +461,19 @@
     [self popupWithTitle:@"Airstrike" andMessage:@"You got a 5 kill streak and have earned an airstrike (I bet you young whipersnappers don't remember Call of Duty 4)."];
 }
 
+-(void) rickRoll
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"rickroll" ofType:@"mp3"];
+    NSURL *file = [[NSURL alloc] initFileURLWithPath:path];
+    
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setBool:YES forKey:@"musicOn"];
+    
+    
+    [(DDHViewController *)[[_board controller] presentingViewController] setAudioPlayer:[[AVAudioPlayer alloc] initWithContentsOfURL:file error:nil]];
+     
+    [self popupWithTitle:@"YOU JUST GOT RICK ROLL'D" andMessage:@"WE'RE BRINGING IT BACK!"];
+}
 
 // Helper functions
 -(DDHPiece *) getEnemyPiece
