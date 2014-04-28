@@ -285,7 +285,7 @@
     // Update the UI to show the new piece
     [_delegate pieceChangedAtColumn:_x addRow:_y];
     
-    [self popupWithTitle:@"Comet" andMessage:@"A commet strikes the board and decimates everything where it lands."];
+    [self popupWithTitle:@"Dragon" andMessage:@"OMG It's a dragon! It destroys everything in its path!"];
 }
 -(void) lukeSkywalker
 {
@@ -324,7 +324,7 @@
     ChessPlayer player = [[_board pieceAtColumn:_x andRow:_y] getPlayer];
     
     // Create a new piece (of a random non-king type) and place it on the board
-    NSArray* pieceTypes = [[NSArray alloc] initWithObjects: [DDHPawn class], [DDHBishop class], [DDHKnight class], [DDHQueen class], [DDHRook class], nil];
+    NSArray* pieceTypes = [[NSArray alloc] initWithObjects: [DDHPawn class], [DDHBishop class], [DDHKnight class], [DDHQueen class], [DDHRook class], [DDHDragon class], nil];
     NSInteger randomIndex = arc4random()%[pieceTypes count];
     DDHPiece* newPiece = [[[pieceTypes objectAtIndex:randomIndex] alloc] initWithPlayer:player atColumn:[randomPos x] andRow:[randomPos y]];
     [_board putPiece:newPiece inColumn:[randomPos x] andRow:[randomPos y]];

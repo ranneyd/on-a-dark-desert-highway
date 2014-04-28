@@ -168,6 +168,10 @@
 		D5DE7A9F18C69E6D00506C67 /* NullPiece.png in Resources */ = {isa = PBXBuildFile; fileRef = D5DE7A9E18C69E6D00506C67 /* NullPiece.png */; };
 		D5F07D921906540700BCDB5C /* DDHMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5F07D901906540700BCDB5C /* DDHMenuViewController.m */; };
 		D5F07D931906540700BCDB5C /* DDHMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5F07D911906540700BCDB5C /* DDHMenuViewController.xib */; };
+		D5F28204190DF6C400CA0D95 /* BlackDragon.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F28200190DF6C400CA0D95 /* BlackDragon.png */; };
+		D5F28205190DF6C400CA0D95 /* BlackDragon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F28201190DF6C400CA0D95 /* BlackDragon@2x.png */; };
+		D5F28206190DF6C400CA0D95 /* WhiteDragon.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F28202190DF6C400CA0D95 /* WhiteDragon.png */; };
+		D5F28207190DF6C400CA0D95 /* WhiteDragon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F28203190DF6C400CA0D95 /* WhiteDragon@2x.png */; };
 		D5F3E16F1907B9E7001D4A52 /* BlackScientist.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F3E1631907B9E7001D4A52 /* BlackScientist.png */; };
 		D5F3E1701907B9E7001D4A52 /* BlackScientist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F3E1641907B9E7001D4A52 /* BlackScientist@2x.png */; };
 		D5F3E1711907B9E7001D4A52 /* BlackWizard.png in Resources */ = {isa = PBXBuildFile; fileRef = D5F3E1651907B9E7001D4A52 /* BlackWizard.png */; };
@@ -384,6 +388,10 @@
 		D5F07D8F1906540700BCDB5C /* DDHMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHMenuViewController.h; sourceTree = "<group>"; };
 		D5F07D901906540700BCDB5C /* DDHMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHMenuViewController.m; sourceTree = "<group>"; };
 		D5F07D911906540700BCDB5C /* DDHMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDHMenuViewController.xib; sourceTree = "<group>"; };
+		D5F28200190DF6C400CA0D95 /* BlackDragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlackDragon.png; path = Assets/BlackDragon.png; sourceTree = "<group>"; };
+		D5F28201190DF6C400CA0D95 /* BlackDragon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlackDragon@2x.png"; path = "Assets/BlackDragon@2x.png"; sourceTree = "<group>"; };
+		D5F28202190DF6C400CA0D95 /* WhiteDragon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WhiteDragon.png; path = Assets/WhiteDragon.png; sourceTree = "<group>"; };
+		D5F28203190DF6C400CA0D95 /* WhiteDragon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WhiteDragon@2x.png"; path = "Assets/WhiteDragon@2x.png"; sourceTree = "<group>"; };
 		D5F3E1631907B9E7001D4A52 /* BlackScientist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlackScientist.png; path = Assets/BlackScientist.png; sourceTree = "<group>"; };
 		D5F3E1641907B9E7001D4A52 /* BlackScientist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "BlackScientist@2x.png"; path = "Assets/BlackScientist@2x.png"; sourceTree = "<group>"; };
 		D5F3E1651907B9E7001D4A52 /* BlackWizard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BlackWizard.png; path = Assets/BlackWizard.png; sourceTree = "<group>"; };
@@ -517,6 +525,10 @@
 		D5B86DB418C4635600042BD9 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D5F28200190DF6C400CA0D95 /* BlackDragon.png */,
+				D5F28201190DF6C400CA0D95 /* BlackDragon@2x.png */,
+				D5F28202190DF6C400CA0D95 /* WhiteDragon.png */,
+				D5F28203190DF6C400CA0D95 /* WhiteDragon@2x.png */,
 				D5F3E1631907B9E7001D4A52 /* BlackScientist.png */,
 				D5F3E1641907B9E7001D4A52 /* BlackScientist@2x.png */,
 				D5F3E1651907B9E7001D4A52 /* BlackWizard.png */,
@@ -803,6 +815,7 @@
 				D5B86DCD18C4636800042BD9 /* BlackBishop.png in Resources */,
 				D5B86DD018C4636800042BD9 /* BlackKing@2x.png in Resources */,
 				D511C8E019034857000883F2 /* questionMark.png in Resources */,
+				D5F28205190DF6C400CA0D95 /* BlackDragon@2x.png in Resources */,
 				D5B1EC8918FE447E001B8067 /* explosion1_0058.png in Resources */,
 				D5B1EC8418FE447E001B8067 /* explosion1_0053.png in Resources */,
 				D5B1EC5218FE447E001B8067 /* explosion1_0003.png in Resources */,
@@ -890,6 +903,7 @@
 				D5B1EC7818FE447E001B8067 /* explosion1_0041.png in Resources */,
 				D5B1ECA818FE447E001B8067 /* explosion1_0089.png in Resources */,
 				D5B1EC5418FE447E001B8067 /* explosion1_0005.png in Resources */,
+				D5F28204190DF6C400CA0D95 /* BlackDragon.png in Resources */,
 				D5B1EC9F18FE447E001B8067 /* explosion1_0080.png in Resources */,
 				D52F505B1905FEF200D2A5F6 /* metal.mp3 in Resources */,
 				D5B1EC5A18FE447E001B8067 /* explosion1_0011.png in Resources */,
@@ -903,6 +917,7 @@
 				D5B1EC9318FE447E001B8067 /* explosion1_0068.png in Resources */,
 				D5A71F90190349070043C769 /* questionMark@2x.png in Resources */,
 				D5B1EC5018FE447E001B8067 /* explosion1_0001.png in Resources */,
+				D5F28207190DF6C400CA0D95 /* WhiteDragon@2x.png in Resources */,
 				D5B1EC9418FE447E001B8067 /* explosion1_0069.png in Resources */,
 				D5B86DDD18C4636800042BD9 /* WhiteKnight.png in Resources */,
 				D5B86DD818C4636800042BD9 /* BlackRook@2x.png in Resources */,
@@ -936,6 +951,7 @@
 				D5B1EC7518FE447E001B8067 /* explosion1_0038.png in Resources */,
 				D5B1EC5718FE447E001B8067 /* explosion1_0008.png in Resources */,
 				D52F508919061FE000D2A5F6 /* defaultPrefs.plist in Resources */,
+				D5F28206190DF6C400CA0D95 /* WhiteDragon.png in Resources */,
 				D5F3E1721907B9E7001D4A52 /* BlackWizard@2x.png in Resources */,
 				D5F3E17A1907B9E7001D4A52 /* WhiteWizard@2x.png in Resources */,
 			);

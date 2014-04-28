@@ -107,8 +107,8 @@
 -(NSString*) description
 {
     if ([super getPlayer] == ChessPlayerBlack)
-        return @"BlackScientist";
-    return @"WhiteScientist";
+        return @"BlackDragon";
+    return @"WhiteDragon";
 }
 
 
