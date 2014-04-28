@@ -221,7 +221,7 @@
     [self setToInitialState];
 
     // Set to determine number of random squares that can be on the board at one time
-    _maxRandomSquares = 8;
+    _maxRandomSquares = 4;
     
     // Start with no squares
     _currentRandomSquares = 0;
@@ -680,7 +680,7 @@
     NSLog(@"current squares: %li", _currentRandomSquares);
     NSLog(@"max squares: %li", _maxRandomSquares);
     // Make more random squares when the number gets too low
-    if (_currentRandomSquares < _maxRandomSquares/2){
+    if (_currentRandomSquares < _maxRandomSquares){
         // Get a random location on the board
         DDHTuple* newLocation = [self getRandomEmptyPosition];
         
