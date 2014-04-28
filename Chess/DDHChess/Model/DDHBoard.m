@@ -16,6 +16,7 @@
 #import "DDHBishop.h"
 #import "DDHQueen.h"
 #import "DDHKing.h"
+#import "DDHDragon.h"
 #import "DDHRandomSquare.h"
 #import "RandomSquare.h"
 
@@ -419,6 +420,12 @@
         if((row == oldRow - 2) || (row == oldRow + 2)){
             _pawnThatDoubleMovedLastTurn = piece;
         }
+    }
+    
+    // Check for special dragon moves
+    if([piece isKindOfClass:[DDHDragon class]]){
+        // Blow up squares to each side
+        [(DDHDragon *)piece explodeAfterMoveOnBoard:self];
     }
     
     // Clear the highlighting

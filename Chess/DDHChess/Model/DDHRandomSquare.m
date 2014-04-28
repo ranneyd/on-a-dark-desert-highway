@@ -14,6 +14,7 @@
 #import "DDHKnight.h"
 #import "DDHBishop.h"
 #import "DDHQueen.h"
+#import "DDHDragon.h"
 #import "DDHTuple.h"
 
 
@@ -74,8 +75,8 @@
 {
     self = [super init];
     
-    [self setType:arc4random()%NumTypes];
-    //[self setType:CarpetBomb]; // For testing purposes. Remove for release
+//    [self setType:arc4random()%NumTypes];
+    [self setType:HugeLandmine]; // For testing purposes. Remove for release
     [self setX:column];
     [self setY:row];
     [self setBoard:board];
@@ -275,6 +276,13 @@
             }
         }
     }
+    
+    // Place a dragon where the comet hit
+    [_board putPiece:[[DDHDragon alloc] initWithPlayer:[posPiece getPlayer] atColumn:_x andRow:_y ]inColumn:_x andRow:_y];
+    
+    // Update the UI to show the new piece
+    [_delegate pieceChangedAtColumn:_x addRow:_y];
+    
     [self popupWithTitle:@"Comet" andMessage:@"A commet strikes the board and decimates everything where it lands."];
 }
 -(void) lukeSkywalker

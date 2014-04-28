@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24BA572D190DC92B00C7116E /* DDHDragon.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BA572C190DC92B00C7116E /* DDHDragon.m */; };
 		9357F65E18C469640034FF67 /* DDHNullPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = 9357F65D18C469640034FF67 /* DDHNullPiece.m */; };
 		93EEB0C318EB3478000DC31F /* DDHRandomChessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93EEB0C218EB3478000DC31F /* DDHRandomChessController.m */; };
 		D50AB3E1190C9A9000F318C5 /* DDHPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = D50AB3E0190C9A9000F318C5 /* DDHPopup.m */; };
@@ -194,6 +195,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24BA572B190DC92B00C7116E /* DDHDragon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHDragon.h; path = Model/DDHDragon.h; sourceTree = "<group>"; };
+		24BA572C190DC92B00C7116E /* DDHDragon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHDragon.m; path = Model/DDHDragon.m; sourceTree = "<group>"; };
 		9357F65C18C469640034FF67 /* DDHNullPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDHNullPiece.h; path = Model/DDHNullPiece.h; sourceTree = "<group>"; };
 		9357F65D18C469640034FF67 /* DDHNullPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDHNullPiece.m; path = Model/DDHNullPiece.m; sourceTree = "<group>"; };
 		93EEB0C118EB3478000DC31F /* DDHRandomChessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHRandomChessController.h; sourceTree = "<group>"; };
@@ -663,6 +666,8 @@
 				D5B86DE718C4637A00042BD9 /* DDH2DArray.m */,
 				D5B86DFB18C4637A00042BD9 /* DDHTuple.h */,
 				D5B86DFC18C4637A00042BD9 /* DDHTuple.m */,
+				24BA572B190DC92B00C7116E /* DDHDragon.h */,
+				24BA572C190DC92B00C7116E /* DDHDragon.m */,
 				D5B86DEA18C4637A00042BD9 /* DDHBoard.h */,
 				D5B86DEB18C4637A00042BD9 /* DDHBoard.m */,
 				D5B86DEC18C4637A00042BD9 /* DDHBoardDelegate.h */,
@@ -969,6 +974,7 @@
 				D5A1C98718C4631300429914 /* DDHAppDelegate.m in Sources */,
 				D5B86E1118C463AB00042BD9 /* DDHBoardSquare.m in Sources */,
 				D5BDA88318FE27590032DD7F /* DDHChessInfoView.m in Sources */,
+				24BA572D190DC92B00C7116E /* DDHDragon.m in Sources */,
 				D5B86E0018C4637A00042BD9 /* DDHKing.m in Sources */,
 				D5B86DFE18C4637A00042BD9 /* DDHBishop.m in Sources */,
 				D5F3E1831907BD73001D4A52 /* TransitionDelegate.m in Sources */,
