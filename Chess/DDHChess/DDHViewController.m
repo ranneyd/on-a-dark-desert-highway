@@ -15,6 +15,7 @@
 @interface DDHViewController()
 @property (weak, nonatomic) IBOutlet UIButton *randomChessButton;
 @property (weak, nonatomic) IBOutlet UIButton *randomChessSuperButton;
+@property (weak, nonatomic) IBOutlet UIButton *howToButton;
 @property (weak, nonatomic) IBOutlet UIButton *boringChessButton;
 
 @end
@@ -43,7 +44,12 @@
     _randomChessSuperButton.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
     _randomChessSuperButton.layer.masksToBounds = NO;
     
-    
+    _howToButton.layer.cornerRadius = 20;
+    _howToButton.layer.shadowRadius= 3.0f;
+    _howToButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    _howToButton.layer.shadowOpacity = 0.5f;
+    _howToButton.layer.shadowOffset = CGSizeMake(8.0f, 8.0f);
+    _howToButton.layer.masksToBounds = NO;
     
     _boringChessButton.layer.cornerRadius = 5;
     _boringChessButton.layer.masksToBounds = YES;
@@ -148,6 +154,13 @@
     [self presentViewController:controller animated:NO completion:nil];
 }
 
+- (IBAction)howToAction:(id)sender
+{
+    UIStoryboard *howto = [UIStoryboard storyboardWithName:@"DDHHowTo" bundle:nil];
+    UIViewController *vc = [howto instantiateInitialViewController];
+    [self presentViewController:vc animated:NO completion:nil];
+}
+
 - (IBAction)boringChessAction:(id)sender
 {
     DDHRandomChessController *controller = [[DDHRandomChessController alloc] initWithNibName:nil bundle:nil andRandom:NO];
@@ -166,5 +179,6 @@
     [player_ prepareToPlay];
     [player_ play];
 }
+
 
 @end
